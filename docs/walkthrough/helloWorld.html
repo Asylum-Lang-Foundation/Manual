@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>First Program (Hello World) &mdash; Asylum  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Functions" href="functions.html" />
+    <link rel="prev" title="Asylum Programming Language Reference Manual" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Asylum
+          
+
+          
+            
+            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">First Program (Hello World)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-the-program">Understanding The Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-cool-trick">A Cool Trick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#print-function">Print Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comments">Comments.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disclaimers">Disclaimers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Asylum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>First Program (Hello World)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/walkthrough/helloWorld.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="tex2jax_ignore mathjax_ignore section" id="first-program-hello-world">
+<h1>First Program (Hello World)<a class="headerlink" href="#first-program-hello-world" title="Permalink to this headline">¶</a></h1>
+<p>Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straightforward:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+<div class="section" id="understanding-the-program">
+<h2>Understanding The Program<a class="headerlink" href="#understanding-the-program" title="Permalink to this headline">¶</a></h2>
+<p>That’s it. Now, let’s understand what this syntax means:</p>
+<ul class="simple">
+<li><p>When you run an Asylum program, it will run the <em>function</em> called <em>main</em>.</p></li>
+<li><p>We declare a <em>function</em> by using the keyword <code class="docutils literal notranslate"><span class="pre">fn</span></code>.</p></li>
+<li><p>After that, we give it the name of our function, which in this case is <em>main</em>.</p></li>
+<li><p>After this, we have an empty pair of parenthesis, <code class="docutils literal notranslate"><span class="pre">()</span></code>. We will use this later to give functions <em>arguments</em>, but do not worry about this for now.</p></li>
+<li><p>We put any code statments we want to run inside the function within <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">println</span></code> is a function that will print whatever text you feed it within <code class="docutils literal notranslate"><span class="pre">()</span></code> followed by a new line. We do a function call by giving the name of the function, and putting what arguments we want to feed it within <code class="docutils literal notranslate"><span class="pre">()</span></code>. We also tell the compiler that the code statement is over by using <code class="docutils literal notranslate"><span class="pre">;</span></code>.</p></li>
+<li><p>If this is confusing, don’t worry, we will talk about a lot of this individually later!</p></li>
+</ul>
+</div>
+<div class="section" id="a-cool-trick">
+<h2>A Cool Trick<a class="headerlink" href="#a-cool-trick" title="Permalink to this headline">¶</a></h2>
+<p>Asylum also lets you do a shortcut for any function that is only one code statment:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+<p>The same output is produced. For now, you can think of <code class="docutils literal notranslate"><span class="pre">{}</span></code> as a group of many code statements, where <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> will just run one.</p>
+</div>
+<div class="section" id="print-function">
+<h2>Print Function<a class="headerlink" href="#print-function" title="Permalink to this headline">¶</a></h2>
+<p>While <code class="docutils literal notranslate"><span class="pre">println</span></code> exists, <code class="docutils literal notranslate"><span class="pre">print</span></code> also exists too? So what’s the difference? <code class="docutils literal notranslate"><span class="pre">println</span></code> will put a newline after it prints what you give it, while <code class="docutils literal notranslate"><span class="pre">print</span></code> will not. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;4&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;5&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;6&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;7&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">345</span>
+<span class="mi">67</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="comments">
+<h2>Comments.<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>Comments are not read by the compiler, and are also very important to documenting your code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is a single line comment.</span>
+<span class="cm">/*</span>
+<span class="cm">    This is a mult-line comment.</span>
+<span class="cm">    Anything within the bouncers is not read by the compiler.</span>
+<span class="cm">*/</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disclaimers">
+<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>StraitJacket currently does not have a <code class="docutils literal notranslate"><span class="pre">println</span></code> or <code class="docutils literal notranslate"><span class="pre">print</span></code> function usable at the moment due to it being part of the incomplete Embedded Asylum Standard Library (EASL). For now, just declare an <code class="docutils literal notranslate"><span class="pre">extern</span> <span class="pre">fn</span> <span class="pre">printf(string</span> <span class="pre">format,</span> <span class="pre">...</span> <span class="pre">args)</span> <span class="pre">-&gt;</span> <span class="pre">int;</span></code> at the top of the file and use that instead. This will function as the <em>print</em> function.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="functions.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Asylum Programming Language Reference Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Asylum Lang Foundation.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
