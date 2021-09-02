@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Data Types &mdash; Asylum  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Functions" href="functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Asylum
+          
+
+          
+            
+            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purpose-of-data-types">Purpose Of Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#primitive-data-types">Primitive Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-primitives">Common Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#special-types">Special Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structs">Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#infinite-structs">Infinite Structs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Asylum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Data Types</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/walkthrough/dataTypes.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="tex2jax_ignore mathjax_ignore section" id="data-types">
+<h1>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h1>
+<p>On the last page, you vaguely heard about the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type. But what is a data type, what are they, and how do you use them?</p>
+<div class="section" id="purpose-of-data-types">
+<h2>Purpose Of Data Types<a class="headerlink" href="#purpose-of-data-types" title="Permalink to this headline">¶</a></h2>
+<p>In Asylum, you can think of everything in an “is a” way. For example, 5 “is a” number, the vehicle you drive “is a” car, and <code class="docutils literal notranslate"><span class="pre">main</span></code> “is a” function. <strong>A data type let’s the computer know what kind of data you are working with.</strong> Obviously, your computer needs to do different things to add numbers together compared to text. And of course, if you write a function that adds numbers together, you wouldn’t want anyone to give it text, a function, or even a car.</p>
+</div>
+<div class="section" id="primitive-data-types">
+<h2>Primitive Data Types<a class="headerlink" href="#primitive-data-types" title="Permalink to this headline">¶</a></h2>
+<p>A primitive data type is one given by Asylum. They are definined by the language and compiler itself. Here is a table of primitives:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Primitive</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>object</p></td>
+<td><p>The “any” type. Every single type, even the ones below “are” an object. It is not recommended to use often though, as conversion from an object to anything else is not guaranteed to be valid and defeats the point of types</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p>A type that means no type. A function that does not have <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> to signify return a type can be read as <code class="docutils literal notranslate"><span class="pre">-&gt;</span> <span class="pre">void</span></code>. It would just be annoying to write that for every function that does not return anything</p></td>
+</tr>
+<tr class="row-even"><td><p>bool</p></td>
+<td><p>A boolean value that is either <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>char</p></td>
+<td><p>A character. You can think of this as single text character like ‘h’, ‘7’, or ‘;’</p></td>
+</tr>
+<tr class="row-even"><td><p>wchar</p></td>
+<td><p>A wide character. It is like a <code class="docutils literal notranslate"><span class="pre">char</span></code>, except it can fit wide characters such as Chinese characters</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>A “string” of characters that forms standard text. This is your typical “Hello World!”</p></td>
+</tr>
+<tr class="row-even"><td><p>wstring</p></td>
+<td><p>A “string” of wide characters that forms extended text. It is like a <code class="docutils literal notranslate"><span class="pre">string</span></code>, but can include wide characters like Chinese characters</p></td>
+</tr>
+<tr class="row-odd"><td><p>uX</p></td>
+<td><p>An unsigned number. X is allowed to be any whole number from 1 to 16777215. An unsigned number is a positive integer (whole number). Its range can be thought of as 2^X. For example, a <code class="docutils literal notranslate"><span class="pre">u3</span></code> data type has a range of <code class="docutils literal notranslate"><span class="pre">2^3=8</span></code>, so can be any value from 0 to 7 inclusively</p></td>
+</tr>
+<tr class="row-even"><td><p>sX</p></td>
+<td><p>A signed number. X is allowed to be any whole number from 1 to 16777215. Unlike unsigned numbers, signed numbers can be negative, at the expense of half its range being negative. Its range can be thought of as 2^X. For example, an <code class="docutils literal notranslate"><span class="pre">s4</span></code> data type has a range of <code class="docutils literal notranslate"><span class="pre">2^4=16</span></code>, so it can be any value from -8 to 7 inclusively</p></td>
+</tr>
+<tr class="row-odd"><td><p>varlen</p></td>
+<td><p>A number that can be any integer with no range. It is only recommended to be used with really large numbers that need high precision, as it takes more space compared to fixed range unsigned or signed numbers</p></td>
+</tr>
+<tr class="row-even"><td><p>fX</p></td>
+<td><p>A floating-point number. This can be thought of as a number with decimals, such as <code class="docutils literal notranslate"><span class="pre">1.234</span></code>. X is allowed to be 16, 32, 64, 80, or 128</p></td>
+</tr>
+<tr class="row-odd"><td><p>fixAxB</p></td>
+<td><p>A fixed-point number with A whole bits, and B decimal bits. This is a signed number that has decimal points. What makes it different from floating-point is that math can be done on it like a signed/unsigned number, which is great for systems that don’t have floating-point processor support. The whole bits work like signed numbers, and the decimal bits allow precision of <code class="docutils literal notranslate"><span class="pre">1/(2^n)</span></code>. For example, a <code class="docutils literal notranslate"><span class="pre">fix3x4</span></code> can have the whole part be from <code class="docutils literal notranslate"><span class="pre">-4</span></code> to <code class="docutils literal notranslate"><span class="pre">3</span></code>, and the fractional part be any of <code class="docutils literal notranslate"><span class="pre">1/2</span></code>, <code class="docutils literal notranslate"><span class="pre">1/4</span></code>, <code class="docutils literal notranslate"><span class="pre">1/8</span></code>, and <code class="docutils literal notranslate"><span class="pre">1/16</span></code> added together</p></td>
+</tr>
+<tr class="row-even"><td><p>func&lt;A, …&gt;</p></td>
+<td><p>A function that has a return type of A. Any other types after it are the parameter types The add function from earlier is type <code class="docutils literal notranslate"><span class="pre">func&lt;int,</span> <span class="pre">int,</span> <span class="pre">int&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>event&lt;A, …&gt;</p></td>
+<td><p>An event handler that can hold functions to execute. Think of this like a list of fuctions that you can add and remove from, and when executed will call of the functions in the list</p></td>
+</tr>
+<tr class="row-even"><td><p>var</p></td>
+<td><p>This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though</p></td>
+</tr>
+<tr class="row-odd"><td><p>unsigned</p></td>
+<td><p>Represents a generic, unsigned integer with bitwidth determined at compile time</p></td>
+</tr>
+<tr class="row-even"><td><p>signed</p></td>
+<td><p>Represents a generic, signed integer with bitwidth determined at compile time</p></td>
+</tr>
+<tr class="row-odd"><td><p>floating</p></td>
+<td><p>Represents a floating-point number with bitwidth determined at compile time</p></td>
+</tr>
+<tr class="row-even"><td><p>fixed</p></td>
+<td><p>Represents a fixed-point number with bitwidth determined at compile time</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="common-primitives">
+<h2>Common Primitives<a class="headerlink" href="#common-primitives" title="Permalink to this headline">¶</a></h2>
+<p>Wait, most languages use primitives such as <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">ulong</span></code>, etc. Where are they? If you look above, Asylum already provides a way to declare unsigned, signed, and floating point numbers. So to get these <em>normal</em> types used commonly in programming, Asylum <em>typedef</em>s, or creates new types that really just shortcut back to the original type. The below chart shows the typedefs defined by EASL (Embedded Asylum Standard Library):</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>True Type</p></th>
+<th class="head"><p>Range</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sbyte</p></td>
+<td><p>s8</p></td>
+<td><p>-128 to 127</p></td>
+</tr>
+<tr class="row-odd"><td><p>byte</p></td>
+<td><p>u8</p></td>
+<td><p>0 to 255</p></td>
+</tr>
+<tr class="row-even"><td><p>short</p></td>
+<td><p>s16</p></td>
+<td><p>-32,768 to 32,767</p></td>
+</tr>
+<tr class="row-odd"><td><p>ushort</p></td>
+<td><p>u16</p></td>
+<td><p>0 to 65,535</p></td>
+</tr>
+<tr class="row-even"><td><p>int</p></td>
+<td><p>s32</p></td>
+<td><p>-2,147,483,648 to 2,147,483,647</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint</p></td>
+<td><p>u32</p></td>
+<td><p>0 to 4,294,967,295</p></td>
+</tr>
+<tr class="row-even"><td><p>long</p></td>
+<td><p>s64</p></td>
+<td><p>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</p></td>
+</tr>
+<tr class="row-odd"><td><p>ulong</p></td>
+<td><p>u64</p></td>
+<td><p>0 to 18,446,744,073,709,551,615</p></td>
+</tr>
+<tr class="row-even"><td><p>longlong</p></td>
+<td><p>s128</p></td>
+<td><p>−170,141,183,460,469,231,731,687,303,715,884,105,728 to 170,141,183,460,469,231,731,687,303,715,884,105,727</p></td>
+</tr>
+<tr class="row-odd"><td><p>ulonglong</p></td>
+<td><p>u128</p></td>
+<td><p>0 to 340,282,366,920,938,463,463,374,607,431,768,211,455</p></td>
+</tr>
+<tr class="row-even"><td><p>half</p></td>
+<td><p>f16</p></td>
+<td><p>?</p></td>
+</tr>
+<tr class="row-odd"><td><p>float</p></td>
+<td><p>f32</p></td>
+<td><p>3.4E +/- 38 (7 digits)</p></td>
+</tr>
+<tr class="row-even"><td><p>double</p></td>
+<td><p>f64</p></td>
+<td><p>1.7E +/- 308 (15 digits)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="special-types">
+<h2>Special Types<a class="headerlink" href="#special-types" title="Permalink to this headline">¶</a></h2>
+<p>Like most other languages, Asylum has <em>special types</em> that are types that involve other types. This statement is confusing, but it’ll make sense after looking at them below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Special Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>T, T, …, T</p></td>
+<td><p>Tuple - this allows you to store a bunch of other data types in one variable. Ex: <code class="docutils literal notranslate"><span class="pre">int,</span> <span class="pre">floatm</span> <span class="pre">string</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>(T, T, …, T)</p></td>
+<td><p>This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity</p></td>
+</tr>
+<tr class="row-even"><td><p>T*</p></td>
+<td><p>A diet-pointer to a data type. For now, think of it as a shortcut to already existing data of the same type</p></td>
+</tr>
+<tr class="row-odd"><td><p>unsafe T*</p></td>
+<td><p>A raw-pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms that also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it)</p></td>
+</tr>
+<tr class="row-even"><td><p>T[]</p></td>
+<td><p>Dynamic array. This is an array of T that is allowed to be any length</p></td>
+</tr>
+<tr class="row-odd"><td><p>T[C]</p></td>
+<td><p>Constant array. This is an array of T that is constant with size C</p></td>
+</tr>
+<tr class="row-even"><td><p>T[A, B, …]</p></td>
+<td><p>A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, <code class="docutils literal notranslate"><span class="pre">int[2,</span> <span class="pre">3]</span></code> can be thought of as a 2x3 grid of <code class="docutils literal notranslate"><span class="pre">int</span></code>s. <code class="docutils literal notranslate"><span class="pre">char[3,</span> <span class="pre">,</span> <span class="pre">7]</span></code> can be thought of as a 3d array of chars where one dimension is 3 long, another is 7 long, and the other can be any length</p></td>
+</tr>
+<tr class="row-odd"><td><p>const T</p></td>
+<td><p>A type T, but you can only assign to it once. This is optimal for data you know will definitely not change</p></td>
+</tr>
+<tr class="row-even"><td><p>static T</p></td>
+<td><p>A type T, but there is only one instance of it across everything. For example, say you make a <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">int</span></code> inside a function, and say inside this function, this <code class="docutils literal notranslate"><span class="pre">int</span></code> is incremented. Instead of creating a new <code class="docutils literal notranslate"><span class="pre">int</span></code> every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that function is called</p></td>
+</tr>
+<tr class="row-odd"><td><p>volatile T</p></td>
+<td><p>If you need to make sure T has changed for say you are using it as a condition in a loop, you can mark it as volatile</p></td>
+</tr>
+<tr class="row-even"><td><p>atomic T</p></td>
+<td><p>Declaring a variable as atomic will make sure only one thread is allowed to use it at a time</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="typedefs">
+<h2>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h2>
+<p>Asylum creates those above “shortcuts” but doing what is called a typedef statement. These are to be placed outside of functions, structures, and implementations.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span><span class="w"> </span><span class="n">s24</span><span class="p">[]</span><span class="w"> </span><span class="n">medIntArr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This example creates a new type called, <code class="docutils literal notranslate"><span class="pre">medIntARr</span></code>, which is really just a dynamic array of 24-bit signed integers in disguise. You can use <code class="docutils literal notranslate"><span class="pre">medInt</span></code> and <code class="docutils literal notranslate"><span class="pre">s24[]</span></code> interchangibly, they are the exact same thing.</p>
+</div>
+<div class="section" id="structs">
+<h2>Structs<a class="headerlink" href="#structs" title="Permalink to this headline">¶</a></h2>
+<p>Of course, making other names for existing types is cool and all, but it can only go so far. Structs allow you to group together a bunch of data types like so:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">red</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">green</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">blue</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">struct</span> <span class="nc">Car</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">licensePlate</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">rgbColor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">model</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now you can pass around more meaningful data!</p>
+<div class="section" id="infinite-structs">
+<h3>Infinite Structs<a class="headerlink" href="#infinite-structs" title="Permalink to this headline">¶</a></h3>
+<p>As you can see above, you can put structs inside of other structs. But one thing that is not allowed is putting a struct inside itself. Why is this a problem? Well let’s think about it:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">IllegalStruct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">IllegalStruct</span><span class="w"> </span><span class="n">illegalStruct</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Nothing too evil looking, right? But the compiler needs to determine the size of a struct at compile time. So let’s try and think of how that happens. We know that Asylum takes care of strings, and trying to figure out its size is a complex topic. But strings do have a fixed length, even if it is a black box to us. Ok, <code class="docutils literal notranslate"><span class="pre">int</span></code>, that’s easy, 32 bits or 4 bytes. Ok, and it contains an <code class="docutils literal notranslate"><span class="pre">IllegalStruct</span></code>, so we just give it the length of the <code class="docutils literal notranslate"><span class="pre">IllegalStruct</span></code>. Ok, now we need to go inside that <code class="docutils literal notranslate"><span class="pre">IllegalStruct</span></code> and figure out the length of its <code class="docutils literal notranslate"><span class="pre">IllegalStruct</span></code>… This is the problem. We’ll keep trying to figure out the length in an infinite loop. So how do we fix it? If you remember from earlier, we have diet-pointers which allow us to have a “shortcut” to data:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">LegalStruct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">LegalStruct</span><span class="o">*</span><span class="w"> </span><span class="n">legalStruct</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This is legal, since we don’t need to know the length of <code class="docutils literal notranslate"><span class="pre">LegalStruct</span></code> to calculate the length of <code class="docutils literal notranslate"><span class="pre">LegalStruct</span></code>. A diet-pointer/shortcut always has a fixed length, no matter what type of data it shortcuts/points to. Using a diet-pointer instead does add some things we will have to do when using it, but this will be discussed later. Also note the following illegal code:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">IllegalA</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">IllegalB</span><span class="w"> </span><span class="n">illegalB</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">struct</span> <span class="nc">IllegalB</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">IllegalA</span><span class="w"> </span><span class="n">illegalA</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won’t be able to determine the length of the structure. This can again be fixed by making either the <code class="docutils literal notranslate"><span class="pre">illegalA</span></code> or <code class="docutils literal notranslate"><span class="pre">illegalB</span></code> members a diet-pointer. Note that just having one diet-pointer solves the infinite struct error.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="functions.html" class="btn btn-neutral float-left" title="Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Asylum Lang Foundation.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

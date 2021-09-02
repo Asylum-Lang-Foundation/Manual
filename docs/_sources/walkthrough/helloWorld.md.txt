@@ -23,7 +23,7 @@ That's it. Now, let's understand what this syntax means:
 * If this is confusing, don't worry, we will talk about a lot of this individually later!
 
 ## A Cool Trick
-Asylum also lets you do a shortcut for any function that is only one code statment:
+Asylum also lets you do a shortcut for any function that is only one expression:
 ```rust
 fn main() => println("Hello World!");
 ```
@@ -31,7 +31,11 @@ Output:
 ```
 Hello World!
 ```
-The same output is produced. For now, you can think of `{}` as a group of many code statements, where `=>` will just run one.
+The same output is produced. For now, you can think of `{}` as a group of many code statements, where `=>` will just return one expression.
+
+```{warning}
+    `=>` must be used in combination with an expression. A call to `println` is allowed, as function calls are part of an expression. However, assignments to a variable such as `myVar = 2` is not an expression, it is a statement.
+```
 
 ## Print Function
 While `println` exists, `print` also exists too? So what's the difference? `println` will put a newline after it prints what you give it, while `print` will not. For example:
@@ -55,7 +59,7 @@ Output:
 67
 ```
 
-## Comments.
+## Comments
 Comments are not read by the compiler, and are also very important to documenting your code:
 ```rust
 // This is a single line comment.

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -88,17 +90,18 @@
               
             
             
-              <p class="caption"><span class="caption-text">Content:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">First Program (Hello World)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#understanding-the-program">Understanding The Program</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#a-cool-trick">A Cool Trick</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#print-function">Print Function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#comments">Comments.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comments">Comments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disclaimers">Disclaimers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 </ul>
 
             
@@ -193,7 +196,7 @@
 </div>
 <div class="section" id="a-cool-trick">
 <h2>A Cool Trick<a class="headerlink" href="#a-cool-trick" title="Permalink to this headline">¶</a></h2>
-<p>Asylum also lets you do a shortcut for any function that is only one code statment:</p>
+<p>Asylum also lets you do a shortcut for any function that is only one expression:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
@@ -201,7 +204,13 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
 </pre></div>
 </div>
-<p>The same output is produced. For now, you can think of <code class="docutils literal notranslate"><span class="pre">{}</span></code> as a group of many code statements, where <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> will just run one.</p>
+<p>The same output is produced. For now, you can think of <code class="docutils literal notranslate"><span class="pre">{}</span></code> as a group of many code statements, where <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> will just return one expression.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>`=&gt;` must be used in combination with an expression. A call to `println` is allowed, as function calls are part of an expression. However, assignments to a variable such as `myVar = 2` is not an expression, it is a statement.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="print-function">
 <h2>Print Function<a class="headerlink" href="#print-function" title="Permalink to this headline">¶</a></h2>
@@ -226,7 +235,7 @@
 </div>
 </div>
 <div class="section" id="comments">
-<h2>Comments.<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>Comments are not read by the compiler, and are also very important to documenting your code:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is a single line comment.</span>
 <span class="cm">/*</span>

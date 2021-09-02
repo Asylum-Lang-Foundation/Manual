@@ -2,7 +2,7 @@ Asylum Programming Language Reference Manual
 ============================================
 
 .. toctree::
-   test.md
+   gettingStarted/*
    :maxdepth: 2
    :caption: Contents:
 
