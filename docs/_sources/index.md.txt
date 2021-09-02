@@ -7,4 +7,5 @@
 
    /walkthrough/helloWorld.md
    /walkthrough/functions.md
+   /walkthrough/dataTypes.md
 ```

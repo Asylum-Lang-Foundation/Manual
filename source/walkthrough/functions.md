@@ -33,6 +33,42 @@ In Asylum, you can denote what a function returns by the `->` operator, which ca
 ## Function Parameters
 A function can be given parameters by having a comma-separated list of data types with names. The `add` function above has two parameters, an `int` called `a`, and another `int` called `b`. Of course, the data types of these parameters do not have to be the same. You call a function by separating the input parameters to it by commas. You must call the function with the same number of parameters. For example, `add(5);` is invalid.
 
+## Different Ways To Return
+Asylum allows you to return a value in 3 different ways:
+* In a one line statement for the function using `=>`:
+```rust
+fn add(int a, int b) -> int => a + b;
+```
+* Using the return statement:
+```rust
+fn add(int a, int b) {
+    return a + b;
+}
+```
+* A statement without a semi-colon:
+```rust
+fn add(int a, int b) {
+    a + b
+}
+```
+These all produce the same code!
+````{warning}
+The following examples are invalid:
+```rust
+/*  
+    "=>" Can only be used with an expression.
+    "a + b" is an expression that evaluates to "int", but "return a + b" is a code statement.
+*/
+fn add(int a, int b) -> int => return a + b;
+```
+```rust
+fn add(int a, int b) -> int {
+    // Like above, "return a + b" is a code statement, not an expression, so it can not be returned.
+    return a + b
+}
+```
+````
+
 ## Multiple Function Definitions
 You can actually define the same function multiple times, as long as its signature is not the same as another function with the same name. The signature of two functions are considered equivalent if all of the following conditions are met:
 * Have the same number of parameters.

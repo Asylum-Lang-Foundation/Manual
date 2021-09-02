@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -87,12 +89,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Content:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#return-types">Return Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#function-parameters">Function Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#different-ways-to-return">Different Ways To Return</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multiple-function-definitions">Multiple Function Definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disclaimers">Disclaimers</a></li>
 </ul>
@@ -202,6 +205,50 @@
 <div class="section" id="function-parameters">
 <h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Permalink to this headline">¶</a></h2>
 <p>A function can be given parameters by having a comma-separated list of data types with names. The <code class="docutils literal notranslate"><span class="pre">add</span></code> function above has two parameters, an <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">a</span></code>, and another <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">b</span></code>. Of course, the data types of these parameters do not have to be the same. You call a function by separating the input parameters to it by commas. You must call the function with the same number of parameters. For example, <code class="docutils literal notranslate"><span class="pre">add(5);</span></code> is invalid.</p>
+</div>
+<div class="section" id="different-ways-to-return">
+<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Permalink to this headline">¶</a></h2>
+<p>Asylum allows you to return a value in 3 different ways:</p>
+<ul class="simple">
+<li><p>In a one line statement for the function using <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>:</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Using the return statement:</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>A statement without a semi-colon:</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>These all produce the same code!</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The following examples are invalid:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cm">/*  </span>
+<span class="cm">    &quot;=&gt;&quot; Can only be used with an expression.</span>
+<span class="cm">    &quot;a + b&quot; is an expression that evaluates to &quot;int&quot;, but &quot;return a + b&quot; is a code statement.</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Like above, &quot;return a + b&quot; is a code statement, not an expression, so it can not be returned.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="multiple-function-definitions">
 <h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Permalink to this headline">¶</a></h2>
