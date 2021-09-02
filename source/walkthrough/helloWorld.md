@@ -55,7 +55,7 @@ Output:
 67
 ```
 
-## Comments.
+## Comments
 Comments are not read by the compiler, and are also very important to documenting your code:
 ```rust
 // This is a single line comment.
