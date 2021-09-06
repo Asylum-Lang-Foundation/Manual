@@ -13,8 +13,6 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,16 +29,17 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Variables" href="variables.html" />
     <link rel="prev" title="Functions" href="functions.html" /> 
 </head>
 
@@ -89,7 +88,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+              <p class="caption"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
@@ -103,8 +102,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#infinite-structs">Infinite Structs</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 </ul>
 
             
@@ -312,6 +314,10 @@
 <td><p>f64</p></td>
 <td><p>1.7E +/- 308 (15 digits)</p></td>
 </tr>
+<tr class="row-odd"><td><p>size_t</p></td>
+<td><p>uX</p></td>
+<td><p>X is the bitwidth of the system, which for 32-bit systems is <code class="docutils literal notranslate"><span class="pre">u32</span></code>, <code class="docutils literal notranslate"><span class="pre">u64</span></code> for 64-bit, etc.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -428,6 +434,26 @@
 <p>Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won’t be able to determine the length of the structure. This can again be fixed by making either the <code class="docutils literal notranslate"><span class="pre">illegalA</span></code> or <code class="docutils literal notranslate"><span class="pre">illegalB</span></code> members a diet-pointer. Note that just having one diet-pointer solves the infinite struct error.</p>
 </div>
 </div>
+<div class="section" id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Explain the difference between unsigned and signed integers. What is a common signed type?</p></li>
+<li><p>Explain the difference between a floating-point and a fixed-point number. What is a common floating-point type?</p></li>
+<li><p>What type of number is <code class="docutils literal notranslate"><span class="pre">long</span></code>? Unsigned, signed, floating-point, or fixed-point?</p></li>
+<li><p>Remember that <code class="docutils literal notranslate"><span class="pre">add</span></code> function from earlier? Remake it so that <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> can have a decimal point.</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">struct</span></code> that represents a circle. Each circle has a radius, a line width, color, and can have another circle inside of it. Create any other necessary <code class="docutils literal notranslate"><span class="pre">struct</span></code>s.</p></li>
+</ol>
+</div>
+<div class="section" id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="solutions/dataTypes1.html"><span class="doc std std-doc">Solution 1</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/dataTypes2.html"><span class="doc std std-doc">Solution 2</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/dataTypes3.html"><span class="doc std std-doc">Solution 3</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/dataTypes4.html"><span class="doc std std-doc">Solution 4</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/dataTypes5.html"><span class="doc std std-doc">Solution 5</span></a></p></li>
+</ul>
+</div>
 </div>
 
 
@@ -436,6 +462,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="variables.html" class="btn btn-neutral float-right" title="Variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="functions.html" class="btn btn-neutral float-left" title="Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

@@ -69,6 +69,14 @@ Comments are not read by the compiler, and are also very important to documentin
 */
 ```
 
+## Challenges
+1. Write a program that says "Hello Asylum User!" in one line of code.
+2. Write a program that prints the first 3 letters of the alphabet together, but you are only allowed to print one letter at a time.
+
+## Challenge Solutions
+* [Solution 1](solutions/helloWorld1.md)
+* [Solution 2](solutions/helloWorld2.md)
+
 ## Disclaimers
 ```{warning}
 StraitJacket currently does not have a `println` or `print` function usable at the moment due to it being part of the incomplete Embedded Asylum Standard Library (EASL). For now, just declare an `extern fn printf(string format, ... args) -> int;` at the top of the file and use that instead. This will function as the *print* function.
