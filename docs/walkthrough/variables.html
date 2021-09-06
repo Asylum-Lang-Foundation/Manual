@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Variables &mdash; Asylum  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Data Types" href="dataTypes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Asylum
+          
+
+          
+            
+            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-use-variables">Why Use Variables?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-variable">Using A Variable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#understanding-the-code">Understanding The Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-operators">General Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operator-precedence">Operator Precedence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preserving-data-with-operators">Preserving Data With Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-more-complex-example">A More Complex Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#struct-variables">Struct Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Asylum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Variables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/walkthrough/variables.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="tex2jax_ignore mathjax_ignore section" id="variables">
+<h1>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h1>
+<p>On the previous page, you learned about data types. They are an essential first half to learning one of the fundamental concepts in any programming language: variables.</p>
+<div class="section" id="why-use-variables">
+<h2>Why Use Variables?<a class="headerlink" href="#why-use-variables" title="Permalink to this headline">¶</a></h2>
+<p>When programming, you typically need to store information/data in places. A variable gives you a way to pass and edit this information around, whether it is numbers, text, etc.</p>
+</div>
+<div class="section" id="using-a-variable">
+<h2>Using A Variable<a class="headerlink" href="#using-a-variable" title="Permalink to this headline">¶</a></h2>
+<p>How you use a variable depends on what it is of course. But let’s look at an example that utilizes variables:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myText</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">myText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myOtherText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This is more text!&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myText</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myOtherText</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+This is more text!
+</pre></div>
+</div>
+<div class="section" id="understanding-the-code">
+<h3>Understanding The Code<a class="headerlink" href="#understanding-the-code" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>We declare a variable (named “myText”) by specifying its type and then the name of what we will call the variable. Here, we are saying that there is a variable called “myText” and it “is a” <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p></li>
+<li><p>Using an assignment operator such as <code class="docutils literal notranslate"><span class="pre">=</span></code>, we give the variable a value.</p></li>
+<li><p>It is also possible to declare and assign a variable at the same time.</p></li>
+<li><p>After this, we could simply print out those variables.</p></li>
+</ul>
+<p>And that is how you declare and use basic variables. You should not think of <code class="docutils literal notranslate"><span class="pre">=</span></code> as the math equals, but rather you are assigning a value to this variable at this point in time.</p>
+</div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>What’s cool about variables is the fact that you can perform operations on them to either manipulate current variables, or form new values entirely. For example, you can add two number variables together to produce a new number, which you could store in a new variable, store it to an existing one, or even not store it at all and throw the result out of the window.</p>
+<div class="section" id="general-operators">
+<h3>General Operators<a class="headerlink" href="#general-operators" title="Permalink to this headline">¶</a></h3>
+<p>These operators can be applied to any variable(s)/values to produce a new value. These operators are “static”, as they do not modify the values of the variables they interact with.</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>Add</p></td>
+<td><p>a + b</p></td>
+<td><p>Returns the sum of two items</p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>Sub</p></td>
+<td><p>a - b</p></td>
+<td><p>Returns the difference of two items</p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td><p>Mul</p></td>
+<td><p>a * b</p></td>
+<td><p>Returns the product of two items</p></td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>Div</p></td>
+<td><p>a / b</p></td>
+<td><p>Returns the result of division of two items</p></td>
+</tr>
+<tr class="row-even"><td><p>%</p></td>
+<td><p>Mod</p></td>
+<td><p>a % b</p></td>
+<td><p>Returns the remainder of the result of the division of two items</p></td>
+</tr>
+<tr class="row-odd"><td><p>..</p></td>
+<td><p>Range</p></td>
+<td><p>a .. b</p></td>
+<td><p>Returns an interable item that is defined by the range between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;</p></td>
+<td><p>BitAnd</p></td>
+<td><p>a &amp; b</p></td>
+<td><p>Returns the bitwise and operation of two items</p></td>
+</tr>
+<tr class="row-odd"><td><p>|</p></td>
+<td><p>Or</p></td>
+<td><p>a | b</p></td>
+<td><p>Returns the bitwise or operation of two items</p></td>
+</tr>
+<tr class="row-even"><td><p>^</p></td>
+<td><p>BitXor</p></td>
+<td><p>a ^ b</p></td>
+<td><p>Returns the bitwise exclusive or operation of two items</p></td>
+</tr>
+<tr class="row-odd"><td><p>~</p></td>
+<td><p>BitNot</p></td>
+<td><p>~a</p></td>
+<td><p>Returns the bitwise not of an item</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;&lt;</p></td>
+<td><p>Lshift</p></td>
+<td><p>a &lt;&lt; b</p></td>
+<td><p>Shifts <code class="docutils literal notranslate"><span class="pre">a</span></code> to the left by <code class="docutils literal notranslate"><span class="pre">b</span></code> bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;&gt;</p></td>
+<td><p>Rshift</p></td>
+<td><p>a &gt;&gt; b</p></td>
+<td><p>Shifts <code class="docutils literal notranslate"><span class="pre">a</span></code> to the right by <code class="docutils literal notranslate"><span class="pre">b</span></code> bits</p></td>
+</tr>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>Pos</p></td>
+<td><p>+a</p></td>
+<td><p>Modifies a value with positive (does nothing)</p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>Neg</p></td>
+<td><p>-a</p></td>
+<td><p>Modifies a value to be negative</p></td>
+</tr>
+<tr class="row-even"><td><p>++</p></td>
+<td><p>Inc</p></td>
+<td><p>++a; a++</p></td>
+<td><p>Increment the value of a</p></td>
+</tr>
+<tr class="row-odd"><td><p>–</p></td>
+<td><p>Dec</p></td>
+<td><p>–a; a–</p></td>
+<td><p>Decrement the value of a</p></td>
+</tr>
+<tr class="row-even"><td><p>^</p></td>
+<td><p>Member</p></td>
+<td><p>^a</p></td>
+<td><p>When indexing an element, will access the member that is the count minus <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>*</p></td>
+<td><p>Dereference</p></td>
+<td><p>*a</p></td>
+<td><p>Given that <code class="docutils literal notranslate"><span class="pre">a</span></code> is a double-pointer, this will return the value the double-pointer points to</p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;</p></td>
+<td><p>Address Of</p></td>
+<td><p>&amp;a</p></td>
+<td><p>Returns a raw, unsafe pointer that points to <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;</p></td>
+<td><p>As Address</p></td>
+<td><p>&#64;a</p></td>
+<td><p>Given that <code class="docutils literal notranslate"><span class="pre">a</span></code> is a pointer, <code class="docutils literal notranslate"><span class="pre">&#64;a</span></code> will return the value of the pointer instead of returning what <code class="docutils literal notranslate"><span class="pre">a</span></code> points to</p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;&amp;</p></td>
+<td><p>And</p></td>
+<td><p>a &amp;&amp; b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, both <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are <code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>||</p></td>
+<td><p>Or</p></td>
+<td><p>a || b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, either <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are <code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>!&amp;</p></td>
+<td><p>Nand</p></td>
+<td><p>!&amp;</p></td>
+<td><p>a !&amp; b</p></td>
+</tr>
+<tr class="row-odd"><td><p>!|</p></td>
+<td><p>Nor</p></td>
+<td><p>!|</p></td>
+<td><p>a !| b</p></td>
+</tr>
+<tr class="row-even"><td><p>!</p></td>
+<td><p>Not</p></td>
+<td><p>!a</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>==</p></td>
+<td><p>Eq</p></td>
+<td><p>a == b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>!=</p></td>
+<td><p>Neq</p></td>
+<td><p>a != b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;</p></td>
+<td><p>Gt</p></td>
+<td><p>a &gt; b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;</p></td>
+<td><p>Lt</p></td>
+<td><p>a &lt; b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is less than <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;=</p></td>
+<td><p>Ge</p></td>
+<td><p>a &gt;= b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is greater than or equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;=</p></td>
+<td><p>Le</p></td>
+<td><p>a &lt;= b</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is less than or equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>?:</p></td>
+<td><p>Cond</p></td>
+<td><p>a ? b : c</p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>??</p></td>
+<td><p>Null</p></td>
+<td><p>a ?? b</p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a null pointer, return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>,</p></td>
+<td><p>Comma</p></td>
+<td><p>a, b, …</p></td>
+<td><p>Form a tuple with <code class="docutils literal notranslate"><span class="pre">a</span></code> in the first element, <code class="docutils literal notranslate"><span class="pre">b</span></code> in the second, etc. Expressions that result in <code class="docutils literal notranslate"><span class="pre">void</span></code> are NOT included</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="assignment-operators">
+<h3>Assignment Operators<a class="headerlink" href="#assignment-operators" title="Permalink to this headline">¶</a></h3>
+<p>These operators are “not static”, as in they modify the value of the left-hand variable. All operators are in the form <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">{OP}</span> <span class="pre">b</span></code>.</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Equivalent</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>+=</p></td>
+<td><p>a = a + b</p></td>
+</tr>
+<tr class="row-odd"><td><p>-=</p></td>
+<td><p>a = a - b</p></td>
+</tr>
+<tr class="row-even"><td><p>*=</p></td>
+<td><p>a = a * b</p></td>
+</tr>
+<tr class="row-odd"><td><p>**=</p></td>
+<td><p>Raises <code class="docutils literal notranslate"><span class="pre">a</span></code> to the <code class="docutils literal notranslate"><span class="pre">b</span></code>th power</p></td>
+</tr>
+<tr class="row-even"><td><p>/=</p></td>
+<td><p>a = a / b</p></td>
+</tr>
+<tr class="row-odd"><td><p>%=</p></td>
+<td><p>a = a % b</p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;=</p></td>
+<td><p>a = a &amp; b</p></td>
+</tr>
+<tr class="row-odd"><td><p>|=</p></td>
+<td><p>a = a | b</p></td>
+</tr>
+<tr class="row-even"><td><p>^=</p></td>
+<td><p>a = a ^ b</p></td>
+</tr>
+<tr class="row-odd"><td><p>~=</p></td>
+<td><p>Flips the bits in <code class="docutils literal notranslate"><span class="pre">a</span></code> specified by <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;&lt;=</p></td>
+<td><p>a = a &lt;&lt; b</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;&gt;=</p></td>
+<td><p>a = a &gt;&gt; b</p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;&amp;=</p></td>
+<td><p>a = a &amp;&amp; b</p></td>
+</tr>
+<tr class="row-odd"><td><p>||=</p></td>
+<td><p>a = a || b</p></td>
+</tr>
+<tr class="row-even"><td><p>!&amp;=</p></td>
+<td><p>a = a !&amp; b</p></td>
+</tr>
+<tr class="row-odd"><td><p>~|=</p></td>
+<td><p>a = a !| b</p></td>
+</tr>
+<tr class="row-even"><td><p>??=</p></td>
+<td><p>a = a ?? b</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operator-precedence">
+<h3>Operator Precedence<a class="headerlink" href="#operator-precedence" title="Permalink to this headline">¶</a></h3>
+<p>You may have remembered in elementary school learning PEMDAS, or the order of operations (parenthesis, exponents, multiply/divide, addition/subtraction). Asylum also obeys an order of operations, the higher on the table, the higher the precedence (same row is on the same level):</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operators</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x++, x–</p></td>
+</tr>
+<tr class="row-odd"><td><p>+x, -x, !x, ~x, ++x, –x, ^x, &amp;x, *x, &#64;x</p></td>
+</tr>
+<tr class="row-even"><td><p>x..y</p></td>
+</tr>
+<tr class="row-odd"><td><p>x * y, x / y, x % y</p></td>
+</tr>
+<tr class="row-even"><td><p>x + y, x - y</p></td>
+</tr>
+<tr class="row-odd"><td><p>x &gt;&gt; y, x &lt;&lt; y</p></td>
+</tr>
+<tr class="row-even"><td><p>x &gt; y, x &lt; y, x &gt;= y, x &lt;= y</p></td>
+</tr>
+<tr class="row-odd"><td><p>x == y, x != y</p></td>
+</tr>
+<tr class="row-even"><td><p>x &amp; y</p></td>
+</tr>
+<tr class="row-odd"><td><p>x ^ y</p></td>
+</tr>
+<tr class="row-even"><td><p>x | y</p></td>
+</tr>
+<tr class="row-odd"><td><p>x &amp;&amp; y, x !&amp; y, x !| y</p></td>
+</tr>
+<tr class="row-even"><td><p>x || y</p></td>
+</tr>
+<tr class="row-odd"><td><p>x ?? y</p></td>
+</tr>
+<tr class="row-even"><td><p>x ? y : z</p></td>
+</tr>
+<tr class="row-odd"><td><p>x, y</p></td>
+</tr>
+<tr class="row-even"><td><p>Assignment Operators</p></td>
+</tr>
+</tbody>
+</table>
+<p>Remember to use parenthesis when in doubt! It makes code easier to read.</p>
+</div>
+<div class="section" id="preserving-data-with-operators">
+<h3>Preserving Data With Operators<a class="headerlink" href="#preserving-data-with-operators" title="Permalink to this headline">¶</a></h3>
+<p>What happens when you use these different operators on differing on similar types? For example, let’s look at the following code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mf">5.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="mf">2.5</span>
+</pre></div>
+</div>
+<p>What just happened? Well it turns out that since <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> are both integers, the result must be an integer. This led to the decimal portion being completely ignored! But <code class="docutils literal notranslate"><span class="pre">5.0</span></code> is a floating-point number. Even though <code class="docutils literal notranslate"><span class="pre">2</span></code> is a decimal number, since an operation is being done with an integer and a floating-poing number, the computer will calculate the result that involves losing less information. So for example, an <code class="docutils literal notranslate"><span class="pre">s32</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) added with a <code class="docutils literal notranslate"><span class="pre">s64</span></code> (<code class="docutils literal notranslate"><span class="pre">long</span></code>) will produce an <code class="docutils literal notranslate"><span class="pre">s64</span></code> (<code class="docutils literal notranslate"><span class="pre">long</span></code>) as it loses less information. Despite the technicalities of floating-point numbers, a floating-point or fixed-point number is always said to be “bigger”.</p>
+</div>
+</div>
+<div class="section" id="a-more-complex-example">
+<h2>A More Complex Example<a class="headerlink" href="#a-more-complex-example" title="Permalink to this headline">¶</a></h2>
+<p>As you can tell, there are quite a lot of different operators. Each will be discussed in more detail later, but for now, let’s see an example that utilizes some:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// Here we have a function that solves for x = (-b +/- sqrt(b^2 - 4ac)) / 2a, which is better known as the standard quadratic formula.</span>
+<span class="c1">// It is also worth noting that we are allowed to return multiple values at once in a tuple as shown:</span>
+<span class="k">fn</span> <span class="nf">quadraticFormula</span><span class="p">(</span><span class="n">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">double</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">double</span><span class="w"> </span><span class="n">innerPart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">           </span><span class="c1">// Calculate the interior part of the square root.</span>
+<span class="w">    </span><span class="n">innerPart</span><span class="w"> </span><span class="o">**=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">                              </span><span class="c1">// Apply the square root by raising to the .5th power.</span>
+<span class="w">    </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">innerPart</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">innerPart</span><span class="w">                  </span><span class="c1">// Return the final results (the comma creates a tuple that is returned).</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="struct-variables">
+<h2>Struct Variables<a class="headerlink" href="#struct-variables" title="Permalink to this headline">¶</a></h2>
+<p>Remember structs from earlier? What if we actually wanted to use them? We can define a variable that “is” our struct like we define any other variable. We could then access the members of our <code class="docutils literal notranslate"><span class="pre">struct</span></code> by using a <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">red</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">green</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">blue</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">struct</span> <span class="nc">Car</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">licensePlate</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">rgbColor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">model</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">licensePlate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TOY1234&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">red</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">green</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">70</span><span class="p">;</span><span class="w"> </span><span class="c1">// You can set multiple variables to the same value too!</span>
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2017</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>But what happens to the variables we did not set? In Asylum, the rule of thumb is that everything is inialized to either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or empty:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">model</span><span class="p">);</span><span class="w"></span>
+<span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">blue</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="mi">0</span>
+</pre></div>
+</div>
+<p>The first line is an empty line if that is not clear.</p>
+<div class="section" id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
+<p>Of course, setting the initial variables the above way is a little messy. Luckily, there is a shorthand using curly brackets for such:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Car</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">licensePlate</span>: <span class="s">&quot;TOY1234&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">rgbColor</span>: <span class="nc">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span>: <span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="n">green</span>: <span class="mi">70</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="n">year</span>: <span class="mi">2017</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This above code is equivalent, and much cleaner.</p>
+</div>
+</div>
+<div class="section" id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Make a program that prints the sum of two variables to produce “Hello World!”.</p></li>
+<li><p>Initialize the <code class="docutils literal notranslate"><span class="pre">Color</span></code> struct in both ways to both produce white (white is 255).</p></li>
+<li><p>Create a function to solve for <code class="docutils literal notranslate"><span class="pre">c</span></code> in the Pythagorean Theorem (<code class="docutils literal notranslate"><span class="pre">a^2</span> <span class="pre">+</span> <span class="pre">b^2</span> <span class="pre">=</span> <span class="pre">c^2</span></code>).</p></li>
+<li><p>What is the result of <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">/</span> <span class="pre">3</span></code>?</p></li>
+<li><p>What is the result of <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">*</span> <span class="pre">(2</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">%</span> <span class="pre">3</span></code>?</p></li>
+</ol>
+</div>
+<div class="section" id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="solutions/variables1.html"><span class="doc std std-doc">Solution 1</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables2.html"><span class="doc std std-doc">Solution 2</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables3.html"><span class="doc std std-doc">Solution 3</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables4.html"><span class="doc std std-doc">Solution 4</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables5.html"><span class="doc std std-doc">Solution 5</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dataTypes.html" class="btn btn-neutral float-left" title="Data Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Asylum Lang Foundation.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

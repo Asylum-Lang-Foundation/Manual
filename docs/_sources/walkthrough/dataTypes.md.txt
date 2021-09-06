@@ -46,6 +46,7 @@ Wait, most languages use primitives such as `int`, `float`, `ulong`, etc. Where 
 | half | f16 | ? |
 | float | f32 | 3.4E +/- 38 (7 digits) |
 | double | f64 | 1.7E +/- 308 (15 digits) |
+| size_t | uX | X is the bitwidth of the system, which for 32-bit systems is `u32`, `u64` for 64-bit, etc. |
 
 ## Special Types
 Like most other languages, Asylum has *special types* that are types that involve other types. This statement is confusing, but it'll make sense after looking at them below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:
@@ -133,3 +134,17 @@ struct IllegalB {
 ````
 
 Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won't be able to determine the length of the structure. This can again be fixed by making either the `illegalA` or `illegalB` members a diet-pointer. Note that just having one diet-pointer solves the infinite struct error.
+
+## Challenges
+1. Explain the difference between unsigned and signed integers. What is a common signed type?
+2. Explain the difference between a floating-point and a fixed-point number. What is a common floating-point type?
+3. What type of number is `long`? Unsigned, signed, floating-point, or fixed-point?
+4. Remember that `add` function from earlier? Remake it so that `a` and `b` can have a decimal point.
+5. Create a `struct` that represents a circle. Each circle has a radius, a line width, color, and can have another circle inside of it. Create any other necessary `struct`s.
+
+## Challenge Solutions
+* [Solution 1](solutions/dataTypes1.md)
+* [Solution 2](solutions/dataTypes2.md)
+* [Solution 3](solutions/dataTypes3.md)
+* [Solution 4](solutions/dataTypes4.md)
+* [Solution 5](solutions/dataTypes5.md)

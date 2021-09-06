@@ -82,6 +82,16 @@ fn add(int a, int b) {}
 ```
 The compiler will know which function to call depending on the context on which it is used.
 
+## Challenges
+1. Adding is cool and all, but subtraction is where it is at! Make a function called `sub` that subtracts `int b` from `int a`, this returns an `int`.
+2. The more numbers the merrier! Make another function that computes `a - b - c` and another that computes `a - b - c - d`. Create them in such a way that all your functions return in a unique way.
+3. Let's see some results! Make a program to print the results of calling these new functions. Comment on the top of each `println` statement what you expect the value to be.
+
+## Challenge Solutions
+* [Solution 1](solutions/functions1.md)
+* [Solution 2](solutions/functions2.md)
+* [Solution 3](solutions/functions3.md)
+
 ## Disclaimers
 ```{warning}
 StraitJacket currently is not smart enough to understand function overloading. The code to do this is not implemented.
