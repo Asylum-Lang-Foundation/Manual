@@ -217,3 +217,8 @@ This above code is equivalent, and much cleaner.
 * [Solution 3](solutions/variables3.md)
 * [Solution 4](solutions/variables4.md)
 * [Solution 5](solutions/variables5.md)
+
+## Disclaimers
+```{warning}
+StraitJacket currently does not support the majority of operators or even basic variable manipulation. It is very high on the priority list.
+```
