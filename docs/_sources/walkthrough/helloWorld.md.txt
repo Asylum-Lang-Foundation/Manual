@@ -2,9 +2,7 @@
 Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straightforward:
 
 ```rust
-fn main() {
-    println("Hello World!");
-}
+println("Hello World!");
 ```
 Output:
 ```
@@ -14,12 +12,29 @@ Hello World!
 ## Understanding The Program
 That's it. Now, let's understand what this syntax means:
 
-* When you run an Asylum program, it will run the *function* called *main*.
+* `println` is a function that prints what you give it, then goes to the next line. You call a function by putting its parameters between `(` and `)`, with the parameters being comma-separated. You can see here that we are telling it to print `Hello World!`. We must wrap this value in `"`s so the compiler knows that it's a value that we are sending it.
+* There is a semicolon `;` to signal to the compiler that the statement is over.
+
+Notice that statements outside a function are called *top-level statements*. These are only allowed to be in one of the files you are compiling, as the compiler wouldn't know where your program would start otherwise. Normally, we put code inside of functions to be even more organized:
+
+```rust
+fn main() {
+    println("Hello World!");
+}
+```
+Output:
+```
+Hello World!
+```
+
+## Understanding The Function Syntax
+That's it. Now, let's understand what this syntax means:
+
+* When you run an Asylum program, it will run the *function* called *main* (or top-level statements in one file if *main* doesn't exist).
 * We declare a *function* by using the keyword `fn`.
 * After that, we give it the name of our function, which in this case is *main*.
 * After this, we have an empty pair of parenthesis, `()`. We will use this later to give functions *arguments*, but do not worry about this for now.
 * We put any code statments we want to run inside the function within `{}`.
-* `println` is a function that will print whatever text you feed it within `()` followed by a new line. We do a function call by giving the name of the function, and putting what arguments we want to feed it within `()`. We also tell the compiler that the code statement is over by using `;`.
 * If this is confusing, don't worry, we will talk about a lot of this individually later!
 
 ## A Cool Trick
@@ -70,7 +85,7 @@ Comments are not read by the compiler, and are also very important to documentin
 ```
 
 ## Challenges
-1. Write a program that says "Hello Asylum User!" in one line of code.
+1. Write a program that says "Hello Asylum User!" in one line of code two different ways.
 2. Write a program that prints the first 3 letters of the alphabet together, but you are only allowed to print one letter at a time.
 
 ## Challenge Solutions

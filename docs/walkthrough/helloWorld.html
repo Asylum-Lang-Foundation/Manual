@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,18 +31,19 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Functions" href="functions.html" />
-    <link rel="prev" title="Asylum Programming Language Reference Manual" href="../index.html" /> 
+    <link rel="prev" title="About Asylum" href="../about.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,10 +91,12 @@
               
             
             
-              <p class="caption"><span class="caption-text">Content:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">First Program (Hello World)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#understanding-the-program">Understanding The Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-the-function-syntax">Understanding The Function Syntax</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#a-cool-trick">A Cool Trick</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#print-function">Print Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#comments">Comments</a></li>
@@ -173,9 +178,7 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="first-program-hello-world">
 <h1>First Program (Hello World)<a class="headerlink" href="#first-program-hello-world" title="Permalink to this headline">¶</a></h1>
 <p>Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straightforward:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -186,12 +189,29 @@
 <h2>Understanding The Program<a class="headerlink" href="#understanding-the-program" title="Permalink to this headline">¶</a></h2>
 <p>That’s it. Now, let’s understand what this syntax means:</p>
 <ul class="simple">
-<li><p>When you run an Asylum program, it will run the <em>function</em> called <em>main</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">println</span></code> is a function that prints what you give it, then goes to the next line. You call a function by putting its parameters between <code class="docutils literal notranslate"><span class="pre">(</span></code> and <code class="docutils literal notranslate"><span class="pre">)</span></code>, with the parameters being comma-separated. You can see here that we are telling it to print <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World!</span></code>. We must wrap this value in <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>s so the compiler knows that it’s a value that we are sending it.</p></li>
+<li><p>There is a semicolon <code class="docutils literal notranslate"><span class="pre">;</span></code> to signal to the compiler that the statement is over.</p></li>
+</ul>
+<p>Notice that statements outside a function are called <em>top-level statements</em>. These are only allowed to be in one of the files you are compiling, as the compiler wouldn’t know where your program would start otherwise. Normally, we put code inside of functions to be even more organized:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+</div>
+<div class="section" id="understanding-the-function-syntax">
+<h2>Understanding The Function Syntax<a class="headerlink" href="#understanding-the-function-syntax" title="Permalink to this headline">¶</a></h2>
+<p>That’s it. Now, let’s understand what this syntax means:</p>
+<ul class="simple">
+<li><p>When you run an Asylum program, it will run the <em>function</em> called <em>main</em> (or top-level statements in one file if <em>main</em> doesn’t exist).</p></li>
 <li><p>We declare a <em>function</em> by using the keyword <code class="docutils literal notranslate"><span class="pre">fn</span></code>.</p></li>
 <li><p>After that, we give it the name of our function, which in this case is <em>main</em>.</p></li>
 <li><p>After this, we have an empty pair of parenthesis, <code class="docutils literal notranslate"><span class="pre">()</span></code>. We will use this later to give functions <em>arguments</em>, but do not worry about this for now.</p></li>
 <li><p>We put any code statments we want to run inside the function within <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">println</span></code> is a function that will print whatever text you feed it within <code class="docutils literal notranslate"><span class="pre">()</span></code> followed by a new line. We do a function call by giving the name of the function, and putting what arguments we want to feed it within <code class="docutils literal notranslate"><span class="pre">()</span></code>. We also tell the compiler that the code statement is over by using <code class="docutils literal notranslate"><span class="pre">;</span></code>.</p></li>
 <li><p>If this is confusing, don’t worry, we will talk about a lot of this individually later!</p></li>
 </ul>
 </div>
@@ -249,7 +269,7 @@
 <div class="section" id="challenges">
 <h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p>Write a program that says “Hello Asylum User!” in one line of code.</p></li>
+<li><p>Write a program that says “Hello Asylum User!” in one line of code two different ways.</p></li>
 <li><p>Write a program that prints the first 3 letters of the alphabet together, but you are only allowed to print one letter at a time.</p></li>
 </ol>
 </div>
@@ -276,7 +296,7 @@
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="functions.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../index.html" class="btn btn-neutral float-left" title="Asylum Programming Language Reference Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../about.html" class="btn btn-neutral float-left" title="About Asylum" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
