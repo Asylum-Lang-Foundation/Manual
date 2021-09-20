@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,14 +31,15 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -86,8 +89,9 @@
               
             
             
-              <p class="caption"><span class="caption-text">Content:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About Asylum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dataTypes.html">Data Types</a></li>
@@ -161,7 +165,14 @@
             
   <div class="tex2jax_ignore mathjax_ignore section" id="challenge-1">
 <h1>Challenge 1<a class="headerlink" href="#challenge-1" title="Permalink to this headline">¶</a></h1>
-<p>In this question, you were asked to write a program that says “Hello Asylum User!” in one line of code. Of course, all this requires is a call to the <code class="docutils literal notranslate"><span class="pre">println</span></code> function like this: <code class="docutils literal notranslate"><span class="pre">println(&quot;Hello</span> <span class="pre">Asylum</span> <span class="pre">User!&quot;);</span></code>. But remember, you can use <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> for functions that are only 1 expression:</p>
+<p>In this question, you were asked to write a program that says “Hello Asylum User!” in one line of code. Of course, all this requires is a call to the <code class="docutils literal notranslate"><span class="pre">println</span></code> function like this: <code class="docutils literal notranslate"><span class="pre">println(&quot;Hello</span> <span class="pre">Asylum</span> <span class="pre">User!&quot;);</span></code>. You can do this with a top-level statement, but remember, you can also use <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> for functions that are only 1 expression:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello Asylum User!&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello Asylum User!
+</pre></div>
+</div>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello Asylum User!&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>

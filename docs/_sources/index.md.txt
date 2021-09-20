@@ -6,6 +6,7 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    :maxdepth: 2
    :caption: Content:
 
+   /about.md
    /walkthrough/helloWorld.md
    /walkthrough/functions.md
    /walkthrough/dataTypes.md
