@@ -324,84 +324,79 @@ This is more text!
 <tr class="row-odd"><td><p>*</p></td>
 <td><p>Dereference</p></td>
 <td><p>*a</p></td>
-<td><p>Given that <code class="docutils literal notranslate"><span class="pre">a</span></code> is a double-pointer, this will return the value the double-pointer points to</p></td>
+<td><p>Given that <code class="docutils literal notranslate"><span class="pre">a</span></code> is a pointer, this will return the value the pointer points to</p></td>
 </tr>
 <tr class="row-even"><td><p>&amp;</p></td>
 <td><p>Address Of</p></td>
 <td><p>&amp;a</p></td>
-<td><p>Returns a raw, unsafe pointer that points to <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td><p>Returns a pointer that points to <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>&#64;</p></td>
-<td><p>As Address</p></td>
-<td><p>&#64;a</p></td>
-<td><p>Given that <code class="docutils literal notranslate"><span class="pre">a</span></code> is a pointer, <code class="docutils literal notranslate"><span class="pre">&#64;a</span></code> will return the value of the pointer instead of returning what <code class="docutils literal notranslate"><span class="pre">a</span></code> points to</p></td>
-</tr>
-<tr class="row-even"><td><p>&amp;&amp;</p></td>
+<tr class="row-odd"><td><p>&amp;&amp;</p></td>
 <td><p>And</p></td>
 <td><p>a &amp;&amp; b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, both <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are <code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>||</p></td>
+<tr class="row-even"><td><p>||</p></td>
 <td><p>Or</p></td>
 <td><p>a || b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, either <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are <code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>!&amp;</p></td>
+<tr class="row-odd"><td><p>!&amp;</p></td>
 <td><p>Nand</p></td>
 <td><p>!&amp;</p></td>
 <td><p>a !&amp; b</p></td>
 </tr>
-<tr class="row-odd"><td><p>!|</p></td>
+<tr class="row-even"><td><p>!|</p></td>
 <td><p>Nor</p></td>
 <td><p>!|</p></td>
 <td><p>a !| b</p></td>
 </tr>
-<tr class="row-even"><td><p>!</p></td>
+<tr class="row-odd"><td><p>!</p></td>
 <td><p>Not</p></td>
 <td><p>!a</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>==</p></td>
+<tr class="row-even"><td><p>==</p></td>
 <td><p>Eq</p></td>
 <td><p>a == b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>!=</p></td>
+<tr class="row-odd"><td><p>!=</p></td>
 <td><p>Neq</p></td>
 <td><p>a != b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt;</p></td>
+<tr class="row-even"><td><p>&gt;</p></td>
 <td><p>Gt</p></td>
 <td><p>a &gt; b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>&lt;</p></td>
+<tr class="row-odd"><td><p>&lt;</p></td>
 <td><p>Lt</p></td>
 <td><p>a &lt; b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is less than <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt;=</p></td>
+<tr class="row-even"><td><p>&gt;=</p></td>
 <td><p>Ge</p></td>
 <td><p>a &gt;= b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is greater than or equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>&lt;=</p></td>
+<tr class="row-odd"><td><p>&lt;=</p></td>
 <td><p>Le</p></td>
 <td><p>a &lt;= b</p></td>
 <td><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if, and only if, <code class="docutils literal notranslate"><span class="pre">a</span></code> is less than or equal to <code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>?:</p></td>
+<tr class="row-even"><td><p>?:</p></td>
 <td><p>Cond</p></td>
 <td><p>a ? b : c</p></td>
 <td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>??</p></td>
+<tr class="row-odd"><td><p>??</p></td>
 <td><p>Null</p></td>
 <td><p>a ?? b</p></td>
 <td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a null pointer, return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>,</p></td>
+<tr class="row-even"><td><p>,</p></td>
 <td><p>Comma</p></td>
 <td><p>a, b, …</p></td>
 <td><p>Form a tuple with <code class="docutils literal notranslate"><span class="pre">a</span></code> in the first element, <code class="docutils literal notranslate"><span class="pre">b</span></code> in the second, etc. Expressions that result in <code class="docutils literal notranslate"><span class="pre">void</span></code> are NOT included</p></td>

@@ -341,11 +341,11 @@
 <tr class="row-odd"><td><p>(T, T, …, T)</p></td>
 <td><p>This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity</p></td>
 </tr>
-<tr class="row-even"><td><p>T*</p></td>
-<td><p>A diet-pointer to a data type. For now, think of it as a shortcut to already existing data of the same type</p></td>
+<tr class="row-even"><td><p>T&amp;</p></td>
+<td><p>A reference to a data type. For now, think of it as a shortcut to already existing data of the same type</p></td>
 </tr>
-<tr class="row-odd"><td><p>unsafe T*</p></td>
-<td><p>A raw-pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms that also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it)</p></td>
+<tr class="row-odd"><td><p>T*</p></td>
+<td><p>A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it)</p></td>
 </tr>
 <tr class="row-even"><td><p>T[]</p></td>
 <td><p>Dynamic array. This is an array of T that is allowed to be any length</p></td>

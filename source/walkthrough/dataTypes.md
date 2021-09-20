@@ -55,8 +55,8 @@ Like most other languages, Asylum has *special types* that are types that involv
 | ------------ | ----------- |
 | T, T, ..., T | Tuple - this allows you to store a bunch of other data types in one variable. Ex: `int, floatm string` |
 | (T, T, ..., T) | This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity |
-| T* | A diet-pointer to a data type. For now, think of it as a shortcut to already existing data of the same type |
-| unsafe T* | A raw-pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms that also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it) |
+| T& | A reference to a data type. For now, think of it as a shortcut to already existing data of the same type |
+| T* | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it) |
 | T[] | Dynamic array. This is an array of T that is allowed to be any length |
 | T[C] | Constant array. This is an array of T that is constant with size C |
 | T[A, B, ...] | A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, `int[2, 3]` can be thought of as a 2x3 grid of `int`s. `char[3, , 7]` can be thought of as a 3d array of chars where one dimension is 3 long, another is 7 long, and the other can be any length |
