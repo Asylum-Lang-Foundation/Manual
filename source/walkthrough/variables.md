@@ -55,9 +55,8 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | ++ | Inc | ++a; a++ | Increment the value of a |
 | -- | Dec | --a; a-- | Decrement the value of a |
 | ^ | Member | ^a | When indexing an element, will access the member that is the count minus `a` |
-| * | Dereference | *a | Given that `a` is a double-pointer, this will return the value the double-pointer points to |
-| & | Address Of | &a | Returns a raw, unsafe pointer that points to `a` |
-| @ | As Address | @a | Given that `a` is a pointer, `@a` will return the value of the pointer instead of returning what `a` points to |
+| * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to |
+| & | Address Of | &a | Returns a pointer that points to `a` |
 | && | And | a && b | Returns `true` if, and only if, both `a` and `b` are `true` |
 | \|\| | Or | a \|\| b | Returns `true` if, and only if, either `a` and `b` are `true` |
 | !& | Nand | !& | a !& b | Returns `true` if, and only if, both `a` and `b` are `false` |
