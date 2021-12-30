@@ -12,3 +12,15 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/dataTypes.md
    /walkthrough/variables.md
 ```
+
+```{eval-rst}
+.. toctree::
+   :maxdepth: 2
+   :caption: Developer Guide:
+
+   /dev/about.md
+   /dev/antlr.md
+   /dev/builder.md
+   /dev/visitor.md
+   /dev/codeRepresentation.md
+```

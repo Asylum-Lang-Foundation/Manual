@@ -1,0 +1,2 @@
+# Asylum Developer Guide
+Asylum is a cool language and all, but how does it actually work? In this section of the manual, you will learn a high level approach of the StraitJacket compiler for Asylum. This covers everything from parsing the text to compiling code, and everything inbetween such as using the builder API and how it works.
