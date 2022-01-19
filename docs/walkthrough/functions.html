@@ -1,42 +1,21 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Functions &mdash; Asylum  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -44,32 +23,14 @@
     <link rel="prev" title="First Program (Hello World)" href="helloWorld.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Asylum
-          
-
-          
-            
             <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -77,19 +38,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Content:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
@@ -105,8 +55,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developer Guide:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../dev/about.html">Asylum Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/antlr.html">AST Creation With ANTLR4</a></li>
@@ -115,74 +67,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/codeRepresentation.html">Working With The Code Representation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Asylum</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Functions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/walkthrough/functions.md.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="tex2jax_ignore mathjax_ignore section" id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
-<p>In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. In Asylum, <strong>all</strong> code must be executed within functions. Functions can also call other functions and execute the code within them. You saw this earlier by calling <code class="docutils literal notranslate"><span class="pre">println</span></code>, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:</p>
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h1>
+<p>In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. Functions can also call other functions and execute the code within them. You saw this earlier by calling <code class="docutils literal notranslate"><span class="pre">println</span></code>, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">));</span><span class="w"></span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)));</span><span class="w"></span>
@@ -211,16 +122,16 @@
 <p class="admonition-title">Note</p>
 <p>Remember that <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> can be used for functions with only one code statement!</p>
 </div>
-<div class="section" id="return-types">
-<h2>Return Types<a class="headerlink" href="#return-types" title="Permalink to this headline">¶</a></h2>
+<section id="return-types">
+<h2>Return Types<a class="headerlink" href="#return-types" title="Permalink to this headline"></a></h2>
 <p>In Asylum, you can denote what a function returns by the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> operator, which can be thought of as “returns”. So in this case, <code class="docutils literal notranslate"><span class="pre">main</span></code> doesn’t return anything (as it doesn’t have <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>), or returns <em>void</em>. <code class="docutils literal notranslate"><span class="pre">add</span></code> returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>, as it is right after the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>. But what is an <code class="docutils literal notranslate"><span class="pre">int</span></code>? It will be talked about later in the types section, but for now think of it as a whole number (no decimal places).</p>
-</div>
-<div class="section" id="function-parameters">
-<h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="function-parameters">
+<h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Permalink to this headline"></a></h2>
 <p>A function can be given parameters by having a comma-separated list of data types with names. The <code class="docutils literal notranslate"><span class="pre">add</span></code> function above has two parameters, an <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">a</span></code>, and another <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">b</span></code>. Of course, the data types of these parameters do not have to be the same. You call a function by separating the input parameters to it by commas. You must call the function with the same number of parameters. For example, <code class="docutils literal notranslate"><span class="pre">add(5);</span></code> is invalid.</p>
-</div>
-<div class="section" id="different-ways-to-return">
-<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="different-ways-to-return">
+<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Permalink to this headline"></a></h2>
 <p>Asylum allows you to return a value in 3 different ways:</p>
 <ul class="simple">
 <li><p>In a one line statement for the function using <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>:</p></li>
@@ -262,9 +173,9 @@
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="multiple-function-definitions">
-<h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="multiple-function-definitions">
+<h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Permalink to this headline"></a></h2>
 <p>You can actually define the same function multiple times, as long as its signature is not the same as another function with the same name. The signature of two functions are considered equivalent if all of the following conditions are met:</p>
 <ul class="simple">
 <li><p>Have the same number of parameters.</p></li>
@@ -278,25 +189,25 @@ The following is valid Asylum code:</p></li>
 </pre></div>
 </div>
 <p>The compiler will know which function to call depending on the context on which it is used.</p>
-</div>
-<div class="section" id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline"></a></h2>
+<ol class="arabic simple">
 <li><p>Adding is cool and all, but subtraction is where it is at! Make a function called <code class="docutils literal notranslate"><span class="pre">sub</span></code> that subtracts <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">b</span></code> from <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">a</span></code>, this returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p></li>
 <li><p>The more numbers the merrier! Make another function that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span></code> and another that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span> <span class="pre">-</span> <span class="pre">d</span></code>. Create them in such a way that all your functions return in a unique way.</p></li>
 <li><p>Let’s see some results! Make a program to print the results of calling these new functions. Comment on the top of each <code class="docutils literal notranslate"><span class="pre">println</span></code> statement what you expect the value to be.</p></li>
 </ol>
-</div>
-<div class="section" id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="solutions/functions1.html"><span class="doc std std-doc">Solution 1</span></a></p></li>
 <li><p><a class="reference internal" href="solutions/functions2.html"><span class="doc std std-doc">Solution 2</span></a></p></li>
 <li><p><a class="reference internal" href="solutions/functions3.html"><span class="doc std std-doc">Solution 3</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="disclaimers">
-<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="disclaimers">
+<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this headline"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>StraitJacket currently is not smart enough to understand function overloading. The code to do this is not implemented.</p>
@@ -305,55 +216,38 @@ The following is valid Asylum code:</p></li>
 <p class="admonition-title">Warning</p>
 <p>StraitJacket can’t use the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator to add numbers at the moment. You have to use the LLVM ASM call <code class="docutils literal notranslate"><span class="pre">(int)llvm(&quot;add&quot;,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> instead.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="dataTypes.html" class="btn btn-neutral float-right" title="Data Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="helloWorld.html" class="btn btn-neutral float-left" title="First Program (Hello World)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataTypes.html" class="btn btn-neutral float-right" title="Data Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Asylum Lang Foundation.
-
-    </p>
+    <p>&#169; Copyright 2022, Asylum Lang Foundation.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

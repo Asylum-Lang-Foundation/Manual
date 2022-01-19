@@ -1,5 +1,5 @@
 # Functions
-In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. In Asylum, **all** code must be executed within functions. Functions can also call other functions and execute the code within them. You saw this earlier by calling `println`, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:
+In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. Functions can also call other functions and execute the code within them. You saw this earlier by calling `println`, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:
 
 ```rust
 fn main() {

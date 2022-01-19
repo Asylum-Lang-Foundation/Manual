@@ -27,6 +27,7 @@ A primitive data type is one given by Asylum. They are definined by the language
 | signed | Represents a generic, signed integer with bitwidth determined at compile time |
 | floating | Represents a floating-point number with bitwidth determined at compile time |
 | fixed | Represents a fixed-point number with bitwidth determined at compile time |
+| This | The current type being implemented in an implementation block |
 
 ## Common Primitives
 Wait, most languages use primitives such as `int`, `float`, `ulong`, etc. Where are they? If you look above, Asylum already provides a way to declare unsigned, signed, and floating point numbers. So to get these *normal* types used commonly in programming, Asylum *typedef*s, or creates new types that really just shortcut back to the original type. The below chart shows the typedefs defined by EASL (Embedded Asylum Standard Library):
@@ -55,12 +56,15 @@ Like most other languages, Asylum has *special types* that are types that involv
 | ------------ | ----------- |
 | T, T, ..., T | Tuple - this allows you to store a bunch of other data types in one variable. Ex: `int, floatm string` |
 | (T, T, ..., T) | This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity |
-| T& | A reference to a data type. For now, think of it as a shortcut to already existing data of the same type |
+| T@ | A reference to a data type. For now, think of it as a shortcut to already existing data of the same type |
+| T& | A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always points to data |
 | T* | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it) |
 | T[] | Dynamic array. This is an array of T that is allowed to be any length |
 | T[C] | Constant array. This is an array of T that is constant with size C |
 | T[A, B, ...] | A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, `int[2, 3]` can be thought of as a 2x3 grid of `int`s. `char[3, , 7]` can be thought of as a 3d array of chars where one dimension is 3 long, another is 7 long, and the other can be any length |
-| const T | A type T, but you can only assign to it once. This is optimal for data you know will definitely not change |
+| const T | A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time |
+| readonly/ro T | A type T, but you can only read from it and not write to it |
+| writeonly/wo T | A type T, but you can only write from it and not read from it |
 | static T | A type T, but there is only one instance of it across everything. For example, say you make a `static int` inside a function, and say inside this function, this `int` is incremented. Instead of creating a new `int` every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that function is called |
 | volatile T | If you need to make sure T has changed for say you are using it as a condition in a loop, you can mark it as volatile |
 | atomic T | Declaring a variable as atomic will make sure only one thread is allowed to use it at a time |
@@ -106,16 +110,16 @@ struct IllegalStruct {
 ```
 ````
 
-Nothing too evil looking, right? But the compiler needs to determine the size of a struct at compile time. So let's try and think of how that happens. We know that Asylum takes care of strings, and trying to figure out its size is a complex topic. But strings do have a fixed length, even if it is a black box to us. Ok, `int`, that's easy, 32 bits or 4 bytes. Ok, and it contains an `IllegalStruct`, so we just give it the length of the `IllegalStruct`. Ok, now we need to go inside that `IllegalStruct` and figure out the length of its `IllegalStruct`... This is the problem. We'll keep trying to figure out the length in an infinite loop. So how do we fix it? If you remember from earlier, we have diet-pointers which allow us to have a "shortcut" to data:
+Nothing too evil looking, right? But the compiler needs to determine the size of a struct at compile time. So let's try and think of how that happens. We know that Asylum takes care of strings, and trying to figure out its size is a complex topic. But strings do have a fixed length, even if it is a black box to us. Ok, `int`, that's easy, 32 bits or 4 bytes. Ok, and it contains an `IllegalStruct`, so we just give it the length of the `IllegalStruct`. Ok, now we need to go inside that `IllegalStruct` and figure out the length of its `IllegalStruct`... This is the problem. We'll keep trying to figure out the length in an infinite loop. So how do we fix it? If you remember from earlier, we have references which allow us to have a "shortcut" to data:
 
 ```rust
 struct LegalStruct {
     string name;
     int number;
-    LegalStruct* legalStruct;
+    LegalStruct@ legalStruct;
 }
 ```
-This is legal, since we don't need to know the length of `LegalStruct` to calculate the length of `LegalStruct`. A diet-pointer/shortcut always has a fixed length, no matter what type of data it shortcuts/points to. Using a diet-pointer instead does add some things we will have to do when using it, but this will be discussed later. Also note the following illegal code:
+This is legal, since we don't need to know the length of `LegalStruct` to calculate the length of `LegalStruct`. A reference/shortcut always has a fixed length, no matter what type of data it shortcuts/points to. Using a reference instead does add some things we will have to do when using it, but this will be discussed later. Also note the following illegal code:
 
 ````{warning}
 ```rust
@@ -133,7 +137,7 @@ struct IllegalB {
 ```
 ````
 
-Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won't be able to determine the length of the structure. This can again be fixed by making either the `illegalA` or `illegalB` members a diet-pointer. Note that just having one diet-pointer solves the infinite struct error.
+Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won't be able to determine the length of the structure. This can again be fixed by making either the `illegalA` or `illegalB` members a reference. Note that just having one reference solves the infinite struct error.
 
 ## Challenges
 1. Explain the difference between unsigned and signed integers. What is a common signed type?
