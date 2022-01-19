@@ -34,7 +34,7 @@ And that is how you declare and use basic variables. You should not think of `=`
 What's cool about variables is the fact that you can perform operations on them to either manipulate current variables, or form new values entirely. For example, you can add two number variables together to produce a new number, which you could store in a new variable, store it to an existing one, or even not store it at all and throw the result out of the window.
 
 ### General Operators
-These operators can be applied to any variable(s)/values to produce a new value. These operators are "static", as they do not modify the values of the variables they interact with.
+These operators can be applied to any variable(s)/values to produce a new value.
 
 | Operator | Name | Usage | Description |
 | -------- | ---- | ----- | ----------- |
@@ -43,7 +43,9 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | * | Mul | a * b | Returns the product of two items |
 | / | Div | a / b | Returns the result of division of two items |
 | % | Mod | a % b | Returns the remainder of the result of the division of two items |
-| .. | Range | a .. b | Returns an interable item that is defined by the range between `a` and `b` |
+| ** | Exp | a ** b | Returns `a` to the power of `b` |
+| .. | Range | a .. b | Returns an interable item that is defined by the range between `a` inclusive and `b` exclusive |
+| ..= | RangeEq | a ..= b | Returns an interable item that is defined by the range between `a` and `b` inclusively |
 | & | BitAnd | a & b | Returns the bitwise and operation of two items |
 | \| | Or | a \| b | Returns the bitwise or operation of two items |
 | ^ | BitXor | a ^ b | Returns the bitwise exclusive or operation of two items |
@@ -54,9 +56,10 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | - | Neg | -a | Modifies a value to be negative |
 | ++ | Inc | ++a; a++ | Increment the value of a |
 | -- | Dec | --a; a-- | Decrement the value of a |
-| ^ | Member | ^a | When indexing an element, will access the member that is the count minus `a` |
+| ^ | From Last | ^a | When indexing an element, will access the member that is the count minus `a` |
 | * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to |
 | & | Address Of | &a | Returns a pointer that points to `a` |
+| @ | As Pointer | @a | If `a` is a reference, treat it as a pointer |
 | && | And | a && b | Returns `true` if, and only if, both `a` and `b` are `true` |
 | \|\| | Or | a \|\| b | Returns `true` if, and only if, either `a` and `b` are `true` |
 | !& | Nand | !& | a !& b | Returns `true` if, and only if, both `a` and `b` are `false` |
@@ -68,9 +71,13 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | < | Lt | a < b | Returns `true` if, and only if, `a` is less than `b` |
 | >= | Ge | a >= b | Returns `true` if, and only if, `a` is greater than or equal to `b` |
 | <= | Le | a <= b | Returns `true` if, and only if, `a` is less than or equal to `b` |
+| <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b` |
 | ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c` |
 | ?? | Null | a ?? b | If `a` is a null pointer, return `b`, else, return `a` |
+| => | Lambda | a => b | The value of `a` is equal to the result of expression `b` |
 | , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included |
+| . | Dot | a.b | Access member `b` from struct `a` |
+| [] | Index | a[b] | Access index `b` from `a` |
 
 ### Assignment Operators
 These operators are "not static", as in they modify the value of the left-hand variable. All operators are in the form `a {OP} b`.
@@ -79,9 +86,9 @@ These operators are "not static", as in they modify the value of the left-hand v
 | += | a = a + b |
 | -= | a = a - b |
 | *= | a = a * b |
-| **= | Raises `a` to the `b`th power |
 | /= | a = a / b |
 | %= | a = a % b |
+| **= | Raises `a` to the `b`th power |
 | &= | a = a & b |
 | \|= | a = a \| b |
 | ^= | a = a ^ b |
@@ -100,8 +107,9 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 | Operators |
 | --------- |
 | x++, x-- |
-| +x, -x, !x, ~x, ++x, --x, ^x, &x, *x, @x |
-| x..y |
+| +x, -x, !x, ~x, ++x, --x, ^x, &x, *x, @x, x[y] |
+| x..y, x..=y |
+| x ** y |
 | x * y, x / y, x % y |
 | x + y, x - y |
 | x >> y, x << y |
@@ -115,6 +123,7 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 | x ?? y |
 | x ? y : z |
 | x, y |
+| x => y |
 | Assignment Operators |
 
 Remember to use parenthesis when in doubt! It makes code easier to read.
@@ -149,19 +158,32 @@ fn quadraticFormula(double a, double b, double c) -> double, double {
 }
 ```
 
+## Access Modifers
+Before we learn about custom data types using structs, we first must learn about access modifiers:
+| Modifier | Functions/Members Recognizable Outside Of Namespace | Member Accessible Outside Of Struct | Member Accessible By Derived Structs | 
+| -------- | --------------------------------------------------- | ----------------------------------- | ------------------------------------ |
+| public/pub | Yes | Yes | Yes |
+| protected/pro | No | No | Yes |
+| public protected/pub pro | Yes | No | Yes |
+| private/pri | No | No | No |
+
+Do not worry too much if these are confusing for now. They will be used in practice by this walkthrough later. For now, just know that `pub` is short for `public`, `pro` is short for `protected`, etc. and that the default accessibility of any function or member is `pro`.
+
 ## Struct Variables
-Remember structs from earlier? What if we actually wanted to use them? We can define a variable that "is" our struct like we define any other variable. We could then access the members of our `struct` by using a `.`.
+Remember structs from earlier? What if we actually wanted to use them? We can define a variable that "is" our struct like we define any other variable. We could then access the members of our `struct` by using a `.`. We must declare these variables as `pub` too so we can access them outside of the struct:
 
 ```rust
 struct Color {
+pub:
     byte red;
     byte green;
     byte blue;
 }
 
 struct Car {
-    string licensePlate;
-    Color rgbColor;
+    pub string licensePlate; // Specifying accessibility this way is also valid.
+    pub Color rgbColor;
+pub:
     int year;
     string model;
 }
@@ -219,5 +241,5 @@ This above code is equivalent, and much cleaner.
 
 ## Disclaimers
 ```{warning}
-StraitJacket currently does not support the majority of operators or even basic variable manipulation. It is very high on the priority list.
+StraitJacket currently does not support the majority of operators. It is very high on the priority list.
 ```

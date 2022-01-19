@@ -4,13 +4,15 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
 ```{eval-rst}
 .. toctree::
    :maxdepth: 2
-   :caption: Content:
+   :caption: Asylum Language Reference:
 
    /about.md
    /walkthrough/helloWorld.md
    /walkthrough/functions.md
    /walkthrough/dataTypes.md
    /walkthrough/variables.md
+   /walkthrough/implementations.md
+   /walkthrough/strings.md
 ```
 
 ```{eval-rst}

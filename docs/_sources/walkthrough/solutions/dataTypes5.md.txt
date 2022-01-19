@@ -22,8 +22,8 @@ struct Circle {
     float radius;
     float lineWidth;
     Color color;
-    Circle* innerCircle;
+    Circle@ innerCircle;
 }
 ```
 
-Also note that a `struct` can not contain itself due to that causing an infinite struct. To counter this, we made `innerCircle` a diet-pointer to a `Circle`.
+Also note that a `struct` can not contain itself due to that causing an infinite struct. To counter this, we made `innerCircle` a reference to a `Circle`.
