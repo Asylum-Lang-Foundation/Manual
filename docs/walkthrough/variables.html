@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Variables &mdash; Asylum  documentation</title>
@@ -12,10 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Asylum
-            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,8 +100,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Variables</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Variables</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/variables.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -106,23 +111,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="variables">
-<h1>Variables<a class="headerlink" href="#variables" title="Permalink to this headline"></a></h1>
+  <section id="variables">
+<h1>Variables<a class="headerlink" href="#variables" title="Permalink to this heading"></a></h1>
 <p>On the previous page, you learned about data types. They are an essential first half to learning one of the fundamental concepts in any programming language: variables.</p>
 <section id="why-use-variables">
-<h2>Why Use Variables?<a class="headerlink" href="#why-use-variables" title="Permalink to this headline"></a></h2>
+<h2>Why Use Variables?<a class="headerlink" href="#why-use-variables" title="Permalink to this heading"></a></h2>
 <p>When programming, you typically need to store information/data in places. A variable gives you a way to pass and edit this information around, whether it is numbers, text, etc.</p>
 </section>
 <section id="using-a-variable">
-<h2>Using A Variable<a class="headerlink" href="#using-a-variable" title="Permalink to this headline"></a></h2>
+<h2>Using A Variable<a class="headerlink" href="#using-a-variable" title="Permalink to this heading"></a></h2>
 <p>How you use a variable depends on what it is of course. But let’s look at an example that utilizes variables:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myText</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">myText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myOtherText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This is more text!&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myText</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myOtherText</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myText</span><span class="p">;</span>
+<span class="w">    </span><span class="n">myText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myOtherText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This is more text!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myText</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myOtherText</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -131,7 +136,7 @@ This is more text!
 </pre></div>
 </div>
 <section id="understanding-the-code">
-<h3>Understanding The Code<a class="headerlink" href="#understanding-the-code" title="Permalink to this headline"></a></h3>
+<h3>Understanding The Code<a class="headerlink" href="#understanding-the-code" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>We declare a variable (named “myText”) by specifying its type and then the name of what we will call the variable. Here, we are saying that there is a variable called “myText” and it “is a” <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p></li>
 <li><p>Using an assignment operator such as <code class="docutils literal notranslate"><span class="pre">=</span></code>, we give the variable a value.</p></li>
@@ -142,12 +147,12 @@ This is more text!
 </section>
 </section>
 <section id="operators">
-<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
 <p>What’s cool about variables is the fact that you can perform operations on them to either manipulate current variables, or form new values entirely. For example, you can add two number variables together to produce a new number, which you could store in a new variable, store it to an existing one, or even not store it at all and throw the result out of the window.</p>
 <section id="general-operators">
-<h3>General Operators<a class="headerlink" href="#general-operators" title="Permalink to this headline"></a></h3>
+<h3>General Operators<a class="headerlink" href="#general-operators" title="Permalink to this heading"></a></h3>
 <p>These operators can be applied to any variable(s)/values to produce a new value.</p>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Operator</p></th>
 <th class="head"><p>Name</p></th>
@@ -360,9 +365,9 @@ This is more text!
 </table>
 </section>
 <section id="assignment-operators">
-<h3>Assignment Operators<a class="headerlink" href="#assignment-operators" title="Permalink to this headline"></a></h3>
+<h3>Assignment Operators<a class="headerlink" href="#assignment-operators" title="Permalink to this heading"></a></h3>
 <p>These operators are “not static”, as in they modify the value of the left-hand variable. All operators are in the form <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">{OP}</span> <span class="pre">b</span></code>.</p>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Operator</p></th>
 <th class="head"><p>Equivalent</p></th>
@@ -424,9 +429,9 @@ This is more text!
 </table>
 </section>
 <section id="operator-precedence">
-<h3>Operator Precedence<a class="headerlink" href="#operator-precedence" title="Permalink to this headline"></a></h3>
+<h3>Operator Precedence<a class="headerlink" href="#operator-precedence" title="Permalink to this heading"></a></h3>
 <p>You may have remembered in elementary school learning PEMDAS, or the order of operations (parenthesis, exponents, multiply/divide, addition/subtraction). Asylum also obeys an order of operations, the higher on the table, the higher the precedence (same row is on the same level):</p>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Operators</p></th>
 </tr>
@@ -475,12 +480,12 @@ This is more text!
 <p>Remember to use parenthesis when in doubt! It makes code easier to read.</p>
 </section>
 <section id="preserving-data-with-operators">
-<h3>Preserving Data With Operators<a class="headerlink" href="#preserving-data-with-operators" title="Permalink to this headline"></a></h3>
+<h3>Preserving Data With Operators<a class="headerlink" href="#preserving-data-with-operators" title="Permalink to this heading"></a></h3>
 <p>What happens when you use these different operators on differing on similar types? For example, let’s look at the following code:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mf">5.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mf">5.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -492,22 +497,22 @@ This is more text!
 </section>
 </section>
 <section id="a-more-complex-example">
-<h2>A More Complex Example<a class="headerlink" href="#a-more-complex-example" title="Permalink to this headline"></a></h2>
+<h2>A More Complex Example<a class="headerlink" href="#a-more-complex-example" title="Permalink to this heading"></a></h2>
 <p>As you can tell, there are quite a lot of different operators. Each will be discussed in more detail later, but for now, let’s see an example that utilizes some:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// Here we have a function that solves for x = (-b +/- sqrt(b^2 - 4ac)) / 2a, which is better known as the standard quadratic formula.</span>
 <span class="c1">// It is also worth noting that we are allowed to return multiple values at once in a tuple as shown:</span>
-<span class="k">fn</span> <span class="nf">quadraticFormula</span><span class="p">(</span><span class="n">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">double</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">quadraticFormula</span><span class="p">(</span><span class="n">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">double</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">double</span><span class="w"> </span><span class="n">innerPart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">           </span><span class="c1">// Calculate the interior part of the square root.</span>
 <span class="w">    </span><span class="n">innerPart</span><span class="w"> </span><span class="o">**=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">                              </span><span class="c1">// Apply the square root by raising to the .5th power.</span>
 <span class="w">    </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">innerPart</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">innerPart</span><span class="w">                  </span><span class="c1">// Return the final results (the comma creates a tuple that is returned).</span>
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="access-modifers">
-<h2>Access Modifers<a class="headerlink" href="#access-modifers" title="Permalink to this headline"></a></h2>
+<h2>Access Modifers<a class="headerlink" href="#access-modifers" title="Permalink to this heading"></a></h2>
 <p>Before we learn about custom data types using structs, we first must learn about access modifiers:</p>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Modifier</p></th>
 <th class="head"><p>Functions/Members Recognizable Outside Of Namespace</p></th>
@@ -541,34 +546,34 @@ This is more text!
 <p>Do not worry too much if these are confusing for now. They will be used in practice by this walkthrough later. For now, just know that <code class="docutils literal notranslate"><span class="pre">pub</span></code> is short for <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">pro</span></code> is short for <code class="docutils literal notranslate"><span class="pre">protected</span></code>, etc. and that the default accessibility of any function or member is <code class="docutils literal notranslate"><span class="pre">pro</span></code>.</p>
 </section>
 <section id="struct-variables">
-<h2>Struct Variables<a class="headerlink" href="#struct-variables" title="Permalink to this headline"></a></h2>
+<h2>Struct Variables<a class="headerlink" href="#struct-variables" title="Permalink to this heading"></a></h2>
 <p>Remember structs from earlier? What if we actually wanted to use them? We can define a variable that “is” our struct like we define any other variable. We could then access the members of our <code class="docutils literal notranslate"><span class="pre">struct</span></code> by using a <code class="docutils literal notranslate"><span class="pre">.</span></code>. We must declare these variables as <code class="docutils literal notranslate"><span class="pre">pub</span></code> too so we can access them outside of the struct:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
-    <span class="nc">byte</span><span class="w"> </span><span class="n">red</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">green</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">blue</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+    <span class="nc">byte</span><span class="w"> </span><span class="n">red</span><span class="p">;</span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">green</span><span class="p">;</span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">blue</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="k">struct</span> <span class="nc">Car</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Car</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">licensePlate</span><span class="p">;</span><span class="w"> </span><span class="c1">// Specifying accessibility this way is also valid.</span>
-<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">rgbColor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">rgbColor</span><span class="p">;</span>
 <span class="k">pub</span>:
-    <span class="nc">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">model</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+    <span class="nc">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">model</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">licensePlate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TOY1234&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="p">;</span>
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">licensePlate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TOY1234&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">red</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">green</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">70</span><span class="p">;</span><span class="w"> </span><span class="c1">// You can set multiple variables to the same value too!</span>
-<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2017</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2017</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>But what happens to the variables we did not set? In Asylum, the rule of thumb is that everything is inialized to either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or empty:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">model</span><span class="p">);</span><span class="w"></span>
-<span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">blue</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">model</span><span class="p">);</span>
+<span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">rgbColor</span><span class="p">.</span><span class="n">blue</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -578,22 +583,22 @@ This is more text!
 </div>
 <p>The first line is an empty line if that is not clear.</p>
 <section id="initialization">
-<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline"></a></h3>
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h3>
 <p>Of course, setting the initial variables the above way is a little messy. Luckily, there is a shorthand using curly brackets for such:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Car</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">licensePlate</span>: <span class="s">&quot;TOY1234&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">rgbColor</span>: <span class="nc">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span>: <span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="n">green</span>: <span class="mi">70</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="n">year</span>: <span class="mi">2017</span><span class="w"></span>
-<span class="w">    </span><span class="p">};</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Car</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">licensePlate</span>: <span class="s">&quot;TOY1234&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">rgbColor</span>: <span class="nc">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span>: <span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="n">green</span>: <span class="mi">70</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="n">year</span>: <span class="mi">2017</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>This above code is equivalent, and much cleaner.</p>
 </section>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Make a program that prints the sum of two variables to produce “Hello World!”.</p></li>
 <li><p>Initialize the <code class="docutils literal notranslate"><span class="pre">Color</span></code> struct in both ways to both produce white (white is 255).</p></li>
@@ -603,17 +608,17 @@ This is more text!
 </ol>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="solutions/variables1.html"><span class="doc std std-doc">Solution 1</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/variables2.html"><span class="doc std std-doc">Solution 2</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/variables3.html"><span class="doc std std-doc">Solution 3</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/variables4.html"><span class="doc std std-doc">Solution 4</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/variables5.html"><span class="doc std std-doc">Solution 5</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables1.html"><span class="std std-doc">Solution 1</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables2.html"><span class="std std-doc">Solution 2</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables3.html"><span class="std std-doc">Solution 3</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables4.html"><span class="std std-doc">Solution 4</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/variables5.html"><span class="std std-doc">Solution 5</span></a></p></li>
 </ul>
 </section>
 <section id="disclaimers">
-<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this headline"></a></h2>
+<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>StraitJacket currently does not support the majority of operators. It is very high on the priority list.</p>

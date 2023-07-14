@@ -34,7 +34,7 @@ In Asylum, you can denote what a function returns by the `->` operator, which ca
 A function can be given parameters by having a comma-separated list of data types with names. The `add` function above has two parameters, an `int` called `a`, and another `int` called `b`. Of course, the data types of these parameters do not have to be the same. You call a function by separating the input parameters to it by commas. You must call the function with the same number of parameters. For example, `add(5);` is invalid.
 
 ## Different Ways To Return
-Asylum allows you to return a value in 3 different ways:
+Asylum allows you to return a value in 2 different ways:
 * In a one line statement for the function using `=>`:
 ```rust
 fn add(int a, int b) -> int => a + b;
@@ -45,27 +45,15 @@ fn add(int a, int b) {
     return a + b;
 }
 ```
-* A statement without a semi-colon:
-```rust
-fn add(int a, int b) {
-    a + b
-}
-```
-These all produce the same code!
+These both produce the same code!
 ````{warning}
-The following examples are invalid:
+The following example is invalid:
 ```rust
 /*  
     "=>" Can only be used with an expression.
     "a + b" is an expression that evaluates to "int", but "return a + b" is a code statement.
 */
 fn add(int a, int b) -> int => return a + b;
-```
-```rust
-fn add(int a, int b) -> int {
-    // Like above, "return a + b" is a code statement, not an expression, so it can not be returned.
-    return a + b
-}
 ```
 ````
 
@@ -84,7 +72,7 @@ The compiler will know which function to call depending on the context on which 
 
 ## Challenges
 1. Adding is cool and all, but subtraction is where it is at! Make a function called `sub` that subtracts `int b` from `int a`, this returns an `int`.
-2. The more numbers the merrier! Make another function that computes `a - b - c` and another that computes `a - b - c - d`. Create them in such a way that all your functions return in a unique way.
+2. The more numbers the merrier! Make another function that computes `a - b - c` and another that computes `a - b - c - d`. Create them in such a way that both your functions return in a unique way.
 3. Let's see some results! Make a program to print the results of calling these new functions. Comment on the top of each `println` statement what you expect the value to be.
 
 ## Challenge Solutions

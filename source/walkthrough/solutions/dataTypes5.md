@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 5
 Here, you were to design a circle struct with the following members (making as many additional structs as necessary):
 * Radius

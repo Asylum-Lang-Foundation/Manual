@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 2
 Here, you were asked to initialize the `Color` struct in both ways. This referred to either setting the variables manually, or using an initializer:
 

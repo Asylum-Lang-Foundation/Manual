@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Working With The Code Representation &mdash; Asylum  documentation</title>
@@ -12,10 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -28,12 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Asylum
-            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -86,8 +91,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Working With The Code Representation</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Working With The Code Representation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/dev/codeRepresentation.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -97,35 +102,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="working-with-the-code-representation">
-<h1>Working With The Code Representation<a class="headerlink" href="#working-with-the-code-representation" title="Permalink to this headline"></a></h1>
+  <section id="working-with-the-code-representation">
+<h1>Working With The Code Representation<a class="headerlink" href="#working-with-the-code-representation" title="Permalink to this heading"></a></h1>
 <p>Thanks to the builder API, we now have an object-oriented representation of our AST. This is important for the next steps, but what exactly are the next steps and how does it work?</p>
 <section id="object-oriented-representation-in-greater-detail">
-<h2>Object-Oriented Representation In Greater Detail<a class="headerlink" href="#object-oriented-representation-in-greater-detail" title="Permalink to this headline"></a></h2>
+<h2>Object-Oriented Representation In Greater Detail<a class="headerlink" href="#object-oriented-representation-in-greater-detail" title="Permalink to this heading"></a></h2>
 <p>First we must understand what the builder actually creates. Our AST gets turned into a series of functions, code statements, expressions, and variable types.</p>
 <section id="universals">
-<h3>Universals<a class="headerlink" href="#universals" title="Permalink to this headline"></a></h3>
+<h3>Universals<a class="headerlink" href="#universals" title="Permalink to this heading"></a></h3>
 <p>A <em>universal</em> is an item that can appear at the top level of a file, outside of all functions, structs, enums, etc.</p>
 <section id="functions">
-<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h4>
+<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h4>
 <p>TODO</p>
 </section>
 </section>
 <section id="code-statements">
-<h3>Code Statements<a class="headerlink" href="#code-statements" title="Permalink to this headline"></a></h3>
+<h3>Code Statements<a class="headerlink" href="#code-statements" title="Permalink to this heading"></a></h3>
 <p>A <em>code statement</em> is a valid line of code that does something. Some examples include <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">7;</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(x</span> <span class="pre">&lt;</span> <span class="pre">8)</span> <span class="pre">println(&quot;Hi&quot;);</span></code>, etc.</p>
 <section id="expression-statement">
-<h4>Expression Statement<a class="headerlink" href="#expression-statement" title="Permalink to this headline"></a></h4>
+<h4>Expression Statement<a class="headerlink" href="#expression-statement" title="Permalink to this heading"></a></h4>
 <p>An expression statement is just one that is an expression such as a function call, operation, etc.</p>
 </section>
 </section>
 <section id="expressions">
-<h3>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline"></a></h3>
+<h3>Expressions<a class="headerlink" href="#expressions" title="Permalink to this heading"></a></h3>
 <p>TODO</p>
 </section>
 </section>
 <section id="compilation-process">
-<h2>Compilation Process<a class="headerlink" href="#compilation-process" title="Permalink to this headline"></a></h2>
+<h2>Compilation Process<a class="headerlink" href="#compilation-process" title="Permalink to this heading"></a></h2>
 <p>Now that we understand how our AST is layed out in object-oriented form, we can go over the steps that compile our representation into executable code:</p>
 <ol class="arabic simple">
 <li><p>Variable Resolution - Resolves called variables and functions.</p></li>

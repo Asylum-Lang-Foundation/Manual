@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>First Program (Hello World) &mdash; Asylum  documentation</title>
@@ -12,10 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Asylum
-            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,6 +59,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html#type-listing">Type Listing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
@@ -81,8 +88,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>First Program (Hello World)</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">First Program (Hello World)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/helloWorld.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,10 +99,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="first-program-hello-world">
-<h1>First Program (Hello World)<a class="headerlink" href="#first-program-hello-world" title="Permalink to this headline"></a></h1>
-<p>Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straightforward:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
+  <section id="first-program-hello-world">
+<h1>First Program (Hello World)<a class="headerlink" href="#first-program-hello-world" title="Permalink to this heading"></a></h1>
+<p>Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straight-forward:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -103,16 +110,16 @@
 </pre></div>
 </div>
 <section id="understanding-the-program">
-<h2>Understanding The Program<a class="headerlink" href="#understanding-the-program" title="Permalink to this headline"></a></h2>
+<h2>Understanding The Program<a class="headerlink" href="#understanding-the-program" title="Permalink to this heading"></a></h2>
 <p>That’s it. Now, let’s understand what this syntax means:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">println</span></code> is a function that prints what you give it, then goes to the next line. You call a function by putting its parameters between <code class="docutils literal notranslate"><span class="pre">(</span></code> and <code class="docutils literal notranslate"><span class="pre">)</span></code>, with the parameters being comma-separated. You can see here that we are telling it to print <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World!</span></code>. We must wrap this value in <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>s so the compiler knows that it’s a value that we are sending it.</p></li>
 <li><p>There is a semicolon <code class="docutils literal notranslate"><span class="pre">;</span></code> to signal to the compiler that the statement is over.</p></li>
 </ul>
-<p>Notice that statements outside a function are called <em>top-level statements</em>. These are only allowed to be in one of the files you are compiling, as the compiler wouldn’t know where your program would start otherwise. Normally, we put code inside of functions to be even more organized:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<p>Notice that statements outside a function are called <em>top-level statements</em>. These are only allowed to be in one of the files you are compiling, as the compiler wouldn’t know where your program would start otherwise. Normally, we put code inside of functions to be more organized:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -121,7 +128,7 @@
 </div>
 </section>
 <section id="understanding-the-function-syntax">
-<h2>Understanding The Function Syntax<a class="headerlink" href="#understanding-the-function-syntax" title="Permalink to this headline"></a></h2>
+<h2>Understanding The Function Syntax<a class="headerlink" href="#understanding-the-function-syntax" title="Permalink to this heading"></a></h2>
 <p>That’s it. Now, let’s understand what this syntax means:</p>
 <ul class="simple">
 <li><p>When you run an Asylum program, it will run the <em>function</em> called <em>main</em> (or top-level statements in one file if <em>main</em> doesn’t exist).</p></li>
@@ -133,9 +140,9 @@
 </ul>
 </section>
 <section id="a-cool-trick">
-<h2>A Cool Trick<a class="headerlink" href="#a-cool-trick" title="Permalink to this headline"></a></h2>
+<h2>A Cool Trick<a class="headerlink" href="#a-cool-trick" title="Permalink to this heading"></a></h2>
 <p>Asylum also lets you do a shortcut for any function that is only one expression:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -145,23 +152,23 @@
 <p>The same output is produced. For now, you can think of <code class="docutils literal notranslate"><span class="pre">{}</span></code> as a group of many code statements, where <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> will just return one expression.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>`=&gt;` must be used in combination with an expression. A call to `println` is allowed, as function calls are part of an expression. However, assignments to a variable such as `myVar = 2` is not an expression, it is a statement.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>`=&gt;` must be used in combination with an expression. A call to `println` is allowed, as function calls are part of an expression. However, items such as blocks, if statements, loops, etc. are not allowed as they are not expressions.
 </pre></div>
 </div>
 </div>
 </section>
 <section id="print-function">
-<h2>Print Function<a class="headerlink" href="#print-function" title="Permalink to this headline"></a></h2>
+<h2>Print Function<a class="headerlink" href="#print-function" title="Permalink to this heading"></a></h2>
 <p>While <code class="docutils literal notranslate"><span class="pre">println</span></code> exists, <code class="docutils literal notranslate"><span class="pre">print</span></code> also exists too? So what’s the difference? <code class="docutils literal notranslate"><span class="pre">println</span></code> will put a newline after it prints what you give it, while <code class="docutils literal notranslate"><span class="pre">print</span></code> will not. For example:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;4&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;5&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;6&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;7&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;4&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;5&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;6&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;7&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -173,28 +180,28 @@
 </div>
 </section>
 <section id="comments">
-<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline"></a></h2>
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this heading"></a></h2>
 <p>Comments are not read by the compiler, and are also very important to documenting your code:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is a single line comment.</span>
 <span class="cm">/*</span>
 <span class="cm">    This is a mult-line comment.</span>
 <span class="cm">    Anything within the bouncers is not read by the compiler.</span>
-<span class="cm">*/</span><span class="w"></span>
+<span class="cm">*/</span>
 </pre></div>
 </div>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Write a program that says “Hello Asylum User!” in one line of code two different ways.</p></li>
 <li><p>Write a program that prints the first 3 letters of the alphabet together, but you are only allowed to print one letter at a time.</p></li>
 </ol>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="solutions/helloWorld1.html"><span class="doc std std-doc">Solution 1</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/helloWorld2.html"><span class="doc std std-doc">Solution 2</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/helloWorld1.html"><span class="std std-doc">Solution 1</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/helloWorld2.html"><span class="std std-doc">Solution 2</span></a></p></li>
 </ul>
 </section>
 </section>

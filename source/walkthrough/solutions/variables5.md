@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 5
 Finally, you were asked to calculate `4 * (2 + 1) % 3`.
 

@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 3
 Now, we are putting everything together. Do you remember how to comment? `//` is for a line-comment, where `/*` and `*/` encloses a multi-line comment. Answers will definitely vary, but the below solution works.
 

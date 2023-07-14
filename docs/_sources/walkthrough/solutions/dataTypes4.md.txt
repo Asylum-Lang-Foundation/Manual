@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 4
 For this challenge, you were asked to create a new `add` function with numbers with a decimal point. This was fairly open to interpretation, so many answers are valid, some of which may include:
 

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parameter Types &mdash; Asylum  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Implementations" href="implementations.html" />
+    <link rel="prev" title="Variables" href="variables.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parameter Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#type-listing">Type Listing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference-parameters">Reference Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#move-parameters">Move Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/about.html">Asylum Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/antlr.html">AST Creation With ANTLR4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/builder.html">Program Builder API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/visitor.html">Builder Code Calling For ASTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/codeRepresentation.html">Working With The Code Representation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Asylum</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Parameter Types</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/walkthrough/parameterTypes.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parameter-types">
+<h1>Parameter Types<a class="headerlink" href="#parameter-types" title="Permalink to this heading"></a></h1>
+<p>In Asylum, there are different ways to pass data to functions. In the previous section, we explored how to create functions that take parameters and return a result that utilized those parameters. However, consider the below code:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This code will not compile:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">setValue</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="c1">// Error, can not set value of an input parameter!</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The compiler sees that <code class="docutils literal notranslate"><span class="pre">val</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code> argument in the function. However, we have not told the compiler that we want to be able to modify the value, so it will not let us! In order to tell the compiler that, there are different parameter types.</p>
+<section id="type-listing">
+<h2>Type Listing<a class="headerlink" href="#type-listing" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>In</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">val</span></code></p></td>
+<td><p>Parameter <code class="docutils literal notranslate"><span class="pre">val</span></code> is passed as in input and so it can not be modified (it is <em>immutable</em>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ref</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ref</span> <span class="pre">int</span> <span class="pre">val</span></code></p></td>
+<td><p>Parameter <code class="docutils literal notranslate"><span class="pre">val</span></code> is passed by reference and can be modified (it is <em>mutable</em>).</p></td>
+</tr>
+<tr class="row-even"><td><p>Move</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">move</span> <span class="pre">int</span> <span class="pre">val</span></code></p></td>
+<td><p>Parameter <code class="docutils literal notranslate"><span class="pre">val</span></code> is being “moved” to the function being called.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The parameter types <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">ref</span></code> are around the same performance wise!</p>
+<p>More advanced programmers may be concerned about passing by value rather than passing by reference. In other languages, passing by value usually means that the entire structure is copied when calling the function, which is usually not desired.</p>
+<p>However, <code class="docutils literal notranslate"><span class="pre">in</span></code> parameters in Asylum automatically pass a reference to a constant (like <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">MyStruct&amp;</span></code> in C++) rather than copy the structure (pass by value) when it is less costly to do so. Asylum was designed to have the common and most intuitive case be the most efficient! If you are confused, do not worry, this is not too important. Just know that using <code class="docutils literal notranslate"><span class="pre">ref</span></code> is not more or less efficent.</p>
+</div>
+</section>
+<section id="reference-parameters">
+<h2>Reference Parameters<a class="headerlink" href="#reference-parameters" title="Permalink to this heading"></a></h2>
+<p>The first solution we may do if we want to modify the value is copy it to another variable:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">setValue</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">newVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="n">newVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="c1">// We can modify this!</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">setValue</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by using a parameter marked as <code class="docutils literal notranslate"><span class="pre">ref</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">setValue</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="c1">// We are allowed to do this now!</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">setValue</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that we have to do <code class="docutils literal notranslate"><span class="pre">ref</span> <span class="pre">x</span></code> to tell the compiler we want to pass a reference to the variable rather than pass it as an <code class="docutils literal notranslate"><span class="pre">in</span></code> parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">x</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">x</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">3</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+</section>
+<section id="move-parameters">
+<h2>Move Parameters<a class="headerlink" href="#move-parameters" title="Permalink to this heading"></a></h2>
+<p>You now hopefully understand how both <code class="docutils literal notranslate"><span class="pre">in</span></code> (default) and <code class="docutils literal notranslate"><span class="pre">ref</span></code> (reference) parameters work. But what is this mysterious <code class="docutils literal notranslate"><span class="pre">move</span></code>?</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="variables.html" class="btn btn-neutral float-left" title="Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="implementations.html" class="btn btn-neutral float-right" title="Implementations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Asylum Lang Foundation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

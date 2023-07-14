@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 4
 You were asked to solve `8 / 3`.
 

@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Asylum'
-copyright = '2022, Asylum Lang Foundation'
+copyright = '2023, Asylum Lang Foundation'
 author = 'Asylum Lang Foundation'
 
 

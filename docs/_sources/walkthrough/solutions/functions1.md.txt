@@ -1,3 +1,7 @@
+```{eval-rst}
+:orphan:
+```
+
 # Challenge 1
 In this challenge, you were asked to create a function that subtracts `int b` from `int a`. There are multiple ways to define such a function, but below we will take the one line approach:
 

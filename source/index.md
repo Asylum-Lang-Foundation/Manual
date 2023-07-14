@@ -12,6 +12,7 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/dataTypes.md
    /walkthrough/variables.md
    /walkthrough/implementations.md
+   /walkthrough/parameterTypes.md
    /walkthrough/strings.md
 ```
 

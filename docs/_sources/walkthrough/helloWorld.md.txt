@@ -1,5 +1,5 @@
 # First Program (Hello World)
-Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straightforward:
+Ah, the hello world. The first program that one makes in a new language. The sanity check that all is well. In Asylum, making such a program is relatively straight-forward:
 
 ```rust
 println("Hello World!");
@@ -15,7 +15,7 @@ That's it. Now, let's understand what this syntax means:
 * `println` is a function that prints what you give it, then goes to the next line. You call a function by putting its parameters between `(` and `)`, with the parameters being comma-separated. You can see here that we are telling it to print `Hello World!`. We must wrap this value in `"`s so the compiler knows that it's a value that we are sending it.
 * There is a semicolon `;` to signal to the compiler that the statement is over.
 
-Notice that statements outside a function are called *top-level statements*. These are only allowed to be in one of the files you are compiling, as the compiler wouldn't know where your program would start otherwise. Normally, we put code inside of functions to be even more organized:
+Notice that statements outside a function are called *top-level statements*. These are only allowed to be in one of the files you are compiling, as the compiler wouldn't know where your program would start otherwise. Normally, we put code inside of functions to be more organized:
 
 ```rust
 fn main() {
@@ -49,7 +49,7 @@ Hello World!
 The same output is produced. For now, you can think of `{}` as a group of many code statements, where `=>` will just return one expression.
 
 ```{warning}
-    `=>` must be used in combination with an expression. A call to `println` is allowed, as function calls are part of an expression. However, assignments to a variable such as `myVar = 2` is not an expression, it is a statement.
+    `=>` must be used in combination with an expression. A call to `println` is allowed, as function calls are part of an expression. However, items such as blocks, if statements, loops, etc. are not allowed as they are not expressions.
 ```
 
 ## Print Function

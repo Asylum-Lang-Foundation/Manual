@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Functions &mdash; Asylum  documentation</title>
@@ -12,15 +12,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Types" href="dataTypes.html" />
+    <link rel="next" title="Parameter Types" href="parameterTypes.html" />
     <link rel="prev" title="First Program (Hello World)" href="helloWorld.html" /> 
 </head>
 
@@ -29,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Asylum
-            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,6 +59,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#disclaimers">Disclaimers</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html#type-listing">Type Listing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
@@ -81,8 +88,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Functions</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/functions.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,17 +99,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h1>
+  <section id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h1>
 <p>In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. Functions can also call other functions and execute the code within them. You saw this earlier by calling <code class="docutils literal notranslate"><span class="pre">println</span></code>, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)));</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
 <span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">          </span><span class="c1">// Notice that this last one is not printed!</span>
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 
-<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Output:</p>
@@ -124,59 +131,45 @@
 <p>Remember that <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> can be used for functions with only one code statement!</p>
 </div>
 <section id="return-types">
-<h2>Return Types<a class="headerlink" href="#return-types" title="Permalink to this headline"></a></h2>
+<h2>Return Types<a class="headerlink" href="#return-types" title="Permalink to this heading"></a></h2>
 <p>In Asylum, you can denote what a function returns by the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> operator, which can be thought of as “returns”. So in this case, <code class="docutils literal notranslate"><span class="pre">main</span></code> doesn’t return anything (as it doesn’t have <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>), or returns <em>void</em>. <code class="docutils literal notranslate"><span class="pre">add</span></code> returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>, as it is right after the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>. But what is an <code class="docutils literal notranslate"><span class="pre">int</span></code>? It will be talked about later in the types section, but for now think of it as a whole number (no decimal places).</p>
 </section>
 <section id="function-parameters">
-<h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Permalink to this headline"></a></h2>
+<h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Permalink to this heading"></a></h2>
 <p>A function can be given parameters by having a comma-separated list of data types with names. The <code class="docutils literal notranslate"><span class="pre">add</span></code> function above has two parameters, an <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">a</span></code>, and another <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">b</span></code>. Of course, the data types of these parameters do not have to be the same. You call a function by separating the input parameters to it by commas. You must call the function with the same number of parameters. For example, <code class="docutils literal notranslate"><span class="pre">add(5);</span></code> is invalid.</p>
 </section>
 <section id="different-ways-to-return">
-<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Permalink to this headline"></a></h2>
-<p>Asylum allows you to return a value in 3 different ways:</p>
+<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Permalink to this heading"></a></h2>
+<p>Asylum allows you to return a value in 2 different ways:</p>
 <ul class="simple">
 <li><p>In a one line statement for the function using <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>:</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Using the return statement:</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>A statement without a semi-colon:</p></li>
-</ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p>These all produce the same code!</p>
+<p>These both produce the same code!</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The following examples are invalid:</p>
+<p>The following example is invalid:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cm">/*  </span>
 <span class="cm">    &quot;=&gt;&quot; Can only be used with an expression.</span>
 <span class="cm">    &quot;a + b&quot; is an expression that evaluates to &quot;int&quot;, but &quot;return a + b&quot; is a code statement.</span>
-<span class="cm">*/</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// Like above, &quot;return a + b&quot; is a code statement, not an expression, so it can not be returned.</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="cm">*/</span>
+<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="multiple-function-definitions">
-<h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Permalink to this headline"></a></h2>
+<h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Permalink to this heading"></a></h2>
 <p>You can actually define the same function multiple times, as long as its signature is not the same as another function with the same name. The signature of two functions are considered equivalent if all of the following conditions are met:</p>
 <ul class="simple">
 <li><p>Have the same number of parameters.</p></li>
@@ -184,31 +177,31 @@
 <li><p>Parameter 1 in function 1 has the same data type as parameter 1 in function 2, parameter 2 in function 1 has the same data type as parameter 2 in function 1, etc.
 The following is valid Asylum code:</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 </pre></div>
 </div>
 <p>The compiler will know which function to call depending on the context on which it is used.</p>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Adding is cool and all, but subtraction is where it is at! Make a function called <code class="docutils literal notranslate"><span class="pre">sub</span></code> that subtracts <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">b</span></code> from <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">a</span></code>, this returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p></li>
-<li><p>The more numbers the merrier! Make another function that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span></code> and another that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span> <span class="pre">-</span> <span class="pre">d</span></code>. Create them in such a way that all your functions return in a unique way.</p></li>
+<li><p>The more numbers the merrier! Make another function that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span></code> and another that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span> <span class="pre">-</span> <span class="pre">d</span></code>. Create them in such a way that both your functions return in a unique way.</p></li>
 <li><p>Let’s see some results! Make a program to print the results of calling these new functions. Comment on the top of each <code class="docutils literal notranslate"><span class="pre">println</span></code> statement what you expect the value to be.</p></li>
 </ol>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this headline"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="solutions/functions1.html"><span class="doc std std-doc">Solution 1</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/functions2.html"><span class="doc std std-doc">Solution 2</span></a></p></li>
-<li><p><a class="reference internal" href="solutions/functions3.html"><span class="doc std std-doc">Solution 3</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/functions1.html"><span class="std std-doc">Solution 1</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/functions2.html"><span class="std std-doc">Solution 2</span></a></p></li>
+<li><p><a class="reference internal" href="solutions/functions3.html"><span class="std std-doc">Solution 3</span></a></p></li>
 </ul>
 </section>
 <section id="disclaimers">
-<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this headline"></a></h2>
+<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>StraitJacket currently is not smart enough to understand function overloading. The code to do this is not implemented.</p>
@@ -225,7 +218,7 @@ The following is valid Asylum code:</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="helloWorld.html" class="btn btn-neutral float-left" title="First Program (Hello World)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dataTypes.html" class="btn btn-neutral float-right" title="Data Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="parameterTypes.html" class="btn btn-neutral float-right" title="Parameter Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

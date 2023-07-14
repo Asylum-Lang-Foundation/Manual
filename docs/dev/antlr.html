@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AST Creation With ANTLR4 &mdash; Asylum  documentation</title>
@@ -12,10 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Asylum
-            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,8 +86,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AST Creation With ANTLR4</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AST Creation With ANTLR4</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/dev/antlr.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,20 +97,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="ast-creation-with-antlr4">
-<h1>AST Creation With ANTLR4<a class="headerlink" href="#ast-creation-with-antlr4" title="Permalink to this headline"></a></h1>
+  <section id="ast-creation-with-antlr4">
+<h1>AST Creation With ANTLR4<a class="headerlink" href="#ast-creation-with-antlr4" title="Permalink to this heading"></a></h1>
 <p>All Asylum source code files at the end of the day are plain text documents. Somehow, we need to take this text and form it into something the computer can understand. This is called an <em>Abstract Syntax Tree</em>, or AST for short. Here’s an example program and its AST:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 
-<span class="n">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span><span class="w"></span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Your sum is: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span><span class="w"></span>
+<span class="n">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Your sum is: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Generated AST:
 <img alt="Generated AST" src="../_images/AstDemo.png" /></p>
 <p>As you can see, the AST is a dissection of the program that discovers what the variables, expressions, and statements are. We can then pass this information into StraitJacket’s program builder API in order to build our program (more on that later). Note that the builder API abstracts program building, meaning that it is possible to arbitrarily define any syntax to produce a valid Asylum program. The files responsible for this AST creation are called grammar files, and can be found <a class="reference external" href="https://github.com/Asylum-Lang-Foundation/Grammar">here</a>.</p>
 <section id="antlr4-overview">
-<h2>ANTLR4 Overview<a class="headerlink" href="#antlr4-overview" title="Permalink to this headline"></a></h2>
+<h2>ANTLR4 Overview<a class="headerlink" href="#antlr4-overview" title="Permalink to this heading"></a></h2>
 <p>So how does it work? Asylum uses ANTLR4 to accomplish that, which when given a set of rules, can produce an AST from any text file. For example, here is the rule for parsing an item inside an enum:</p>
 <div class="highlight-c# notranslate"><div class="highlight"><pre><span></span>// Enum entry.
 enum_entry
@@ -117,21 +122,21 @@ enum_entry
 </div>
 <p>A <em>token</em> is in all caps. It represents an item that has definitive characters such as <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span></code>, and <code class="docutils literal notranslate"><span class="pre">myVarName</span></code>. A <em>rule</em> is in all undercase. It represents how an item should be read, such as an if statement, for loop, expression, etc. A rule is allowed to use tokens and other rules to determine how it is read. Above, you can see various tokens and rules are used. But before we can understand how the above works, we must explain some ANTLR4 syntax. This is just a quick overview, and for a more definite guide you should read the official book or my guide <a class="reference external" href="https://gota7.github.io/GotaGuide/ProgrammingLanguage/Grammar.html">here</a>.</p>
 <section id="the-or-operator">
-<h3>The Or Operator<a class="headerlink" href="#the-or-operator" title="Permalink to this headline"></a></h3>
+<h3>The Or Operator<a class="headerlink" href="#the-or-operator" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">|</span></code> specifies an <em>or</em> option. Consider the following rule:</p>
 <div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Function property.</span>
-<span class="n">function_property</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="n">STATIC</span><span class="w"></span>
-<span class="w">	</span><span class="p">|</span><span class="w">	</span><span class="n">INLINE</span><span class="w"></span>
-<span class="w">	</span><span class="p">|</span><span class="w">	</span><span class="n">ASYNC</span><span class="w"></span>
-<span class="w">	</span><span class="p">|</span><span class="w">	</span><span class="n">UNSAFE</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+<span class="n">function_property</span>
+<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="n">STATIC</span>
+<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="n">INLINE</span>
+<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="n">ASYNC</span>
+<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="n">UNSAFE</span>
+<span class="w">	</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>This rule implies that a function property can match to either a <code class="docutils literal notranslate"><span class="pre">STATIC</span></code>, <code class="docutils literal notranslate"><span class="pre">INLINE</span></code>, <code class="docutils literal notranslate"><span class="pre">ASYNC</span></code>, or <code class="docutils literal notranslate"><span class="pre">UNSAFE</span></code> token. The definition of each token is defined elsewhere. If none of these tokens are present, then the text will not match as a <code class="docutils literal notranslate"><span class="pre">function_property</span></code>. This will error if a <code class="docutils literal notranslate"><span class="pre">function_property</span></code> is the only thing the parser is allowed to match, but will be perfectly acceptable if it is not needed to match.</p>
 </section>
 <section id="the-maybe-operator">
-<h3>The Maybe Operator<a class="headerlink" href="#the-maybe-operator" title="Permalink to this headline"></a></h3>
+<h3>The Maybe Operator<a class="headerlink" href="#the-maybe-operator" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">?</span></code> specifies a <em>maybe</em> option. Consider the following rule:</p>
 <div class="highlight-c# notranslate"><div class="highlight"><pre><span></span>// Struct entry.
 struct_entry
@@ -143,23 +148,23 @@ struct_entry
 <p>The <code class="docutils literal notranslate"><span class="pre">?</span></code> after the <code class="docutils literal notranslate"><span class="pre">access_modifier</span></code> rule means that if it can be matched, do it, but if not then it’s not a problem. The field is optional, not every property of a struct has to be declared with an access modifier after all. <code class="docutils literal notranslate"><span class="pre">#</span></code> is used after an option to label it, which is useful for the AST reading code. Also note from earlier how if the <code class="docutils literal notranslate"><span class="pre">#StructData</span></code> option is unable to be matched, it will then try to match <code class="docutils literal notranslate"><span class="pre">#StructAccess</span></code>.</p>
 </section>
 <section id="the-infinitely-many-operator">
-<h3>The Infinitely Many Operator<a class="headerlink" href="#the-infinitely-many-operator" title="Permalink to this headline"></a></h3>
+<h3>The Infinitely Many Operator<a class="headerlink" href="#the-infinitely-many-operator" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">*</span></code> specifies an option that can be matched anywhere from zero to infinitely many times.</p>
 <div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Type implements.</span>
-<span class="n">type_implements</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="sc">&#39;:&#39;</span><span class="w"> </span><span class="n">variable_type</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;,&#39;</span><span class="w"> </span><span class="n">variable_type</span><span class="p">)*</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+<span class="n">type_implements</span>
+<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="sc">&#39;:&#39;</span><span class="w"> </span><span class="n">variable_type</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;,&#39;</span><span class="w"> </span><span class="n">variable_type</span><span class="p">)</span><span class="o">*</span>
+<span class="w">	</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>This is used for when a type implements subtypes. It can either match one type such as <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">string</span></code>, or many other types such as <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">MyType1,</span> <span class="pre">MyType2,</span> <span class="pre">MyType3</span></code>.</p>
 </section>
 <section id="the-at-least-one-operator">
-<h3>The At Least One Operator<a class="headerlink" href="#the-at-least-one-operator" title="Permalink to this headline"></a></h3>
+<h3>The At Least One Operator<a class="headerlink" href="#the-at-least-one-operator" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">+</span></code> specifies an option that has to appear at least one time.</p>
 <div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Unsigned.</span>
-<span class="n">UNSIGNED</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="sc">&#39;u&#39;</span><span class="w"> </span><span class="n">DecDigit</span><span class="p">+</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+<span class="n">UNSIGNED</span>
+<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="sc">&#39;u&#39;</span><span class="w"> </span><span class="n">DecDigit</span><span class="o">+</span>
+<span class="w">	</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Here, an <code class="docutils literal notranslate"><span class="pre">UNSIGNED</span></code> will match if <code class="docutils literal notranslate"><span class="pre">u</span></code> is followed by at least one <code class="docutils literal notranslate"><span class="pre">DecDigit</span></code>, so <code class="docutils literal notranslate"><span class="pre">u1</span></code>, <code class="docutils literal notranslate"><span class="pre">u3273</span></code>, and <code class="docutils literal notranslate"><span class="pre">u0</span></code> are all valid matches, even if they are not legal.</p>

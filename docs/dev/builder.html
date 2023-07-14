@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Program Builder API &mdash; Asylum  documentation</title>
@@ -12,10 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Asylum
-            <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -75,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Program Builder API</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Builder API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/dev/builder.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -86,94 +91,94 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="program-builder-api">
-<h1>Program Builder API<a class="headerlink" href="#program-builder-api" title="Permalink to this headline"></a></h1>
+  <section id="program-builder-api">
+<h1>Program Builder API<a class="headerlink" href="#program-builder-api" title="Permalink to this heading"></a></h1>
 <p>Alright, now we have an AST of our program. What do we do now? So far, the AST is composed of a bunch of abstract concepts. The goal of using the builder API is to transform our AST of abstract concepts into one that is object oriented such that we can work with it. The builder is defined in the namespace <code class="docutils literal notranslate"><span class="pre">StraitJacket.Builder</span></code>.</p>
 <section id="test-case">
-<h2>Test Case<a class="headerlink" href="#test-case" title="Permalink to this headline"></a></h2>
+<h2>Test Case<a class="headerlink" href="#test-case" title="Permalink to this heading"></a></h2>
 <p>Consider the following file, <em>Test.asy</em>:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">using</span><span class="w"> </span><span class="n">MyLib</span><span class="p">.</span><span class="n">Other</span><span class="p">;</span><span class="w"></span>
-<span class="n">namespace</span><span class="w"> </span><span class="n">MyLib</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">using</span><span class="w"> </span><span class="n">MyLib</span><span class="p">.</span><span class="n">Other</span><span class="p">;</span>
+<span class="n">namespace</span><span class="w"> </span><span class="n">MyLib</span><span class="p">;</span>
 
-<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 
-<span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
-<span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">));</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">));</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Of course ANTLR4 has visitor classes that we can tell how to handle things such as functions, enums, etc. and transfer that information to the builder. But, assuming we wish to create the AST manually using the builder API, it’ll look something like this:</p>
 <div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Init.</span>
-<span class="n">Builder</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Builder</span><span class="p">();</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">BeginFile</span><span class="p">(</span><span class="s">&quot;Test.asy&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementUsing</span><span class="p">(</span><span class="s">&quot;MyLib.Other&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementNamespace</span><span class="p">(</span><span class="s">&quot;MyLib&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">Builder</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Builder</span><span class="p">();</span>
+<span class="n">b</span><span class="p">.</span><span class="n">BeginFile</span><span class="p">(</span><span class="s">&quot;Test.asy&quot;</span><span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementUsing</span><span class="p">(</span><span class="s">&quot;MyLib.Other&quot;</span><span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementNamespace</span><span class="p">(</span><span class="s">&quot;MyLib&quot;</span><span class="p">);</span>
 
 <span class="c1">// Add function.</span>
-<span class="n">b</span><span class="p">.</span><span class="n">PushModifier</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">Public</span><span class="p">);</span><span class="w"></span>
-<span class="n">List</span><span class="p">&lt;</span><span class="n">VarParameter</span><span class="p">&gt;</span><span class="w"> </span><span class="n">funcParams</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">VarParameter</span><span class="p">&gt;();</span><span class="w"></span>
-<span class="n">funcParams</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="n">funcParams</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">BeginFunction</span><span class="p">(</span><span class="s">&quot;add&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VarType</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">funcParams</span><span class="p">);</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">PopModifier</span><span class="p">();</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementReturn</span><span class="p">(</span><span class="w"></span>
+<span class="n">b</span><span class="p">.</span><span class="n">PushModifier</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">Public</span><span class="p">);</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">VarParameter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">funcParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VarParameter</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">funcParams</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">));</span>
+<span class="n">funcParams</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">));</span>
+<span class="n">b</span><span class="p">.</span><span class="n">BeginFunction</span><span class="p">(</span><span class="s">&quot;add&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VarType</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">funcParams</span><span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="n">PopModifier</span><span class="p">();</span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementReturn</span><span class="p">(</span>
 <span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionOperator</span><span class="p">(</span><span class="n">Operator</span><span class="p">.</span><span class="n">Add</span><span class="p">,</span><span class="w"> </span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span><span class="w"> </span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">));</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">EndFunction</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">));</span>
+<span class="n">b</span><span class="p">.</span><span class="n">EndFunction</span><span class="p">();</span>
 
 <span class="c1">// Top level statements.</span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementVariableDeclaration</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExpressionConstantInt</span><span class="p">(</span><span class="m">3</span><span class="p">));</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementVariableDeclaration</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExpressionConstantInt</span><span class="p">(</span><span class="m">7</span><span class="p">));</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">BeginIf</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionOperator</span><span class="p">(</span><span class="n">Operator</span><span class="p">.</span><span class="n">Lt</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionConstantInt</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementExpression</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="s">&quot;printf&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionConstantString</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;add&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">Else</span><span class="p">();</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">StatementExpression</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="s">&quot;printf&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionConstantString</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;add&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&gt;()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
-<span class="n">b</span><span class="p">.</span><span class="n">EndIf</span><span class="p">();</span><span class="w"></span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementVariableDeclaration</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExpressionConstantInt</span><span class="p">(</span><span class="m">3</span><span class="p">));</span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementVariableDeclaration</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">VarParameter</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExpressionConstantInt</span><span class="p">(</span><span class="m">7</span><span class="p">));</span>
+<span class="n">b</span><span class="p">.</span><span class="n">BeginIf</span><span class="p">(</span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionOperator</span><span class="p">(</span><span class="n">Operator</span><span class="p">.</span><span class="n">Lt</span><span class="p">,</span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionConstantInt</span><span class="p">(</span><span class="m">2</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementExpression</span><span class="p">(</span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;printf&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionConstantString</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">),</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Else</span><span class="p">();</span>
+<span class="n">b</span><span class="p">.</span><span class="n">StatementExpression</span><span class="p">(</span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;printf&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionConstantString</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">),</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionFunctionCall</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;add&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">ExpressionVariable</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="n">EndIf</span><span class="p">();</span>
 
 <span class="c1">// End.</span>
-<span class="n">b</span><span class="p">.</span><span class="n">EndFile</span><span class="p">();</span><span class="w"></span>
+<span class="n">b</span><span class="p">.</span><span class="n">EndFile</span><span class="p">();</span>
 <span class="c1">// Compile, run, or do whatever with code here.</span>
 </pre></div>
 </div>
