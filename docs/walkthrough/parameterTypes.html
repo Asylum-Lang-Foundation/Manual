@@ -21,15 +21,15 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Implementations" href="implementations.html" />
-    <link rel="prev" title="Variables" href="variables.html" /> 
+    <link rel="next" title="Strings" href="strings.html" />
+    <link rel="prev" title="Implementations" href="implementations.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #de7cff" >
 
           
           
@@ -52,13 +52,16 @@
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Parameter Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#type-listing">Type Listing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-parameters">Reference Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#move-parameters">Move Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#move-parameters">Move Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#use-after-move">Use After Move</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
@@ -74,7 +77,7 @@
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #de7cff" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Asylum</a>
       </nav>
@@ -140,7 +143,7 @@
 </section>
 <section id="reference-parameters">
 <h2>Reference Parameters<a class="headerlink" href="#reference-parameters" title="Permalink to this heading"></a></h2>
-<p>The first solution we may do if we want to modify the value is copy it to another variable:</p>
+<p>The first solution we may do if we want to modify the <code class="docutils literal notranslate"><span class="pre">in</span></code> value is copy it to another variable:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">setValue</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">newVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 <span class="w">    </span><span class="n">newVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="c1">// We can modify this!</span>
@@ -194,7 +197,24 @@
 </section>
 <section id="move-parameters">
 <h2>Move Parameters<a class="headerlink" href="#move-parameters" title="Permalink to this heading"></a></h2>
-<p>You now hopefully understand how both <code class="docutils literal notranslate"><span class="pre">in</span></code> (default) and <code class="docutils literal notranslate"><span class="pre">ref</span></code> (reference) parameters work. But what is this mysterious <code class="docutils literal notranslate"><span class="pre">move</span></code>?</p>
+<p>You now hopefully understand how both <code class="docutils literal notranslate"><span class="pre">in</span></code> (default) and <code class="docutils literal notranslate"><span class="pre">ref</span></code> (reference) parameters work. But what is this mysterious <code class="docutils literal notranslate"><span class="pre">move</span></code>? Sometimes we have structures we can not copy, or are very large and do not want to be copied. However, we would still like to use the structure somewhere else. This is done by “moving” it to the function we are calling:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Image</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">Pixels</span><span class="w"> </span><span class="n">pixels</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">setPixels</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">Pixels</span><span class="w"> </span><span class="n">pixels</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">pixels</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">pixels</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above example, <code class="docutils literal notranslate"><span class="pre">Pixels</span></code> is a structure that contains large resources and thus should be copied or constructed as little as possible. Therefore, we want to move pixels to the image rather than copy them. This is done by using the move operator <code class="docutils literal notranslate"><span class="pre">:=</span></code>. However, we are only allowed to move an item we have ownership over. If <code class="docutils literal notranslate"><span class="pre">pixels</span></code> was passed as <code class="docutils literal notranslate"><span class="pre">in</span></code> or as <code class="docutils literal notranslate"><span class="pre">ref</span></code>, then we would only get to “borrow” the structure rather than own it! We’re allowed to make copies of borrowed items, but we can not move them!</p>
+<p>Do not worry if this is confusing, Asylum’s “move semantics” (or moving memory rather than borrowing or copying) will be discussed in its own section showing how to use it in practice and go into further detail.</p>
+<section id="use-after-move">
+<h3>Use After Move<a class="headerlink" href="#use-after-move" title="Permalink to this heading"></a></h3>
+</section>
 </section>
 </section>
 
@@ -202,14 +222,14 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="variables.html" class="btn btn-neutral float-left" title="Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="implementations.html" class="btn btn-neutral float-right" title="Implementations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="implementations.html" class="btn btn-neutral float-left" title="Implementations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="strings.html" class="btn btn-neutral float-right" title="Strings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Asylum Lang Foundation.</p>
+    <p>&#169; Copyright 2023, Asylum Lang Foundation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

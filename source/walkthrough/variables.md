@@ -38,67 +38,69 @@ These operators can be applied to any variable(s)/values to produce a new value.
 
 | Operator | Name | Usage | Description |
 | -------- | ---- | ----- | ----------- |
-| + | Add | a + b | Returns the sum of two items |
-| - | Sub | a - b | Returns the difference of two items |
-| * | Mul | a * b | Returns the product of two items |
-| / | Div | a / b | Returns the result of division of two items |
-| % | Mod | a % b | Returns the remainder of the result of the division of two items |
-| ** | Exp | a ** b | Returns `a` to the power of `b` |
-| .. | Range | a .. b | Returns an interable item that is defined by the range between `a` inclusive and `b` exclusive |
-| ..= | RangeEq | a ..= b | Returns an interable item that is defined by the range between `a` and `b` inclusively |
-| & | BitAnd | a & b | Returns the bitwise and operation of two items |
-| \| | Or | a \| b | Returns the bitwise or operation of two items |
-| ^ | BitXor | a ^ b | Returns the bitwise exclusive or operation of two items |
-| ~ | BitNot | ~a | Returns the bitwise not of an item |
-| << | Lshift | a << b | Shifts `a` to the left by `b` bits |
-| >> | Rshift | a >> b | Shifts `a` to the right by `b` bits |
-| + | Pos | +a | Modifies a value with positive (does nothing) |
-| - | Neg | -a | Modifies a value to be negative |
-| ++ | Inc | ++a; a++ | Increment the value of a |
-| -- | Dec | --a; a-- | Decrement the value of a |
-| ^ | From Last | ^a | When indexing an element, will access the member that is the count minus `a` |
-| * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to |
-| & | Address Of | &a | Returns a pointer that points to `a` |
-| @ | As Pointer | @a | If `a` is a reference, treat it as a pointer |
-| && | And | a && b | Returns `true` if, and only if, both `a` and `b` are `true` |
-| \|\| | Or | a \|\| b | Returns `true` if, and only if, either `a` and `b` are `true` |
-| !& | Nand | !& | a !& b | Returns `true` if, and only if, both `a` and `b` are `false` |
-| !\| | Nor | !\| | a !\| b | Returns `true` if, and only if, neither `a` or `b` are `true` |
-| ! | Not | !a | Returns `true` if, and only if, `a` is `false` |
-| == | Eq | a == b | Returns `true` if, and only if, `a` is equal to `b` |
-| != | Neq | a != b | Returns `true` if, and only if, `a` is not equal to `b` |
-| > | Gt | a > b | Returns `true` if, and only if, `a` is greater than `b` |
-| < | Lt | a < b | Returns `true` if, and only if, `a` is less than `b` |
-| >= | Ge | a >= b | Returns `true` if, and only if, `a` is greater than or equal to `b` |
-| <= | Le | a <= b | Returns `true` if, and only if, `a` is less than or equal to `b` |
-| <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b` |
-| ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c` |
-| ?? | Null | a ?? b | If `a` is a null pointer, return `b`, else, return `a` |
-| => | Lambda | a => b | The value of `a` is equal to the result of expression `b` |
-| , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included |
-| . | Dot | a.b | Access member `b` from struct `a` |
-| [] | Index | a[b] | Access index `b` from `a` |
+| + | Add | a + b | Returns the sum of two items. |
+| - | Sub | a - b | Returns the difference of two items. |
+| * | Mul | a * b | Returns the product of two items. |
+| / | Div | a / b | Returns the result of division of two items. |
+| % | Mod | a % b | Returns the remainder of the result of the division of two items. |
+| ** | Exp | a ** b | Returns `a` to the power of `b`. |
+| .. | Range | a .. b | Returns an iterable item that is defined by the range between `a` inclusive and `b` exclusive. |
+| ..= | RangeEq | a ..= b | Returns an iterable item that is defined by the range between `a` and `b` inclusively. |
+| & | BitAnd | a & b | Returns the bitwise and operation of two items. |
+| \| | Or | a \| b | Returns the bitwise or operation of two items. |
+| ^ | BitXor | a ^ b | Returns the bitwise exclusive or operation of two items. |
+| ~ | BitNot | ~a | Returns the bitwise not of an item. |
+| << | Lshift | a << b | Shifts `a` to the left by `b` bits. |
+| >> | Rshift | a >> b | Shifts `a` to the right by `b` bits. |
+| + | Pos | +a | Modifies a value with positive (does nothing to a value, usually used to convert a value to a number). |
+| - | Neg | -a | Modifies a value to be negative. |
+| ++ | Inc | ++a; a++ | Increment the value of a. |
+| `--` | Dec | `--a`; `a--` | Decrement the value of a. |
+| ^ | From Last | ^a | When indexing an element, will access the member that is the count minus `a`. |
+| * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to. |
+| & | Address Of | &a | Returns a pointer that points to `a`. |
+| @ | As Pointer | @a | If `a` is a reference, treat it as a pointer. |
+| && | And | a && b | Returns `true` if, and only if, both `a` and `b` are `true`. |
+| \|\| | Or | a \|\| b | Returns `true` if, and only if, either `a` and `b` are `true`. |
+| !& | Nand | !& | a !& b | Returns `true` if, and only if, both `a` and `b` are `false`. |
+| !\| | Nor | !\| | a !\| b | Returns `true` if, and only if, neither `a` or `b` are `true`. |
+| ! | Not | !a | Returns `true` if, and only if, `a` is `false`. |
+| == | Eq | a == b | Returns `true` if, and only if, `a` is equal to `b`. |
+| != | Neq | a != b | Returns `true` if, and only if, `a` is not equal to `b`. |
+| > | Gt | a > b | Returns `true` if, and only if, `a` is greater than `b`. |
+| < | Lt | a < b | Returns `true` if, and only if, `a` is less than `b`. |
+| >= | Ge | a >= b | Returns `true` if, and only if, `a` is greater than or equal to `b`. |
+| <= | Le | a <= b | Returns `true` if, and only if, `a` is less than or equal to `b`. |
+| <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b`. |
+| ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c`. |
+| ?? | Null | a ?? b | If `a` is a null pointer, return `b`, else, return `a`. |
+| => | Lambda | a => b | The value of `a` is equal to the result of expression `b`. |
+| , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included. |
+| . | Dot | a.b | Access member `b` from struct `a`. |
+| [] | Index | a[b] | Access index `b` from `a`. |
 
 ### Assignment Operators
 These operators are "not static", as in they modify the value of the left-hand variable. All operators are in the form `a {OP} b`.
 | Operator | Equivalent |
 | -------- | ---------- |
+| = | Set `a` to a copy of `b` (copy assignment). |
+| := | Set `a` to be the new owner of the data in `b` (move assignment). |
 | += | a = a + b |
 | -= | a = a - b |
 | *= | a = a * b |
 | /= | a = a / b |
 | %= | a = a % b |
-| **= | Raises `a` to the `b`th power |
+| **= | Raises `a` to the `b`th power. |
 | &= | a = a & b |
 | \|= | a = a \| b |
 | ^= | a = a ^ b |
-| ~= | Flips the bits in `a` specified by `b` |
+| ~= | Flips the bits in `a` specified by `b`. |
 | <<= | a = a << b |
 | >>= | a = a >> b |
 | &&= | a = a && b |
 | \|\|= | a = a \|\| b |
 | !&= | a = a !& b |
-| ~\|= | a = a !\| b |
+| !\|= | a = a !\| b |
 | ??= | a = a ?? b |
 
 ### Operator Precedence
@@ -106,14 +108,15 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 
 | Operators |
 | --------- |
-| x++, x-- |
+| (x) |
+| x++, `x--` |
 | +x, -x, !x, ~x, ++x, --x, ^x, &x, *x, @x, x[y] |
 | x..y, x..=y |
 | x ** y |
 | x * y, x / y, x % y |
 | x + y, x - y |
 | x >> y, x << y |
-| x > y, x < y, x >= y, x <= y |
+| x > y, x < y, x >= y, x <= y, x <=> y |
 | x == y, x != y |
 | x & y |
 | x ^ y |
@@ -129,7 +132,7 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 Remember to use parenthesis when in doubt! It makes code easier to read.
 
 ### Preserving Data With Operators
-What happens when you use these different operators on differing on similar types? For example, let's look at the following code:
+What happens when you use these different operators on differing or similar types? For example, let's look at the following code:
 
 ```rust
 fn main() {
@@ -227,7 +230,7 @@ This above code is equivalent, and much cleaner.
 
 ## Challenges
 1. Make a program that prints the sum of two variables to produce "Hello World!".
-2. Initialize the `Color` struct in both ways to both produce white (white is 255).
+2. Initialize the `Color` struct in both ways to both produce white (white has red, green, and blue set to 255).
 3. Create a function to solve for `c` in the Pythagorean Theorem (`a^2 + b^2 = c^2`).
 4. What is the result of `8 / 3`?
 5. What is the result of `4 * (2 + 1) % 3`?

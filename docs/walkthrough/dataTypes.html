@@ -29,7 +29,7 @@
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #de7cff" >
 
           
           
@@ -66,6 +66,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
@@ -81,7 +82,7 @@
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #de7cff" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Asylum</a>
       </nav>
@@ -106,11 +107,11 @@
 <p>On the last page, you vaguely heard about the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type. But what is a data type, what are they, and how do you use them?</p>
 <section id="purpose-of-data-types">
 <h2>Purpose Of Data Types<a class="headerlink" href="#purpose-of-data-types" title="Permalink to this heading"></a></h2>
-<p>In Asylum, you can think of everything in an “is a” way. For example, 5 “is a” number, the vehicle you drive “is a” car, and <code class="docutils literal notranslate"><span class="pre">main</span></code> “is a” function. <strong>A data type let’s the computer know what kind of data you are working with.</strong> Obviously, your computer needs to do different things to add numbers together compared to text. And of course, if you write a function that adds numbers together, you wouldn’t want anyone to give it text, a function, or even a car.</p>
+<p>In Asylum, you can think of everything in an “is a” way. For example, 5 “is a” number, the vehicle you drive “is a” car, and <code class="docutils literal notranslate"><span class="pre">main</span></code> “is a” function. <strong>A data type lets the computer know what kind of data you are working with.</strong> Obviously, your computer needs to do different things to add numbers together compared to concatting text. And of course, if you write a function that adds numbers together, you wouldn’t want anyone to give it text, a function, or even a car.</p>
 </section>
 <section id="primitive-data-types">
 <h2>Primitive Data Types<a class="headerlink" href="#primitive-data-types" title="Permalink to this heading"></a></h2>
-<p>A primitive data type is one given by Asylum. They are definined by the language and compiler itself. Here is a table of primitives:</p>
+<p>A primitive data type is one defined by Asylum. They are built into the language and the compiler will automatically recognize them. A table is listed below:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Primitive</p></th>
@@ -119,64 +120,52 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>object</p></td>
-<td><p>The “any” type. Every single type, even the ones below “are” an object. It is not recommended to use often though, as conversion from an object to anything else is not guaranteed to be valid and defeats the point of types</p></td>
+<td><p>The “any” type. Every single type, even the ones below “are” an object. It is not recommended to use often though, as conversion from an object to anything else is not guaranteed to be valid and defeats the point of types.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
-<td><p>A type that means no type. A function that does not have <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> to signify return a type can be read as <code class="docutils literal notranslate"><span class="pre">-&gt;</span> <span class="pre">void</span></code>. It would just be annoying to write that for every function that does not return anything</p></td>
+<td><p>A type that means no type. A function that does not have <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> to signify a return type can be read as <code class="docutils literal notranslate"><span class="pre">-&gt;</span> <span class="pre">void</span></code>. It would just be annoying to write that for every function that does not return anything.</p></td>
 </tr>
 <tr class="row-even"><td><p>bool</p></td>
-<td><p>A boolean value that is either <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>A boolean value that is either <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>char</p></td>
-<td><p>A character. You can think of this as single text character like ‘h’, ‘7’, or ‘;’</p></td>
+<td><p>A character. You can think of this as single text character like ‘h’, ‘7’, or ‘;’.</p></td>
 </tr>
 <tr class="row-even"><td><p>wchar</p></td>
-<td><p>A wide character. It is like a <code class="docutils literal notranslate"><span class="pre">char</span></code>, except it can fit wide characters such as Chinese characters</p></td>
+<td><p>A wide character. It is like a <code class="docutils literal notranslate"><span class="pre">char</span></code>, except it can fit wide characters such as Chinese characters.</p></td>
 </tr>
 <tr class="row-odd"><td><p>string</p></td>
-<td><p>A “string” of characters that forms standard text. This is your typical “Hello World!”</p></td>
+<td><p>A “string” of characters that forms standard text. This is your typical <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">World!&quot;</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p>wstring</p></td>
-<td><p>A “string” of wide characters that forms extended text. It is like a <code class="docutils literal notranslate"><span class="pre">string</span></code>, but can include wide characters like Chinese characters</p></td>
+<td><p>A “string” of wide characters that forms extended text. It is like a <code class="docutils literal notranslate"><span class="pre">string</span></code>, but can include wide characters like Chinese characters.</p></td>
 </tr>
 <tr class="row-odd"><td><p>uX</p></td>
-<td><p>An unsigned number. X is allowed to be any whole number from 1 to 16777215. An unsigned number is a positive integer (whole number). Its range can be thought of as 2^X. For example, a <code class="docutils literal notranslate"><span class="pre">u3</span></code> data type has a range of <code class="docutils literal notranslate"><span class="pre">2^3=8</span></code>, so can be any value from 0 to 7 inclusively</p></td>
+<td><p>An unsigned number. X is allowed to be any whole number from 1 to 16777215. An unsigned number is a positive integer (whole number). Its range can be thought of as 2^X. For example, a <code class="docutils literal notranslate"><span class="pre">u3</span></code> data type has a range of <code class="docutils literal notranslate"><span class="pre">2^3=8</span></code>, so it can be any value from 0 to 7 inclusively.</p></td>
 </tr>
 <tr class="row-even"><td><p>sX</p></td>
-<td><p>A signed number. X is allowed to be any whole number from 1 to 16777215. Unlike unsigned numbers, signed numbers can be negative, at the expense of half its range being negative. Its range can be thought of as 2^X. For example, an <code class="docutils literal notranslate"><span class="pre">s4</span></code> data type has a range of <code class="docutils literal notranslate"><span class="pre">2^4=16</span></code>, so it can be any value from -8 to 7 inclusively</p></td>
+<td><p>A signed number. X is allowed to be any whole number from 1 to 16777215. Unlike unsigned numbers, signed numbers can be negative, at the expense of half its range being negative. Its range can be thought of as 2^X. For example, an <code class="docutils literal notranslate"><span class="pre">s4</span></code> data type has a range of <code class="docutils literal notranslate"><span class="pre">2^4=16</span></code>, so it can be any value from -8 to 7 inclusively.</p></td>
 </tr>
 <tr class="row-odd"><td><p>varlen</p></td>
-<td><p>A number that can be any integer with no range. It is only recommended to be used with really large numbers that need high precision, as it takes more space compared to fixed range unsigned or signed numbers</p></td>
+<td><p>A number that can be any number with no limitations. It is only recommended to be used with really large numbers that need high precision, as it takes more space compared to fixed range unsigned, signed, or floating-point numbers.</p></td>
 </tr>
 <tr class="row-even"><td><p>fX</p></td>
-<td><p>A floating-point number. This can be thought of as a number with decimals, such as <code class="docutils literal notranslate"><span class="pre">1.234</span></code>. X is allowed to be 16, 32, 64, 80, or 128</p></td>
+<td><p>A floating-point number. This can be thought of as a number with decimals, such as <code class="docutils literal notranslate"><span class="pre">1.234</span></code>. X is allowed to be 16, 32, 64, 80, or 128.</p></td>
 </tr>
 <tr class="row-odd"><td><p>fixAxB</p></td>
-<td><p>A fixed-point number with A whole bits, and B decimal bits. This is a signed number that has decimal points. What makes it different from floating-point is that math can be done on it like a signed/unsigned number, which is great for systems that don’t have floating-point processor support. The whole bits work like signed numbers, and the decimal bits allow precision of <code class="docutils literal notranslate"><span class="pre">1/(2^n)</span></code>. For example, a <code class="docutils literal notranslate"><span class="pre">fix3x4</span></code> can have the whole part be from <code class="docutils literal notranslate"><span class="pre">-4</span></code> to <code class="docutils literal notranslate"><span class="pre">3</span></code>, and the fractional part be any of <code class="docutils literal notranslate"><span class="pre">1/2</span></code>, <code class="docutils literal notranslate"><span class="pre">1/4</span></code>, <code class="docutils literal notranslate"><span class="pre">1/8</span></code>, and <code class="docutils literal notranslate"><span class="pre">1/16</span></code> added together</p></td>
+<td><p>A fixed-point number with A whole bits, and B decimal bits. This is a signed number that has decimal points. What makes it different from floating-point is that math can be done on it like a signed/unsigned number, which is great for systems that don’t have floating-point processor support. The whole bits work like signed numbers, and the decimal bits allow precision of <code class="docutils literal notranslate"><span class="pre">1/(2^n)</span></code>. For example, a <code class="docutils literal notranslate"><span class="pre">fix3x4</span></code> can have the whole part be from <code class="docutils literal notranslate"><span class="pre">-4</span></code> to <code class="docutils literal notranslate"><span class="pre">3</span></code>, and the fractional part be any of <code class="docutils literal notranslate"><span class="pre">1/2</span></code>, <code class="docutils literal notranslate"><span class="pre">1/4</span></code>, <code class="docutils literal notranslate"><span class="pre">1/8</span></code>, and <code class="docutils literal notranslate"><span class="pre">1/16</span></code> added together.</p></td>
 </tr>
 <tr class="row-even"><td><p>func&lt;A, …&gt;</p></td>
-<td><p>A function that has a return type of A. Any other types after it are the parameter types The add function from earlier is type <code class="docutils literal notranslate"><span class="pre">func&lt;int,</span> <span class="pre">int,</span> <span class="pre">int&gt;</span></code></p></td>
+<td><p>A function that has a return type of A. Any other types after it are the parameter types. The add function from earlier is type <code class="docutils literal notranslate"><span class="pre">func&lt;int,</span> <span class="pre">int,</span> <span class="pre">int&gt;</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>event&lt;A, …&gt;</p></td>
-<td><p>An event handler that can hold functions to execute. Think of this like a list of fuctions that you can add and remove from, and when executed will call of the functions in the list</p></td>
+<td><p>An event handler that can hold functions to execute. Think of this like a list of fuctions that you can add and remove from, and when executed will call all of the functions in the list.</p></td>
 </tr>
 <tr class="row-even"><td><p>var</p></td>
-<td><p>This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though</p></td>
-</tr>
-<tr class="row-odd"><td><p>unsigned</p></td>
-<td><p>Represents a generic, unsigned integer with bitwidth determined at compile time</p></td>
-</tr>
-<tr class="row-even"><td><p>signed</p></td>
-<td><p>Represents a generic, signed integer with bitwidth determined at compile time</p></td>
-</tr>
-<tr class="row-odd"><td><p>floating</p></td>
-<td><p>Represents a floating-point number with bitwidth determined at compile time</p></td>
-</tr>
-<tr class="row-even"><td><p>fixed</p></td>
-<td><p>Represents a fixed-point number with bitwidth determined at compile time</p></td>
+<td><p>This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though.</p></td>
 </tr>
 <tr class="row-odd"><td><p>This</p></td>
-<td><p>The current type being implemented in an implementation block</p></td>
+<td><p>The current type being implemented in an implementation block.</p></td>
 </tr>
 </tbody>
 </table>
@@ -250,10 +239,11 @@
 </tr>
 </tbody>
 </table>
+<p>Despite the fact that this table is final, it is highly recommended to continue using types such as <code class="docutils literal notranslate"><span class="pre">u16</span></code> when the type expected <em>must</em> be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.</p>
 </section>
 <section id="special-types">
 <h2>Special Types<a class="headerlink" href="#special-types" title="Permalink to this heading"></a></h2>
-<p>Like most other languages, Asylum has <em>special types</em> that are types that involve other types. This statement is confusing, but it’ll make sense after looking at them below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:</p>
+<p>Like most other languages, Asylum has <em>special types</em> that are types that involve other types. This statement is confusing, but it’ll make sense after looking at the special types below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Special Type</p></th>
@@ -262,49 +252,53 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>T, T, …, T</p></td>
-<td><p>Tuple - this allows you to store a bunch of other data types in one variable. Ex: <code class="docutils literal notranslate"><span class="pre">int,</span> <span class="pre">floatm</span> <span class="pre">string</span></code></p></td>
+<td><p>Tuple - this allows you to store a bunch of other data types in one variable. Ex: <code class="docutils literal notranslate"><span class="pre">int,</span> <span class="pre">float,</span> <span class="pre">string</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>(T, T, …, T)</p></td>
-<td><p>This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity</p></td>
+<td><p>This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity.</p></td>
 </tr>
 <tr class="row-even"><td><p>T&#64;</p></td>
-<td><p>A reference to a data type. For now, think of it as a shortcut to already existing data of the same type</p></td>
+<td><p>A reference to a data type on the heap. For now, think of it as a shortcut to already existing data of the same type.</p></td>
 </tr>
-<tr class="row-odd"><td><p>T&amp;</p></td>
-<td><p>A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always points to data</p></td>
+<tr class="row-odd"><td><p>ref T</p></td>
+<td><p>A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always references data. (L-value reference for those familiar with C++).</p></td>
 </tr>
-<tr class="row-even"><td><p>T*</p></td>
-<td><p>A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it)</p></td>
+<tr class="row-even"><td><p>move T</p></td>
+<td><p>A reference to a data type that can not be written to (R-value reference for those familiar with C++)</p></td>
 </tr>
-<tr class="row-odd"><td><p>T[]</p></td>
-<td><p>Dynamic array. This is an array of T that is allowed to be any length</p></td>
+<tr class="row-odd"><td><p>T*</p></td>
+<td><p>A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it).</p></td>
 </tr>
-<tr class="row-even"><td><p>T[C]</p></td>
-<td><p>Constant array. This is an array of T that is constant with size C</p></td>
+<tr class="row-even"><td><p>T[]</p></td>
+<td><p>Dynamic array. This is an array of T that is allowed to be any length.</p></td>
 </tr>
-<tr class="row-odd"><td><p>T[A, B, …]</p></td>
-<td><p>A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, <code class="docutils literal notranslate"><span class="pre">int[2,</span> <span class="pre">3]</span></code> can be thought of as a 2x3 grid of <code class="docutils literal notranslate"><span class="pre">int</span></code>s. <code class="docutils literal notranslate"><span class="pre">char[3,</span> <span class="pre">,</span> <span class="pre">7]</span></code> can be thought of as a 3d array of chars where one dimension is 3 long, another is 7 long, and the other can be any length</p></td>
+<tr class="row-odd"><td><p>T[C]</p></td>
+<td><p>Constant array. This is an array of T that is constant with size C.</p></td>
 </tr>
-<tr class="row-even"><td><p>const T</p></td>
-<td><p>A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time</p></td>
+<tr class="row-even"><td><p>T[A, B, …]</p></td>
+<td><p>A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, <code class="docutils literal notranslate"><span class="pre">int[2,</span> <span class="pre">3]</span></code> can be thought of as a 2x3 grid of <code class="docutils literal notranslate"><span class="pre">int</span></code>s. <code class="docutils literal notranslate"><span class="pre">char[3,</span> <span class="pre">,</span> <span class="pre">7]</span></code> can be thought of as a 3d array of chars where one dimension is 3 long, the last is 7 long, and the other can be any length.</p></td>
 </tr>
-<tr class="row-odd"><td><p>readonly/ro T</p></td>
-<td><p>A type T, but you can only read from it and not write to it</p></td>
+<tr class="row-odd"><td><p>const T</p></td>
+<td><p>A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time. All <code class="docutils literal notranslate"><span class="pre">in</span></code> parameters of functions are <code class="docutils literal notranslate"><span class="pre">const</span></code> (discussed later).</p></td>
 </tr>
-<tr class="row-even"><td><p>writeonly/wo T</p></td>
-<td><p>A type T, but you can only write from it and not read from it</p></td>
+<tr class="row-even"><td><p>readonly/ro T</p></td>
+<td><p>A type T, but you can only read from it and not write to it.</p></td>
 </tr>
-<tr class="row-odd"><td><p>static T</p></td>
-<td><p>A type T, but there is only one instance of it across everything. For example, say you make a <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">int</span></code> inside a function, and say inside this function, this <code class="docutils literal notranslate"><span class="pre">int</span></code> is incremented. Instead of creating a new <code class="docutils literal notranslate"><span class="pre">int</span></code> every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that function is called</p></td>
+<tr class="row-odd"><td><p>writeonly/wo T</p></td>
+<td><p>A type T, but you can only write to it and not read from it.</p></td>
 </tr>
-<tr class="row-even"><td><p>volatile T</p></td>
-<td><p>If you need to make sure T has changed for say you are using it as a condition in a loop, you can mark it as volatile</p></td>
+<tr class="row-even"><td><p>static T</p></td>
+<td><p>A type T, but there is only one instance of it across everything. For example, say you make a <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">int</span></code> inside a function, and inside this function, this <code class="docutils literal notranslate"><span class="pre">int</span></code> is incremented. Instead of creating a new <code class="docutils literal notranslate"><span class="pre">int</span></code> every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that single function is called.</p></td>
 </tr>
-<tr class="row-odd"><td><p>atomic T</p></td>
-<td><p>Declaring a variable as atomic will make sure only one thread is allowed to use it at a time</p></td>
+<tr class="row-odd"><td><p>volatile T</p></td>
+<td><p>If you need to make sure T has changed, for example you are using it as a condition in a loop, you can mark it as volatile.</p></td>
+</tr>
+<tr class="row-even"><td><p>atomic T</p></td>
+<td><p>Declaring a type as atomic will make sure only one thread is allowed to use it at a time.</p></td>
 </tr>
 </tbody>
 </table>
+<p>Again, do not be overwhelmed if these do not make sense. They will all be explored in more detail later.</p>
 </section>
 <section id="typedefs">
 <h2>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading"></a></h2>
@@ -312,7 +306,7 @@
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span><span class="w"> </span><span class="n">s24</span><span class="p">[]</span><span class="w"> </span><span class="n">medIntArr</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>This example creates a new type called, <code class="docutils literal notranslate"><span class="pre">medIntARr</span></code>, which is really just a dynamic array of 24-bit signed integers in disguise. You can use <code class="docutils literal notranslate"><span class="pre">medInt</span></code> and <code class="docutils literal notranslate"><span class="pre">s24[]</span></code> interchangibly, they are the exact same thing.</p>
+<p>This example creates a new type called, <code class="docutils literal notranslate"><span class="pre">medIntArr</span></code>, which is really just a dynamic array of 24-bit signed integers in disguise. You can use <code class="docutils literal notranslate"><span class="pre">medIntArr</span></code> and <code class="docutils literal notranslate"><span class="pre">s24[]</span></code> interchangibly, they are the exact same thing.</p>
 </section>
 <section id="structs">
 <h2>Structs<a class="headerlink" href="#structs" title="Permalink to this heading"></a></h2>
@@ -370,7 +364,7 @@
 </pre></div>
 </div>
 </div>
-<p>Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won’t be able to determine the length of the structure. This can again be fixed by making either the <code class="docutils literal notranslate"><span class="pre">illegalA</span></code> or <code class="docutils literal notranslate"><span class="pre">illegalB</span></code> members a reference. Note that just having one reference solves the infinite struct error.</p>
+<p>Similarly, like a struct containing itself, this will also produce an infinite loop for the compiler that won’t be able to determine the length of the structure. This can again be fixed by making either the <code class="docutils literal notranslate"><span class="pre">illegalA</span></code> or <code class="docutils literal notranslate"><span class="pre">illegalB</span></code> members a reference. Note that just having one reference solves the infinite struct error.</p>
 </section>
 </section>
 <section id="challenges">
@@ -378,8 +372,8 @@
 <ol class="arabic simple">
 <li><p>Explain the difference between unsigned and signed integers. What is a common signed type?</p></li>
 <li><p>Explain the difference between a floating-point and a fixed-point number. What is a common floating-point type?</p></li>
-<li><p>What type of number is <code class="docutils literal notranslate"><span class="pre">long</span></code>? Unsigned, signed, floating-point, or fixed-point?</p></li>
-<li><p>Remember that <code class="docutils literal notranslate"><span class="pre">add</span></code> function from earlier? Remake it so that <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> can have a decimal point.</p></li>
+<li><p>What type of number is <code class="docutils literal notranslate"><span class="pre">long</span></code>? Is it unsigned, signed, floating-point, or fixed-point?</p></li>
+<li><p>Remember the <code class="docutils literal notranslate"><span class="pre">add</span></code> function from earlier? Remake it so that <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> can have a decimal point.</p></li>
 <li><p>Create a <code class="docutils literal notranslate"><span class="pre">struct</span></code> that represents a circle. Each circle has a radius, a line width, color, and can have another circle inside of it. Create any other necessary <code class="docutils literal notranslate"><span class="pre">struct</span></code>s.</p></li>
 </ol>
 </section>
@@ -406,7 +400,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Asylum Lang Foundation.</p>
+    <p>&#169; Copyright 2023, Asylum Lang Foundation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

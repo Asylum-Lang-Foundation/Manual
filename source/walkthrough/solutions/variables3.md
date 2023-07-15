@@ -10,5 +10,5 @@ Here, you were asked to make a function to solve for `c` in `a^2 + b^2 = c^2`. A
 fn pythagoreanTheorem(float a, float b) {
     float c = a * a + b * b;
     c **= 0.5;
-    c
+    return c;
 }

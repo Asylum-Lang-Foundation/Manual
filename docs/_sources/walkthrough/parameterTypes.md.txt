@@ -28,7 +28,7 @@ However, `in` parameters in Asylum automatically pass a reference to a constant 
 ```
 
 ## Reference Parameters
-The first solution we may do if we want to modify the value is copy it to another variable:
+The first solution we may do if we want to modify the `in` value is copy it to another variable:
 
 ```rust
 fn setValue(int val) {
@@ -86,4 +86,23 @@ Output:
 ```
 
 ## Move Parameters
-You now hopefully understand how both `in` (default) and `ref` (reference) parameters work. But what is this mysterious `move`?
+You now hopefully understand how both `in` (default) and `ref` (reference) parameters work. But what is this mysterious `move`? Sometimes we have structures we can not copy, or are very large and do not want to be copied. However, we would still like to use the structure somewhere else. This is done by "moving" it to the function we are calling:
+
+```rust
+struct Image {
+pub:
+    Pixels pixels;
+}
+
+impl Image {
+    pub fn setPixels(move Pixels pixels) {
+        this.pixels := pixels;
+    }
+}
+```
+
+In the above example, `Pixels` is a structure that contains large resources and thus should be copied or constructed as little as possible. Therefore, we want to move pixels to the image rather than copy them. This is done by using the move operator `:=`. However, we are only allowed to move an item we have ownership over. If `pixels` was passed as `in` or as `ref`, then we would only get to "borrow" the structure rather than own it! We're allowed to make copies of borrowed items, but we can not move them!
+
+Do not worry if this is confusing, Asylum's "move semantics" (or moving memory rather than borrowing or copying) will be discussed in its own section showing how to use it in practice and go into further detail.
+
+### Use After Move

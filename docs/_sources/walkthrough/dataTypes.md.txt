@@ -2,32 +2,28 @@
 On the last page, you vaguely heard about the `int` data type. But what is a data type, what are they, and how do you use them?
 
 ## Purpose Of Data Types
-In Asylum, you can think of everything in an "is a" way. For example, 5 "is a" number, the vehicle you drive "is a" car, and `main` "is a" function. **A data type let's the computer know what kind of data you are working with.** Obviously, your computer needs to do different things to add numbers together compared to text. And of course, if you write a function that adds numbers together, you wouldn't want anyone to give it text, a function, or even a car.
+In Asylum, you can think of everything in an "is a" way. For example, 5 "is a" number, the vehicle you drive "is a" car, and `main` "is a" function. **A data type lets the computer know what kind of data you are working with.** Obviously, your computer needs to do different things to add numbers together compared to concatting text. And of course, if you write a function that adds numbers together, you wouldn't want anyone to give it text, a function, or even a car.
 
 ## Primitive Data Types
-A primitive data type is one given by Asylum. They are definined by the language and compiler itself. Here is a table of primitives:
+A primitive data type is one defined by Asylum. They are built into the language and the compiler will automatically recognize them. A table is listed below:
 | Primitive | Description |
 | --------- | ----------- |
-| object | The "any" type. Every single type, even the ones below "are" an object. It is not recommended to use often though, as conversion from an object to anything else is not guaranteed to be valid and defeats the point of types |
-| void | A type that means no type. A function that does not have `->` to signify return a type can be read as `-> void`. It would just be annoying to write that for every function that does not return anything |
-| bool | A boolean value that is either `true` or `false` |
-| char | A character. You can think of this as single text character like 'h', '7', or ';' |
-| wchar | A wide character. It is like a `char`, except it can fit wide characters such as Chinese characters |
-| string | A "string" of characters that forms standard text. This is your typical "Hello World!" |
-| wstring | A "string" of wide characters that forms extended text. It is like a `string`, but can include wide characters like Chinese characters |
-| uX | An unsigned number. X is allowed to be any whole number from 1 to 16777215. An unsigned number is a positive integer (whole number). Its range can be thought of as 2^X. For example, a `u3` data type has a range of `2^3=8`, so can be any value from 0 to 7 inclusively |
-| sX | A signed number. X is allowed to be any whole number from 1 to 16777215. Unlike unsigned numbers, signed numbers can be negative, at the expense of half its range being negative. Its range can be thought of as 2^X. For example, an `s4` data type has a range of `2^4=16`, so it can be any value from -8 to 7 inclusively |
-| varlen | A number that can be any integer with no range. It is only recommended to be used with really large numbers that need high precision, as it takes more space compared to fixed range unsigned or signed numbers |
-| fX | A floating-point number. This can be thought of as a number with decimals, such as `1.234`. X is allowed to be 16, 32, 64, 80, or 128 |
-| fixAxB | A fixed-point number with A whole bits, and B decimal bits. This is a signed number that has decimal points. What makes it different from floating-point is that math can be done on it like a signed/unsigned number, which is great for systems that don't have floating-point processor support. The whole bits work like signed numbers, and the decimal bits allow precision of `1/(2^n)`. For example, a `fix3x4` can have the whole part be from `-4` to `3`, and the fractional part be any of `1/2`, `1/4`, `1/8`, and `1/16` added together |
-| func<A, ...> | A function that has a return type of A. Any other types after it are the parameter types The add function from earlier is type `func<int, int, int>` |
-| event<A, ...> | An event handler that can hold functions to execute. Think of this like a list of fuctions that you can add and remove from, and when executed will call of the functions in the list |
-| var | This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though |
-| unsigned | Represents a generic, unsigned integer with bitwidth determined at compile time |
-| signed | Represents a generic, signed integer with bitwidth determined at compile time |
-| floating | Represents a floating-point number with bitwidth determined at compile time |
-| fixed | Represents a fixed-point number with bitwidth determined at compile time |
-| This | The current type being implemented in an implementation block |
+| object | The "any" type. Every single type, even the ones below "are" an object. It is not recommended to use often though, as conversion from an object to anything else is not guaranteed to be valid and defeats the point of types. |
+| void | A type that means no type. A function that does not have `->` to signify a return type can be read as `-> void`. It would just be annoying to write that for every function that does not return anything. |
+| bool | A boolean value that is either `true` or `false`. |
+| char | A character. You can think of this as single text character like 'h', '7', or ';'. |
+| wchar | A wide character. It is like a `char`, except it can fit wide characters such as Chinese characters. |
+| string | A "string" of characters that forms standard text. This is your typical `"Hello World!"`. |
+| wstring | A "string" of wide characters that forms extended text. It is like a `string`, but can include wide characters like Chinese characters. |
+| uX | An unsigned number. X is allowed to be any whole number from 1 to 16777215. An unsigned number is a positive integer (whole number). Its range can be thought of as 2^X. For example, a `u3` data type has a range of `2^3=8`, so it can be any value from 0 to 7 inclusively. |
+| sX | A signed number. X is allowed to be any whole number from 1 to 16777215. Unlike unsigned numbers, signed numbers can be negative, at the expense of half its range being negative. Its range can be thought of as 2^X. For example, an `s4` data type has a range of `2^4=16`, so it can be any value from -8 to 7 inclusively. |
+| varlen | A number that can be any number with no limitations. It is only recommended to be used with really large numbers that need high precision, as it takes more space compared to fixed range unsigned, signed, or floating-point numbers. |
+| fX | A floating-point number. This can be thought of as a number with decimals, such as `1.234`. X is allowed to be 16, 32, 64, 80, or 128. |
+| fixAxB | A fixed-point number with A whole bits, and B decimal bits. This is a signed number that has decimal points. What makes it different from floating-point is that math can be done on it like a signed/unsigned number, which is great for systems that don't have floating-point processor support. The whole bits work like signed numbers, and the decimal bits allow precision of `1/(2^n)`. For example, a `fix3x4` can have the whole part be from `-4` to `3`, and the fractional part be any of `1/2`, `1/4`, `1/8`, and `1/16` added together. |
+| func<A, ...> | A function that has a return type of A. Any other types after it are the parameter types. The add function from earlier is type `func<int, int, int>`. |
+| event<A, ...> | An event handler that can hold functions to execute. Think of this like a list of fuctions that you can add and remove from, and when executed will call all of the functions in the list. |
+| var | This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though. |
+| This | The current type being implemented in an implementation block. |
 
 ## Common Primitives
 Wait, most languages use primitives such as `int`, `float`, `ulong`, etc. Where are they? If you look above, Asylum already provides a way to declare unsigned, signed, and floating point numbers. So to get these *normal* types used commonly in programming, Asylum *typedef*s, or creates new types that really just shortcut back to the original type. The below chart shows the typedefs defined by EASL (Embedded Asylum Standard Library):
@@ -49,25 +45,30 @@ Wait, most languages use primitives such as `int`, `float`, `ulong`, etc. Where 
 | double | f64 | 1.7E +/- 308 (15 digits) |
 | size_t | uX | X is the bitwidth of the system, which for 32-bit systems is `u32`, `u64` for 64-bit, etc. |
 
+Despite the fact that this table is final, it is highly recommended to continue using types such as `u16` when the type expected *must* be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.
+
 ## Special Types
-Like most other languages, Asylum has *special types* that are types that involve other types. This statement is confusing, but it'll make sense after looking at them below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:
+Like most other languages, Asylum has *special types* that are types that involve other types. This statement is confusing, but it'll make sense after looking at the special types below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:
 
 | Special Type | Description |
 | ------------ | ----------- |
-| T, T, ..., T | Tuple - this allows you to store a bunch of other data types in one variable. Ex: `int, floatm string` |
-| (T, T, ..., T) | This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity |
-| T@ | A reference to a data type. For now, think of it as a shortcut to already existing data of the same type |
-| T& | A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always points to data |
-| T* | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it) |
-| T[] | Dynamic array. This is an array of T that is allowed to be any length |
-| T[C] | Constant array. This is an array of T that is constant with size C |
-| T[A, B, ...] | A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, `int[2, 3]` can be thought of as a 2x3 grid of `int`s. `char[3, , 7]` can be thought of as a 3d array of chars where one dimension is 3 long, another is 7 long, and the other can be any length |
-| const T | A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time |
-| readonly/ro T | A type T, but you can only read from it and not write to it |
-| writeonly/wo T | A type T, but you can only write from it and not read from it |
-| static T | A type T, but there is only one instance of it across everything. For example, say you make a `static int` inside a function, and say inside this function, this `int` is incremented. Instead of creating a new `int` every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that function is called |
-| volatile T | If you need to make sure T has changed for say you are using it as a condition in a loop, you can mark it as volatile |
-| atomic T | Declaring a variable as atomic will make sure only one thread is allowed to use it at a time |
+| T, T, ..., T | Tuple - this allows you to store a bunch of other data types in one variable. Ex: `int, float, string`. |
+| (T, T, ..., T) | This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity. |
+| T@ | A reference to a data type on the heap. For now, think of it as a shortcut to already existing data of the same type. |
+| ref T | A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always references data. (L-value reference for those familiar with C++). |
+| move T | A reference to a data type that can not be written to (R-value reference for those familiar with C++) |
+| T* | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it). |
+| T[] | Dynamic array. This is an array of T that is allowed to be any length. |
+| T[C] | Constant array. This is an array of T that is constant with size C. |
+| T[A, B, ...] | A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, `int[2, 3]` can be thought of as a 2x3 grid of `int`s. `char[3, , 7]` can be thought of as a 3d array of chars where one dimension is 3 long, the last is 7 long, and the other can be any length. |
+| const T | A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time. All `in` parameters of functions are `const` (discussed later). |
+| readonly/ro T | A type T, but you can only read from it and not write to it. |
+| writeonly/wo T | A type T, but you can only write to it and not read from it. |
+| static T | A type T, but there is only one instance of it across everything. For example, say you make a `static int` inside a function, and inside this function, this `int` is incremented. Instead of creating a new `int` every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that single function is called. |
+| volatile T | If you need to make sure T has changed, for example you are using it as a condition in a loop, you can mark it as volatile. |
+| atomic T | Declaring a type as atomic will make sure only one thread is allowed to use it at a time. |
+
+Again, do not be overwhelmed if these do not make sense. They will all be explored in more detail later.
 
 ## Typedefs
 Asylum creates those above "shortcuts" but doing what is called a typedef statement. These are to be placed outside of functions, structures, and implementations.
@@ -76,7 +77,7 @@ Asylum creates those above "shortcuts" but doing what is called a typedef statem
 typedef s24[] medIntArr;
 ```
 
-This example creates a new type called, `medIntARr`, which is really just a dynamic array of 24-bit signed integers in disguise. You can use `medInt` and `s24[]` interchangibly, they are the exact same thing.
+This example creates a new type called, `medIntArr`, which is really just a dynamic array of 24-bit signed integers in disguise. You can use `medIntArr` and `s24[]` interchangibly, they are the exact same thing.
 
 ## Structs
 Of course, making other names for existing types is cool and all, but it can only go so far. Structs allow you to group together a bunch of data types like so:
@@ -137,13 +138,13 @@ struct IllegalB {
 ```
 ````
 
-Similarly like a struct containing itself, this will also produce an infinite loop for the compiler that won't be able to determine the length of the structure. This can again be fixed by making either the `illegalA` or `illegalB` members a reference. Note that just having one reference solves the infinite struct error.
+Similarly, like a struct containing itself, this will also produce an infinite loop for the compiler that won't be able to determine the length of the structure. This can again be fixed by making either the `illegalA` or `illegalB` members a reference. Note that just having one reference solves the infinite struct error.
 
 ## Challenges
 1. Explain the difference between unsigned and signed integers. What is a common signed type?
 2. Explain the difference between a floating-point and a fixed-point number. What is a common floating-point type?
-3. What type of number is `long`? Unsigned, signed, floating-point, or fixed-point?
-4. Remember that `add` function from earlier? Remake it so that `a` and `b` can have a decimal point.
+3. What type of number is `long`? Is it unsigned, signed, floating-point, or fixed-point?
+4. Remember the `add` function from earlier? Remake it so that `a` and `b` can have a decimal point.
 5. Create a `struct` that represents a circle. Each circle has a radius, a line width, color, and can have another circle inside of it. Create any other necessary `struct`s.
 
 ## Challenge Solutions
