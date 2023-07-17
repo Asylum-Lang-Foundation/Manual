@@ -12,8 +12,14 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/dataTypes.md
    /walkthrough/variables.md
    /walkthrough/implementations.md
-   /walkthrough/parameterTypes.md
+   /walkthrough/inheritance.md
+   /walkthrough/controlFlow.md
+   /walkthrough/enums.md
    /walkthrough/strings.md
+   /walkthrough/parameterTypes.md
+   /walkthrough/referencesPointers.md
+   /walkthrough/smartPointers.md
+   /walkthrough/copyMoveSemantics.md
 ```
 
 ```{eval-rst}

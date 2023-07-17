@@ -47,7 +47,7 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | .. | Range | a .. b | Returns an iterable item that is defined by the range between `a` inclusive and `b` exclusive. |
 | ..= | RangeEq | a ..= b | Returns an iterable item that is defined by the range between `a` and `b` inclusively. |
 | & | BitAnd | a & b | Returns the bitwise and operation of two items. |
-| \| | Or | a \| b | Returns the bitwise or operation of two items. |
+| \| | BitOr | a \| b | Returns the bitwise or operation of two items. |
 | ^ | BitXor | a ^ b | Returns the bitwise exclusive or operation of two items. |
 | ~ | BitNot | ~a | Returns the bitwise not of an item. |
 | << | Lshift | a << b | Shifts `a` to the left by `b` bits. |
@@ -56,10 +56,10 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | - | Neg | -a | Modifies a value to be negative. |
 | ++ | Inc | ++a; a++ | Increment the value of a. |
 | `--` | Dec | `--a`; `a--` | Decrement the value of a. |
-| ^ | From Last | ^a | When indexing an element, will access the member that is the count minus `a`. |
+| ^ | FromLast | ^a | When indexing an element, will access the member that is the count minus `a`. |
 | * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to. |
-| & | Address Of | &a | Returns a pointer that points to `a`. |
-| @ | As Pointer | @a | If `a` is a reference, treat it as a pointer. |
+| & | AddressOf | &a | Returns a pointer that points to `a`. |
+| @ | AsPointer | @a | If `a` is a reference, treat it as a pointer. |
 | && | And | a && b | Returns `true` if, and only if, both `a` and `b` are `true`. |
 | \|\| | Or | a \|\| b | Returns `true` if, and only if, either `a` and `b` are `true`. |
 | !& | Nand | !& | a !& b | Returns `true` if, and only if, both `a` and `b` are `false`. |

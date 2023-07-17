@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Implementations &mdash; Asylum  documentation</title>
+  <title>Structs &amp; Implementations &mdash; Asylum  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -21,7 +21,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Parameter Types" href="parameterTypes.html" />
+    <link rel="next" title="&lt;no title&gt;" href="inheritance.html" />
     <link rel="prev" title="Variables" href="variables.html" /> 
 </head>
 
@@ -52,19 +52,38 @@
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementations</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Structs &amp; Implementations</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#constructors">Constructors</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#better-contructors">Better Contructors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#member-initialization">Member Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#default-values">Default Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copy-constructors">Copy Constructors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-copy-constructor">Custom Copy Constructor</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#move-constructors">Move Constructors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-move-constructor">Custom Move Constructor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#default-values">Default Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#destructors">Destructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attribute-list">Attribute List</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overloadable-operators">Overloadable Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dereference-operator-overloading">Dereference Operator Overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#null-operator-special-notes">Null Operator Special Notes</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#casts">Casts</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -89,7 +108,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Implementations</li>
+      <li class="breadcrumb-item active">Structs &amp; Implementations</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/implementations.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -99,8 +118,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="implementations">
-<h1>Implementations<a class="headerlink" href="#implementations" title="Permalink to this heading"></a></h1>
+  <section id="structs-implementations">
+<h1>Structs &amp; Implementations<a class="headerlink" href="#structs-implementations" title="Permalink to this heading"></a></h1>
 <p>On the previous page, you learned how structs can give you custom data types that allow you to hold data. But we are also allowed to give them functions as well inside of implementation blocks:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
@@ -115,8 +134,12 @@
 </pre></div>
 </div>
 <p>In the code above, we define a function for every single <code class="docutils literal notranslate"><span class="pre">Color</span></code> struct. We could then use it like such:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A struct can have as many implementation blocks as it desires.</p>
+</div>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">r</span>: <span class="mh">0x21</span><span class="p">,</span>
 <span class="w">        </span><span class="n">g</span>: <span class="mh">0x43</span><span class="p">,</span>
 <span class="w">        </span><span class="n">b</span>: <span class="mh">0x75</span>
@@ -128,6 +151,12 @@
 <p>Output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#214375</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>More experience programmers are probably wondering why we are “copying” the newly created struct rather than moving it.</p>
+<p>When a struct is newly constructed and assigned to a variable, it is “constructed in-place”. The reason a C++ syntax was not chosen is because it is not intuitive for beginners, and makes constructors messy if certain things that must be constructed depend on code in the constructor.</p>
+<p>This property in Asylum will be discussed more in the section about move semantics.</p>
 </div>
 <section id="constructors">
 <h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading"></a></h2>
@@ -141,7 +170,7 @@
 <span class="p">}</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="p">(</span><span class="mh">0x7F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0x29</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">(</span><span class="mh">0x7F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0x29</span><span class="p">);</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">toHex</span><span class="p">());</span>
 <span class="p">}</span>
 </pre></div>
@@ -159,7 +188,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Since a constructor is defined, you can no longer do the following:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">r</span>: <span class="mh">0x21</span><span class="p">,</span>
 <span class="w">    </span><span class="n">g</span>: <span class="mh">0x43</span><span class="p">,</span>
 <span class="w">    </span><span class="n">b</span>: <span class="mh">0x75</span>
@@ -167,22 +196,13 @@
 </pre></div>
 </div>
 <p>The reason for this is that the default (empty) constructor will get “deleted”, as it assumes you don’t want your data to be constructed another way! However, assume <code class="docutils literal notranslate"><span class="pre">Color</span></code> now has a new variable described as <code class="docutils literal notranslate"><span class="pre">byte</span> <span class="pre">a</span></code> under <code class="docutils literal notranslate"><span class="pre">b</span></code>. The following is legal:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="p">(</span><span class="mh">0x7F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0x29</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">(</span><span class="mh">0x7F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0x29</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">g</span>: <span class="mh">0x53</span><span class="p">,</span>
 <span class="w">    </span><span class="n">a</span>: <span class="mh">0x32</span>
 <span class="p">};</span>
 </pre></div>
 </div>
 <p>You’re still allowed to change values of members after the constructor is called!</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Consider the following code:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">(</span><span class="mh">0x7F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0x29</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This is bad practice! The newly constructed <code class="docutils literal notranslate"><span class="pre">Color</span></code> is immediately copied, which can cause compiler errors if <code class="docutils literal notranslate"><span class="pre">Color</span></code> can not be copied, or be inefficient if <code class="docutils literal notranslate"><span class="pre">Color</span></code> is a large struct!</p>
-<p>The compiler will do the best it can to optimize these situations, though it will warn you.</p>
 </div>
 <section id="better-contructors">
 <h3>Better Contructors<a class="headerlink" href="#better-contructors" title="Permalink to this heading"></a></h3>
@@ -242,28 +262,463 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Alternatively, if more complex operations need to be done in advance, blocks can be interlaced with member constructors:</p>
+<p>Alternatively, if more complex operations need to be done in advance, you can fall back to a typical constructor as long as everything gets constructed:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">name1</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">name2</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">name3</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span>: <span class="nc">data1</span><span class="p">(</span><span class="n">name1</span><span class="p">,</span><span class="w"> </span><span class="n">num1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data1</span><span class="p">.</span><span class="n">hash</span><span class="p">();</span>
-<span class="w">        </span><span class="c1">// More complex functions here.</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span>: <span class="nc">data2</span><span class="p">(</span><span class="n">name2</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data2</span><span class="p">.</span><span class="n">hash</span><span class="p">();</span>
-<span class="w">        </span><span class="c1">// More complex functions here.</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span>: <span class="nc">data3</span><span class="p">(</span><span class="n">name3</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">        </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">name2</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">);</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data2</span><span class="p">.</span><span class="n">hash</span><span class="p">();</span>
+<span class="w">        </span><span class="n">data3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">name3</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>We can chain as many member initializations and code blocks as we desire. Also notice how <code class="docutils literal notranslate"><span class="pre">hash</span></code> is the same name. This is because member intializations only have access to the code block directly before them (if it exists) and the parameters of the constructor (such as <code class="docutils literal notranslate"><span class="pre">name2</span></code>).</p>
+<p>Just remember to not use a member before it is declared, otherwise the compiler will error. Also note how <code class="docutils literal notranslate"><span class="pre">this.</span></code> is not prefixed in front of <code class="docutils literal notranslate"><span class="pre">data2</span></code> and <code class="docutils literal notranslate"><span class="pre">data3</span></code> since there are not parameter names that can confuse the compiler on which variable is being used.</p>
+</section>
+<section id="copy-constructors">
+<h3>Copy Constructors<a class="headerlink" href="#copy-constructors" title="Permalink to this heading"></a></h3>
+<p>Suppose we have the below code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="s">&quot;name1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name3&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, we make a copy of the data. Copy constructors will always exist by default for structs, unless:</p>
+<ol class="arabic simple">
+<li><p>One of the members of the struct does not have a copy constructor.</p></li>
+<li><p>The struct is marked with the <code class="docutils literal notranslate"><span class="pre">NoCopy</span></code> attribute.</p></li>
+</ol>
+<p>The default copy constructor will by default make a copy of each of its members, calling member copy constructors as needed (Ex: The copy constructor of <code class="docutils literal notranslate"><span class="pre">Data</span></code> is called for copying <code class="docutils literal notranslate"><span class="pre">data1</span></code>, <code class="docutils literal notranslate"><span class="pre">data2</span></code>, and <code class="docutils literal notranslate"><span class="pre">data3</span></code>).</p>
+<section id="custom-copy-constructor">
+<h4>Custom Copy Constructor<a class="headerlink" href="#custom-copy-constructor" title="Permalink to this heading"></a></h4>
+<p>There may be times when you want finer functionality with the copy constructor. This is done by making a constructor with a single parameter of the same type.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">This</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">data1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">data2</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">data3</span><span class="p">;</span>
+<span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="move-constructors">
+<h3>Move Constructors<a class="headerlink" href="#move-constructors" title="Permalink to this heading"></a></h3>
+<p>Suppose we have the following code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="s">&quot;name1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name3&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data2</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">data1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, we move the data. Move constructors will always exist by default for structs, unless:</p>
+<ol class="arabic simple">
+<li><p>One of the members of the struct does not have a move constructor.</p></li>
+<li><p>The struct is marked with the <code class="docutils literal notranslate"><span class="pre">NoMove</span></code> attribute.</p></li>
+</ol>
+<p>The default move constructor will by default move each of its members, calling member copy constructors as needed (Ex: The move constructor of <code class="docutils literal notranslate"><span class="pre">Data</span></code> is called for move <code class="docutils literal notranslate"><span class="pre">data1</span></code>, <code class="docutils literal notranslate"><span class="pre">data2</span></code>, and <code class="docutils literal notranslate"><span class="pre">data3</span></code>).</p>
+<section id="custom-move-constructor">
+<h4>Custom Move Constructor<a class="headerlink" href="#custom-move-constructor" title="Permalink to this heading"></a></h4>
+<p>There may be times when you want finer functionality with the move constructor. This is done by making a constructor with a single parameter of the same type, marked with <code class="docutils literal notranslate"><span class="pre">move</span></code>.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data1</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">data1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data2</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">data2</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data3</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">data3</span><span class="p">;</span>
+<span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 <section id="default-values">
-<h3>Default Values<a class="headerlink" href="#default-values" title="Permalink to this heading"></a></h3>
-<p>TODO!!!</p>
+<h2>Default Values<a class="headerlink" href="#default-values" title="Permalink to this heading"></a></h2>
+<p>Sometimes you don’t want to have to define items in the constructor, as it is easier to have the defaults present in the struct itself. This can be done in the struct declaration:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">Data</span><span class="w"> </span><span class="n">data1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Data</span><span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Data</span><span class="w"> </span><span class="n">data3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">float</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">data1</span></code> and <code class="docutils literal notranslate"><span class="pre">data3</span></code> are of type <code class="docutils literal notranslate"><span class="pre">Data</span></code> and do not have a default/parameter-less constructor, and so will need to be constructed in a constructor for <code class="docutils literal notranslate"><span class="pre">MyData</span></code>.</p>
 </section>
+<section id="destructors">
+<h2>Destructors<a class="headerlink" href="#destructors" title="Permalink to this heading"></a></h2>
+<p>If a struct contains resources that are initialized, you may want them to be destroyed when the struct is freed. This can be done via deconstructors:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">~</span><span class="n">This</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Data deleted.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyData</span><span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="s">&quot;name1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name3&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hi!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Data deleted.
+Hi!
+</pre></div>
+</div>
+<p>Deconstructors take no parameters and return nothing. They are not marked with <code class="docutils literal notranslate"><span class="pre">fn</span></code>, as they are not functions either. There may only be one deconstructor defined per struct.</p>
+</section>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h2>
+<p>It is possible to give structures attributes. Attributes are used either by the programmer or the compiler to mark special properties of structures. An example usage of attributes is below:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NoCopy</span><span class="p">]</span>
+<span class="p">[</span><span class="n">PaddingAlignment</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+<span class="p">[</span><span class="n">AssertMemberSize</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)]</span>
+<span class="k">struct</span> <span class="nc">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">Data</span><span class="w"> </span><span class="n">data1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Data</span><span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Data</span><span class="w"> </span><span class="n">data3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">float</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">myStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>An attribute with no parameters has no need for parenthesis, though attributes with parameters have them passed as if calling a function, arguments separated by commas.</p>
+<section id="attribute-list">
+<h3>Attribute List<a class="headerlink" href="#attribute-list" title="Permalink to this heading"></a></h3>
+<p>Below is a table of attributes for structs:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Args</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AssertMemberSize</p></td>
+<td><p>member, bytes</p></td>
+<td><p>Ensure member <code class="docutils literal notranslate"><span class="pre">member</span></code> is <code class="docutils literal notranslate"><span class="pre">bytes</span></code> bytes in size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AssertSize</p></td>
+<td><p>bytes</p></td>
+<td><p>Ensure the entire struct is <code class="docutils literal notranslate"><span class="pre">bytes</span></code> bytes in size.</p></td>
+</tr>
+<tr class="row-even"><td><p>NoCopy</p></td>
+<td><p>-</p></td>
+<td><p>Prevent copying of the struct.</p></td>
+</tr>
+<tr class="row-odd"><td><p>NoMove</p></td>
+<td><p>-</p></td>
+<td><p>Prevent moving of the struct.</p></td>
+</tr>
+<tr class="row-even"><td><p>PaddingAlignment</p></td>
+<td><p>bytes</p></td>
+<td><p>Ensure that each member of the struct is aligned to <code class="docutils literal notranslate"><span class="pre">bytes</span></code> bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this heading"></a></h2>
+<p>Getters and setters can be annoying to implement, though Asylum does its best to make them easier to work with. Those familiar with C# may recall similar looking code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyStruct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">get</span><span class="p">;</span><span class="w"> </span><span class="n">pri</span><span class="w"> </span><span class="n">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num3</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">pub</span><span class="w"> </span><span class="n">get</span><span class="p">;</span><span class="w"> </span><span class="n">pro</span><span class="w"> </span><span class="n">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num5</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num6</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pri</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">num3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num7</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">num5</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num8</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">get</span><span class="p">;</span>
+<span class="w">        </span><span class="n">set</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above showcases different ways properties may be utilized. The above code may be confusing, hopefully these rules clear things up:</p>
+<ol class="arabic simple">
+<li><p>Getters or setters for properties each have their own access modifiers. They do not have to match. These getters and setter access modifiers override what the member variable is declared as.</p></li>
+<li><p>If an access modifier is not set for a getter or setter, it will default to the variable member’s access modifier.</p></li>
+<li><p>The scope of a getter or setter’s access modifier is not allowed to be narrower in scope than the member’s access modifier.</p></li>
+<li><p>A lamba operator <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> can be used to immediately return a value for the get property. It is not possible to assign variables with this a value.</p></li>
+<li><p>The lambda operator <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> is allowed to be used for getters or setters in particular, or use curly brackets to note that it is a function, and you can call functions implemented by the struct in it. Note that <code class="docutils literal notranslate"><span class="pre">_</span></code> represents the value you give in the set function. The type of <code class="docutils literal notranslate"><span class="pre">_</span></code> will be the same type as the member variable.</p></li>
+</ol>
 </section>
 <section id="operators">
 <h2>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
-<p>TODO!!!</p>
+<p>In the variables section, you learned about various operators that can be applied to variables. However, most of the operators are not implemented by default. Below is how operator overloading works for an example vector structure:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Vec3</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">float</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">float</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="n">float</span><span class="w"> </span><span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Vec3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Vec3</span><span class="p">(</span><span class="n">float</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span>: <span class="nc">x</span><span class="p">(</span><span class="n">_</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="n">_</span><span class="p">),</span><span class="w"> </span><span class="n">z</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="c1">// TODO: IMPLEMENTATION SCOPE???</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="n">Add</span><span class="o">&lt;</span><span class="n">Vec3</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Vec3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">op</span><span class="p">(</span><span class="n">Vec3</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Vec3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Vec3</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="n">Sub</span><span class="o">&lt;</span><span class="n">Vec3</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Vec3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">op</span><span class="p">(</span><span class="n">Vec3</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Vec3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Vec3</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="n">Neg</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Vec3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">op</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Vec3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Vec3</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Inheritance is discussed further in the next section. For now, know that structs are allowed to implement interfaces as they see fit, and such implementations get their own implementation blocks. Asylum has a built-in namespace in its EASL (Embedded Asylum Standard Library) named <code class="docutils literal notranslate"><span class="pre">op</span></code> that contains interfaces for all overloadable operators. The function to implement the operator is always called <code class="docutils literal notranslate"><span class="pre">op</span></code>. For the <code class="docutils literal notranslate"><span class="pre">Add</span></code> and <code class="docutils literal notranslate"><span class="pre">Sub</span></code> implementations above, the <code class="docutils literal notranslate"><span class="pre">&lt;Vec3&gt;</span></code> indicates that we are “adding with” a <code class="docutils literal notranslate"><span class="pre">Vec3</span></code>.</p>
+<section id="overloadable-operators">
+<h3>Overloadable Operators<a class="headerlink" href="#overloadable-operators" title="Permalink to this heading"></a></h3>
+<p>See <a class="reference internal" href="#/walkthrough/variables.html#general-operators"><span class="xref myst">Operators</span></a> for information about each operator’s “intended usage”. Below lists overloadable operators:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type Args</p></th>
+<th class="head"><p>Function Args</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>Add</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> + <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>Sub</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> - <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td><p>Mul</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> * <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>Div</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> / <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>%</p></td>
+<td><p>Mod</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> % <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>**</p></td>
+<td><p>Exp</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> ** <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>..</p></td>
+<td><p>Range</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> .. <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>..=</p></td>
+<td><p>RangeEq</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> ..= <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;</p></td>
+<td><p>BitAnd</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>|</p></td>
+<td><p>BitOr</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> | <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>^</p></td>
+<td><p>BitXor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> ^ <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>~</p></td>
+<td><p>BitNot</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>~<code class="docutils literal notranslate"><span class="pre">This</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;&lt;</p></td>
+<td><p>Lshift</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &lt;&lt; <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;&gt;</p></td>
+<td><p>Rshift</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>Pos</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>+<code class="docutils literal notranslate"><span class="pre">This</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>Neg</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-<code class="docutils literal notranslate"><span class="pre">This</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>++</p></td>
+<td><p>Inc</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>++<code class="docutils literal notranslate"><span class="pre">This</span></code>; <code class="docutils literal notranslate"><span class="pre">This</span></code>++</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--</span></code></p></td>
+<td><p>Dec</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--This</span></code>; <code class="docutils literal notranslate"><span class="pre">This--</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>^</p></td>
+<td><p>FromLast</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>^<code class="docutils literal notranslate"><span class="pre">This</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>*</p></td>
+<td><p>Dereference</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>*<code class="docutils literal notranslate"><span class="pre">This</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>!</p></td>
+<td><p>Not</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>!<code class="docutils literal notranslate"><span class="pre">This</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>==</p></td>
+<td><p>Eq</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> == <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>!=</p></td>
+<td><p>Neq</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> != <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;</p></td>
+<td><p>Gt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;</p></td>
+<td><p>Lt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &lt; <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;=</p></td>
+<td><p>Ge</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &gt;= <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;=</p></td>
+<td><p>Le</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &lt;= <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;=&gt;</p></td>
+<td><p>Cmp</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code> &lt;=&gt; <code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>[]</p></td>
+<td><p>Index</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> other</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">This</span></code>[<code class="docutils literal notranslate"><span class="pre">T</span></code>]</p></td>
+</tr>
+</tbody>
+</table>
+<p>TODO: ASSIGNMENTS!!!</p>
+</section>
+<section id="dereference-operator-overloading">
+<h3>Dereference Operator Overloading<a class="headerlink" href="#dereference-operator-overloading" title="Permalink to this heading"></a></h3>
+<p>In Asylum, implementing the dereference operator has a special effect in which the dot <code class="docutils literal notranslate"><span class="pre">.</span></code> operator now operates on the dereferenced item rather than the struct implementing it. In order to access members implementing the struct, the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator must be used instead:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="nc">MyWrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">Data</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="n">Dereference</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MyWrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">op</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Data</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyWrapper</span><span class="w"> </span><span class="n">mw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyWrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">val</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">mw</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mw</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">mw</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">7</span>
+</pre></div>
+</div>
+<p>As you can see above, when we use the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator on <code class="docutils literal notranslate"><span class="pre">mw</span></code> it no longer accesses <code class="docutils literal notranslate"><span class="pre">MyWrapper</span></code>, but rather <code class="docutils literal notranslate"><span class="pre">Data</span></code>. In order to access what is truly in <code class="docutils literal notranslate"><span class="pre">mw</span></code>, you have to treat it as a pointer using the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator. This is discussed later in the section on pointers.</p>
+</section>
+<section id="null-operator-special-notes">
+<h3>Null Operator Special Notes<a class="headerlink" href="#null-operator-special-notes" title="Permalink to this heading"></a></h3>
+<p>TODO: POINTER BOOL CASTS!!!</p>
+</section>
 </section>
 <section id="casts">
 <h2>Casts<a class="headerlink" href="#casts" title="Permalink to this heading"></a></h2>
@@ -276,7 +731,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="variables.html" class="btn btn-neutral float-left" title="Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="parameterTypes.html" class="btn btn-neutral float-right" title="Parameter Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="inheritance.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
