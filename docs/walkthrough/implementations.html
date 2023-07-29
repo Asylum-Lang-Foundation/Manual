@@ -64,6 +64,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#custom-move-constructor">Custom Move Constructor</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#empty-constructor">Empty Constructor</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#default-values">Default Values</a></li>
@@ -76,14 +77,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#overloadable-operators">Overloadable Operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dereference-operator-overloading">Dereference Operator Overloading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#null-operator-special-notes">Null Operator Special Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#false-operator-special-notes">False Operator Special Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#casts">Casts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -334,6 +338,25 @@
 </pre></div>
 </div>
 </section>
+</section>
+<section id="empty-constructor">
+<h3>Empty Constructor<a class="headerlink" href="#empty-constructor" title="Permalink to this heading"></a></h3>
+<p>The empty constructor exists by default and is deleted if any constructor for the struct is defined. Of course you are free to define your own empty constructors as you like. But in the case an empty constructor exists, the syntax is valid:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">r</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">g</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">0</span>
+<span class="mi">0</span>
+</pre></div>
+</div>
+<p>All structs on the stack must be initialized, and so <code class="docutils literal notranslate"><span class="pre">color</span></code> has all its members with their default values.</p>
 </section>
 </section>
 <section id="default-values">
@@ -691,12 +714,12 @@ Hi!
 
 <span class="k">struct</span> <span class="nc">MyWrapper</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
-    <span class="nc">Data</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+    <span class="nc">Data</span><span class="w"> </span><span class="n">wrapped</span><span class="p">;</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="n">Dereference</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MyWrapper</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">op</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Data</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">op</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ref</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">ref</span><span class="w"> </span><span class="n">wrapped</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -713,15 +736,43 @@ Hi!
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">7</span>
 </pre></div>
 </div>
-<p>As you can see above, when we use the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator on <code class="docutils literal notranslate"><span class="pre">mw</span></code> it no longer accesses <code class="docutils literal notranslate"><span class="pre">MyWrapper</span></code>, but rather <code class="docutils literal notranslate"><span class="pre">Data</span></code>. In order to access what is truly in <code class="docutils literal notranslate"><span class="pre">mw</span></code>, you have to treat it as a pointer using the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator. This is discussed later in the section on pointers.</p>
+<p>As you can see above, when we use the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator on <code class="docutils literal notranslate"><span class="pre">mw</span></code> it no longer accesses <code class="docutils literal notranslate"><span class="pre">MyWrapper</span></code>, but rather <code class="docutils literal notranslate"><span class="pre">Data</span></code>. In order to access what is truly in <code class="docutils literal notranslate"><span class="pre">mw</span></code>, you have to treat it as an assignable reference using the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator. The reason for this is to allow the ability of implementing custom wrapper types. This is discussed later in the section on smart references.</p>
 </section>
-<section id="null-operator-special-notes">
-<h3>Null Operator Special Notes<a class="headerlink" href="#null-operator-special-notes" title="Permalink to this heading"></a></h3>
-<p>TODO: POINTER BOOL CASTS!!!</p>
+<section id="false-operator-special-notes">
+<h3>False Operator Special Notes<a class="headerlink" href="#false-operator-special-notes" title="Permalink to this heading"></a></h3>
+<p>The false <code class="docutils literal notranslate"><span class="pre">??</span></code> operator can not be overloaded. This is because it only works on a boolean input. However, pointers for example are implicitly castable if boolean.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">allocIfNull</span><span class="p">(</span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">*</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">int</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The above code checks to see if <code class="docutils literal notranslate"><span class="pre">data</span></code> is a null pointer. If it is null, then <code class="docutils literal notranslate"><span class="pre">data</span></code> gets converted to <code class="docutils literal notranslate"><span class="pre">false</span></code> implicitly, which causes a <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">int</span></code> to be returned. Otherwise, <code class="docutils literal notranslate"><span class="pre">data</span></code> is returned as since it has data, it gets converted to <code class="docutils literal notranslate"><span class="pre">true</span></code> implicitly. The operator thus returns data.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">y</span>
+<span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span><span class="n">x</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span>: <span class="nc">y</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The above three statements are equivalent.</p>
 </section>
 </section>
 <section id="casts">
 <h2>Casts<a class="headerlink" href="#casts" title="Permalink to this heading"></a></h2>
+<p>It is also possible to make your custom type convert to a custom type by implementing a cast. This is done by implementing the type you want to cast to:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="kt">bool</span><span class="p">.</span><span class="n">implicit</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">cast</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above code implicitly casts <code class="docutils literal notranslate"><span class="pre">Data</span></code> to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. This means that whenever a value of <code class="docutils literal notranslate"><span class="pre">bool</span></code> type is expected, a value of <code class="docutils literal notranslate"><span class="pre">Data</span></code> type can be given. You can either implement <code class="docutils literal notranslate"><span class="pre">bool.implicit</span></code> or <code class="docutils literal notranslate"><span class="pre">bool.explicit</span></code> but not both (this holds for any type of course, not just <code class="docutils literal notranslate"><span class="pre">bool</span></code>). The difference is that an explicit casts requires you to cast the value yourself (Ex: <code class="docutils literal notranslate"><span class="pre">(bool)myVal</span></code>) when say a <code class="docutils literal notranslate"><span class="pre">bool</span></code> value is expected, where as an implicit cast will allow you to just pass <code class="docutils literal notranslate"><span class="pre">myVal</span></code> and have it be casted automatically.</p>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 </section>

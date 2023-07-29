@@ -78,6 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -268,9 +269,9 @@ This is more text!
 <td><p>Returns a pointer that points to <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>&#64;</p></td>
-<td><p>AsPointer</p></td>
+<td><p>AsAssignableReference</p></td>
 <td><p>&#64;a</p></td>
-<td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a reference, treat it as a pointer.</p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a reference, make it so the reference is accessed.</p></td>
 </tr>
 <tr class="row-even"><td><p>&amp;&amp;</p></td>
 <td><p>And</p></td>
@@ -338,9 +339,9 @@ This is more text!
 <td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>??</p></td>
-<td><p>Null</p></td>
+<td><p>False</p></td>
 <td><p>a ?? b</p></td>
-<td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a null pointer, return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is false, return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p>=&gt;</p></td>
 <td><p>Lambda</p></td>
@@ -446,7 +447,7 @@ This is more text!
 <tbody>
 <tr class="row-even"><td><p>(x)</p></td>
 </tr>
-<tr class="row-odd"><td><p>x++, <code class="docutils literal notranslate"><span class="pre">x--</span></code></p></td>
+<tr class="row-odd"><td><p>x.y, x++, <code class="docutils literal notranslate"><span class="pre">x--</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>+x, -x, !x, ~x, ++x, –x, ^x, &amp;x, *x, &#64;x, x[y]</p></td>
 </tr>

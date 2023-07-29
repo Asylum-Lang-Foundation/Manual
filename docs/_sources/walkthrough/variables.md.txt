@@ -59,7 +59,7 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | ^ | FromLast | ^a | When indexing an element, will access the member that is the count minus `a`. |
 | * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to. |
 | & | AddressOf | &a | Returns a pointer that points to `a`. |
-| @ | AsPointer | @a | If `a` is a reference, treat it as a pointer. |
+| @ | AsAssignableReference | @a | If `a` is a reference, make it so the reference is accessed. |
 | && | And | a && b | Returns `true` if, and only if, both `a` and `b` are `true`. |
 | \|\| | Or | a \|\| b | Returns `true` if, and only if, either `a` and `b` are `true`. |
 | !& | Nand | !& | a !& b | Returns `true` if, and only if, both `a` and `b` are `false`. |
@@ -73,7 +73,7 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | <= | Le | a <= b | Returns `true` if, and only if, `a` is less than or equal to `b`. |
 | <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b`. |
 | ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c`. |
-| ?? | Null | a ?? b | If `a` is a null pointer, return `b`, else, return `a`. |
+| ?? | False | a ?? b | If `a` is false, return `b`, else, return `a`. |
 | => | Lambda | a => b | The value of `a` is equal to the result of expression `b`. |
 | , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included. |
 | . | Dot | a.b | Access member `b` from struct `a`. |
@@ -109,7 +109,7 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 | Operators |
 | --------- |
 | (x) |
-| x++, `x--` |
+| x.y, x++, `x--` |
 | +x, -x, !x, ~x, ++x, --x, ^x, &x, *x, @x, x[y] |
 | x..y, x..=y |
 | x ** y |

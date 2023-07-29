@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pointers &mdash; Asylum  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="copyMoveSemantics.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="smartReferences.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #de7cff" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pointers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#variables-overview">Variables Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#graphic">Graphic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#address-of-operator">Address-Of Operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dereference-operator">Dereference Operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#points-to-operator">Points-To Operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structures">Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pointer-math">Pointer Math</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/about.html">Asylum Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/antlr.html">AST Creation With ANTLR4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/builder.html">Program Builder API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/visitor.html">Builder Code Calling For ASTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/codeRepresentation.html">Working With The Code Representation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #de7cff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Asylum</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pointers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/walkthrough/pointers.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pointers">
+<h1>Pointers<a class="headerlink" href="#pointers" title="Permalink to this heading"></a></h1>
+<p>Now that you understand how references work, it is time to discuss a topic more in-line with what low-level C programmers expect: pointers. Do note that pointer-related functions are unecessary in the vast majority of Asylum applications. These below operations should only be used where appropriate. Note that any function that utilizes pointers need to be marked as <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> to signify you know what you are doing and let the compiler continue compiling the code.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="w"> </span>-&gt; <span class="nc">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+<span class="w">    </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">true</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>The above code is an example that showcases the use of pointers. Let’s walk through it line by line:</p>
+<ol class="arabic simple">
+<li><p>An <code class="docutils literal notranslate"><span class="pre">int</span></code> named <code class="docutils literal notranslate"><span class="pre">x</span></code> is instantiated with the value <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p>A pointer to an <code class="docutils literal notranslate"><span class="pre">int</span></code> named <code class="docutils literal notranslate"><span class="pre">y</span></code> is set to be set to the “address of” <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>A pointer to an <code class="docutils literal notranslate"><span class="pre">int</span></code> named <code class="docutils literal notranslate"><span class="pre">z</span></code> is set to point to <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>Tests if <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> point to the same thing.</p></li>
+<li><p>The value <code class="docutils literal notranslate"><span class="pre">y</span></code> points to is set to <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p></li>
+<li><p>The value <code class="docutils literal notranslate"><span class="pre">z</span></code> points to is set to <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p>Print the value of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+</ol>
+<p>Since <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> point to the same thing (the variable <code class="docutils literal notranslate"><span class="pre">x</span></code>), setting the value <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> point to set the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> as well.</p>
+<section id="variables-overview">
+<h2>Variables Overview<a class="headerlink" href="#variables-overview" title="Permalink to this heading"></a></h2>
+<p>For the sake of simplicity, let there be known two types of values: L-values and R-values. The names of the values come from the fact that L-values usually are on the left side of the <code class="docutils literal notranslate"><span class="pre">=</span></code> and R-values are on the right side of the <code class="docutils literal notranslate"><span class="pre">=</span></code>. This is an incorrect way of thinking about these. Think of L-values as values you can “load from/store to” and R-values are values you can “read from”. Let us look at an example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>The variable <code class="docutils literal notranslate"><span class="pre">x</span></code> is an L-value because we can store to it. You can not give a value to the number <code class="docutils literal notranslate"><span class="pre">3</span></code>, so it must be an R-value.</p></li>
+<li><p>We know that all variables are L-values, so <code class="docutils literal notranslate"><span class="pre">x</span></code> on the left hand side must be an L-value. Though note when we add <code class="docutils literal notranslate"><span class="pre">x</span></code> with <code class="docutils literal notranslate"><span class="pre">2</span></code> we need to get the value <code class="docutils literal notranslate"><span class="pre">x</span></code> contains somehow. This is done by converting the <code class="docutils literal notranslate"><span class="pre">x</span></code> on the right to an R-value. It does this by loading the value contained in <code class="docutils literal notranslate"><span class="pre">x</span></code> (in this case <code class="docutils literal notranslate"><span class="pre">3</span></code>), adds it to <code class="docutils literal notranslate"><span class="pre">2</span></code>, then stores the result back into <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>The variable <code class="docutils literal notranslate"><span class="pre">y</span></code> is an L-value because all variables are L-values. When we say <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>, we really mean that the value of <code class="docutils literal notranslate"><span class="pre">y</span></code> should be set to the value of <code class="docutils literal notranslate"><span class="pre">x</span></code>. This is done by converting <code class="docutils literal notranslate"><span class="pre">x</span></code> into an R-value by loading from it, and then storing it into <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>All function calls expect R-values. Luckily, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">+</span> <span class="pre">1</span></code> is an R-value as first the L-value <code class="docutils literal notranslate"><span class="pre">y</span></code> is converted to an R-value and then 1 is added to it.</p></li>
+</ol>
+<section id="graphic">
+<h3>Graphic<a class="headerlink" href="#graphic" title="Permalink to this heading"></a></h3>
+<p>The above may be confusing, and that is a perfectly natural feeling. L-values and R-values can be hard to get an exact feel for. Consider the below tables:</p>
+<p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">3;</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>-</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>Number <code class="docutils literal notranslate"><span class="pre">3</span></code> is an R-value since it has no location in memory.</p></li>
+<li><p>Variable <code class="docutils literal notranslate"><span class="pre">x</span></code> is an L-value since we can store to it, and store the <code class="docutils literal notranslate"><span class="pre">3</span></code> to it.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2;</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>-</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>3 + 2</p></td>
+<td><p>-</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>5</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>We need to get the value from <code class="docutils literal notranslate"><span class="pre">x</span></code>, and since it as an L-value (has a location in memory) we can extract the value <code class="docutils literal notranslate"><span class="pre">3</span></code> from it.</p></li>
+<li><p>The constant <code class="docutils literal notranslate"><span class="pre">2</span></code> is an R-value since it has no location in memory.</p></li>
+<li><p>Add the two numbers together, the R-value loaded from L-value <code class="docutils literal notranslate"><span class="pre">x</span></code> and the <code class="docutils literal notranslate"><span class="pre">2</span></code> previously.</p></li>
+<li><p>The new value of <code class="docutils literal notranslate"><span class="pre">5</span></code> is stored back into L-value <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x;</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>-</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>y</p></td>
+<td><p>0x5af5b578</p></td>
+<td><p>5</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>R-value <code class="docutils literal notranslate"><span class="pre">5</span></code> is loaded from L-value <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">5</span></code> loaded has no operation done on it.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">5</span></code> is stored into L-value <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">println(y</span> <span class="pre">+</span> <span class="pre">1);</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>y</p></td>
+<td><p>0x5af5b578</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>5 + 1</p></td>
+<td><p>-</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>println</p></td>
+<td><p>0x10230fc8</p></td>
+<td><p>code</p></td>
+</tr>
+<tr class="row-even"><td><p>println(6)</p></td>
+<td><p>-</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>R-value <code class="docutils literal notranslate"><span class="pre">5</span></code> is loaded from L-value <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>R-value <code class="docutils literal notranslate"><span class="pre">1</span></code> is summoned into existence.</p></li>
+<li><p>R-values <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> are added.</p></li>
+<li><p>L-value <code class="docutils literal notranslate"><span class="pre">println</span></code> is resolved. Functions are still variables that live in memory, though usually in static memory. When they are converted to R-values, they return “code”. Of course there is no type to store this data, nor can you change the value of a function.</p></li>
+<li><p>Code from above is ran with <code class="docutils literal notranslate"><span class="pre">6</span></code> as a parameter. It returns R-value <code class="docutils literal notranslate"><span class="pre">2</span></code>, the number of characters printed.</p></li>
+</ol>
+<p>As you may have noticed, L-values have a location in memory (either static, stack, or heap) and have values, where as R-values are pure values that do not live anywhere in memory. All arithmetic operations are done with R-values, where as you can only store to L-values.</p>
+<p>The memory addresses given above are possible addresses that may occur, though your results will most likely vary heavily.</p>
+</section>
+</section>
+<section id="address-of-operator">
+<h2>Address-Of Operator<a class="headerlink" href="#address-of-operator" title="Permalink to this heading"></a></h2>
+<p>Now that you understand L-values and R-values, we can talk about the address-of operator <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>. Variables, as discussed, are L-values and so are locations in memory that hold values. But what if we wanted to get the location of a value rather than the value? That is what the address of operator is for:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x5af5b574</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>y</p></td>
+<td><p>0x5af5b578</p></td>
+<td><p>0x5af5b570</p></td>
+</tr>
+</tbody>
+</table>
+<p>For demonstration purposes, this address of <code class="docutils literal notranslate"><span class="pre">x</span></code> matches the location in memory assigned to it earlier. Remember, we normally convert an L-value to an R-value by loading the value at an address. But all the address-of operator does is treat an L-value as an R-value. This allows us to get the memory address of the variable!</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The following ways of using the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator are invalid:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="mi">3</span><span class="p">;</span>
+<span class="n">int</span><span class="o">**</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="p">;</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>It is not possible to get the address of an R-value. Note that since functions are technically L-values, you can get the address of them.</p></li>
+<li><p>While it may be tempting that <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> would give an address of an address, it’s important to realize that <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> outputs an R-value. This means it is not possible to get the address of it.</p></li>
+</ol>
+</div>
+</section>
+<section id="dereference-operator">
+<h2>Dereference Operator<a class="headerlink" href="#dereference-operator" title="Permalink to this heading"></a></h2>
+<p>Consider the opposite of getting the address of a variable. What if we wanted to treat a variable’s value as a location to set an item at. We can do this to R-values using the dereference operator:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="n">println</span><span class="p">(</span><span class="o">*</span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span>
+<span class="mi">5</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>y</p></td>
+<td><p>0x5af5b578</p></td>
+<td><p>0x5af5b570</p></td>
+</tr>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>0x5af5b570</p></td>
+<td><p>5</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>We make a variable of type <code class="docutils literal notranslate"><span class="pre">int</span></code> with a value of <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p>Variable <code class="docutils literal notranslate"><span class="pre">y</span></code> is set to be the address of <code class="docutils literal notranslate"><span class="pre">x</span></code> in memory.</p></li>
+<li><p>The value of y is treated as a location, and the value at that (variable <code class="docutils literal notranslate"><span class="pre">x</span></code>) is set to <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+</ol>
+<p>A more technical explanation is that <code class="docutils literal notranslate"><span class="pre">y</span></code> is an L-value, but <code class="docutils literal notranslate"><span class="pre">*</span></code> only operates on R-values. This means <code class="docutils literal notranslate"><span class="pre">y</span></code> is converted to an R-value first by loading it, which gives the address of <code class="docutils literal notranslate"><span class="pre">x</span></code> (<code class="docutils literal notranslate"><span class="pre">0x5af5b570</span></code>). Note though that we can not store to an R-value, so we have to treat it as an L-value. This is done by using <code class="docutils literal notranslate"><span class="pre">*</span></code>. Now that <code class="docutils literal notranslate"><span class="pre">0x5af5b570</span></code> is treated as an L-value, we are allowed to store <code class="docutils literal notranslate"><span class="pre">5</span></code> to it (as if we were storing to <code class="docutils literal notranslate"><span class="pre">x</span></code>). Note that if we print the <code class="docutils literal notranslate"><span class="pre">0x5af5b570</span></code> L-value instead, it must be converted to an R-value first (as all function arguments must be). This means the value gets loaded from it to get an R-value, which is the value at <code class="docutils literal notranslate"><span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">5</span></code>!</p>
+</section>
+<section id="points-to-operator">
+<h2>Points-To Operator<a class="headerlink" href="#points-to-operator" title="Permalink to this heading"></a></h2>
+<p>A shorthand for making pointers is the points-to operator <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>. This is used for creating and setting pointers:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// Equivalent to int* y = &amp;x;</span>
+<span class="n">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">z</span><span class="p">;</span><span class="w"> </span><span class="c1">// It is possible to re-assign pointers to point to other variables.</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="structures">
+<h2>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h2>
+<p>You can make pointers to structures and access members with the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator like usual. C programmers will note that they typically need to do <code class="docutils literal notranslate"><span class="pre">(*myStruct).myMember</span></code> or <code class="docutils literal notranslate"><span class="pre">myStruct-&gt;myMember</span></code>, but the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> operator has a different meaning in Asylum. Thus, the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator will dereference automatically:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyStruct</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">int</span><span class="w"> </span><span class="n">myMember</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyStruct</span><span class="w"> </span><span class="n">data1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyStruct</span><span class="o">*</span><span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">MyStruct</span><span class="p">();</span>
+<span class="w">    </span><span class="n">MyStruct</span><span class="o">**</span><span class="w"> </span><span class="n">data3</span><span class="w"> </span>-&gt; <span class="nc">data2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">data1</span><span class="p">.</span><span class="n">myMember</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">data2</span><span class="p">.</span><span class="n">myMember</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// Same as line above!</span>
+<span class="w">    </span><span class="n">data3</span><span class="p">.</span><span class="n">myMember</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="c1">// Also same as line above.</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">data1</span><span class="p">.</span><span class="n">myMember</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">data2</span><span class="p">.</span><span class="n">myMember</span><span class="p">);</span>
+<span class="w">    </span><span class="n">delete</span><span class="w"> </span><span class="n">data2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">7</span>
+</pre></div>
+</div>
+<p>Since a pointer can not hold any data other than an address, there is no hard in having the <code class="docutils literal notranslate"><span class="pre">.</span></code> act for acessing members for both values and pointers. The <code class="docutils literal notranslate"><span class="pre">.</span></code> operator will dereference until it reaches the member desired.</p>
+</section>
+<section id="pointer-math">
+<h2>Pointer Math<a class="headerlink" href="#pointer-math" title="Permalink to this heading"></a></h2>
+<p>What pointers increment by depends on the size of what is being pointed to. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>-&gt; <span class="nc">a</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">++</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span>
+<span class="mh">0x57910390</span>
+<span class="mh">0x57910394</span>
+<span class="mh">0x5791038c</span>
+</pre></div>
+</div>
+<p>As shown above, incrementing a pointer adds the size of what it points to to the pointer (adds <code class="docutils literal notranslate"><span class="pre">4</span></code>). Subtracting <code class="docutils literal notranslate"><span class="pre">2</span></code> thus subtracts <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">4</span> <span class="pre">=</span> <span class="pre">8</span></code>. Operations such as multiplication and division on pointers is not defined.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is easy to produce an invalid pointer while using pointer math. Please only use it when it is appropriate for the task. This should <em>never</em> be used for general-purpose applications.</p>
+</div>
+<section id="arrays">
+<h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading"></a></h3>
+<p>One of the uses of pointer math is iterating through an array. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">printItems</span><span class="p">(</span><span class="n">int</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">numToPrint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">numToPrint</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">curr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="o">*</span><span class="n">curr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">curr</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">printItems</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">5</span>
+<span class="mi">7</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The above is just an example of how pointer math can be used. It is not recommended to iterate through arrays like it is done here. Please use pointers and pointer math at your own risk.</p>
+</div>
+</section>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="smartReferences.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="copyMoveSemantics.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Asylum Lang Foundation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

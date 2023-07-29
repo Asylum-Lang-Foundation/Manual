@@ -226,6 +226,26 @@ impl MyData {
 }
 ```
 
+### Empty Constructor
+The empty constructor exists by default and is deleted if any constructor for the struct is defined. Of course you are free to define your own empty constructors as you like. But in the case an empty constructor exists, the syntax is valid:
+
+```rust
+fn main() {
+    Color color;
+    println(color.r);
+    println(color.g);
+    println(color.b);
+}
+```
+Output:
+```
+0
+0
+0
+```
+
+All structs on the stack must be initialized, and so `color` has all its members with their default values.
+
 ## Default Values
 Sometimes you don't want to have to define items in the constructor, as it is easier to have the defaults present in the struct itself. This can be done in the struct declaration:
 
@@ -408,12 +428,12 @@ pub:
 
 struct MyWrapper {
 pub:
-    Data ptr;
+    Data wrapped;
     int val;
 }
 
 impl op.Dereference for MyWrapper {
-    fn op() -> Data => ptr;
+    fn op() -> ref Data => ref wrapped;
 }
 
 fn main() {
@@ -430,10 +450,42 @@ Output:
 7
 ```
 
-As you can see above, when we use the `.` operator on `mw` it no longer accesses `MyWrapper`, but rather `Data`. In order to access what is truly in `mw`, you have to treat it as a pointer using the `@` operator. This is discussed later in the section on pointers.
+As you can see above, when we use the `.` operator on `mw` it no longer accesses `MyWrapper`, but rather `Data`. In order to access what is truly in `mw`, you have to treat it as an assignable reference using the `@` operator. The reason for this is to allow the ability of implementing custom wrapper types. This is discussed later in the section on smart references.
 
-### Null Operator Special Notes
-TODO: POINTER BOOL CASTS!!!
+### False Operator Special Notes
+The false `??` operator can not be overloaded. This is because it only works on a boolean input. However, pointers for example are implicitly castable if boolean.
+
+```rust
+pub unsafe fn allocIfNull(int* data) -> int* => data ?? new int;
+```
+
+The above code checks to see if `data` is a null pointer. If it is null, then `data` gets converted to `false` implicitly, which causes a `new int` to be returned. Otherwise, `data` is returned as since it has data, it gets converted to `true` implicitly. The operator thus returns data.
+
+```rust
+return x ?? y
+return (bool)x ? x : y
+if (x) return x; else return y;
+```
+
+The above three statements are equivalent.
 
 ## Casts
+It is also possible to make your custom type convert to a custom type by implementing a cast. This is done by implementing the type you want to cast to:
+
+```rust
+struct Data {
+    int val;
+}
+
+impl bool.implicit for Data {
+    fn cast() -> bool => val == 7;
+}
+```
+
+The above code implicitly casts `Data` to a `bool`. This means that whenever a value of `bool` type is expected, a value of `Data` type can be given. You can either implement `bool.implicit` or `bool.explicit` but not both (this holds for any type of course, not just `bool`). The difference is that an explicit casts requires you to cast the value yourself (Ex: `(bool)myVal`) when say a `bool` value is expected, where as an implicit cast will allow you to just pass `myVal` and have it be casted automatically.
+
+## Challenges
+TODO!!!
+
+## Challenge Solutions
 TODO!!!

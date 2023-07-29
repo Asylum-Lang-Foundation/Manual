@@ -17,8 +17,9 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/enums.md
    /walkthrough/strings.md
    /walkthrough/parameterTypes.md
-   /walkthrough/referencesPointers.md
-   /walkthrough/smartPointers.md
+   /walkthrough/references.md
+   /walkthrough/smartReferences.md
+   /walkthrough/pointers.md
    /walkthrough/copyMoveSemantics.md
 ```
 
@@ -33,3 +34,13 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /dev/visitor.md
    /dev/codeRepresentation.md
 ```
+
+## Goals
+Asylum has many goals:
+* Be clear on how memory is being utilized (copied, referenced, moved, allocated, destroyed, etc).
+* Be beginner friendly (intuitive syntax and semantics, "pits of success", higher-level abstractions, etc).
+* Be applicable for general-purpose and low-level development.
+
+## Non-Goals
+There are some things Asylum does not aim to be:
+* Have everything C++ does. Asylum has a lot of features, but not all of them.
