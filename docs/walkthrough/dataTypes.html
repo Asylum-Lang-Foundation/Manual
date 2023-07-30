@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
@@ -258,43 +259,52 @@
 <tr class="row-odd"><td><p>(T, T, …, T)</p></td>
 <td><p>This is the exact same as tuple, except with parenthesis around it. This is useful for removing ambiguity.</p></td>
 </tr>
-<tr class="row-even"><td><p>T&#64;</p></td>
-<td><p>A reference to a data type on the heap. For now, think of it as a shortcut to already existing data of the same type.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ref T</p></td>
+<tr class="row-even"><td><p>ref T/T&amp;</p></td>
 <td><p>A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always references data. (L-value reference for those familiar with C++).</p></td>
 </tr>
-<tr class="row-even"><td><p>move T</p></td>
-<td><p>A reference to a data type that can not be written to (R-value reference for those familiar with C++)</p></td>
+<tr class="row-odd"><td><p>move T/T%</p></td>
+<td><p>A reference to a data type that can not be written to (R-value reference for those familiar with C++).</p></td>
+</tr>
+<tr class="row-even"><td><p>T&#64;</p></td>
+<td><p>A reference to a data that may be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>T^</p></td>
+<td><p>Smart reference that owns data. When it goes out of scope, the value it owns dies with it. Owning references may only moved to other owning references, never copied. It is possible for this reference to be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>T#</p></td>
+<td><p>Smart reference that counts references to data. Copying it to another <code class="docutils literal notranslate"><span class="pre">T#</span></code> will increase the reference count, where moving it leaves the reference count the same. References that are not <code class="docutils literal notranslate"><span class="pre">T#</span></code> do not effect the reference count.</p></td>
 </tr>
 <tr class="row-odd"><td><p>T*</p></td>
 <td><p>A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it).</p></td>
 </tr>
-<tr class="row-even"><td><p>T[]</p></td>
+<tr class="row-even"><td><p>T?</p></td>
+<td><p>An optional value. Either contains <code class="docutils literal notranslate"><span class="pre">T</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>T[]</p></td>
 <td><p>Dynamic array. This is an array of T that is allowed to be any length.</p></td>
 </tr>
-<tr class="row-odd"><td><p>T[C]</p></td>
+<tr class="row-even"><td><p>T[C]</p></td>
 <td><p>Constant array. This is an array of T that is constant with size C.</p></td>
 </tr>
-<tr class="row-even"><td><p>T[A, B, …]</p></td>
+<tr class="row-odd"><td><p>T[A, B, …]</p></td>
 <td><p>A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, <code class="docutils literal notranslate"><span class="pre">int[2,</span> <span class="pre">3]</span></code> can be thought of as a 2x3 grid of <code class="docutils literal notranslate"><span class="pre">int</span></code>s. <code class="docutils literal notranslate"><span class="pre">char[3,</span> <span class="pre">,</span> <span class="pre">7]</span></code> can be thought of as a 3d array of chars where one dimension is 3 long, the last is 7 long, and the other can be any length.</p></td>
 </tr>
-<tr class="row-odd"><td><p>const T</p></td>
+<tr class="row-even"><td><p>const T</p></td>
 <td><p>A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time. All <code class="docutils literal notranslate"><span class="pre">in</span></code> parameters of functions are <code class="docutils literal notranslate"><span class="pre">const</span></code> (discussed later).</p></td>
 </tr>
-<tr class="row-even"><td><p>readonly/ro T</p></td>
+<tr class="row-odd"><td><p>readonly/ro T</p></td>
 <td><p>A type T, but you can only read from it and not write to it.</p></td>
 </tr>
-<tr class="row-odd"><td><p>writeonly/wo T</p></td>
+<tr class="row-even"><td><p>writeonly/wo T</p></td>
 <td><p>A type T, but you can only write to it and not read from it.</p></td>
 </tr>
-<tr class="row-even"><td><p>static T</p></td>
+<tr class="row-odd"><td><p>static T</p></td>
 <td><p>A type T, but there is only one instance of it across everything. For example, say you make a <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">int</span></code> inside a function, and inside this function, this <code class="docutils literal notranslate"><span class="pre">int</span></code> is incremented. Instead of creating a new <code class="docutils literal notranslate"><span class="pre">int</span></code> every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that single function is called.</p></td>
 </tr>
-<tr class="row-odd"><td><p>volatile T</p></td>
+<tr class="row-even"><td><p>volatile T</p></td>
 <td><p>If you need to make sure T has changed, for example you are using it as a condition in a loop, you can mark it as volatile.</p></td>
 </tr>
-<tr class="row-even"><td><p>atomic T</p></td>
+<tr class="row-odd"><td><p>atomic T</p></td>
 <td><p>Declaring a type as atomic will make sure only one thread is allowed to use it at a time.</p></td>
 </tr>
 </tbody>

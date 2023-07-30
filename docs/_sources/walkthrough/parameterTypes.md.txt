@@ -16,8 +16,8 @@ The compiler sees that `val` is an `int` argument in the function. However, we h
 | Type | Example | Explanation |
 | ---- | ------- | ----------- |
 | In | `int val` | Parameter `val` is passed as in input and so it can not be modified (it is *immutable*). |
-| Ref | `ref int val` | Parameter `val` is passed by reference and can be modified (it is *mutable*). |
-| Move | `move int val` | Parameter `val` is being "moved" to the function being called. |
+| Ref | `ref int val`, `int& val` | Parameter `val` is passed by reference and can be modified (it is *mutable*). |
+| Move | `move int val`, `int% val` | Parameter `val` is being "moved" to the function being called. |
 
 ```{note}
 The parameter types `in` and `ref` are around the same performance wise!
@@ -49,37 +49,49 @@ Output:
 3
 ```
 
-Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by using a parameter marked as `ref`:
+Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by using a parameter marked as `ref` or trailing it with `&`:
 
 ```rust
-fn setValue(ref int val) {
+fn setValue1(ref int val) {
     val = 7; // We are allowed to do this now!
+}
+
+fn setValue2(int& val) {
+    val = 5;
 }
 
 fn main() {
     int x = 3;
     println(x);
-    setValue(ref x);
+    setValue1(ref x);
+    setValue2(x&); // This works the same as ref x!
     println(x);
 }
 ```
+Output:
+```
+5
+```
 
-Note that we have to do `ref x` to tell the compiler we want to pass a reference to the variable rather than pass it as an `in` parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:
+Note that we have to do `ref x` or `x&` to tell the compiler we want to pass a reference to the variable rather than pass it as an `in` parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:
 
 ```rust
 fn myFunc(int a) -> int => a;
 fn myFunc(ref int a) -> int => a;
 fn myFunc(move int a) -> int => a;
+fn myFunc2(int% a) -> int => a; // Can also make a parameter a "move" one with %.
 
 fn main() {
     int x = 3;
     println(myFunc(x));
     println(myFunc(ref x));
     println(myFunc(move x));
+    println(myFunc2(3%)); // Appending % after a variable or value moves it.
 }
 ```
 Output:
 ```
+3
 3
 3
 3

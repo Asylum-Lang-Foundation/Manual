@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Asylum  documentation</title>
+  <title>References &mdash; Asylum  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -21,8 +21,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="smartReferences.html" />
-    <link rel="prev" title="Parameter Types" href="parameterTypes.html" /> 
+    <link rel="next" title="Pointers" href="pointers.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="optional.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,7 +46,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
@@ -55,6 +55,21 @@
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#standard-references">Standard References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nullable-references">Nullable References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#smart-references">Smart References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#owning-references">Owning References</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Nullable References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#passing-arguments">Passing Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transfering-ownership">Transfering Ownership</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#counted-references">Counted References</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
@@ -80,7 +95,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">References</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/references.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,13 +105,151 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h1>
+<p>In Asylum, you typically do not want to copy data around, especially if it is large. At the same time, you may not want to change how data is moved. References exist for this purpose, to allow you to use memory located somewhere else.</p>
+<section id="standard-references">
+<h2>Standard References<a class="headerlink" href="#standard-references" title="Permalink to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="nullable-references">
+<h2>Nullable References<a class="headerlink" href="#nullable-references" title="Permalink to this heading"></a></h2>
+<p>Before we talk about “smart references”, we must first discuss a new type of reference: the nullable reference <code class="docutils literal notranslate"><span class="pre">T&#64;</span></code>. The main difference between a nullable reference and a standard reference is that this type can either reference data, or it will not. When the data it references goes out of scope, the reference itself will be made null. Therefore, it is important to check the value of a nullable reference before using it for null:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!@</span><span class="n">a</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!@</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Shows passing parameters both ways is the same.</span>
+<span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span>-&gt; <span class="nc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="w">        </span><span class="o">@</span><span class="n">d</span><span class="w"> </span>-&gt; <span class="nc">c</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span>-&gt; <span class="nc">b</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">r2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">r1</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">r2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">8</span>
+<span class="n">null</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In order to check if a reference is null, we must first treat <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> like references rather than getting their <code class="docutils literal notranslate"><span class="pre">int</span></code> value. This is done by putting an <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before them.</p></li>
+<li><p>If a nullable reference is valid, the value of the reference can be implicitly converted to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. This <code class="docutils literal notranslate"><span class="pre">bool</span></code> is true if the reference is valid/not null. This means putting <code class="docutils literal notranslate"><span class="pre">!</span></code> before the value of the reference, <code class="docutils literal notranslate"><span class="pre">!&#64;x</span></code> will return true if the nullable reference <code class="docutils literal notranslate"><span class="pre">x</span></code> is null.</p></li>
+</ul>
+<p>TODO: FIGURE OUT HOW THESE MAGICALLY KNOW HOW TO DIE!!!</p>
+</section>
+<section id="smart-references">
+<h2>Smart References<a class="headerlink" href="#smart-references" title="Permalink to this heading"></a></h2>
+<p>There are certain scenarios in which you want finer control of when data lives. Some of which include not being able to instantiate a struct in its constructor or the struct does not have a definitive compile-time size (as in referred to by an abstract base). The solution to this are smart references.</p>
+<section id="owning-references">
+<h3>Owning References<a class="headerlink" href="#owning-references" title="Permalink to this heading"></a></h3>
+<p>Owning references are fairly simple in design. Only one reference can be crowned the owner of data. Owning references have type <code class="docutils literal notranslate"><span class="pre">T^</span></code>. You can think of the <code class="docutils literal notranslate"><span class="pre">^</span></code> as a crown that the reference is wearing.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyStruct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">MyStruct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">MyStruct</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span>: <span class="nc">val</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyStruct</span><span class="o">^</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">^</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>The above code shows how an owning reference is created. Owning references construct an instance of the type they hold on the heap. When they go out of scope, the data they hold goes out of scope as well. They behave similarly to <code class="docutils literal notranslate"><span class="pre">Box&lt;T&gt;</span></code> in Rust and <code class="docutils literal notranslate"><span class="pre">std::unique_ptr&lt;T&gt;</span></code> in C++.</p>
+<section id="id1">
+<h4>Nullable References<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>Nullable references are allowed to copy from an owning reference, though nullable references are not allowed to own any data and thus just reference the same data. When the owning reference goes out of scope, the nullable reference is set to null.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyStruct</span><span class="o">@</span><span class="w"> </span><span class="n">r1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyStruct</span><span class="o">^</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">^</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">        </span><span class="o">@</span><span class="n">r1</span><span class="w"> </span>-&gt; <span class="nc">item</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">r1</span><span class="p">)</span>:
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>
+</pre></div>
+</div>
+</section>
+<section id="passing-arguments">
+<h4>Passing Arguments<a class="headerlink" href="#passing-arguments" title="Permalink to this heading"></a></h4>
+<p>It is possible to pass an owning reference as a nullable reference and a standard reference:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">MyStruct</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">@</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!@</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyStruct</span><span class="o">^</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">^</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="o">@</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">item</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">8</span>
+</pre></div>
+</div>
+</section>
+<section id="transfering-ownership">
+<h4>Transfering Ownership<a class="headerlink" href="#transfering-ownership" title="Permalink to this heading"></a></h4>
+<p>Remember that is not possible to copy the value of an owning pointer. However, data can be moved instead. This is useful for transferring ownership of data:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="o">^</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="n">int</span><span class="o">^%</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Can also do `: val(_%)` here instead.</span>
+<span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">val</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="n">int</span><span class="o">^</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+<span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">@</span><span class="n">data1</span><span class="p">.</span><span class="n">val</span><span class="p">);</span><span class="w"> </span><span class="c1">// Alternative is MyData(@data1.val%);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">data1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">data2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>
+<span class="o">-&gt;</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>In the above code, the ownership of <code class="docutils literal notranslate"><span class="pre">3</span></code> is transferred from <code class="docutils literal notranslate"><span class="pre">data1.val</span></code> to <code class="docutils literal notranslate"><span class="pre">data2.val</span></code>. When transferring the owner, it is important to make sure the reference gets transferred rather than the <code class="docutils literal notranslate"><span class="pre">int</span></code> it is referring to. Remember to place <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before references when you want to manipulate the references.</p>
+</section>
+</section>
+<section id="counted-references">
+<h3>Counted References<a class="headerlink" href="#counted-references" title="Permalink to this heading"></a></h3>
+<p>Ownership is distributed among the <code class="docutils literal notranslate"><span class="pre">T#</span></code> references. Nullable references that point to it get nulled when all counted references are out of scope.</p>
+</section>
+</section>
+</section>
+
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="parameterTypes.html" class="btn btn-neutral float-left" title="Parameter Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="smartReferences.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="optional.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pointers.html" class="btn btn-neutral float-right" title="Pointers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

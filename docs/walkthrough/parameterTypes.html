@@ -21,7 +21,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="references.html" />
+    <link rel="next" title="&lt;no title&gt;" href="optional.html" />
     <link rel="prev" title="Strings" href="strings.html" /> 
 </head>
 
@@ -63,6 +63,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
@@ -126,11 +127,11 @@
 <td><p>Parameter <code class="docutils literal notranslate"><span class="pre">val</span></code> is passed as in input and so it can not be modified (it is <em>immutable</em>).</p></td>
 </tr>
 <tr class="row-odd"><td><p>Ref</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ref</span> <span class="pre">int</span> <span class="pre">val</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ref</span> <span class="pre">int</span> <span class="pre">val</span></code>, <code class="docutils literal notranslate"><span class="pre">int&amp;</span> <span class="pre">val</span></code></p></td>
 <td><p>Parameter <code class="docutils literal notranslate"><span class="pre">val</span></code> is passed by reference and can be modified (it is <em>mutable</em>).</p></td>
 </tr>
 <tr class="row-even"><td><p>Move</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">move</span> <span class="pre">int</span> <span class="pre">val</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">move</span> <span class="pre">int</span> <span class="pre">val</span></code>, <code class="docutils literal notranslate"><span class="pre">int%</span> <span class="pre">val</span></code></p></td>
 <td><p>Parameter <code class="docutils literal notranslate"><span class="pre">val</span></code> is being “moved” to the function being called.</p></td>
 </tr>
 </tbody>
@@ -163,34 +164,46 @@
 <span class="mi">3</span>
 </pre></div>
 </div>
-<p>Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by using a parameter marked as <code class="docutils literal notranslate"><span class="pre">ref</span></code>:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">setValue</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<p>Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by using a parameter marked as <code class="docutils literal notranslate"><span class="pre">ref</span></code> or trailing it with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">setValue1</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="c1">// We are allowed to do this now!</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">setValue2</span><span class="p">(</span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="w">    </span><span class="n">setValue</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">setValue1</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">setValue2</span><span class="p">(</span><span class="n">x</span><span class="o">&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// This works the same as ref x!</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Note that we have to do <code class="docutils literal notranslate"><span class="pre">ref</span> <span class="pre">x</span></code> to tell the compiler we want to pass a reference to the variable rather than pass it as an <code class="docutils literal notranslate"><span class="pre">in</span></code> parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:</p>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>Note that we have to do <code class="docutils literal notranslate"><span class="pre">ref</span> <span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">x&amp;</span></code> to tell the compiler we want to pass a reference to the variable rather than pass it as an <code class="docutils literal notranslate"><span class="pre">in</span></code> parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
 <span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
 <span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="k">fn</span> <span class="nf">myFunc2</span><span class="p">(</span><span class="n">int</span><span class="o">%</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">// Can also make a parameter a &quot;move&quot; one with %.</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">x</span><span class="p">));</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">x</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc2</span><span class="p">(</span><span class="mi">3</span><span class="o">%</span><span class="p">));</span><span class="w"> </span><span class="c1">// Appending % after a variable or value moves it.</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">3</span>
 <span class="mi">3</span>
 <span class="mi">3</span>
 </pre></div>
@@ -225,7 +238,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="strings.html" class="btn btn-neutral float-left" title="Strings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="references.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="optional.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

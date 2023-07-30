@@ -17,8 +17,8 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/enums.md
    /walkthrough/strings.md
    /walkthrough/parameterTypes.md
+   /walkthrough/optional.md
    /walkthrough/references.md
-   /walkthrough/smartReferences.md
    /walkthrough/pointers.md
    /walkthrough/copyMoveSemantics.md
 ```
