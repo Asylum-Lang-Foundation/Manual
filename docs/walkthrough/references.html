@@ -56,7 +56,14 @@
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">References</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#standard-references">Standard References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-references">Standard References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reference-types">Reference Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-references">More References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-references">Accessing References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dangers-of-references">Dangers Of References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function-arguments">Function Arguments</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#nullable-references">Nullable References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#smart-references">Smart References</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#owning-references">Owning References</a><ul>
@@ -65,9 +72,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#transfering-ownership">Transfering Ownership</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#counted-references">Counted References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#counted-references">Counted References</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Nullable References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#about-cycles">About Cycles</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
@@ -110,41 +123,274 @@
 <p>In Asylum, you typically do not want to copy data around, especially if it is large. At the same time, you may not want to change how data is moved. References exist for this purpose, to allow you to use memory located somewhere else.</p>
 <section id="standard-references">
 <h2>Standard References<a class="headerlink" href="#standard-references" title="Permalink to this heading"></a></h2>
-<p>TODO!!!</p>
-</section>
-<section id="nullable-references">
-<h2>Nullable References<a class="headerlink" href="#nullable-references" title="Permalink to this heading"></a></h2>
-<p>Before we talk about “smart references”, we must first discuss a new type of reference: the nullable reference <code class="docutils literal notranslate"><span class="pre">T&#64;</span></code>. The main difference between a nullable reference and a standard reference is that this type can either reference data, or it will not. When the data it references goes out of scope, the reference itself will be made null. Therefore, it is important to check the value of a nullable reference before using it for null:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!@</span><span class="n">a</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!@</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<p>Earlier, we have discussed different ways of passing function arguments. Here is a reminder of passing by reference:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">modifyVal</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Shows passing parameters both ways is the same.</span>
-<span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span>-&gt; <span class="nc">null</span><span class="p">;</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
-<span class="w">        </span><span class="o">@</span><span class="n">d</span><span class="w"> </span>-&gt; <span class="nc">c</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span>-&gt; <span class="nc">b</span><span class="p">;</span>
-<span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">r2</span><span class="p">;</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">r1</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">r2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">modifyVal</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>By passing by reference, we are allowed to modify data of the variable we pass to the function. However, there is an alternate way of representing references which we will use for the rest of the page:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">modifyVal</span><span class="p">(</span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">modifyVal</span><span class="p">(</span><span class="n">val</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span>
+</pre></div>
+</div>
+<section id="reference-types">
+<h3>Reference Types<a class="headerlink" href="#reference-types" title="Permalink to this heading"></a></h3>
+<p>That <code class="docutils literal notranslate"><span class="pre">int&amp;</span></code> from earier is not just passing by reference, but it is a type you can store to as well! All a reference does is allow you to have multiple variables share the same value. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="o">&amp;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">val2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span>
+<span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="mi">7</span><span class="p">,</span> <span class="mi">7</span>
+</pre></div>
+</div>
+<p>As you can see above, the values of <code class="docutils literal notranslate"><span class="pre">val1</span></code> and <code class="docutils literal notranslate"><span class="pre">val2</span></code> are always the same, and using one is the equivalent of using the other. There is also a short-hand notation for creating a reference:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val2</span><span class="w"> </span>-&gt; <span class="nc">val1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The arrow (points to operator) can be thought to read as <code class="docutils literal notranslate"><span class="pre">val2</span></code> “references” <code class="docutils literal notranslate"><span class="pre">val1</span></code>. This syntax is preferred and will be used for the rest of this page.</p>
+</section>
+<section id="more-references">
+<h3>More References<a class="headerlink" href="#more-references" title="Permalink to this heading"></a></h3>
+<p>You can add as many references as you want!</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val2</span><span class="w"> </span>-&gt; <span class="nc">val1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val3</span><span class="w"> </span>-&gt; <span class="nc">val1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val4</span><span class="w"> </span>-&gt; <span class="nc">val3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">val4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">int&amp;</span> <span class="pre">val4</span> <span class="pre">-&gt;</span> <span class="pre">val3</span></code> does not have a reference reference the reference <code class="docutils literal notranslate"><span class="pre">val3</span></code> but rather the original <code class="docutils literal notranslate"><span class="pre">val1</span></code> value. This is because using a reference is the same as using the original value!</p>
+</section>
+<section id="accessing-references">
+<h3>Accessing References<a class="headerlink" href="#accessing-references" title="Permalink to this heading"></a></h3>
+<p>Sometimes you will want to modify or retrieve a reference instead of the value that is being referenced. In order to do this, you can use the as assignable reference operator <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val3</span><span class="w"> </span>-&gt; <span class="nc">val1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val3</span><span class="p">);</span>
+<span class="w">    </span><span class="o">@</span><span class="n">val3</span><span class="w"> </span>-&gt; <span class="nc">val2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">val4</span><span class="w"> </span>-&gt; <span class="o">@</span><span class="n">val3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">val3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val4</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">val4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="o">-&gt;</span> <span class="mi">5</span>
+<span class="o">-&gt;</span> <span class="mi">5</span>
+<span class="o">-&gt;</span> <span class="o">-&gt;</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>We first initalize <code class="docutils literal notranslate"><span class="pre">val1</span></code> and <code class="docutils literal notranslate"><span class="pre">val2</span></code> with their values <code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">5</span></code> respectively.</p></li>
+<li><p>Variable <code class="docutils literal notranslate"><span class="pre">val3</span></code> references <code class="docutils literal notranslate"><span class="pre">val1</span></code>. We then inspect its value.</p></li>
+<li><p>The reference <code class="docutils literal notranslate"><span class="pre">val3</span></code> is changed to now be a reference to <code class="docutils literal notranslate"><span class="pre">val2</span></code>. Notice how we need to put <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before the name of the reference in order to modify it.</p></li>
+<li><p>A reference to a reference named <code class="docutils literal notranslate"><span class="pre">val4</span></code> is created. In order to reference <code class="docutils literal notranslate"><span class="pre">val3</span></code> we need to treat <code class="docutils literal notranslate"><span class="pre">val3</span></code> as a reference rather than what it is referencing. This is done by putting <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before the name of the variable.</p></li>
+<li><p>Treating <code class="docutils literal notranslate"><span class="pre">val3</span></code> as a reference is printed and we see it “references” <code class="docutils literal notranslate"><span class="pre">3</span></code>. Printing the value of <code class="docutils literal notranslate"><span class="pre">val4</span></code> shows the same as <code class="docutils literal notranslate"><span class="pre">val3</span></code> as a reference. Printing <code class="docutils literal notranslate"><span class="pre">val4</span></code> as a reference shows that it is indeed a reference to a reference to <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+</ol>
+</section>
+<section id="dangers-of-references">
+<h3>Dangers Of References<a class="headerlink" href="#dangers-of-references" title="Permalink to this heading"></a></h3>
+<p>It is important to note that standard references do not hold any data. If the data they are referring to is not there anymore, this can cause problems. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="o">@</span><span class="n">x</span><span class="w"> </span>-&gt; <span class="nc">y</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Variable y goes out of scope here, x is now an invalid reference!</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Segmentation</span> <span class="n">Fault</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">x</span></code> is referring to <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> dies before <code class="docutils literal notranslate"><span class="pre">x</span></code> does, we get a situation in which <code class="docutils literal notranslate"><span class="pre">x</span></code> tries to reference <code class="docutils literal notranslate"><span class="pre">y</span></code>, but does not know that <code class="docutils literal notranslate"><span class="pre">y</span></code> is gone. Thus when we try to use <code class="docutils literal notranslate"><span class="pre">x</span></code> (therefore we’re trying to use <code class="docutils literal notranslate"><span class="pre">y</span></code>), our program crashes. The compiler will warn you when this may happen, but definitely keep this in mind.</p>
+</section>
+<section id="function-arguments">
+<h3>Function Arguments<a class="headerlink" href="#function-arguments" title="Permalink to this heading"></a></h3>
+<p>You can not create a reference from function arguments that are of type <code class="docutils literal notranslate"><span class="pre">in</span></code> or <code class="docutils literal notranslate"><span class="pre">move</span></code>. However, you can copy parameters that are references:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc1</span><span class="p">(</span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">myFunc2</span><span class="p">(</span><span class="n">val</span><span class="o">&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// This makes a new reference.</span>
+<span class="w">    </span><span class="n">myFunc2</span><span class="p">(</span><span class="o">@</span><span class="n">val</span><span class="p">)</span>: <span class="c1">// This uses the existing reference (preferred).</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">myFunc2</span><span class="p">(</span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> parameters are read-only, and so making a reference to this data breaks the promise that the data is read-only:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">myRef</span><span class="w"> </span>-&gt; <span class="nc">val</span><span class="p">;</span><span class="w"> </span><span class="c1">// This is not allowed!</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">move</span></code> parameters do not necessarily come from a variable (they can be from constant values), so there may not be any variable to reference. Thus, this is not allowed.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="o">%</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">myRef</span><span class="w"> </span>-&gt; <span class="nc">val</span><span class="p">;</span><span class="w"> </span><span class="c1">// This is not allowed!</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<!-- ## Nullable References
+Before we talk about "smart references", we must first discuss a new type of reference: the nullable reference `T@`. The main difference between a nullable reference and a standard reference is that this type can either reference data, or it will not. When the data it references goes out of scope, the reference itself will be made null. Therefore, it is important to check the value of a nullable reference before using it for null:
+
+```rust
+fn add(int@ a, int@ b) -> int? {
+    if (!@a || !@b) return null;
+    else return a + b;
+}
+
+fn main() {
+    int a = 3;
+    int b = 5;
+    println(ref a, b&); // Shows passing parameters both ways is the same.
+    int@ r1 -> null;
+    {
+        int c = 7;
+        @d -> c;
+    }
+    int& r2 -> b;
+    int@ r3 = @r2;
+    println(@r1, @r2);
+}
+```
+Output:
+```
+8
+null
+```
+
+* In order to check if a reference is null, we must first treat `a` and `b` like references rather than getting their `int` value. This is done by putting an `@` before them.
+* If a nullable reference is valid, the value of the reference can be implicitly converted to a `bool`. This `bool` is true if the reference is valid/not null. This means putting `!` before the value of the reference, `!@x` will return true if the nullable reference `x` is null.
+
+TODO: FIGURE OUT HOW THESE MAGICALLY KNOW HOW TO DIE!!!
+
+TODO: WHAT IF CONDITIONAL:
+
+int x = 3;
+int& y -> x;
+if (cond) @y -> z;
+
+-->
+</section>
+</section>
+<section id="nullable-references">
+<h2>Nullable References<a class="headerlink" href="#nullable-references" title="Permalink to this heading"></a></h2>
+<p>Standard references are great for when you know the data they reference is alive, however this is not always the case. There are some situations where you want to reference data and be able to check if the data still exists or not before using it. This is what the nullable reference is for. Nullable references also allow a reference to reference nothing or “null” as their name implies.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="o">@</span><span class="n">x</span><span class="w"> </span>-&gt; <span class="nc">y</span><span class="p">;</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>
+<span class="o">-&gt;</span> <span class="mi">3</span>
 <span class="n">null</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>In order to check if a reference is null, we must first treat <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> like references rather than getting their <code class="docutils literal notranslate"><span class="pre">int</span></code> value. This is done by putting an <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before them.</p></li>
-<li><p>If a nullable reference is valid, the value of the reference can be implicitly converted to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. This <code class="docutils literal notranslate"><span class="pre">bool</span></code> is true if the reference is valid/not null. This means putting <code class="docutils literal notranslate"><span class="pre">!</span></code> before the value of the reference, <code class="docutils literal notranslate"><span class="pre">!&#64;x</span></code> will return true if the nullable reference <code class="docutils literal notranslate"><span class="pre">x</span></code> is null.</p></li>
-</ul>
-<p>TODO: FIGURE OUT HOW THESE MAGICALLY KNOW HOW TO DIE!!!</p>
+<p>We can declare a nullable reference by using <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>. Notice that we do not have to set the value of it like with standard references. Declaring <code class="docutils literal notranslate"><span class="pre">int&#64;</span> <span class="pre">x;</span></code> is the same as declaring <code class="docutils literal notranslate"><span class="pre">int&#64;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">null</span></code>; When printing the reference, or that it references a value like usual.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is important to check the value of a nullable reference before using it if you don’t know if it is null or not! The following code produces a segmentation fault like earlier:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Segmentation</span> <span class="n">Fault</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The correct way is this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">&#64;x</span></code> can be converted to a <code class="docutils literal notranslate"><span class="pre">bool</span></code> implicitly. If <code class="docutils literal notranslate"><span class="pre">x</span></code> is a nullable reference, this value is <code class="docutils literal notranslate"><span class="pre">true</span></code> if the reference is not null, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if it is null. Note that <code class="docutils literal notranslate"><span class="pre">&#64;x</span></code> where <code class="docutils literal notranslate"><span class="pre">x</span></code> is a standard reference will always implicitly be converted to <code class="docutils literal notranslate"><span class="pre">true</span></code>!</p>
+<p>If you want to guarantee that the variable being passed is not null, then either pass the value by <code class="docutils literal notranslate"><span class="pre">in</span></code> or by <code class="docutils literal notranslate"><span class="pre">ref</span></code>! Nullable references should only be used as arguments to move nullable references around or when references can be null.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Nullable references are not a magic bullet. They will work properly if created from owning or counted references (discussed later) or by referencing data on the stack (as shown on the first example with nullable references). If a nullable reference is created from a standard reference, it will <strong>not</strong> know when to become null since the reference guarantees the referenced data will always exist!</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">z</span><span class="w"> </span>-&gt; <span class="nc">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// No problems so far. Even if `y` references something else later, `z` will still reference `x` since that&#39;s what `y` is doing at this time.</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="o">@</span><span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">w</span><span class="p">;</span><span class="w"> </span><span class="c1">// Nullable reference `z` still references `x`.</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span>-&gt; <span class="nc">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// Using `z` will produce segmentation fault now!</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="p">[</span><span class="n">Segmentation</span> <span class="n">Fault</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Even though we would expect <code class="docutils literal notranslate"><span class="pre">z</span></code> to be <code class="docutils literal notranslate"><span class="pre">null</span></code>, there is no way of knowing that <code class="docutils literal notranslate"><span class="pre">y</span></code> is an invalid reference. Thus, the compiler will think the memory that is referenced is valid. While you are allowed to create nullable references from standard references, it is highly recommended you do not.</p>
+</div>
 </section>
 <section id="smart-references">
 <h2>Smart References<a class="headerlink" href="#smart-references" title="Permalink to this heading"></a></h2>
@@ -210,7 +456,7 @@
 </section>
 <section id="transfering-ownership">
 <h4>Transfering Ownership<a class="headerlink" href="#transfering-ownership" title="Permalink to this heading"></a></h4>
-<p>Remember that is not possible to copy the value of an owning pointer. However, data can be moved instead. This is useful for transferring ownership of data:</p>
+<p>Remember that is not possible to copy the value of an owning reference. However, data can be moved instead. This is useful for transferring ownership of data:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="o">^</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 <span class="p">}</span>
@@ -240,7 +486,46 @@
 <section id="counted-references">
 <h3>Counted References<a class="headerlink" href="#counted-references" title="Permalink to this heading"></a></h3>
 <p>Ownership is distributed among the <code class="docutils literal notranslate"><span class="pre">T#</span></code> references. Nullable references that point to it get nulled when all counted references are out of scope.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">MyStruct</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">@</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!@</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyStruct</span>#<span class="w"> </span><span class="n">item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">^</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyStruct</span>#<span class="w"> </span><span class="n">item2</span><span class="w"> </span>-&gt; <span class="nc">item1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">myFunc</span><span class="p">(</span><span class="o">@</span><span class="n">item1</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">item2</span><span class="p">));</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">item1</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">@</span><span class="n">item1</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">8</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+<p>The above code shows how a counted reference is created. Counted references construct an instance of the type they hold on the heap. Copying from a counted reference to another counted reference increments the reference count. When a counted reference goes out of scope, the reference count decreases. When the reference counter reaches 0, the memory referenced is deleted. Counted references behave similarly to <code class="docutils literal notranslate"><span class="pre">Rc&lt;T&gt;</span></code> in Rust and <code class="docutils literal notranslate"><span class="pre">std::shared_ptr&lt;T&gt;</span></code> in C++.</p>
+<section id="id2">
+<h4>Nullable References<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>Nullable references for counted references work similarly how they do for owned references. when the number of counted references reaches <code class="docutils literal notranslate"><span class="pre">0</span></code>, the nullable references that reference the data are now <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 </section>
+<section id="about-cycles">
+<h4>About Cycles<a class="headerlink" href="#about-cycles" title="Permalink to this heading"></a></h4>
+<p>TODO!!!</p>
+</section>
+</section>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<p>TODO!!!</p>
 </section>
 </section>
 
