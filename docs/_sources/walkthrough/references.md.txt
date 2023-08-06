@@ -122,12 +122,13 @@ It is important to note that standard references do not hold any data. If the da
 
 ```rust
 fn main() {
-    int& x;
+    int x = 3;
+    int& y -> x;
     {
-        int y = 3;
-        @x -> y;
-    } // Variable y goes out of scope here, x is now an invalid reference!
-    println(x);
+        int z = 5;
+        @y -> z;
+    } // Variable z goes out of scope here, y is now an invalid reference!
+    println(y);
 }
 ```
 Output:
@@ -135,7 +136,7 @@ Output:
 [Segmentation Fault]
 ```
 
-Since `x` is referring to `y` and `y` dies before `x` does, we get a situation in which `x` tries to reference `y`, but does not know that `y` is gone. Thus when we try to use `x` (therefore we're trying to use `y`), our program crashes. The compiler will warn you when this may happen, but definitely keep this in mind.
+Since `y` is referring to `z` and `z` dies before `y` does, we get a situation in which `y` tries to reference `z`, but does not know that `z` is gone. Thus when we try to use `y` (therefore we're trying to use `z`), our program crashes. The compiler will warn you when this may happen, but definitely keep this in mind.
 
 ### Function Arguments
 You can not create a reference from function arguments that are of type `in` or `move`. However, you can copy parameters that are references:
@@ -171,48 +172,6 @@ fn myFunc(int% val) {
 ```
 ````
 
-<!-- ## Nullable References
-Before we talk about "smart references", we must first discuss a new type of reference: the nullable reference `T@`. The main difference between a nullable reference and a standard reference is that this type can either reference data, or it will not. When the data it references goes out of scope, the reference itself will be made null. Therefore, it is important to check the value of a nullable reference before using it for null:
-
-```rust
-fn add(int@ a, int@ b) -> int? {
-    if (!@a || !@b) return null;
-    else return a + b;
-}
-
-fn main() {
-    int a = 3;
-    int b = 5;
-    println(ref a, b&); // Shows passing parameters both ways is the same.
-    int@ r1 -> null;
-    {
-        int c = 7;
-        @d -> c;
-    }
-    int& r2 -> b;
-    int@ r3 = @r2;
-    println(@r1, @r2);
-}
-```
-Output:
-```
-8
-null
-```
-
-* In order to check if a reference is null, we must first treat `a` and `b` like references rather than getting their `int` value. This is done by putting an `@` before them.
-* If a nullable reference is valid, the value of the reference can be implicitly converted to a `bool`. This `bool` is true if the reference is valid/not null. This means putting `!` before the value of the reference, `!@x` will return true if the nullable reference `x` is null.
-
-TODO: FIGURE OUT HOW THESE MAGICALLY KNOW HOW TO DIE!!!
-
-TODO: WHAT IF CONDITIONAL:
-
-int x = 3;
-int& y -> x;
-if (cond) @y -> z;
-
--->
-
 ## Nullable References
 Standard references are great for when you know the data they reference is alive, however this is not always the case. There are some situations where you want to reference data and be able to check if the data still exists or not before using it. This is what the nullable reference is for. Nullable references also allow a reference to reference nothing or "null" as their name implies.
 
@@ -236,6 +195,10 @@ null
 ```
 
 We can declare a nullable reference by using `@` instead of `&`. Notice that we do not have to set the value of it like with standard references. Declaring `int@ x;` is the same as declaring `int@ x = null`; When printing the reference, or that it references a value like usual.
+
+````{note}
+Nullable references are not very performant due to the code required to null a nullable pointer when the data being referenced is no longer accessible. Usage with owned references, counted references, and allocators are fairly inexpensive. However, using nullable references with stack variables generates additional code requiring branching which is not ideal for performance.
+````
 
 ````{warning}
 It is important to check the value of a nullable reference before using it if you don't know if it is null or not! The following code produces a segmentation fault like earlier:
@@ -413,7 +376,58 @@ The above code shows how a counted reference is created. Counted references cons
 Nullable references for counted references work similarly how they do for owned references. when the number of counted references reaches `0`, the nullable references that reference the data are now `null`.
 
 #### About Cycles
-TODO!!!
+Counted references do not have their memory freed until all counted references that use the memory have died. Therefore, if there is a situation where a counted reference is not able to die (a cycle), then memory can not be freed:
+
+```rust
+struct Data {
+    pub int val;
+    pub Data# linked;
+};
+
+impl Data {
+    pub Data(int val) : val(_) {}
+}
+
+fn func() {
+    Data# data1 = Data#(3);
+    Data# data2 = Data#(5);
+    @data1.linked -> data2;
+    @data2.linked -> data1;
+}
+```
+
+When the function `func` is called, the memory for `data1` and `data2` will never be freed. While the first counted references (the ones made first) are deleted from going out of scope, `data1` and `data2` reference each other and so it never occurs for one to be deleted since the count is above 0. The way to avoid this is by changing the design pattern used. Counted references should only be used for items that "own" the data. Nullable references should be used for items that access the data. A version of the above that takes this into account would look like this:
+
+```rust
+struct Data {
+    pub int val;
+    pub Data@ linked;
+};
+
+impl Data {
+    pub Data(int val) : val(_) {}
+}
+
+fn func() {
+    Data# data1 = Data#(3);
+    Data# data2 = Data#(5);
+    @data1.linked -> data2;
+    @data2.linked -> data1;
+}
+```
+
+Since `linked` is a nullable reference and so does not count towards the counted reference count, the data dies when `func` is over.
+
+## When To Use Which Reference
+With all these different types of references, it can be hard to decide the right one to use in each scenario. The below steps should help you understand which is the right reference to use.
+
+1. If a function only needs to read data, then it should take an `in` parameter and not deal with references.
+2. If the data being referenced is guaranteed to exist and the function operating on it does not manage the ownership of the data, then it should be a standard reference.
+3. If there is only one single owner of the data and the function in question transfers ownership, then an owning reference should be used.
+4. If there are multiple owners of the data and you are transferring ownership of one of the owners, then a counted reference should be used.
+5. If the data is from unknown origin and can expire at an unexpected or unknown time, only then should nullable references be used.
+
+These are the general cases for using the above different reference types, though they are not hard rules and depend on your particular use case. Nullable references can make it hard to track where data originates from so use them with caution. They are most useful for when stored as members to structs when the referenced data in question has an unknown expiration. However, we will see some special uses in the section with allocators.
 
 ## Challenges
 TODO!!!

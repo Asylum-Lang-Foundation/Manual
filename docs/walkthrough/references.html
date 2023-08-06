@@ -12,11 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -79,6 +79,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#when-to-use-which-reference">When To Use Which Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
@@ -235,12 +236,13 @@
 <h3>Dangers Of References<a class="headerlink" href="#dangers-of-references" title="Permalink to this heading"></a></h3>
 <p>It is important to note that standard references do not hold any data. If the data they are referring to is not there anymore, this can cause problems. For example:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">x</span><span class="p">;</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">        </span><span class="o">@</span><span class="n">x</span><span class="w"> </span>-&gt; <span class="nc">y</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Variable y goes out of scope here, x is now an invalid reference!</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">        </span><span class="n">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="o">@</span><span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">z</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Variable z goes out of scope here, y is now an invalid reference!</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -248,7 +250,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Segmentation</span> <span class="n">Fault</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Since <code class="docutils literal notranslate"><span class="pre">x</span></code> is referring to <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> dies before <code class="docutils literal notranslate"><span class="pre">x</span></code> does, we get a situation in which <code class="docutils literal notranslate"><span class="pre">x</span></code> tries to reference <code class="docutils literal notranslate"><span class="pre">y</span></code>, but does not know that <code class="docutils literal notranslate"><span class="pre">y</span></code> is gone. Thus when we try to use <code class="docutils literal notranslate"><span class="pre">x</span></code> (therefore we’re trying to use <code class="docutils literal notranslate"><span class="pre">y</span></code>), our program crashes. The compiler will warn you when this may happen, but definitely keep this in mind.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">y</span></code> is referring to <code class="docutils literal notranslate"><span class="pre">z</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> dies before <code class="docutils literal notranslate"><span class="pre">y</span></code> does, we get a situation in which <code class="docutils literal notranslate"><span class="pre">y</span></code> tries to reference <code class="docutils literal notranslate"><span class="pre">z</span></code>, but does not know that <code class="docutils literal notranslate"><span class="pre">z</span></code> is gone. Thus when we try to use <code class="docutils literal notranslate"><span class="pre">y</span></code> (therefore we’re trying to use <code class="docutils literal notranslate"><span class="pre">z</span></code>), our program crashes. The compiler will warn you when this may happen, but definitely keep this in mind.</p>
 </section>
 <section id="function-arguments">
 <h3>Function Arguments<a class="headerlink" href="#function-arguments" title="Permalink to this heading"></a></h3>
@@ -281,47 +283,6 @@
 </pre></div>
 </div>
 </div>
-<!-- ## Nullable References
-Before we talk about "smart references", we must first discuss a new type of reference: the nullable reference `T@`. The main difference between a nullable reference and a standard reference is that this type can either reference data, or it will not. When the data it references goes out of scope, the reference itself will be made null. Therefore, it is important to check the value of a nullable reference before using it for null:
-
-```rust
-fn add(int@ a, int@ b) -> int? {
-    if (!@a || !@b) return null;
-    else return a + b;
-}
-
-fn main() {
-    int a = 3;
-    int b = 5;
-    println(ref a, b&); // Shows passing parameters both ways is the same.
-    int@ r1 -> null;
-    {
-        int c = 7;
-        @d -> c;
-    }
-    int& r2 -> b;
-    int@ r3 = @r2;
-    println(@r1, @r2);
-}
-```
-Output:
-```
-8
-null
-```
-
-* In order to check if a reference is null, we must first treat `a` and `b` like references rather than getting their `int` value. This is done by putting an `@` before them.
-* If a nullable reference is valid, the value of the reference can be implicitly converted to a `bool`. This `bool` is true if the reference is valid/not null. This means putting `!` before the value of the reference, `!@x` will return true if the nullable reference `x` is null.
-
-TODO: FIGURE OUT HOW THESE MAGICALLY KNOW HOW TO DIE!!!
-
-TODO: WHAT IF CONDITIONAL:
-
-int x = 3;
-int& y -> x;
-if (cond) @y -> z;
-
--->
 </section>
 </section>
 <section id="nullable-references">
@@ -346,6 +307,10 @@ if (cond) @y -> z;
 </pre></div>
 </div>
 <p>We can declare a nullable reference by using <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>. Notice that we do not have to set the value of it like with standard references. Declaring <code class="docutils literal notranslate"><span class="pre">int&#64;</span> <span class="pre">x;</span></code> is the same as declaring <code class="docutils literal notranslate"><span class="pre">int&#64;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">null</span></code>; When printing the reference, or that it references a value like usual.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nullable references are not very performant due to the code required to null a nullable pointer when the data being referenced is no longer accessible. Usage with owned references, counted references, and allocators are fairly inexpensive. However, using nullable references with stack variables generates additional code requiring branching which is not ideal for performance.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It is important to check the value of a nullable reference before using it if you don’t know if it is null or not! The following code produces a segmentation fault like earlier:</p>
@@ -515,9 +480,57 @@ if (cond) @y -> z;
 </section>
 <section id="about-cycles">
 <h4>About Cycles<a class="headerlink" href="#about-cycles" title="Permalink to this heading"></a></h4>
-<p>TODO!!!</p>
+<p>Counted references do not have their memory freed until all counted references that use the memory have died. Therefore, if there is a situation where a counted reference is not able to die (a cycle), then memory can not be freed:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Data</span>#<span class="w"> </span><span class="n">linked</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span>: <span class="nc">val</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Data</span>#<span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span>#<span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Data</span>#<span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span>#<span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="o">@</span><span class="n">data1</span><span class="p">.</span><span class="n">linked</span><span class="w"> </span>-&gt; <span class="nc">data2</span><span class="p">;</span>
+<span class="w">    </span><span class="o">@</span><span class="n">data2</span><span class="p">.</span><span class="n">linked</span><span class="w"> </span>-&gt; <span class="nc">data1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the function <code class="docutils literal notranslate"><span class="pre">func</span></code> is called, the memory for <code class="docutils literal notranslate"><span class="pre">data1</span></code> and <code class="docutils literal notranslate"><span class="pre">data2</span></code> will never be freed. While the first counted references (the ones made first) are deleted from going out of scope, <code class="docutils literal notranslate"><span class="pre">data1</span></code> and <code class="docutils literal notranslate"><span class="pre">data2</span></code> reference each other and so it never occurs for one to be deleted since the count is above 0. The way to avoid this is by changing the design pattern used. Counted references should only be used for items that “own” the data. Nullable references should be used for items that access the data. A version of the above that takes this into account would look like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Data</span><span class="o">@</span><span class="w"> </span><span class="n">linked</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Data</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span>: <span class="nc">val</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Data</span>#<span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span>#<span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Data</span>#<span class="w"> </span><span class="n">data2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Data</span>#<span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="o">@</span><span class="n">data1</span><span class="p">.</span><span class="n">linked</span><span class="w"> </span>-&gt; <span class="nc">data2</span><span class="p">;</span>
+<span class="w">    </span><span class="o">@</span><span class="n">data2</span><span class="p">.</span><span class="n">linked</span><span class="w"> </span>-&gt; <span class="nc">data1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">linked</span></code> is a nullable reference and so does not count towards the counted reference count, the data dies when <code class="docutils literal notranslate"><span class="pre">func</span></code> is over.</p>
 </section>
 </section>
+</section>
+<section id="when-to-use-which-reference">
+<h2>When To Use Which Reference<a class="headerlink" href="#when-to-use-which-reference" title="Permalink to this heading"></a></h2>
+<p>With all these different types of references, it can be hard to decide the right one to use in each scenario. The below steps should help you understand which is the right reference to use.</p>
+<ol class="arabic simple">
+<li><p>If a function only needs to read data, then it should take an <code class="docutils literal notranslate"><span class="pre">in</span></code> parameter and not deal with references.</p></li>
+<li><p>If the data being referenced is guaranteed to exist and the function operating on it does not manage the ownership of the data, then it should be a standard reference.</p></li>
+<li><p>If there is only one single owner of the data and the function in question transfers ownership, then an owning reference should be used.</p></li>
+<li><p>If there are multiple owners of the data and you are transferring ownership of one of the owners, then a counted reference should be used.</p></li>
+<li><p>If the data is from unknown origin and can expire at an unexpected or unknown time, only then should nullable references be used.</p></li>
+</ol>
+<p>These are the general cases for using the above different reference types, though they are not hard rules and depend on your particular use case. Nullable references can make it hard to track where data originates from so use them with caution. They are most useful for when stored as members to structs when the referenced data in question has an unknown expiration. However, we will see some special uses in the section with allocators.</p>
 </section>
 <section id="challenges">
 <h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
