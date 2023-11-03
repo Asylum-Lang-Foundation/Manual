@@ -14,9 +14,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -52,10 +52,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul class="current">
@@ -106,34 +110,34 @@
            <div itemprop="articleBody">
              
   <section id="working-with-the-code-representation">
-<h1>Working With The Code Representation<a class="headerlink" href="#working-with-the-code-representation" title="Permalink to this heading"></a></h1>
+<h1>Working With The Code Representation<a class="headerlink" href="#working-with-the-code-representation" title="Link to this heading"></a></h1>
 <p>Thanks to the builder API, we now have an object-oriented representation of our AST. This is important for the next steps, but what exactly are the next steps and how does it work?</p>
 <section id="object-oriented-representation-in-greater-detail">
-<h2>Object-Oriented Representation In Greater Detail<a class="headerlink" href="#object-oriented-representation-in-greater-detail" title="Permalink to this heading"></a></h2>
+<h2>Object-Oriented Representation In Greater Detail<a class="headerlink" href="#object-oriented-representation-in-greater-detail" title="Link to this heading"></a></h2>
 <p>First we must understand what the builder actually creates. Our AST gets turned into a series of functions, code statements, expressions, and variable types.</p>
 <section id="universals">
-<h3>Universals<a class="headerlink" href="#universals" title="Permalink to this heading"></a></h3>
+<h3>Universals<a class="headerlink" href="#universals" title="Link to this heading"></a></h3>
 <p>A <em>universal</em> is an item that can appear at the top level of a file, outside of all functions, structs, enums, etc.</p>
 <section id="functions">
-<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h4>
+<h4>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h4>
 <p>TODO</p>
 </section>
 </section>
 <section id="code-statements">
-<h3>Code Statements<a class="headerlink" href="#code-statements" title="Permalink to this heading"></a></h3>
+<h3>Code Statements<a class="headerlink" href="#code-statements" title="Link to this heading"></a></h3>
 <p>A <em>code statement</em> is a valid line of code that does something. Some examples include <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">7;</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(x</span> <span class="pre">&lt;</span> <span class="pre">8)</span> <span class="pre">println(&quot;Hi&quot;);</span></code>, etc.</p>
 <section id="expression-statement">
-<h4>Expression Statement<a class="headerlink" href="#expression-statement" title="Permalink to this heading"></a></h4>
+<h4>Expression Statement<a class="headerlink" href="#expression-statement" title="Link to this heading"></a></h4>
 <p>An expression statement is just one that is an expression such as a function call, operation, etc.</p>
 </section>
 </section>
 <section id="expressions">
-<h3>Expressions<a class="headerlink" href="#expressions" title="Permalink to this heading"></a></h3>
+<h3>Expressions<a class="headerlink" href="#expressions" title="Link to this heading"></a></h3>
 <p>TODO</p>
 </section>
 </section>
 <section id="compilation-process">
-<h2>Compilation Process<a class="headerlink" href="#compilation-process" title="Permalink to this heading"></a></h2>
+<h2>Compilation Process<a class="headerlink" href="#compilation-process" title="Link to this heading"></a></h2>
 <p>Now that we understand how our AST is layed out in object-oriented form, we can go over the steps that compile our representation into executable code:</p>
 <ol class="arabic simple">
 <li><p>Variable Resolution - Resolves called variables and functions.</p></li>

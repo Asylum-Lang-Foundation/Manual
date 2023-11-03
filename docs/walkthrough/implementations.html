@@ -14,14 +14,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="inheritance.html" />
+    <link rel="next" title="Inheritance" href="inheritance.html" />
     <link rel="prev" title="Variables" href="variables.html" /> 
 </head>
 
@@ -85,10 +85,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -124,7 +128,7 @@
            <div itemprop="articleBody">
              
   <section id="structs-implementations">
-<h1>Structs &amp; Implementations<a class="headerlink" href="#structs-implementations" title="Permalink to this heading"></a></h1>
+<h1>Structs &amp; Implementations<a class="headerlink" href="#structs-implementations" title="Link to this heading"></a></h1>
 <p>On the previous page, you learned how structs can give you custom data types that allow you to hold data. But we are also allowed to give them functions as well inside of implementation blocks:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
@@ -164,7 +168,7 @@
 <p>This property in Asylum will be discussed more in the section about move semantics.</p>
 </div>
 <section id="constructors">
-<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading"></a></h2>
+<h2>Constructors<a class="headerlink" href="#constructors" title="Link to this heading"></a></h2>
 <p>As you probably have noticed, it is a bit tedius to construct instances of structs. Defining a constructor allows you to make this process easier:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">byte</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -210,7 +214,7 @@
 <p>You’re still allowed to change values of members after the constructor is called!</p>
 </div>
 <section id="better-contructors">
-<h3>Better Contructors<a class="headerlink" href="#better-contructors" title="Permalink to this heading"></a></h3>
+<h3>Better Contructors<a class="headerlink" href="#better-contructors" title="Link to this heading"></a></h3>
 <p>While the above approach works, it is very tedious. Luckily, there is a shortcut:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">byte</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>: <span class="nc">r</span><span class="p">(</span><span class="n">_</span><span class="p">),</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">g</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
@@ -238,7 +242,7 @@
 </ul>
 </section>
 <section id="member-initialization">
-<h3>Member Initialization<a class="headerlink" href="#member-initialization" title="Permalink to this heading"></a></h3>
+<h3>Member Initialization<a class="headerlink" href="#member-initialization" title="Link to this heading"></a></h3>
 <p>Suppose we have a struct with the following constructor:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span>: <span class="nc">name</span><span class="p">(</span><span class="n">_</span><span class="p">),</span><span class="w"> </span><span class="n">num</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
@@ -281,7 +285,7 @@
 <p>Just remember to not use a member before it is declared, otherwise the compiler will error. Also note how <code class="docutils literal notranslate"><span class="pre">this.</span></code> is not prefixed in front of <code class="docutils literal notranslate"><span class="pre">data2</span></code> and <code class="docutils literal notranslate"><span class="pre">data3</span></code> since there are not parameter names that can confuse the compiler on which variable is being used.</p>
 </section>
 <section id="copy-constructors">
-<h3>Copy Constructors<a class="headerlink" href="#copy-constructors" title="Permalink to this heading"></a></h3>
+<h3>Copy Constructors<a class="headerlink" href="#copy-constructors" title="Link to this heading"></a></h3>
 <p>Suppose we have the below code:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="s">&quot;name1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name3&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
@@ -296,7 +300,7 @@
 </ol>
 <p>The default copy constructor will by default make a copy of each of its members, calling member copy constructors as needed (Ex: The copy constructor of <code class="docutils literal notranslate"><span class="pre">Data</span></code> is called for copying <code class="docutils literal notranslate"><span class="pre">data1</span></code>, <code class="docutils literal notranslate"><span class="pre">data2</span></code>, and <code class="docutils literal notranslate"><span class="pre">data3</span></code>).</p>
 <section id="custom-copy-constructor">
-<h4>Custom Copy Constructor<a class="headerlink" href="#custom-copy-constructor" title="Permalink to this heading"></a></h4>
+<h4>Custom Copy Constructor<a class="headerlink" href="#custom-copy-constructor" title="Link to this heading"></a></h4>
 <p>There may be times when you want finer functionality with the copy constructor. This is done by making a constructor with a single parameter of the same type.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">This</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -311,7 +315,7 @@
 </section>
 </section>
 <section id="move-constructors">
-<h3>Move Constructors<a class="headerlink" href="#move-constructors" title="Permalink to this heading"></a></h3>
+<h3>Move Constructors<a class="headerlink" href="#move-constructors" title="Link to this heading"></a></h3>
 <p>Suppose we have the following code:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MyData</span><span class="w"> </span><span class="n">data1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyData</span><span class="p">(</span><span class="s">&quot;name1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name3&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
@@ -326,7 +330,7 @@
 </ol>
 <p>The default move constructor will by default move each of its members, calling member copy constructors as needed (Ex: The move constructor of <code class="docutils literal notranslate"><span class="pre">Data</span></code> is called for move <code class="docutils literal notranslate"><span class="pre">data1</span></code>, <code class="docutils literal notranslate"><span class="pre">data2</span></code>, and <code class="docutils literal notranslate"><span class="pre">data3</span></code>).</p>
 <section id="custom-move-constructor">
-<h4>Custom Move Constructor<a class="headerlink" href="#custom-move-constructor" title="Permalink to this heading"></a></h4>
+<h4>Custom Move Constructor<a class="headerlink" href="#custom-move-constructor" title="Link to this heading"></a></h4>
 <p>There may be times when you want finer functionality with the move constructor. This is done by making a constructor with a single parameter of the same type, marked with <code class="docutils literal notranslate"><span class="pre">move</span></code>.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -341,7 +345,7 @@
 </section>
 </section>
 <section id="empty-constructor">
-<h3>Empty Constructor<a class="headerlink" href="#empty-constructor" title="Permalink to this heading"></a></h3>
+<h3>Empty Constructor<a class="headerlink" href="#empty-constructor" title="Link to this heading"></a></h3>
 <p>The empty constructor exists by default and is deleted if any constructor for the struct is defined. Of course you are free to define your own empty constructors as you like. But in the case an empty constructor exists, the syntax is valid:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
@@ -361,7 +365,7 @@
 </section>
 </section>
 <section id="default-values">
-<h2>Default Values<a class="headerlink" href="#default-values" title="Permalink to this heading"></a></h2>
+<h2>Default Values<a class="headerlink" href="#default-values" title="Link to this heading"></a></h2>
 <p>Sometimes you don’t want to have to define items in the constructor, as it is easier to have the defaults present in the struct itself. This can be done in the struct declaration:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
@@ -377,7 +381,7 @@
 <p>Note that <code class="docutils literal notranslate"><span class="pre">data1</span></code> and <code class="docutils literal notranslate"><span class="pre">data3</span></code> are of type <code class="docutils literal notranslate"><span class="pre">Data</span></code> and do not have a default/parameter-less constructor, and so will need to be constructed in a constructor for <code class="docutils literal notranslate"><span class="pre">MyData</span></code>.</p>
 </section>
 <section id="destructors">
-<h2>Destructors<a class="headerlink" href="#destructors" title="Permalink to this heading"></a></h2>
+<h2>Destructors<a class="headerlink" href="#destructors" title="Link to this heading"></a></h2>
 <p>If a struct contains resources that are initialized, you may want them to be destroyed when the struct is freed. This can be done via deconstructors:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="o">~</span><span class="n">This</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -401,7 +405,7 @@ Hi!
 <p>Deconstructors take no parameters and return nothing. They are not marked with <code class="docutils literal notranslate"><span class="pre">fn</span></code>, as they are not functions either. There may only be one deconstructor defined per struct.</p>
 </section>
 <section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h2>
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
 <p>It is possible to give structures attributes. Attributes are used either by the programmer or the compiler to mark special properties of structures. An example usage of attributes is below:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NoCopy</span><span class="p">]</span>
 <span class="p">[</span><span class="n">PaddingAlignment</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
@@ -419,7 +423,7 @@ Hi!
 </div>
 <p>An attribute with no parameters has no need for parenthesis, though attributes with parameters have them passed as if calling a function, arguments separated by commas.</p>
 <section id="attribute-list">
-<h3>Attribute List<a class="headerlink" href="#attribute-list" title="Permalink to this heading"></a></h3>
+<h3>Attribute List<a class="headerlink" href="#attribute-list" title="Link to this heading"></a></h3>
 <p>Below is a table of attributes for structs:</p>
 <table class="docutils align-default">
 <thead>
@@ -454,7 +458,7 @@ Hi!
 </section>
 </section>
 <section id="properties">
-<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this heading"></a></h2>
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
 <p>Getters and setters can be annoying to implement, though Asylum does its best to make them easier to work with. Those familiar with C# may recall similar looking code:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyStruct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">num1</span><span class="p">;</span>
@@ -485,7 +489,7 @@ Hi!
 </ol>
 </section>
 <section id="operators">
-<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2>Operators<a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>In the variables section, you learned about various operators that can be applied to variables. However, most of the operators are not implemented by default. Below is how operator overloading works for an example vector structure:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Vec3</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
@@ -514,7 +518,7 @@ Hi!
 </div>
 <p>Inheritance is discussed further in the next section. For now, know that structs are allowed to implement interfaces as they see fit, and such implementations get their own implementation blocks. Asylum has a built-in namespace in its EASL (Embedded Asylum Standard Library) named <code class="docutils literal notranslate"><span class="pre">op</span></code> that contains interfaces for all overloadable operators. The function to implement the operator is always called <code class="docutils literal notranslate"><span class="pre">op</span></code>. For the <code class="docutils literal notranslate"><span class="pre">Add</span></code> and <code class="docutils literal notranslate"><span class="pre">Sub</span></code> implementations above, the <code class="docutils literal notranslate"><span class="pre">&lt;Vec3&gt;</span></code> indicates that we are “adding with” a <code class="docutils literal notranslate"><span class="pre">Vec3</span></code>.</p>
 <section id="overloadable-operators">
-<h3>Overloadable Operators<a class="headerlink" href="#overloadable-operators" title="Permalink to this heading"></a></h3>
+<h3>Overloadable Operators<a class="headerlink" href="#overloadable-operators" title="Link to this heading"></a></h3>
 <p>See <a class="reference internal" href="#/walkthrough/variables.html#general-operators"><span class="xref myst">Operators</span></a> for information about each operator’s “intended usage”. Below lists overloadable operators:</p>
 <table class="docutils align-default">
 <thead>
@@ -705,7 +709,7 @@ Hi!
 <p>TODO: ASSIGNMENTS!!!</p>
 </section>
 <section id="dereference-operator-overloading">
-<h3>Dereference Operator Overloading<a class="headerlink" href="#dereference-operator-overloading" title="Permalink to this heading"></a></h3>
+<h3>Dereference Operator Overloading<a class="headerlink" href="#dereference-operator-overloading" title="Link to this heading"></a></h3>
 <p>In Asylum, implementing the dereference operator has a special effect in which the dot <code class="docutils literal notranslate"><span class="pre">.</span></code> operator now operates on the dereferenced item rather than the struct implementing it. In order to access members implementing the struct, the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator must be used instead:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
@@ -740,7 +744,7 @@ Hi!
 <p>As you can see above, when we use the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator on <code class="docutils literal notranslate"><span class="pre">mw</span></code> it no longer accesses <code class="docutils literal notranslate"><span class="pre">MyWrapper</span></code>, but rather <code class="docutils literal notranslate"><span class="pre">Data</span></code>. In order to access what is truly in <code class="docutils literal notranslate"><span class="pre">mw</span></code>, you have to treat it as an assignable reference using the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator. The reason for this is to allow the ability of implementing custom wrapper types. This is discussed later in the section on smart references.</p>
 </section>
 <section id="false-operator-special-notes">
-<h3>False Operator Special Notes<a class="headerlink" href="#false-operator-special-notes" title="Permalink to this heading"></a></h3>
+<h3>False Operator Special Notes<a class="headerlink" href="#false-operator-special-notes" title="Link to this heading"></a></h3>
 <p>The false <code class="docutils literal notranslate"><span class="pre">??</span></code> operator can not be overloaded. This is because it only works on a boolean input. However, pointers for example are implicitly castable if boolean.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">allocIfNull</span><span class="p">(</span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">*</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">int</span><span class="p">;</span>
 </pre></div>
@@ -755,7 +759,7 @@ Hi!
 </section>
 </section>
 <section id="casts">
-<h2>Casts<a class="headerlink" href="#casts" title="Permalink to this heading"></a></h2>
+<h2>Casts<a class="headerlink" href="#casts" title="Link to this heading"></a></h2>
 <p>It is also possible to make your custom type convert to a custom type by implementing a cast. This is done by implementing the type you want to cast to:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
@@ -769,11 +773,11 @@ Hi!
 <p>The above code implicitly casts <code class="docutils literal notranslate"><span class="pre">Data</span></code> to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. This means that whenever a value of <code class="docutils literal notranslate"><span class="pre">bool</span></code> type is expected, a value of <code class="docutils literal notranslate"><span class="pre">Data</span></code> type can be given. You can either implement <code class="docutils literal notranslate"><span class="pre">bool.implicit</span></code> or <code class="docutils literal notranslate"><span class="pre">bool.explicit</span></code> but not both (this holds for any type of course, not just <code class="docutils literal notranslate"><span class="pre">bool</span></code>). The difference is that an explicit casts requires you to cast the value yourself (Ex: <code class="docutils literal notranslate"><span class="pre">(bool)myVal</span></code>) when say a <code class="docutils literal notranslate"><span class="pre">bool</span></code> value is expected, where as an implicit cast will allow you to just pass <code class="docutils literal notranslate"><span class="pre">myVal</span></code> and have it be casted automatically.</p>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 </section>
@@ -783,7 +787,7 @@ Hi!
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="variables.html" class="btn btn-neutral float-left" title="Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="inheritance.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="inheritance.html" class="btn btn-neutral float-right" title="Inheritance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

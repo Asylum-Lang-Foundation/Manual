@@ -20,7 +20,9 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/optional.md
    /walkthrough/references.md
    /walkthrough/pointers.md
+   /walkthrough/allocators.md
    /walkthrough/copyMoveSemantics.md
+   /walkthrough/templates.md
 ```
 
 ```{eval-rst}

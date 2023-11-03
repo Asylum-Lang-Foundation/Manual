@@ -14,14 +14,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="copyMoveSemantics.html" />
+    <link rel="next" title="Allocators" href="allocators.html" />
     <link rel="prev" title="References" href="references.html" /> 
 </head>
 
@@ -53,6 +53,9 @@
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -73,6 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -108,7 +112,7 @@
            <div itemprop="articleBody">
              
   <section id="pointers">
-<h1>Pointers<a class="headerlink" href="#pointers" title="Permalink to this heading"></a></h1>
+<h1>Pointers<a class="headerlink" href="#pointers" title="Link to this heading"></a></h1>
 <p>Now that you understand how references work, it is time to discuss a topic more in-line with what low-level C programmers expect: pointers. Do note that pointer-related functions are unecessary in the vast majority of Asylum applications. These below operations should only be used where appropriate. Note that any function that utilizes pointers need to be marked as <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> to signify you know what you are doing and let the compiler continue compiling the code.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
@@ -138,7 +142,7 @@
 </ol>
 <p>Since <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> point to the same thing (the variable <code class="docutils literal notranslate"><span class="pre">x</span></code>), setting the value <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> point to set the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> as well.</p>
 <section id="variables-overview">
-<h2>Variables Overview<a class="headerlink" href="#variables-overview" title="Permalink to this heading"></a></h2>
+<h2>Variables Overview<a class="headerlink" href="#variables-overview" title="Link to this heading"></a></h2>
 <p>For the sake of simplicity, let there be known two types of values: L-values and R-values. The names of the values come from the fact that L-values usually are on the left side of the <code class="docutils literal notranslate"><span class="pre">=</span></code> and R-values are on the right side of the <code class="docutils literal notranslate"><span class="pre">=</span></code>. This is an incorrect way of thinking about these. Think of L-values as values you can “load from/store to” and R-values are values you can “read from”. Let us look at an example:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
@@ -153,7 +157,7 @@
 <li><p>All function calls expect R-values. Luckily, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">+</span> <span class="pre">1</span></code> is an R-value as first the L-value <code class="docutils literal notranslate"><span class="pre">y</span></code> is converted to an R-value and then 1 is added to it.</p></li>
 </ol>
 <section id="graphic">
-<h3>Graphic<a class="headerlink" href="#graphic" title="Permalink to this heading"></a></h3>
+<h3>Graphic<a class="headerlink" href="#graphic" title="Link to this heading"></a></h3>
 <p>The above may be confusing, and that is a perfectly natural feeling. L-values and R-values can be hard to get an exact feel for. Consider the below tables:</p>
 <p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">3;</span></code>:</p>
 <table class="docutils align-default">
@@ -282,7 +286,7 @@
 </section>
 </section>
 <section id="address-of-operator">
-<h2>Address-Of Operator<a class="headerlink" href="#address-of-operator" title="Permalink to this heading"></a></h2>
+<h2>Address-Of Operator<a class="headerlink" href="#address-of-operator" title="Link to this heading"></a></h2>
 <p>Now that you understand L-values and R-values, we can talk about the address-of operator <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>. Variables, as discussed, are L-values and so are locations in memory that hold values. But what if we wanted to get the location of a value rather than the value? That is what the address of operator is for:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
@@ -327,7 +331,7 @@
 </div>
 </section>
 <section id="dereference-operator">
-<h2>Dereference Operator<a class="headerlink" href="#dereference-operator" title="Permalink to this heading"></a></h2>
+<h2>Dereference Operator<a class="headerlink" href="#dereference-operator" title="Link to this heading"></a></h2>
 <p>Consider the opposite of getting the address of a variable. What if we wanted to treat a variable’s value as a location to set an item at. We can do this to R-values using the dereference operator:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
@@ -371,7 +375,7 @@
 <p>A more technical explanation is that <code class="docutils literal notranslate"><span class="pre">y</span></code> is an L-value, but <code class="docutils literal notranslate"><span class="pre">*</span></code> only operates on R-values. This means <code class="docutils literal notranslate"><span class="pre">y</span></code> is converted to an R-value first by loading it, which gives the address of <code class="docutils literal notranslate"><span class="pre">x</span></code> (<code class="docutils literal notranslate"><span class="pre">0x5af5b570</span></code>). Note though that we can not store to an R-value, so we have to treat it as an L-value. This is done by using <code class="docutils literal notranslate"><span class="pre">*</span></code>. Now that <code class="docutils literal notranslate"><span class="pre">0x5af5b570</span></code> is treated as an L-value, we are allowed to store <code class="docutils literal notranslate"><span class="pre">5</span></code> to it (as if we were storing to <code class="docutils literal notranslate"><span class="pre">x</span></code>). Note that if we print the <code class="docutils literal notranslate"><span class="pre">0x5af5b570</span></code> L-value instead, it must be converted to an R-value first (as all function arguments must be). This means the value gets loaded from it to get an R-value, which is the value at <code class="docutils literal notranslate"><span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">5</span></code>!</p>
 </section>
 <section id="points-to-operator">
-<h2>Points-To Operator<a class="headerlink" href="#points-to-operator" title="Permalink to this heading"></a></h2>
+<h2>Points-To Operator<a class="headerlink" href="#points-to-operator" title="Link to this heading"></a></h2>
 <p>A shorthand for making pointers is the points-to operator <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>. This is used for creating and setting pointers:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span>-&gt; <span class="nc">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// Equivalent to int* y = &amp;x;</span>
@@ -382,7 +386,7 @@
 </div>
 </section>
 <section id="structures">
-<h2>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h2>
+<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <p>You can make pointers to structures and access members with the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator like usual. C programmers will note that they typically need to do <code class="docutils literal notranslate"><span class="pre">(*myStruct).myMember</span></code> or <code class="docutils literal notranslate"><span class="pre">myStruct-&gt;myMember</span></code>, but the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> operator has a different meaning in Asylum. Thus, the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator will dereference automatically:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyStruct</span><span class="w"> </span><span class="p">{</span>
 <span class="k">pub</span>:
@@ -410,7 +414,7 @@
 <p>Since a pointer can not hold any data other than an address, there is no hard in having the <code class="docutils literal notranslate"><span class="pre">.</span></code> act for acessing members for both values and pointers. The <code class="docutils literal notranslate"><span class="pre">.</span></code> operator will dereference until it reaches the member desired.</p>
 </section>
 <section id="pointer-math">
-<h2>Pointer Math<a class="headerlink" href="#pointer-math" title="Permalink to this heading"></a></h2>
+<h2>Pointer Math<a class="headerlink" href="#pointer-math" title="Link to this heading"></a></h2>
 <p>What pointers increment by depends on the size of what is being pointed to. For example:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -435,7 +439,7 @@
 <p>It is easy to produce an invalid pointer while using pointer math. Please only use it when it is appropriate for the task. This should <em>never</em> be used for general-purpose applications.</p>
 </div>
 <section id="arrays">
-<h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading"></a></h3>
+<h3>Arrays<a class="headerlink" href="#arrays" title="Link to this heading"></a></h3>
 <p>One of the uses of pointer math is iterating through an array. For example:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">printItems</span><span class="p">(</span><span class="n">int</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">numToPrint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="o">*</span><span class="w"> </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
@@ -465,11 +469,11 @@
 </section>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 </section>
@@ -479,7 +483,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="references.html" class="btn btn-neutral float-left" title="References" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="copyMoveSemantics.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="allocators.html" class="btn btn-neutral float-right" title="Allocators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

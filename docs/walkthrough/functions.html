@@ -14,9 +14,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -62,10 +62,14 @@
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -101,7 +105,7 @@
            <div itemprop="articleBody">
              
   <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h1>
+<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h1>
 <p>In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. Functions can also call other functions and execute the code within them. You saw this earlier by calling <code class="docutils literal notranslate"><span class="pre">println</span></code>, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">));</span>
@@ -132,15 +136,15 @@
 <p>Remember that <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> can be used for functions with only one code statement!</p>
 </div>
 <section id="return-types">
-<h2>Return Types<a class="headerlink" href="#return-types" title="Permalink to this heading"></a></h2>
+<h2>Return Types<a class="headerlink" href="#return-types" title="Link to this heading"></a></h2>
 <p>In Asylum, you can denote what a function returns by the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> operator, which can be thought of as “returns”. So in this case, <code class="docutils literal notranslate"><span class="pre">main</span></code> doesn’t return anything (as it doesn’t have <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>), or returns <em>void</em>. <code class="docutils literal notranslate"><span class="pre">add</span></code> returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>, as it is right after the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>. But what is an <code class="docutils literal notranslate"><span class="pre">int</span></code>? It will be talked about later in the types section, but for now think of it as a whole number (no decimal places).</p>
 </section>
 <section id="function-parameters">
-<h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Permalink to this heading"></a></h2>
+<h2>Function Parameters<a class="headerlink" href="#function-parameters" title="Link to this heading"></a></h2>
 <p>A function can be given parameters by having a comma-separated list of data types with names. The <code class="docutils literal notranslate"><span class="pre">add</span></code> function above has two parameters, an <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">a</span></code>, and another <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">b</span></code>. Of course, the data types of these parameters do not have to be the same. You call a function by separating the input parameters to it by commas. You must call the function with the same number of parameters. For example, <code class="docutils literal notranslate"><span class="pre">add(5);</span></code> is invalid.</p>
 </section>
 <section id="different-ways-to-return">
-<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Permalink to this heading"></a></h2>
+<h2>Different Ways To Return<a class="headerlink" href="#different-ways-to-return" title="Link to this heading"></a></h2>
 <p>Asylum allows you to return a value in 2 different ways:</p>
 <ul class="simple">
 <li><p>In a one line statement for the function using <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>:</p></li>
@@ -170,7 +174,7 @@
 </div>
 </section>
 <section id="multiple-function-definitions">
-<h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Permalink to this heading"></a></h2>
+<h2>Multiple Function Definitions<a class="headerlink" href="#multiple-function-definitions" title="Link to this heading"></a></h2>
 <p>You can actually define the same function multiple times, as long as its signature is not the same as another function with the same name. The signature of two functions are considered equivalent if all of the following conditions are met:</p>
 <ul class="simple">
 <li><p>Have the same number of parameters.</p></li>
@@ -186,7 +190,7 @@ The following is valid Asylum code:</p></li>
 <p>The compiler will know which function to call depending on the context on which it is used.</p>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Adding is cool and all, but subtraction is where it is at! Make a function called <code class="docutils literal notranslate"><span class="pre">sub</span></code> that subtracts <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">b</span></code> from <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">a</span></code>, this returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p></li>
 <li><p>The more numbers the merrier! Make another function that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span></code> and another that computes <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">c</span> <span class="pre">-</span> <span class="pre">d</span></code>. Create them in such a way that both your functions return in a unique way.</p></li>
@@ -194,7 +198,7 @@ The following is valid Asylum code:</p></li>
 </ol>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="solutions/functions1.html"><span class="std std-doc">Solution 1</span></a></p></li>
 <li><p><a class="reference internal" href="solutions/functions2.html"><span class="std std-doc">Solution 2</span></a></p></li>
@@ -202,7 +206,7 @@ The following is valid Asylum code:</p></li>
 </ul>
 </section>
 <section id="disclaimers">
-<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Permalink to this heading"></a></h2>
+<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Link to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>StraitJacket currently is not smart enough to understand function overloading. The code to do this is not implemented.</p>

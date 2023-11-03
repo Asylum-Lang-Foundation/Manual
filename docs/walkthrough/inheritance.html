@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Asylum  documentation</title>
+  <title>Inheritance &mdash; Asylum  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -14,14 +14,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="controlFlow.html" />
+    <link rel="next" title="Control Flow" href="controlFlow.html" />
     <link rel="prev" title="Structs &amp; Implementations" href="implementations.html" /> 
 </head>
 
@@ -46,17 +46,36 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Inheritance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-inheritance">Basic Inheritance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#function-inheritance">Function Inheritance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#traits">Traits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-calling">Base Calling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#abstract-structures">Abstract Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-diamond-problem">The Diamond Problem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#composition-vs-inheritance">Composition VS Inheritance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -81,7 +100,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">Inheritance</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/inheritance.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,13 +110,186 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="inheritance">
+<h1>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading"></a></h1>
+<p>In Asylum, structures can inherit data and functions from other structures. Inheritance can be complicated for new programmers, so read carefully.</p>
+<section id="basic-inheritance">
+<h2>Basic Inheritance<a class="headerlink" href="#basic-inheritance" title="Link to this heading"></a></h2>
+<p>You can inherit from another struct by using <code class="docutils literal notranslate"><span class="pre">:</span></code> followed by the name of the struct to inherit from:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Tires</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">expectedPSI</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">Color</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">maker</span><span class="p">;</span>
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">model</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="nc">Car</span><span class="w"> </span>: <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span>:
+    <span class="nc">int</span><span class="w"> </span><span class="n">trunkSpace</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Car</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bases</span><span class="p">.</span><span class="n">Tires</span>: <span class="nc">Tires</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">count</span>: <span class="mi">4</span><span class="p">,</span>
+<span class="w">            </span><span class="n">expectedPSI</span>: <span class="mi">32</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="n">bases</span><span class="p">.</span><span class="n">Vehicle</span>: <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">color</span>: <span class="nc">Color</span><span class="p">(</span><span class="mh">0x7F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0x29</span><span class="p">),</span>
+<span class="w">            </span><span class="n">year</span>: <span class="mi">2017</span><span class="p">,</span>
+<span class="w">            </span><span class="n">maker</span>: <span class="s">&quot;Toyota&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">model</span>: <span class="s">&quot;Camry&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="n">trunkSpace</span>: <span class="mi">21</span><span class="p">,</span>
+<span class="w">        </span><span class="n">year</span>: <span class="mi">2022</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">year</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">bases</span><span class="p">.</span><span class="n">Vehicle</span><span class="p">.</span><span class="n">year</span><span class="p">);</span><span class="w"> </span><span class="c1">// Can specify exactly where variable is from.</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">count</span><span class="p">);</span><span class="w"> </span><span class="c1">// Is inherited from Tires.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2022</span>
+<span class="mi">2017</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>Note that what the struct inherits can be referenced done by using <code class="docutils literal notranslate"><span class="pre">bases.STRUCTNAME.MEMBERNAME</span></code>.</p>
+<section id="function-inheritance">
+<h3>Function Inheritance<a class="headerlink" href="#function-inheritance" title="Link to this heading"></a></h3>
+<p>You can inherit functions similarly to members:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="nc">B</span><span class="w"> </span>: <span class="nc">A</span><span class="w"> </span><span class="p">{}</span>
+<span class="k">struct</span> <span class="nc">C</span><span class="w"> </span>: <span class="nc">B</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">fun</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">fun</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">fun</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">val</span>: <span class="mi">1</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bases</span><span class="p">.</span><span class="n">A</span>: <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">val</span>: <span class="mi">2</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bases</span><span class="p">.</span><span class="n">B</span>: <span class="nc">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">bases</span><span class="p">.</span><span class="n">A</span>: <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">val</span>: <span class="mi">3</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">B</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span>-&gt; <span class="nc">c</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">fun</span><span class="p">());</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b1</span><span class="p">.</span><span class="n">fun</span><span class="p">());</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">fun</span><span class="p">());</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b2</span><span class="p">.</span><span class="n">fun</span><span class="p">());</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b2</span><span class="p">.</span><span class="n">bases</span><span class="p">.</span><span class="n">A</span><span class="p">.</span><span class="n">fun</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">7</span>
+<span class="mi">3</span>
+<span class="mi">7</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>There is a lot going on here, so let’s take it a step at a time:</p>
+<ol class="arabic simple">
+<li><p>We create a bunch of structures. Here, <code class="docutils literal notranslate"><span class="pre">A</span></code> has an <code class="docutils literal notranslate"><span class="pre">int</span></code> named <code class="docutils literal notranslate"><span class="pre">val</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code> inherits <code class="docutils literal notranslate"><span class="pre">A</span></code>, and <code class="docutils literal notranslate"><span class="pre">C</span></code> inherits <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p></li>
+<li><p>We give each of our structures implementations with identically named functions named <code class="docutils literal notranslate"><span class="pre">fun</span></code>. For <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>, these just return the value stored in <code class="docutils literal notranslate"><span class="pre">A</span></code>. For <code class="docutils literal notranslate"><span class="pre">B</span></code> though, it just returns <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p></li>
+<li><p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> is an <code class="docutils literal notranslate"><span class="pre">A</span></code>, it just returns the value stored. This is the same for <code class="docutils literal notranslate"><span class="pre">c</span></code>, since it’s a <code class="docutils literal notranslate"><span class="pre">C</span></code>. However, <code class="docutils literal notranslate"><span class="pre">b1</span></code> is a <code class="docutils literal notranslate"><span class="pre">B</span></code> so returns <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p></li>
+<li><p>The variable <code class="docutils literal notranslate"><span class="pre">b2</span></code> is a reference to <code class="docutils literal notranslate"><span class="pre">c</span></code>. Since <code class="docutils literal notranslate"><span class="pre">c</span></code> is a <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">B</span></code>, that means we have no problem treating <code class="docutils literal notranslate"><span class="pre">c</span></code> as a <code class="docutils literal notranslate"><span class="pre">B</span></code>. We could also treat it as an <code class="docutils literal notranslate"><span class="pre">A</span></code> as we wanted. But since we are treating it as a <code class="docutils literal notranslate"><span class="pre">B</span></code>, the function call <code class="docutils literal notranslate"><span class="pre">fun</span></code> returns <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p></li>
+<li><p>If we just call <code class="docutils literal notranslate"><span class="pre">A</span></code>’s function from <code class="docutils literal notranslate"><span class="pre">b2</span></code>, we print its value like it would if <code class="docutils literal notranslate"><span class="pre">b2</span></code> was an <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p></li>
+</ol>
+</section>
+</section>
+<section id="traits">
+<h2>Traits<a class="headerlink" href="#traits" title="Link to this heading"></a></h2>
+<p>These are essentially virtual functions. When implementing functions, what function is called is heavily dependent on what struct you are working with as you saw above. However, what if we wanted <code class="docutils literal notranslate"><span class="pre">b2</span></code> to call <code class="docutils literal notranslate"><span class="pre">C</span></code>’s <code class="docutils literal notranslate"><span class="pre">fun</span></code> since we know it is really a <code class="docutils literal notranslate"><span class="pre">C</span></code>? A use case for this would be if we were implementing animals. We could have dogs, cats, etc. Ideally, we would want to just pass around an <code class="docutils literal notranslate"><span class="pre">Animal</span></code> and if it were a <code class="docutils literal notranslate"><span class="pre">Dog</span></code> it should bark, a <code class="docutils literal notranslate"><span class="pre">Cat</span></code> meow, etc. We can do this using traits:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">noise</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">string</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">isMammal</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">bool</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span><span class="w"> </span><span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">Cat</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">noise</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">string</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Bark&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">isMammal</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="o">=&gt;</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Cat</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">noise</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">string</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Meow&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">isMammal</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="o">=&gt;</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Dog</span><span class="w"> </span><span class="n">dog</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Cat</span><span class="w"> </span><span class="n">cat</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Animal</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dog2</span><span class="w"> </span>-&gt; <span class="nc">dog</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">dog</span><span class="p">.</span><span class="n">noise</span><span class="p">());</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">cat</span><span class="p">.</span><span class="n">noise</span><span class="p">());</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">dog2</span><span class="p">.</span><span class="n">noise</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bark</span>
+<span class="n">Meow</span>
+<span class="n">Bark</span>
+</pre></div>
+</div>
+<p>In the above example, the <code class="docutils literal notranslate"><span class="pre">Animal</span></code> trait has a function for getting the noise of the animal. It has a default implementation that returns an empty noise, while the function for determining if the animal is a mammal has no default and must be implemented for the structure to not be abstract (explained later). Note that if we were to use standard functions rather than traits, <code class="docutils literal notranslate"><span class="pre">dog2.noise()</span></code> would return an empty string.</p>
+<section id="base-calling">
+<h3>Base Calling<a class="headerlink" href="#base-calling" title="Link to this heading"></a></h3>
+</section>
+<section id="abstract-structures">
+<h3>Abstract Structures<a class="headerlink" href="#abstract-structures" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="the-diamond-problem">
+<h2>The Diamond Problem<a class="headerlink" href="#the-diamond-problem" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+<section id="composition-vs-inheritance">
+<h3>Composition VS Inheritance<a class="headerlink" href="#composition-vs-inheritance" title="Link to this heading"></a></h3>
+<p>TODO!!!</p>
+</section>
+</section>
+</section>
+
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="implementations.html" class="btn btn-neutral float-left" title="Structs &amp; Implementations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="controlFlow.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="controlFlow.html" class="btn btn-neutral float-right" title="Control Flow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

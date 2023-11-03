@@ -14,9 +14,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,10 +53,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul class="current">
@@ -95,10 +99,10 @@
            <div itemprop="articleBody">
              
   <section id="builder-code-calling-for-asts">
-<h1>Builder Code Calling For ASTs<a class="headerlink" href="#builder-code-calling-for-asts" title="Permalink to this heading"></a></h1>
+<h1>Builder Code Calling For ASTs<a class="headerlink" href="#builder-code-calling-for-asts" title="Link to this heading"></a></h1>
 <p>So we have our AST, and we have a builder API. Put them together, and now any generated AST can be converted into a program we can compile and run. But how exactly does this process work? ANTLR4 does not just give us an AST, but it gives us a way of reading it to!</p>
 <section id="antlr-visitors">
-<h2>ANTLR Visitors<a class="headerlink" href="#antlr-visitors" title="Permalink to this heading"></a></h2>
+<h2>ANTLR Visitors<a class="headerlink" href="#antlr-visitors" title="Link to this heading"></a></h2>
 <p>Current visitor code is out of date and does not use the new builder API yet. See <a class="reference external" href="https://github.com/Asylum-Lang-Foundation/StraitJacket-Sharp/tree/main/AST">here</a> for AST visiting code.</p>
 </section>
 </section>

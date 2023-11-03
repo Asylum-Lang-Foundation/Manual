@@ -14,9 +14,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,10 +53,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../walkthrough/pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul class="current">
@@ -95,10 +99,10 @@
            <div itemprop="articleBody">
              
   <section id="program-builder-api">
-<h1>Program Builder API<a class="headerlink" href="#program-builder-api" title="Permalink to this heading"></a></h1>
+<h1>Program Builder API<a class="headerlink" href="#program-builder-api" title="Link to this heading"></a></h1>
 <p>Alright, now we have an AST of our program. What do we do now? So far, the AST is composed of a bunch of abstract concepts. The goal of using the builder API is to transform our AST of abstract concepts into one that is object oriented such that we can work with it. The builder is defined in the namespace <code class="docutils literal notranslate"><span class="pre">StraitJacket.Builder</span></code>.</p>
 <section id="test-case">
-<h2>Test Case<a class="headerlink" href="#test-case" title="Permalink to this heading"></a></h2>
+<h2>Test Case<a class="headerlink" href="#test-case" title="Link to this heading"></a></h2>
 <p>Consider the following file, <em>Test.asy</em>:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">using</span><span class="w"> </span><span class="n">MyLib</span><span class="p">.</span><span class="n">Other</span><span class="p">;</span>
 <span class="n">namespace</span><span class="w"> </span><span class="n">MyLib</span><span class="p">;</span>

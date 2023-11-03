@@ -14,9 +14,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -66,10 +66,14 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -105,14 +109,14 @@
            <div itemprop="articleBody">
              
   <section id="data-types">
-<h1>Data Types<a class="headerlink" href="#data-types" title="Permalink to this heading"></a></h1>
+<h1>Data Types<a class="headerlink" href="#data-types" title="Link to this heading"></a></h1>
 <p>On the last page, you vaguely heard about the <code class="docutils literal notranslate"><span class="pre">int</span></code> data type. But what is a data type, what are they, and how do you use them?</p>
 <section id="purpose-of-data-types">
-<h2>Purpose Of Data Types<a class="headerlink" href="#purpose-of-data-types" title="Permalink to this heading"></a></h2>
+<h2>Purpose Of Data Types<a class="headerlink" href="#purpose-of-data-types" title="Link to this heading"></a></h2>
 <p>In Asylum, you can think of everything in an “is a” way. For example, 5 “is a” number, the vehicle you drive “is a” car, and <code class="docutils literal notranslate"><span class="pre">main</span></code> “is a” function. <strong>A data type lets the computer know what kind of data you are working with.</strong> Obviously, your computer needs to do different things to add numbers together compared to concatting text. And of course, if you write a function that adds numbers together, you wouldn’t want anyone to give it text, a function, or even a car.</p>
 </section>
 <section id="primitive-data-types">
-<h2>Primitive Data Types<a class="headerlink" href="#primitive-data-types" title="Permalink to this heading"></a></h2>
+<h2>Primitive Data Types<a class="headerlink" href="#primitive-data-types" title="Link to this heading"></a></h2>
 <p>A primitive data type is one defined by Asylum. They are built into the language and the compiler will automatically recognize them. A table is listed below:</p>
 <table class="docutils align-default">
 <thead>
@@ -173,7 +177,7 @@
 </table>
 </section>
 <section id="common-primitives">
-<h2>Common Primitives<a class="headerlink" href="#common-primitives" title="Permalink to this heading"></a></h2>
+<h2>Common Primitives<a class="headerlink" href="#common-primitives" title="Link to this heading"></a></h2>
 <p>Wait, most languages use primitives such as <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">ulong</span></code>, etc. Where are they? If you look above, Asylum already provides a way to declare unsigned, signed, and floating point numbers. So to get these <em>normal</em> types used commonly in programming, Asylum <em>typedef</em>s, or creates new types that really just shortcut back to the original type. The below chart shows the typedefs defined by EASL (Embedded Asylum Standard Library):</p>
 <table class="docutils align-default">
 <thead>
@@ -244,7 +248,7 @@
 <p>Despite the fact that this table is final, it is highly recommended to continue using types such as <code class="docutils literal notranslate"><span class="pre">u16</span></code> when the type expected <em>must</em> be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.</p>
 </section>
 <section id="special-types">
-<h2>Special Types<a class="headerlink" href="#special-types" title="Permalink to this heading"></a></h2>
+<h2>Special Types<a class="headerlink" href="#special-types" title="Link to this heading"></a></h2>
 <p>Like most other languages, Asylum has <em>special types</em> that are types that involve other types. This statement is confusing, but it’ll make sense after looking at the special types below (where T is any data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:</p>
 <table class="docutils align-default">
 <thead>
@@ -312,7 +316,7 @@
 <p>Again, do not be overwhelmed if these do not make sense. They will all be explored in more detail later.</p>
 </section>
 <section id="typedefs">
-<h2>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading"></a></h2>
+<h2>Typedefs<a class="headerlink" href="#typedefs" title="Link to this heading"></a></h2>
 <p>Asylum creates those above “shortcuts” but doing what is called a typedef statement. These are to be placed outside of functions, structures, and implementations.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span><span class="w"> </span><span class="n">s24</span><span class="p">[]</span><span class="w"> </span><span class="n">medIntArr</span><span class="p">;</span>
 </pre></div>
@@ -320,7 +324,7 @@
 <p>This example creates a new type called, <code class="docutils literal notranslate"><span class="pre">medIntArr</span></code>, which is really just a dynamic array of 24-bit signed integers in disguise. You can use <code class="docutils literal notranslate"><span class="pre">medIntArr</span></code> and <code class="docutils literal notranslate"><span class="pre">s24[]</span></code> interchangibly, they are the exact same thing.</p>
 </section>
 <section id="structs">
-<h2>Structs<a class="headerlink" href="#structs" title="Permalink to this heading"></a></h2>
+<h2>Structs<a class="headerlink" href="#structs" title="Link to this heading"></a></h2>
 <p>Of course, making other names for existing types is cool and all, but it can only go so far. Structs allow you to group together a bunch of data types like so:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">red</span><span class="p">;</span>
@@ -338,7 +342,7 @@
 </div>
 <p>Now you can pass around more meaningful data!</p>
 <section id="infinite-structs">
-<h3>Infinite Structs<a class="headerlink" href="#infinite-structs" title="Permalink to this heading"></a></h3>
+<h3>Infinite Structs<a class="headerlink" href="#infinite-structs" title="Link to this heading"></a></h3>
 <p>As you can see above, you can put structs inside of other structs. But one thing that is not allowed is putting a struct inside itself. Why is this a problem? Well let’s think about it:</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -379,7 +383,7 @@
 </section>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Explain the difference between unsigned and signed integers. What is a common signed type?</p></li>
 <li><p>Explain the difference between a floating-point and a fixed-point number. What is a common floating-point type?</p></li>
@@ -389,7 +393,7 @@
 </ol>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="solutions/dataTypes1.html"><span class="std std-doc">Solution 1</span></a></p></li>
 <li><p><a class="reference internal" href="solutions/dataTypes2.html"><span class="std std-doc">Solution 2</span></a></p></li>

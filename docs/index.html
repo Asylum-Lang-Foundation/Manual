@@ -14,9 +14,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -52,10 +52,14 @@
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -91,7 +95,7 @@
            <div itemprop="articleBody">
              
   <section id="asylum-programming-language-reference-manual">
-<h1>Asylum Programming Language Reference Manual<a class="headerlink" href="#asylum-programming-language-reference-manual" title="Permalink to this heading"></a></h1>
+<h1>Asylum Programming Language Reference Manual<a class="headerlink" href="#asylum-programming-language-reference-manual" title="Link to this heading"></a></h1>
 <p>Welcome to the Asylum Programming Language Reference Manual! Here, you will learn all there is to know about Asylum, regardless of your programming experience! Whether you are a programming veteran, or completely new to programming, this reference should go into the necessary depth with even practice problems to quiz your understanding.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
@@ -155,6 +159,20 @@
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/implementations.html#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/inheritance.html">Inheritance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/inheritance.html#basic-inheritance">Basic Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/inheritance.html#traits">Traits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/inheritance.html#the-diamond-problem">The Diamond Problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/controlFlow.html">Control Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/controlFlow.html#if-statements">If Statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/controlFlow.html#match">Match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/controlFlow.html#loops">Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/controlFlow.html#recursion-recursion-recursion">Recursion Recursion Recursion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/parameterTypes.html">Parameter Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/parameterTypes.html#type-listing">Type Listing</a></li>
@@ -180,6 +198,14 @@
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/pointers.html#pointer-math">Pointer Math</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/pointers.html#challenges">Challenges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/pointers.html#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/allocators.html">Allocators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/allocators.html#arena-allocators">Arena Allocators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/allocators.html#general-purpose-allocators">General Purpose Allocators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/allocators.html#custom-allocators">Custom Allocators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/allocators.html#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/allocators.html#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -208,7 +234,7 @@
 </ul>
 </div>
 <section id="goals">
-<h2>Goals<a class="headerlink" href="#goals" title="Permalink to this heading"></a></h2>
+<h2>Goals<a class="headerlink" href="#goals" title="Link to this heading"></a></h2>
 <p>Asylum has many goals:</p>
 <ul class="simple">
 <li><p>Be clear on how memory is being utilized (copied, referenced, moved, allocated, destroyed, etc).</p></li>
@@ -217,7 +243,7 @@
 </ul>
 </section>
 <section id="non-goals">
-<h2>Non-Goals<a class="headerlink" href="#non-goals" title="Permalink to this heading"></a></h2>
+<h2>Non-Goals<a class="headerlink" href="#non-goals" title="Link to this heading"></a></h2>
 <p>There are some things Asylum does not aim to be:</p>
 <ul class="simple">
 <li><p>Have everything C++ does. Asylum has a lot of features, but not all of them.</p></li>

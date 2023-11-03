@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Asylum  documentation</title>
+  <title>Control Flow &mdash; Asylum  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -14,15 +14,15 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="enums.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="inheritance.html" /> 
+    <link rel="next" title="Enums" href="enums.html" />
+    <link rel="prev" title="Inheritance" href="inheritance.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,17 +46,37 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Control Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#if-statements">If Statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#match">Match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loops">Loops</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#while-loops">While Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#do-while-loops">Do While Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#for-loops">For Loops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#iterating">Iterating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#do-for-loops">Do For Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continue">Continue</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#recursion-recursion-recursion">Recursion Recursion Recursion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -81,7 +101,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">Control Flow</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/controlFlow.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,13 +111,401 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="control-flow">
+<h1>Control Flow<a class="headerlink" href="#control-flow" title="Link to this heading"></a></h1>
+<p>Being able to create and manipulate variables is useful, but without the ability to run control flow such as conditions, loops, etc. a program is fairly limited in what it can do.</p>
+<section id="if-statements">
+<h2>If Statements<a class="headerlink" href="#if-statements" title="Link to this heading"></a></h2>
+<p>If statements are the foundation of programming. If it is raining, you bring an umbrella. If you are hungry, you get something to eat. By using conditions in your code, you can have greater control on what your program can do:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">printItem</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Other&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hi!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output (a = 0):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>0
+Hi!
+</pre></div>
+</div>
+<p>Output (a = 1):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1
+Hi!
+</pre></div>
+</div>
+<p>Output (a = 2):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2
+Hi!
+</pre></div>
+</div>
+<p>Output (a = 3):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Other
+Hi!
+</pre></div>
+</div>
+<p>As shown above, the output depends on the input value of <code class="docutils literal notranslate"><span class="pre">a</span></code>. Note that the brackets <code class="docutils literal notranslate"><span class="pre">{}</span></code> are necessary for executing multiple statements. Indentation does not matter, and the statement directly after the <code class="docutils literal notranslate"><span class="pre">if</span></code> is “inside’ the <code class="docutils literal notranslate"><span class="pre">if</span></code>. Since the last <code class="docutils literal notranslate"><span class="pre">println</span></code> statement is after the statement after the <code class="docutils literal notranslate"><span class="pre">if</span></code> and is not in brackets, it is outside. Thus, it gets called no matter what the input of <code class="docutils literal notranslate"><span class="pre">a</span></code> is.</p>
+</section>
+<section id="match">
+<h2>Match<a class="headerlink" href="#match" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">match</span></code> statement is useful for situations in which you have a lot of various possible values for a variable and have different code actions for each. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">magicNumberGuess</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="mi">3</span>:
+        <span class="mi">7</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;I like this number!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="mi">2</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;It&#39;s a very basic number.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="mi">10</span><span class="o">..=</span><span class="mi">100</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;Bigger than 9 and less than 101.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="mi">3</span>:
+        <span class="mi">6</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;I really do not like this number.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;I have no opinions on this number.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You are allowed to have multiple conditions for each result (<code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">7</span></code> both lead to <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">like</span> <span class="pre">this</span> <span class="pre">number!</span></code> being shown), as well as have multiple statements done as result as the condition. The <code class="docutils literal notranslate"><span class="pre">_</span></code> case will catch anything. Note that the first condition hit is matched, so <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">really</span> <span class="pre">do</span> <span class="pre">not</span> <span class="pre">like</span> <span class="pre">this</span> <span class="pre">number.</span></code> will never be shown for <code class="docutils literal notranslate"><span class="pre">3</span></code> and the <code class="docutils literal notranslate"><span class="pre">_</span></code> case should always be done last. Note that this can work for anything, not just numbers:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">matchStr</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;Red&quot;</span>:
+            <span class="nc">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="s">&quot;Green&quot;</span>:
+            <span class="nc">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="s">&quot;Orange&quot;</span>:
+        <span class="s">&quot;Purple&quot;</span>:
+            <span class="nc">return</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_</span>:
+            <span class="nc">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also note that it is not required to match every possible value in a <code class="docutils literal notranslate"><span class="pre">match</span></code> statement. We could decide to not match the “default” case with <code class="docutils literal notranslate"><span class="pre">_</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">matchItem</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="mi">3</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;You win!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="loops">
+<h2>Loops<a class="headerlink" href="#loops" title="Link to this heading"></a></h2>
+<p>Sometimes you want to run code multiple times. Sometimes that amount of times depends on an input given. For example, you should wash as many hands as you have. While it may be tempting to hardcode this value to <code class="docutils literal notranslate"><span class="pre">2</span></code>, some other unknown intelligent lifeform may have <code class="docutils literal notranslate"><span class="pre">4</span></code>. First, we must go over the loop statement:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+[Continues Infinitely]
+</pre></div>
+</div>
+<p>To stop this program, press <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> on your terminal. While looping like this is a cool thing that we are able to do, it does not seem particularly useful if we can not exit the loop. Luckily, <code class="docutils literal notranslate"><span class="pre">break</span></code> exists for this purpose:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+<p>Remember that we need to put the statements inside a <code class="docutils literal notranslate"><span class="pre">{}</span></code>, otherwise only the first statement will be part of the <code class="docutils literal notranslate"><span class="pre">loop</span></code>. The <code class="docutils literal notranslate"><span class="pre">break</span></code> statement allows us to break out of a loop we are in. The above <code class="docutils literal notranslate"><span class="pre">break;</span></code> is actually shorthand for <code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">1;</span></code> This does imply you can break out of multiple loops:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">                </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">break</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">2;</span></code> breaks out of the first 2 <code class="docutils literal notranslate"><span class="pre">loop</span></code>s, which leaves us to the <code class="docutils literal notranslate"><span class="pre">println(2);</span></code> statement. Then we break out of the final loop. While this breaking structure is neat, it does not allow us to do much, or does it?</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">count</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="o">++</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+</pre></div>
+</div>
+<p>Now we’re getting somewhere! First, we set <code class="docutils literal notranslate"><span class="pre">num</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Inside the loop, if <code class="docutils literal notranslate"><span class="pre">num</span></code> is greater than the value of <code class="docutils literal notranslate"><span class="pre">endNum</span></code> we exit the loop. Otherwise, it first prints the value of <code class="docutils literal notranslate"><span class="pre">num</span></code>, increments the value of <code class="docutils literal notranslate"><span class="pre">num</span></code> (adds <code class="docutils literal notranslate"><span class="pre">1</span></code> to it), then jumps to the top of the loop repeating the condition check and print call until it exits.</p>
+<section id="while-loops">
+<h3>While Loops<a class="headerlink" href="#while-loops" title="Link to this heading"></a></h3>
+<p>Surely there must be an easier way than the above code? Luckily, <code class="docutils literal notranslate"><span class="pre">while</span></code> loops automatically check a condition at the top of the loop and <code class="docutils literal notranslate"><span class="pre">break</span></code> if it is not met. The below code accomplishes the same task as the code from earlier:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">count</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="o">++</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+</pre></div>
+</div>
+<p>It’s important to note that the condition runs at <em>the top</em> of the loop, not for every statement in the loop:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">count</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="o">++</span><span class="p">);</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="o">++</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+</pre></div>
+</div>
+<p>Since the value of <code class="docutils literal notranslate"><span class="pre">num</span></code> is only checked at the top of the loop, even though <code class="docutils literal notranslate"><span class="pre">num</span></code> becomes <code class="docutils literal notranslate"><span class="pre">6</span></code> during the course of the loop, it is still printed anyways.</p>
+</section>
+<section id="do-while-loops">
+<h3>Do While Loops<a class="headerlink" href="#do-while-loops" title="Link to this heading"></a></h3>
+<p>What if you wanted to run a condition at the end of a loop rather than the beginning? For this purpose, you can use a do while loop:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">count</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kr">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="o">++</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+<p>Note that a do while loop guarantees the code in the loop will be executed at least once.</p>
+</section>
+<section id="for-loops">
+<h3>For Loops<a class="headerlink" href="#for-loops" title="Link to this heading"></a></h3>
+<p>It’s annoying that we have to increment <code class="docutils literal notranslate"><span class="pre">num</span></code> ourselves and declare it outside the loop. With <code class="docutils literal notranslate"><span class="pre">for</span></code> loops, this problem is taken care for us:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">count</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">endNum</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+</pre></div>
+</div>
+<p>The first part of the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop has an expression that is done once before the loop. The next expression is the condition to check before each loop. The loop only continues if this condition succeeds. Finally, there is an expression to run at the end of the loop. Here, the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> is incremented. It is common practice for <code class="docutils literal notranslate"><span class="pre">for</span></code> loop iterators to be <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span></code>, or <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<section id="iterating">
+<h4>Iterating<a class="headerlink" href="#iterating" title="Link to this heading"></a></h4>
+<p>You may also use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop for iterating over an iterable list. You may iterate over anything that implements <code class="docutils literal notranslate"><span class="pre">Iterable</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">printListItems</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">item</span><span class="w"> </span>: <span class="nc">items</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above code will print all of the items in the given list. You can also iterate using the <code class="docutils literal notranslate"><span class="pre">..</span></code> (<code class="docutils literal notranslate"><span class="pre">Range</span></code>) or <code class="docutils literal notranslate"><span class="pre">..=</span></code> (<code class="docutils literal notranslate"><span class="pre">RangeEq</span></code>) operator:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span>: <span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span>: <span class="mi">1</span><span class="o">..=</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="do-for-loops">
+<h3>Do For Loops<a class="headerlink" href="#do-for-loops" title="Link to this heading"></a></h3>
+<p>Like the do while loops, do for loops run at least once:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">count</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">endNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">do</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">endNum</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+<p>It’s important to note that the condition is checked <em>before</em> the final expression is ran. In the example above, since <code class="docutils literal notranslate"><span class="pre">i</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code> it passes the condition of being less than or equal to <code class="docutils literal notranslate"><span class="pre">endNum</span></code> (<code class="docutils literal notranslate"><span class="pre">endNum</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code>). This means the loop goes for another iteration, allowing <code class="docutils literal notranslate"><span class="pre">6</span></code> to be printed. Note that you may not loop over iterators as done in <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.</p>
+</section>
+<section id="continue">
+<h3>Continue<a class="headerlink" href="#continue" title="Link to this heading"></a></h3>
+<p>Continues allow you to jump to the end of a loop:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>, we jump to the end of the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. At this point we increment <code class="docutils literal notranslate"><span class="pre">a</span></code>, then jump to the top of the loop where we check the condition <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">6</span></code>. You are also allowed to continue out of multiple loops like with <code class="docutils literal notranslate"><span class="pre">break</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">                </span><span class="k">continue</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="recursion-recursion-recursion">
+<h2>Recursion Recursion Recursion<a class="headerlink" href="#recursion-recursion-recursion" title="Link to this heading"></a></h2>
+<p>One method of control flow that uses function calls rather than loops is called recursion, in which a function calls itself. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">fib</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above calculates the Fibonacci number for number <code class="docutils literal notranslate"><span class="pre">n</span></code>. Note that for large values of <code class="docutils literal notranslate"><span class="pre">n</span></code>, this will grow the call stack a large amount. In order to avoid this, tail recursion can be used. Tail recursion is when the last thing done by the function is calling itself. This means we can replace the call stack with the new one, therefore avoiding growing the stack:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">fib</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">curr</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">curr</span><span class="p">,</span><span class="w"> </span><span class="n">prev</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">curr</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above example, either a value is returned or the current call stack is replaced with a new one. This is different from the first recursive example, as we don’t need to wait for the result of the function call to do calculations. The result <em>is</em> the new function call.</p>
+</section>
+</section>
+
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="inheritance.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="enums.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="inheritance.html" class="btn btn-neutral float-left" title="Inheritance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="enums.html" class="btn btn-neutral float-right" title="Enums" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

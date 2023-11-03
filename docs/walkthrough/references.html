@@ -14,9 +14,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,6 +53,9 @@
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">References</a><ul>
@@ -85,6 +88,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
 <ul>
@@ -120,10 +124,10 @@
            <div itemprop="articleBody">
              
   <section id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h1>
+<h1>References<a class="headerlink" href="#references" title="Link to this heading"></a></h1>
 <p>In Asylum, you typically do not want to copy data around, especially if it is large. At the same time, you may not want to change how data is moved. References exist for this purpose, to allow you to use memory located somewhere else.</p>
 <section id="standard-references">
-<h2>Standard References<a class="headerlink" href="#standard-references" title="Permalink to this heading"></a></h2>
+<h2>Standard References<a class="headerlink" href="#standard-references" title="Link to this heading"></a></h2>
 <p>Earlier, we have discussed different ways of passing function arguments. Here is a reminder of passing by reference:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">modifyVal</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
@@ -157,7 +161,7 @@
 </pre></div>
 </div>
 <section id="reference-types">
-<h3>Reference Types<a class="headerlink" href="#reference-types" title="Permalink to this heading"></a></h3>
+<h3>Reference Types<a class="headerlink" href="#reference-types" title="Link to this heading"></a></h3>
 <p>That <code class="docutils literal notranslate"><span class="pre">int&amp;</span></code> from earier is not just passing by reference, but it is a type you can store to as well! All a reference does is allow you to have multiple variables share the same value. For example:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -183,7 +187,7 @@
 <p>The arrow (points to operator) can be thought to read as <code class="docutils literal notranslate"><span class="pre">val2</span></code> “references” <code class="docutils literal notranslate"><span class="pre">val1</span></code>. This syntax is preferred and will be used for the rest of this page.</p>
 </section>
 <section id="more-references">
-<h3>More References<a class="headerlink" href="#more-references" title="Permalink to this heading"></a></h3>
+<h3>More References<a class="headerlink" href="#more-references" title="Link to this heading"></a></h3>
 <p>You can add as many references as you want!</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -202,7 +206,7 @@
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">int&amp;</span> <span class="pre">val4</span> <span class="pre">-&gt;</span> <span class="pre">val3</span></code> does not have a reference reference the reference <code class="docutils literal notranslate"><span class="pre">val3</span></code> but rather the original <code class="docutils literal notranslate"><span class="pre">val1</span></code> value. This is because using a reference is the same as using the original value!</p>
 </section>
 <section id="accessing-references">
-<h3>Accessing References<a class="headerlink" href="#accessing-references" title="Permalink to this heading"></a></h3>
+<h3>Accessing References<a class="headerlink" href="#accessing-references" title="Link to this heading"></a></h3>
 <p>Sometimes you will want to modify or retrieve a reference instead of the value that is being referenced. In order to do this, you can use the as assignable reference operator <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -233,7 +237,7 @@
 </ol>
 </section>
 <section id="dangers-of-references">
-<h3>Dangers Of References<a class="headerlink" href="#dangers-of-references" title="Permalink to this heading"></a></h3>
+<h3>Dangers Of References<a class="headerlink" href="#dangers-of-references" title="Link to this heading"></a></h3>
 <p>It is important to note that standard references do not hold any data. If the data they are referring to is not there anymore, this can cause problems. For example:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -253,7 +257,7 @@
 <p>Since <code class="docutils literal notranslate"><span class="pre">y</span></code> is referring to <code class="docutils literal notranslate"><span class="pre">z</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> dies before <code class="docutils literal notranslate"><span class="pre">y</span></code> does, we get a situation in which <code class="docutils literal notranslate"><span class="pre">y</span></code> tries to reference <code class="docutils literal notranslate"><span class="pre">z</span></code>, but does not know that <code class="docutils literal notranslate"><span class="pre">z</span></code> is gone. Thus when we try to use <code class="docutils literal notranslate"><span class="pre">y</span></code> (therefore we’re trying to use <code class="docutils literal notranslate"><span class="pre">z</span></code>), our program crashes. The compiler will warn you when this may happen, but definitely keep this in mind.</p>
 </section>
 <section id="function-arguments">
-<h3>Function Arguments<a class="headerlink" href="#function-arguments" title="Permalink to this heading"></a></h3>
+<h3>Function Arguments<a class="headerlink" href="#function-arguments" title="Link to this heading"></a></h3>
 <p>You can not create a reference from function arguments that are of type <code class="docutils literal notranslate"><span class="pre">in</span></code> or <code class="docutils literal notranslate"><span class="pre">move</span></code>. However, you can copy parameters that are references:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc1</span><span class="p">(</span><span class="n">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">myFunc2</span><span class="p">(</span><span class="n">val</span><span class="o">&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// This makes a new reference.</span>
@@ -286,7 +290,7 @@
 </section>
 </section>
 <section id="nullable-references">
-<h2>Nullable References<a class="headerlink" href="#nullable-references" title="Permalink to this heading"></a></h2>
+<h2>Nullable References<a class="headerlink" href="#nullable-references" title="Link to this heading"></a></h2>
 <p>Standard references are great for when you know the data they reference is alive, however this is not always the case. There are some situations where you want to reference data and be able to check if the data still exists or not before using it. This is what the nullable reference is for. Nullable references also allow a reference to reference nothing or “null” as their name implies.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">int</span><span class="o">@</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
@@ -358,10 +362,10 @@
 </div>
 </section>
 <section id="smart-references">
-<h2>Smart References<a class="headerlink" href="#smart-references" title="Permalink to this heading"></a></h2>
+<h2>Smart References<a class="headerlink" href="#smart-references" title="Link to this heading"></a></h2>
 <p>There are certain scenarios in which you want finer control of when data lives. Some of which include not being able to instantiate a struct in its constructor or the struct does not have a definitive compile-time size (as in referred to by an abstract base). The solution to this are smart references.</p>
 <section id="owning-references">
-<h3>Owning References<a class="headerlink" href="#owning-references" title="Permalink to this heading"></a></h3>
+<h3>Owning References<a class="headerlink" href="#owning-references" title="Link to this heading"></a></h3>
 <p>Owning references are fairly simple in design. Only one reference can be crowned the owner of data. Owning references have type <code class="docutils literal notranslate"><span class="pre">T^</span></code>. You can think of the <code class="docutils literal notranslate"><span class="pre">^</span></code> as a crown that the reference is wearing.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyStruct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
@@ -383,7 +387,7 @@
 </div>
 <p>The above code shows how an owning reference is created. Owning references construct an instance of the type they hold on the heap. When they go out of scope, the data they hold goes out of scope as well. They behave similarly to <code class="docutils literal notranslate"><span class="pre">Box&lt;T&gt;</span></code> in Rust and <code class="docutils literal notranslate"><span class="pre">std::unique_ptr&lt;T&gt;</span></code> in C++.</p>
 <section id="id1">
-<h4>Nullable References<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<h4>Nullable References<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
 <p>Nullable references are allowed to copy from an owning reference, though nullable references are not allowed to own any data and thus just reference the same data. When the owning reference goes out of scope, the nullable reference is set to null.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MyStruct</span><span class="o">@</span><span class="w"> </span><span class="n">r1</span><span class="p">;</span>
@@ -401,7 +405,7 @@
 </div>
 </section>
 <section id="passing-arguments">
-<h4>Passing Arguments<a class="headerlink" href="#passing-arguments" title="Permalink to this heading"></a></h4>
+<h4>Passing Arguments<a class="headerlink" href="#passing-arguments" title="Link to this heading"></a></h4>
 <p>It is possible to pass an owning reference as a nullable reference and a standard reference:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">MyStruct</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">@</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!@</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
@@ -420,7 +424,7 @@
 </div>
 </section>
 <section id="transfering-ownership">
-<h4>Transfering Ownership<a class="headerlink" href="#transfering-ownership" title="Permalink to this heading"></a></h4>
+<h4>Transfering Ownership<a class="headerlink" href="#transfering-ownership" title="Link to this heading"></a></h4>
 <p>Remember that is not possible to copy the value of an owning reference. However, data can be moved instead. This is useful for transferring ownership of data:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">MyData</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="o">^</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
@@ -449,7 +453,7 @@
 </section>
 </section>
 <section id="counted-references">
-<h3>Counted References<a class="headerlink" href="#counted-references" title="Permalink to this heading"></a></h3>
+<h3>Counted References<a class="headerlink" href="#counted-references" title="Link to this heading"></a></h3>
 <p>Ownership is distributed among the <code class="docutils literal notranslate"><span class="pre">T#</span></code> references. Nullable references that point to it get nulled when all counted references are out of scope.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">MyStruct</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">MyStruct</span><span class="o">@</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!@</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
@@ -475,11 +479,11 @@
 </div>
 <p>The above code shows how a counted reference is created. Counted references construct an instance of the type they hold on the heap. Copying from a counted reference to another counted reference increments the reference count. When a counted reference goes out of scope, the reference count decreases. When the reference counter reaches 0, the memory referenced is deleted. Counted references behave similarly to <code class="docutils literal notranslate"><span class="pre">Rc&lt;T&gt;</span></code> in Rust and <code class="docutils literal notranslate"><span class="pre">std::shared_ptr&lt;T&gt;</span></code> in C++.</p>
 <section id="id2">
-<h4>Nullable References<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<h4>Nullable References<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
 <p>Nullable references for counted references work similarly how they do for owned references. when the number of counted references reaches <code class="docutils literal notranslate"><span class="pre">0</span></code>, the nullable references that reference the data are now <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 </section>
 <section id="about-cycles">
-<h4>About Cycles<a class="headerlink" href="#about-cycles" title="Permalink to this heading"></a></h4>
+<h4>About Cycles<a class="headerlink" href="#about-cycles" title="Link to this heading"></a></h4>
 <p>Counted references do not have their memory freed until all counted references that use the memory have died. Therefore, if there is a situation where a counted reference is not able to die (a cycle), then memory can not be freed:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
@@ -521,7 +525,7 @@
 </section>
 </section>
 <section id="when-to-use-which-reference">
-<h2>When To Use Which Reference<a class="headerlink" href="#when-to-use-which-reference" title="Permalink to this heading"></a></h2>
+<h2>When To Use Which Reference<a class="headerlink" href="#when-to-use-which-reference" title="Link to this heading"></a></h2>
 <p>With all these different types of references, it can be hard to decide the right one to use in each scenario. The below steps should help you understand which is the right reference to use.</p>
 <ol class="arabic simple">
 <li><p>If a function only needs to read data, then it should take an <code class="docutils literal notranslate"><span class="pre">in</span></code> parameter and not deal with references.</p></li>
@@ -533,11 +537,11 @@
 <p>These are the general cases for using the above different reference types, though they are not hard rules and depend on your particular use case. Nullable references can make it hard to track where data originates from so use them with caution. They are most useful for when stored as members to structs when the referenced data in question has an unknown expiration. However, we will see some special uses in the section with allocators.</p>
 </section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading"></a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 <section id="challenge-solutions">
-<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Permalink to this heading"></a></h2>
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
 </section>
 </section>
