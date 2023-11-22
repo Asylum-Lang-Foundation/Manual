@@ -41,7 +41,7 @@ fn add(int a, int b) -> int => a + b;
 ```
 * Using the return statement:
 ```rust
-fn add(int a, int b) {
+fn add(int a, int b) -> int {
     return a + b;
 }
 ```
