@@ -79,11 +79,3 @@ The compiler will know which function to call depending on the context on which 
 * [Solution 1](solutions/functions1.md)
 * [Solution 2](solutions/functions2.md)
 * [Solution 3](solutions/functions3.md)
-
-## Disclaimers
-```{warning}
-StraitJacket currently is not smart enough to understand function overloading. The code to do this is not implemented.
-```
-```{warning}
-StraitJacket can't use the `+` operator to add numbers at the moment. You have to use the LLVM ASM call `(int)llvm("add", a, b)` instead.
-```

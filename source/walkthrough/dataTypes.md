@@ -20,8 +20,9 @@ A primitive data type is one defined by Asylum. They are built into the language
 | varlen | A number that can be any number with no limitations. It is only recommended to be used with really large numbers that need high precision, as it takes more space compared to fixed range unsigned, signed, or floating-point numbers. |
 | fX | A floating-point number. This can be thought of as a number with decimals, such as `1.234`. X is allowed to be 16, 32, 64, 80, or 128. |
 | fixAxB | A fixed-point number with A whole bits, and B decimal bits. This is a signed number that has decimal points. What makes it different from floating-point is that math can be done on it like a signed/unsigned number, which is great for systems that don't have floating-point processor support. The whole bits work like signed numbers, and the decimal bits allow precision of `1/(2^n)`. For example, a `fix3x4` can have the whole part be from `-4` to `3`, and the fractional part be any of `1/2`, `1/4`, `1/8`, and `1/16` added together. |
-| func<A, ...> | A function that has a return type of A. Any other types after it are the parameter types. The add function from earlier is type `func<int, int, int>`. |
+| func<A, ...> | A function that has a return type of A. Any other types after it are the parameter types. The add function from earlier is type `func<int(int, int)>`. |
 | event<A, ...> | An event handler that can hold functions to execute. Think of this like a list of fuctions that you can add and remove from, and when executed will call all of the functions in the list. |
+| error<T, U> | An item that is either error type `U` or value type `T`. |
 | var | This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though. |
 | This | The current type being implemented in an implementation block. |
 
@@ -44,6 +45,8 @@ Wait, most languages use primitives such as `int`, `float`, `ulong`, etc. Where 
 | float | f32 | 3.4E +/- 38 (7 digits) |
 | double | f64 | 1.7E +/- 308 (15 digits) |
 | size_t | uX | X is the bitwidth of the system, which for 32-bit systems is `u32`, `u64` for 64-bit, etc. |
+| ssize_t | sX | X is the bitwidth of the system, which for 32-bit systems is `s32`, `s64` for 64-bit, etc. |
+| ptr_t | uX | X is the bitwidth of pointers on the system. Typically matches the system's bitwidth. |
 
 Despite the fact that this table is final, it is highly recommended to continue using types such as `u16` when the type expected *must* be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.
 
@@ -57,17 +60,16 @@ Like most other languages, Asylum has *special types* that are types that involv
 | ref T/T& | A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always references data. (L-value reference for those familiar with C++). |
 | move T/T% | A reference to a data type that can not be written to (R-value reference for those familiar with C++). |
 | T@ | A reference to a data that may be null. |
-| T^ | Smart reference that owns data. When it goes out of scope, the value it owns dies with it. Owning references may only moved to other owning references, never copied. It is possible for this reference to be null. |
-| T# | Smart reference that counts references to data. Copying it to another `T#` will increase the reference count, where moving it leaves the reference count the same. References that are not `T#` do not effect the reference count. |
+| T^ | Smart reference that owns data. When it goes out of scope, the value it owns dies with it. Owning references may only moved to other owning references, never copied. It is not possible for this reference to be null. |
+| T# | Smart reference that counts references to data. Copying it to another `T#` will increase the reference count, where moving it leaves the reference count the same. References that are not `T#` do not effect the reference count. It is not possible for this reference to be null. |
 | T* | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it). |
 | T? | An optional value. Either contains `T` or `null`. |
 | T[] | Dynamic array. This is an array of T that is allowed to be any length. |
 | T[C] | Constant array. This is an array of T that is constant with size C. |
 | T[A, B, ...] | A dimensional array where A, B, etc. are constants, but constants are not required to be specified. For example, `int[2, 3]` can be thought of as a 2x3 grid of `int`s. `char[3, , 7]` can be thought of as a 3d array of chars where one dimension is 3 long, the last is 7 long, and the other can be any length. |
-| const T | A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time. All `in` parameters of functions are `const` (discussed later). |
-| readonly/ro T | A type T, but you can only read from it and not write to it. |
-| writeonly/wo T | A type T, but you can only write to it and not read from it. |
-| static T | A type T, but there is only one instance of it across everything. For example, say you make a `static int` inside a function, and inside this function, this `int` is incremented. Instead of creating a new `int` every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that single function is called. |
+| readonly/ro T | A type T, but you can only assign to it once. This is optimal for data you know will definitely not change, and is known at compile time. All `in` parameters of functions are `ro` (discussed later). |
+| writeonly/wo T | A type T, but you can only write to it and not read from it. This is useful for hardware registers. |
+| static T | A type T, but there is only one instance of it across everything. For example, say you make a `static int` inside a function, and inside this function, this `int` is incremented. Instead of creating a new `int` every time you would call the function and having its value increment to one each time, this will instead act like a counter for every time you call the function as that variable is shared across every time that single function is called. The constructor for the type is only called once initially though. |
 | volatile T | If you need to make sure T has changed, for example you are using it as a condition in a loop, you can mark it as volatile. |
 | atomic T | Declaring a type as atomic will make sure only one thread is allowed to use it at a time. |
 
