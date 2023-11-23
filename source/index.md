@@ -12,6 +12,7 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/dataTypes.md
    /walkthrough/variables.md
    /walkthrough/tuples.md
+   /walkthrough/errors.md
    /walkthrough/implementations.md
    /walkthrough/inheritance.md
    /walkthrough/controlFlow.md

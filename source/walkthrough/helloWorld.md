@@ -18,7 +18,8 @@ That's it. Now, let's understand what this syntax means:
 Notice that statements outside a function are called *top-level statements*. These are only allowed to be in one of the files you are compiling, as the compiler wouldn't know where your program would start otherwise. Normally, we put code inside of functions to be more organized:
 
 ```rust
-fn main() {
+fn main()
+{
     println("Hello World!");
 }
 ```
@@ -56,7 +57,8 @@ The same output is produced. For now, you can think of `{}` as a group of many c
 While `println` exists, `print` also exists too? So what's the difference? `println` will put a newline after it prints what you give it, while `print` will not. For example:
 
 ```rust
-fn main() {
+fn main()
+{
     println("1");
     println("2");
     print("3");

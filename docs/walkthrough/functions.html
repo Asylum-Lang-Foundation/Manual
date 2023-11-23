@@ -56,7 +56,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#multiple-function-definitions">Multiple Function Definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#disclaimers">Disclaimers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
@@ -155,7 +154,7 @@
 <ul class="simple">
 <li><p>Using the return statement:</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -204,17 +203,6 @@ The following is valid Asylum code:</p></li>
 <li><p><a class="reference internal" href="solutions/functions2.html"><span class="std std-doc">Solution 2</span></a></p></li>
 <li><p><a class="reference internal" href="solutions/functions3.html"><span class="std std-doc">Solution 3</span></a></p></li>
 </ul>
-</section>
-<section id="disclaimers">
-<h2>Disclaimers<a class="headerlink" href="#disclaimers" title="Link to this heading"></a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>StraitJacket currently is not smart enough to understand function overloading. The code to do this is not implemented.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>StraitJacket can’t use the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator to add numbers at the moment. You have to use the LLVM ASM call <code class="docutils literal notranslate"><span class="pre">(int)llvm(&quot;add&quot;,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> instead.</p>
-</div>
 </section>
 </section>
 

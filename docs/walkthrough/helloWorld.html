@@ -122,7 +122,8 @@
 <li><p>There is a semicolon <code class="docutils literal notranslate"><span class="pre">;</span></code> to signal to the compiler that the statement is over.</p></li>
 </ul>
 <p>Notice that statements outside a function are called <em>top-level statements</em>. These are only allowed to be in one of the files you are compiling, as the compiler wouldn’t know where your program would start otherwise. Normally, we put code inside of functions to be more organized:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -165,7 +166,8 @@
 <section id="print-function">
 <h2>Print Function<a class="headerlink" href="#print-function" title="Link to this heading"></a></h2>
 <p>While <code class="docutils literal notranslate"><span class="pre">println</span></code> exists, <code class="docutils literal notranslate"><span class="pre">print</span></code> also exists too? So what’s the difference? <code class="docutils literal notranslate"><span class="pre">println</span></code> will put a newline after it prints what you give it, while <code class="docutils literal notranslate"><span class="pre">print</span></code> will not. For example:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span>

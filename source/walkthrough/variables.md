@@ -9,9 +9,9 @@ How you use a variable depends on what it is of course. But let's look at an exa
 
 ```rust
 fn main() {
-    string myText;
+    str myText;
     myText = "Hello World!";
-    string myOtherText = "This is more text!";
+    str myOtherText = "This is more text!";
     println(myText);
     println(myOtherText);
 }
