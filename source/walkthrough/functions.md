@@ -2,7 +2,8 @@
 In just about any programming language, functions are heavily utilized. The job of a function is to execute code depending on input parameters, and produce any amount of results from it. Functions can also call other functions and execute the code within them. You saw this earlier by calling `println`, which told the computer to execute printing code to whatever you gave it. We can also have values be returned like so:
 
 ```rust
-fn main() {
+fn main()
+{
     println(add(3, 7));
     println(add(2, add(3, 2)));
     println(add(2, 1));
@@ -41,7 +42,8 @@ fn add(int a, int b) -> int => a + b;
 ```
 * Using the return statement:
 ```rust
-fn add(int a, int b) -> int {
+fn add(int a, int b) -> int
+{
     return a + b;
 }
 ```

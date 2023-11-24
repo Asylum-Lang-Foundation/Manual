@@ -83,15 +83,10 @@ Strings of text are composed of characters. Below are the types allowed:
 
 By default, characters are set to `h`. The default value of a string is the empty string.
 
-### Template Types
-These types depend on other types to work.
+### Function Type
+The function type is in the form `func<T(...)>` It is a type that is a function that has a return type of `T` and parameter types for the function in the parenthesis. The add function from earlier is type `func<int(int, int)>`. It is mostly used for storing functions into variables.
 
-| Type | Description |
-| ---- | ----------- |
-| func<`T`(`...`)> | A type that is a function that has a return type of `T` and parameter types for the function in the parenthesis. The add function from earlier is type `func<int(int, int)>`. |
-| error<`T`, `U`> | When a success occurs, the value of type `T` will be returned. When an error occurs, the value of type `U` will be used. Note that both are allowed to be `void`. |
-
-Functions do not have a default value and must be initialized immediately. Errors by default are set to an error of the default type of `U` if possible.
+Functions do not have a default value and must be initialized immediately.
 
 ### Non-Types
 These types are not really types and are context sensitive.
@@ -100,30 +95,6 @@ These types are not really types and are context sensitive.
 | ---- | ----------- |
 | var | This is not a type, it turns into another type that is automatically determined at compile time. It has its uses, but it is generally not recommended, this is a matter of opinion though. |
 | This | The current type being implemented in an implementation block. |
-
-## C Compatibility
-C uses different types from Asylum, so the below are for C compatibility. Asylum *typedef*s, or creates new types that really just shortcut back to the original type. The below chart shows the typedefs defined by EASL (Embedded Asylum Standard Library):
-
-| Type | C Type | True Type | Range |
-| ---- | ------ | --------- | ----------- |
-| c_schar_t | signed char | s8 | -128 to 127 |
-| c_uchar_t | unsigned char | u8 | 0 to 255 |
-| c_char_t | char | - | - | 
-| c_short_t | short | s16 | -32,768 to 32,767 |
-| c_ushort_t | unsigned short | u16 | 0 to 65,535 |
-| c_int_t | int | s32 | -2,147,483,648 to 2,147,483,647 |
-| c_uint_t | unsigned int | u32 | 0 to 4,294,967,295 |
-| c_long_t | long | s32 | -2,147,483,648 to 2,147,483,647 |
-| c_ulong_t | unsigned long | u32 | 0 to 4,294,967,295 |
-| c_longlong_t | long long | s64 | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
-| c_ulonglong_t | unsigned long long | u64 | 0 to 18,446,744,073,709,551,615 |
-| c_float_t | float | f32 | 3.4E +/- 38 (7 digits) |
-| c_double_t | double | f64 | 1.7E +/- 308 (15 digits) |
-| c_size_t | uint | - |
-| c_ssize_t | int | - |
-| c_ptr_t | int | - |
-
-Despite the fact that this table is final, it is highly recommended to continue using types such as `u16` when the type expected *must* be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.
 
 ## Special Types
 Like most other languages, Asylum has *special types* that are types that involve other types. This statement is confusing, but it'll make sense after looking at the special types below (where `T` is any non-void data type). It is not expected for everything listed here to make sense, as they are discussed in more detail later:
@@ -149,28 +120,109 @@ Arrays are used for storing blocks of data that do not grow or shrink in size.
 
 Arrays will have their elements be their default values if possible. Note that is not possible to store a dynamic array in a `struct` since they do not have a definite size.
 
-### References
-References are used to access data stored somewhere else without having to copy it. With the exception of nullable references, references will always have valid data.
+### Other Types
+There are some other types that have special uses as well.
 
 | Type | Name | Description |
 | ---- | ---- | ----------- |
 | `T`& | Reference | A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always references data. (L-value reference for those familiar with C++). |
+| `T`% | Move | Data being transferred that can not be written to (R-value reference for those familiar with C++). |
+| `T`* | Pointer | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it). |
+
+References and moved data do not have a default value and must be initialized immediately. Pointers are `null` by default.
+
+## EASL Types
+EASL (Embedded Asylum Standard Library) is a thin layer over Asylum that helps implement the language itself. It is responsible for providing the types below. Note that all EASL types start with upper-case letters as only the primitive types start with lowercase.
+
+### C Compatibility
+C uses different types from Asylum, so the below are for C compatibility. EASL *typedef*s, or creates new types that really just shortcut back to the original type:
+
+| Type | C Type | True Type | Range |
+| ---- | ------ | --------- | ----------- |
+| C_schar_t | signed char | s8 | -128 to 127 |
+| C_uchar_t | unsigned char | u8 | 0 to 255 |
+| C_char_t | char | - | - | 
+| C_short_t | short | s16 | -32,768 to 32,767 |
+| C_ushort_t | unsigned short | u16 | 0 to 65,535 |
+| C_int_t | int | s32 | -2,147,483,648 to 2,147,483,647 |
+| C_uint_t | unsigned int | u32 | 0 to 4,294,967,295 |
+| C_long_t | long | s32 | -2,147,483,648 to 2,147,483,647 |
+| C_ulong_t | unsigned long | u32 | 0 to 4,294,967,295 |
+| C_longlong_t | long long | s64 | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
+| C_ulonglong_t | unsigned long long | u64 | 0 to 18,446,744,073,709,551,615 |
+| C_float_t | float | f32 | 3.4E +/- 38 (7 digits) |
+| C_double_t | double | f64 | 1.7E +/- 308 (15 digits) |
+| C_ssize_t | ssize_t | int | - |
+| C_size_t | size_t | uint | - |
+| C_intptr_t | intptr_t | int | - |
+| C_uintptr_t | uintptr_t | uint | - |
+
+Despite the fact that this table is final, it is highly recommended to continue using types such as `u16` when the type expected *must* be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.
+
+### Smart References
+Smart references are used to access data stored somewhere else without having to copy it. With the exception of nullable references, references will always have valid data.
+
+| Type | Name | Description |
+| ---- | ---- | ----------- |
 | `T`@ | Nullable Reference | Smart reference to a data that may be null. |
 | `T`^ | Owning Reference | Smart reference that owns data. When it goes out of scope, the value it owns dies with it. Owning references may only moved to other owning references, never copied. It is not possible for this reference to be null. |
 | `T`# | Counted Reference | Smart reference that counts references to data. Copying it to another `T#` will increase the reference count, where moving it leaves the reference count the same. References that are not `T#` do not effect the reference count. It is not possible for this reference to be null. |
 
 All references must be initialized while declared as they have no default value with the exception of the nullable reference, which is `null` by default.
 
+### Vectors
+Vectors are shortcuts to tuples of multiple of the same type. For example, a `Vector<float, 4>` will produce a tuple of `4` `float` elements. EASL defines typedefs for commonly used vector types:
+
+| Type | True Type |
+| ---- | --------- |
+| Vec2 | Vector<float, 2> |
+| Vec3 | Vector<float, 3> |
+| Vec4 | Vector<float, 4> |
+| UVec2 | Vector<uint, 2> |
+| UVec3 | Vector<uint, 3> |
+| UVec4 | Vector<uint, 4> |
+| SVec2 | Vector<int, 2> |
+| SVec3 | Vector<int, 3> |
+| SVec4 | Vector<int, 4> |
+
+### Matrices
+EASL also allows you to declare a matrix with `Matrix<T, U, V>` where `T` is the element type, `U` is the number of rows, and `V` is the number of columns. This means a `Matrix<float, 3, 4>` is a matrix of `float` elements with `3` rows and `4` columns. Note that `T` must have addition, subtraction, multiplication, and division defined with itself. Like vectors, EASL defines some typedefs for commonly used matrix types:
+
+| Type | True Type |
+| ---- | --------- |
+| Matrix2x2 | Matrix<float, 2, 2> |
+| Matrix2x3 | Matrix<float, 2, 3> |
+| Matrix3x3 | Matrix<float, 3, 3> |
+| Matrix3x4 | Matrix<float, 3, 4> |
+| Matrix4x4 | Matrix<float, 4, 4> |
+| UMatrix2x2 | Matrix<uint, 2, 2> |
+| UMatrix2x3 | Matrix<uint, 2, 3> |
+| UMatrix3x3 | Matrix<uint, 3, 3> |
+| UMatrix3x4 | Matrix<uint, 3, 4> |
+| UMatrix4x4 | Matrix<uint, 4, 4> |
+| SMatrix2x2 | Matrix<int, 2, 2> |
+| SMatrix2x3 | Matrix<int, 2, 3> |
+| SMatrix3x3 | Matrix<int, 3, 3> |
+| SMatrix3x4 | Matrix<int, 3, 4> |
+| SMatrix4x4 | Matrix<int, 4, 4> |
+
+Unlike `Vector<T, U>`, `Matrix<T, U, V>` is a struct rather than a tuple. Its composure looks like:
+
+```rust
+struct Matrix<type T: Add<T> & Sub<T> & Mul<T> & Div<T>, uint U where U > 1, uint V where V > 1> {
+    Vector<T, U>[V] rows;
+}
+```
+
 ### Other Types
-There are some other types that have special uses as well.
+Some other types that EASL defines:
 
 | Type | Name | Description |
 | ---- | ---- | ----------- |
-| `T`% | Move | Data being transferred that can not be written to (R-value reference for those familiar with C++). |
-| `T`* | Pointer | A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it's for more low-level uses so you most likely don't need it). |
 | `T`? | Optional | An optional value. Either contains `T` or `null`. |
+| Error<`T`, `U`> | When a success occurs, the value of type `T` will be returned. When an error occurs, the value of type `U` will be used. Note that both are allowed to be `void`. |
 
-Moved data does not have a default value and must be initialized immediately. However, pointers and optionals are both `null` by default.
+Optional is `null` by default. Errors by default are set to an error of the default type of `U` if possible.
 
 ## Storage Qualifiers
 You're allowed to tag on storage qualifiers to add rules on how data is allowed to be accessed.

@@ -21,7 +21,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="tuples.html" />
+    <link rel="next" title="Tuples" href="tuples.html" />
     <link rel="prev" title="Data Types" href="dataTypes.html" /> 
 </head>
 
@@ -75,6 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#disclaimers">Disclaimers</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
@@ -145,7 +146,7 @@ This is more text!
 <section id="understanding-the-code">
 <h3>Understanding The Code<a class="headerlink" href="#understanding-the-code" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>We declare a variable (named “myText”) by specifying its type and then the name of what we will call the variable. Here, we are saying that there is a variable called “myText” and it “is a” <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p></li>
+<li><p>We declare a variable (named “myText”) by specifying its type and then the name of what we will call the variable. Here, we are saying that there is a variable called “myText” and it “is an” <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p></li>
 <li><p>Using an assignment operator such as <code class="docutils literal notranslate"><span class="pre">=</span></code>, we give the variable a value.</p></li>
 <li><p>It is also possible to declare and assign a variable at the same time.</p></li>
 <li><p>After this, we could simply print out those variables.</p></li>
@@ -348,22 +349,27 @@ This is more text!
 <td><p>a ?? b</p></td>
 <td><p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> is false, return <code class="docutils literal notranslate"><span class="pre">b</span></code>, else, return <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p>=&gt;</p></td>
+<tr class="row-even"><td><p>!?</p></td>
+<td><p>Success Or Die</p></td>
+<td><p>!? a</p></td>
+<td><p>This is a shorthand for <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(a)</span> <span class="pre">toAssign</span> <span class="pre">=</span> <span class="pre">item;</span> <span class="pre">else</span> <span class="pre">return</span> <span class="pre">a;</span></code>. Basically, either the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is returned if its true or otherwise we exit out of the function and return whatever <code class="docutils literal notranslate"><span class="pre">a</span></code> is. This is useful for propogating errors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>=&gt;</p></td>
 <td><p>Lambda</p></td>
 <td><p>a =&gt; b</p></td>
 <td><p>The value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is equal to the result of expression <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>,</p></td>
+<tr class="row-even"><td><p>,</p></td>
 <td><p>Comma</p></td>
 <td><p>a, b, …</p></td>
 <td><p>Form a tuple with <code class="docutils literal notranslate"><span class="pre">a</span></code> in the first element, <code class="docutils literal notranslate"><span class="pre">b</span></code> in the second, etc. Expressions that result in <code class="docutils literal notranslate"><span class="pre">void</span></code> are NOT included.</p></td>
 </tr>
-<tr class="row-even"><td><p>.</p></td>
+<tr class="row-odd"><td><p>.</p></td>
 <td><p>Dot</p></td>
 <td><p>a.b</p></td>
 <td><p>Access member <code class="docutils literal notranslate"><span class="pre">b</span></code> from struct <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>[]</p></td>
+<tr class="row-even"><td><p>[]</p></td>
 <td><p>Index</p></td>
 <td><p>a[b]</p></td>
 <td><p>Access index <code class="docutils literal notranslate"><span class="pre">b</span></code> from <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
@@ -480,15 +486,13 @@ This is more text!
 </tr>
 <tr class="row-even"><td><p>x || y</p></td>
 </tr>
-<tr class="row-odd"><td><p>x ?? y</p></td>
+<tr class="row-odd"><td><p>x ?? y, x !? y</p></td>
 </tr>
 <tr class="row-even"><td><p>x ? y : z</p></td>
 </tr>
 <tr class="row-odd"><td><p>x, y</p></td>
 </tr>
 <tr class="row-even"><td><p>x =&gt; y</p></td>
-</tr>
-<tr class="row-odd"><td><p>Assignment Operators</p></td>
 </tr>
 </tbody>
 </table>
@@ -497,7 +501,8 @@ This is more text!
 <section id="preserving-data-with-operators">
 <h3>Preserving Data With Operators<a class="headerlink" href="#preserving-data-with-operators" title="Link to this heading"></a></h3>
 <p>What happens when you use these different operators on differing or similar types? For example, let’s look at the following code:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="mf">5.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="p">}</span>
@@ -508,7 +513,7 @@ This is more text!
 <span class="mf">2.5</span>
 </pre></div>
 </div>
-<p>What just happened? Well it turns out that since <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> are both integers, the result must be an integer. This led to the decimal portion being completely ignored! But <code class="docutils literal notranslate"><span class="pre">5.0</span></code> is a floating-point number. Even though <code class="docutils literal notranslate"><span class="pre">2</span></code> is a decimal number, since an operation is being done with an integer and a floating-poing number, the computer will calculate the result that involves losing less information. So for example, an <code class="docutils literal notranslate"><span class="pre">s32</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) added with a <code class="docutils literal notranslate"><span class="pre">s64</span></code> (<code class="docutils literal notranslate"><span class="pre">long</span></code>) will produce an <code class="docutils literal notranslate"><span class="pre">s64</span></code> (<code class="docutils literal notranslate"><span class="pre">long</span></code>) as it loses less information. Despite the technicalities of floating-point numbers, a floating-point or fixed-point number is always said to be “bigger”.</p>
+<p>What just happened? Well it turns out that since <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> are both integers, the result must be an integer. This led to the decimal portion being completely ignored! But <code class="docutils literal notranslate"><span class="pre">5.0</span></code> is a floating-point number. Even though <code class="docutils literal notranslate"><span class="pre">2</span></code> is a decimal number, since an operation is being done with an integer and a floating-poing number, the computer will calculate the result that involves losing less information. So for example, an <code class="docutils literal notranslate"><span class="pre">s32</span></code> added with an <code class="docutils literal notranslate"><span class="pre">s64</span></code> will produce an <code class="docutils literal notranslate"><span class="pre">s64</span></code> as it loses less information. Despite the technicalities of floating-point numbers, a floating-point or fixed-point number is always said to be “bigger”.</p>
 </section>
 </section>
 <section id="a-more-complex-example">
@@ -516,10 +521,11 @@ This is more text!
 <p>As you can tell, there are quite a lot of different operators. Each will be discussed in more detail later, but for now, let’s see an example that utilizes some:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// Here we have a function that solves for x = (-b +/- sqrt(b^2 - 4ac)) / 2a, which is better known as the standard quadratic formula.</span>
 <span class="c1">// It is also worth noting that we are allowed to return multiple values at once in a tuple as shown:</span>
-<span class="k">fn</span> <span class="nf">quadraticFormula</span><span class="p">(</span><span class="n">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">double</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">double</span><span class="w"> </span><span class="n">innerPart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">           </span><span class="c1">// Calculate the interior part of the square root.</span>
+<span class="k">fn</span> <span class="nf">quadraticFormula</span><span class="p">(</span><span class="n">float</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">float</span><span class="p">,</span><span class="w"> </span><span class="n">float</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">float</span><span class="w"> </span><span class="n">innerPart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">            </span><span class="c1">// Calculate the interior part of the square root.</span>
 <span class="w">    </span><span class="n">innerPart</span><span class="w"> </span><span class="o">**=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">                              </span><span class="c1">// Apply the square root by raising to the .5th power.</span>
-<span class="w">    </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">innerPart</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">innerPart</span><span class="w">                  </span><span class="c1">// Return the final results (the comma creates a tuple that is returned).</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">innerPart</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">innerPart</span><span class="w">           </span><span class="c1">// Return the final results (the comma creates a tuple that is returned).</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -571,7 +577,7 @@ This is more text!
 <span class="p">}</span>
 
 <span class="k">struct</span> <span class="nc">Car</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">licensePlate</span><span class="p">;</span><span class="w"> </span><span class="c1">// Specifying accessibility this way is also valid.</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="kt">str</span><span class="w"> </span><span class="n">licensePlate</span><span class="p">;</span><span class="w"> </span><span class="c1">// Specifying accessibility this way is also valid.</span>
 <span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">rgbColor</span><span class="p">;</span>
 <span class="k">pub</span>:
     <span class="nc">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
@@ -646,7 +652,7 @@ This is more text!
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="dataTypes.html" class="btn btn-neutral float-left" title="Data Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tuples.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tuples.html" class="btn btn-neutral float-right" title="Tuples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

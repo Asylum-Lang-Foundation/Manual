@@ -23,7 +23,7 @@ This is more text!
 ```
 
 ### Understanding The Code
-* We declare a variable (named "myText") by specifying its type and then the name of what we will call the variable. Here, we are saying that there is a variable called "myText" and it "is a" `string`.
+* We declare a variable (named "myText") by specifying its type and then the name of what we will call the variable. Here, we are saying that there is a variable called "myText" and it "is an" `str`.
 * Using an assignment operator such as `=`, we give the variable a value.
 * It is also possible to declare and assign a variable at the same time.
 * After this, we could simply print out those variables.
@@ -74,6 +74,7 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b`. |
 | ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c`. |
 | ?? | False | a ?? b | If `a` is false, return `b`, else, return `a`. |
+| !? | Success Or Die | !? a | This is a shorthand for `if (a) toAssign = item; else return a;`. Basically, either the value of `a` is returned if its true or otherwise we exit out of the function and return whatever `a` is. This is useful for propogating errors. |
 | => | Lambda | a => b | The value of `a` is equal to the result of expression `b`. |
 | , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included. |
 | . | Dot | a.b | Access member `b` from struct `a`. |
@@ -123,11 +124,10 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 | x \| y |
 | x && y, x !& y, x !\| y |
 | x \|\| y |
-| x ?? y |
+| x ?? y, x !? y |
 | x ? y : z |
 | x, y |
 | x => y |
-| Assignment Operators |
 
 Remember to use parenthesis when in doubt! It makes code easier to read.
 
@@ -135,7 +135,8 @@ Remember to use parenthesis when in doubt! It makes code easier to read.
 What happens when you use these different operators on differing or similar types? For example, let's look at the following code:
 
 ```rust
-fn main() {
+fn main()
+{
     println(5 / 2);
     println(5.0 / 2);
 }
@@ -146,7 +147,7 @@ Output:
 2.5
 ```
 
-What just happened? Well it turns out that since `5` and `2` are both integers, the result must be an integer. This led to the decimal portion being completely ignored! But `5.0` is a floating-point number. Even though `2` is a decimal number, since an operation is being done with an integer and a floating-poing number, the computer will calculate the result that involves losing less information. So for example, an `s32` (`int`) added with a `s64` (`long`) will produce an `s64` (`long`) as it loses less information. Despite the technicalities of floating-point numbers, a floating-point or fixed-point number is always said to be "bigger".
+What just happened? Well it turns out that since `5` and `2` are both integers, the result must be an integer. This led to the decimal portion being completely ignored! But `5.0` is a floating-point number. Even though `2` is a decimal number, since an operation is being done with an integer and a floating-poing number, the computer will calculate the result that involves losing less information. So for example, an `s32` added with an `s64` will produce an `s64` as it loses less information. Despite the technicalities of floating-point numbers, a floating-point or fixed-point number is always said to be "bigger".
 
 ## A More Complex Example
 As you can tell, there are quite a lot of different operators. Each will be discussed in more detail later, but for now, let's see an example that utilizes some:
@@ -154,10 +155,11 @@ As you can tell, there are quite a lot of different operators. Each will be disc
 ```rust
 // Here we have a function that solves for x = (-b +/- sqrt(b^2 - 4ac)) / 2a, which is better known as the standard quadratic formula.
 // It is also worth noting that we are allowed to return multiple values at once in a tuple as shown:
-fn quadraticFormula(double a, double b, double c) -> double, double {
-    double innerPart = b * b - 4 * a * c;           // Calculate the interior part of the square root.
+fn quadraticFormula(float a, float b, float c) -> float, float
+{
+    float innerPart = b * b - 4 * a * c;            // Calculate the interior part of the square root.
     innerPart **= 0.5;                              // Apply the square root by raising to the .5th power.
-    -b + innerPart, -b - innerPart                  // Return the final results (the comma creates a tuple that is returned).
+    return -b + innerPart, -b - innerPart           // Return the final results (the comma creates a tuple that is returned).
 }
 ```
 
@@ -184,7 +186,7 @@ pub:
 }
 
 struct Car {
-    pub string licensePlate; // Specifying accessibility this way is also valid.
+    pub str licensePlate; // Specifying accessibility this way is also valid.
     pub Color rgbColor;
 pub:
     int year;

@@ -59,16 +59,22 @@
 <li class="toctree-l3"><a class="reference internal" href="#floating-point-types">Floating Point Types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-numbers">Other Numbers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#text-based">Text Based</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#template-types">Template Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function-type">Function Type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#non-types">Non-Types</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#c-compatibility">C Compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#special-types">Special Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tuple-types">Tuple Types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#array-types">Array Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-types">Other Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#easl-types">EASL Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c-compatibility">C Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smart-references">Smart References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vectors">Vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matrices">Matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Other Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#storage-qualifiers">Storage Qualifiers</a></li>
@@ -82,6 +88,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
@@ -280,25 +287,10 @@
 </table>
 <p>By default, characters are set to <code class="docutils literal notranslate"><span class="pre">h</span></code>. The default value of a string is the empty string.</p>
 </section>
-<section id="template-types">
-<h3>Template Types<a class="headerlink" href="#template-types" title="Link to this heading"></a></h3>
-<p>These types depend on other types to work.</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Type</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>func&lt;<code class="docutils literal notranslate"><span class="pre">T</span></code>(<code class="docutils literal notranslate"><span class="pre">...</span></code>)&gt;</p></td>
-<td><p>A type that is a function that has a return type of <code class="docutils literal notranslate"><span class="pre">T</span></code> and parameter types for the function in the parenthesis. The add function from earlier is type <code class="docutils literal notranslate"><span class="pre">func&lt;int(int,</span> <span class="pre">int)&gt;</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>error&lt;<code class="docutils literal notranslate"><span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code>&gt;</p></td>
-<td><p>When a success occurs, the value of type <code class="docutils literal notranslate"><span class="pre">T</span></code> will be returned. When an error occurs, the value of type <code class="docutils literal notranslate"><span class="pre">U</span></code> will be used. Note that both are allowed to be <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></td>
-</tr>
-</tbody>
-</table>
-<p>Functions do not have a default value and must be initialized immediately. Errors by default are set to an error of the default type of <code class="docutils literal notranslate"><span class="pre">U</span></code> if possible.</p>
+<section id="function-type">
+<h3>Function Type<a class="headerlink" href="#function-type" title="Link to this heading"></a></h3>
+<p>The function type is in the form <code class="docutils literal notranslate"><span class="pre">func&lt;T(...)&gt;</span></code> It is a type that is a function that has a return type of <code class="docutils literal notranslate"><span class="pre">T</span></code> and parameter types for the function in the parenthesis. The add function from earlier is type <code class="docutils literal notranslate"><span class="pre">func&lt;int(int,</span> <span class="pre">int)&gt;</span></code>. It is mostly used for storing functions into variables.</p>
+<p>Functions do not have a default value and must be initialized immediately.</p>
 </section>
 <section id="non-types">
 <h3>Non-Types<a class="headerlink" href="#non-types" title="Link to this heading"></a></h3>
@@ -319,102 +311,6 @@
 </tbody>
 </table>
 </section>
-</section>
-<section id="c-compatibility">
-<h2>C Compatibility<a class="headerlink" href="#c-compatibility" title="Link to this heading"></a></h2>
-<p>C uses different types from Asylum, so the below are for C compatibility. Asylum <em>typedef</em>s, or creates new types that really just shortcut back to the original type. The below chart shows the typedefs defined by EASL (Embedded Asylum Standard Library):</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Type</p></th>
-<th class="head"><p>C Type</p></th>
-<th class="head"><p>True Type</p></th>
-<th class="head"><p>Range</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>c_schar_t</p></td>
-<td><p>signed char</p></td>
-<td><p>s8</p></td>
-<td><p>-128 to 127</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_uchar_t</p></td>
-<td><p>unsigned char</p></td>
-<td><p>u8</p></td>
-<td><p>0 to 255</p></td>
-</tr>
-<tr class="row-even"><td><p>c_char_t</p></td>
-<td><p>char</p></td>
-<td><p>-</p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_short_t</p></td>
-<td><p>short</p></td>
-<td><p>s16</p></td>
-<td><p>-32,768 to 32,767</p></td>
-</tr>
-<tr class="row-even"><td><p>c_ushort_t</p></td>
-<td><p>unsigned short</p></td>
-<td><p>u16</p></td>
-<td><p>0 to 65,535</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_int_t</p></td>
-<td><p>int</p></td>
-<td><p>s32</p></td>
-<td><p>-2,147,483,648 to 2,147,483,647</p></td>
-</tr>
-<tr class="row-even"><td><p>c_uint_t</p></td>
-<td><p>unsigned int</p></td>
-<td><p>u32</p></td>
-<td><p>0 to 4,294,967,295</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_long_t</p></td>
-<td><p>long</p></td>
-<td><p>s32</p></td>
-<td><p>-2,147,483,648 to 2,147,483,647</p></td>
-</tr>
-<tr class="row-even"><td><p>c_ulong_t</p></td>
-<td><p>unsigned long</p></td>
-<td><p>u32</p></td>
-<td><p>0 to 4,294,967,295</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_longlong_t</p></td>
-<td><p>long long</p></td>
-<td><p>s64</p></td>
-<td><p>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</p></td>
-</tr>
-<tr class="row-even"><td><p>c_ulonglong_t</p></td>
-<td><p>unsigned long long</p></td>
-<td><p>u64</p></td>
-<td><p>0 to 18,446,744,073,709,551,615</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_float_t</p></td>
-<td><p>float</p></td>
-<td><p>f32</p></td>
-<td><p>3.4E +/- 38 (7 digits)</p></td>
-</tr>
-<tr class="row-even"><td><p>c_double_t</p></td>
-<td><p>double</p></td>
-<td><p>f64</p></td>
-<td><p>1.7E +/- 308 (15 digits)</p></td>
-</tr>
-<tr class="row-odd"><td><p>c_size_t</p></td>
-<td><p>uint</p></td>
-<td><p>-</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p>c_ssize_t</p></td>
-<td><p>int</p></td>
-<td><p>-</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>c_ptr_t</p></td>
-<td><p>int</p></td>
-<td><p>-</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-<p>Despite the fact that this table is final, it is highly recommended to continue using types such as <code class="docutils literal notranslate"><span class="pre">u16</span></code> when the type expected <em>must</em> be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.</p>
 </section>
 <section id="special-types">
 <h2>Special Types<a class="headerlink" href="#special-types" title="Link to this heading"></a></h2>
@@ -469,9 +365,9 @@
 </table>
 <p>Arrays will have their elements be their default values if possible. Note that is not possible to store a dynamic array in a <code class="docutils literal notranslate"><span class="pre">struct</span></code> since they do not have a definite size.</p>
 </section>
-<section id="references">
-<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
-<p>References are used to access data stored somewhere else without having to copy it. With the exception of nullable references, references will always have valid data.</p>
+<section id="other-types">
+<h3>Other Types<a class="headerlink" href="#other-types" title="Link to this heading"></a></h3>
+<p>There are some other types that have special uses as well.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
@@ -484,25 +380,126 @@
 <td><p>Reference</p></td>
 <td><p>A not-null reference to a data type. For now, think of it as a shortcut to already existing data of the same type that always references data. (L-value reference for those familiar with C++).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>&#64;</p></td>
-<td><p>Nullable Reference</p></td>
-<td><p>Smart reference to a data that may be null.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>%</p></td>
+<td><p>Move</p></td>
+<td><p>Data being transferred that can not be written to (R-value reference for those familiar with C++).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>^</p></td>
-<td><p>Owning Reference</p></td>
-<td><p>Smart reference that owns data. When it goes out of scope, the value it owns dies with it. Owning references may only moved to other owning references, never copied. It is not possible for this reference to be null.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>#</p></td>
-<td><p>Counted Reference</p></td>
-<td><p>Smart reference that counts references to data. Copying it to another <code class="docutils literal notranslate"><span class="pre">T#</span></code> will increase the reference count, where moving it leaves the reference count the same. References that are not <code class="docutils literal notranslate"><span class="pre">T#</span></code> do not effect the reference count. It is not possible for this reference to be null.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>*</p></td>
+<td><p>Pointer</p></td>
+<td><p>A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it).</p></td>
 </tr>
 </tbody>
 </table>
-<p>All references must be initialized while declared as they have no default value with the exception of the nullable reference, which is <code class="docutils literal notranslate"><span class="pre">null</span></code> by default.</p>
+<p>References and moved data do not have a default value and must be initialized immediately. Pointers are <code class="docutils literal notranslate"><span class="pre">null</span></code> by default.</p>
 </section>
-<section id="other-types">
-<h3>Other Types<a class="headerlink" href="#other-types" title="Link to this heading"></a></h3>
-<p>There are some other types that have special uses as well.</p>
+</section>
+<section id="easl-types">
+<h2>EASL Types<a class="headerlink" href="#easl-types" title="Link to this heading"></a></h2>
+<p>EASL (Embedded Asylum Standard Library) is a thin layer over Asylum that helps implement the language itself. It is responsible for providing the types below. Note that all EASL types start with upper-case letters as only the primitive types start with lowercase.</p>
+<section id="c-compatibility">
+<h3>C Compatibility<a class="headerlink" href="#c-compatibility" title="Link to this heading"></a></h3>
+<p>C uses different types from Asylum, so the below are for C compatibility. EASL <em>typedef</em>s, or creates new types that really just shortcut back to the original type:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>C Type</p></th>
+<th class="head"><p>True Type</p></th>
+<th class="head"><p>Range</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>C_schar_t</p></td>
+<td><p>signed char</p></td>
+<td><p>s8</p></td>
+<td><p>-128 to 127</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_uchar_t</p></td>
+<td><p>unsigned char</p></td>
+<td><p>u8</p></td>
+<td><p>0 to 255</p></td>
+</tr>
+<tr class="row-even"><td><p>C_char_t</p></td>
+<td><p>char</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_short_t</p></td>
+<td><p>short</p></td>
+<td><p>s16</p></td>
+<td><p>-32,768 to 32,767</p></td>
+</tr>
+<tr class="row-even"><td><p>C_ushort_t</p></td>
+<td><p>unsigned short</p></td>
+<td><p>u16</p></td>
+<td><p>0 to 65,535</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_int_t</p></td>
+<td><p>int</p></td>
+<td><p>s32</p></td>
+<td><p>-2,147,483,648 to 2,147,483,647</p></td>
+</tr>
+<tr class="row-even"><td><p>C_uint_t</p></td>
+<td><p>unsigned int</p></td>
+<td><p>u32</p></td>
+<td><p>0 to 4,294,967,295</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_long_t</p></td>
+<td><p>long</p></td>
+<td><p>s32</p></td>
+<td><p>-2,147,483,648 to 2,147,483,647</p></td>
+</tr>
+<tr class="row-even"><td><p>C_ulong_t</p></td>
+<td><p>unsigned long</p></td>
+<td><p>u32</p></td>
+<td><p>0 to 4,294,967,295</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_longlong_t</p></td>
+<td><p>long long</p></td>
+<td><p>s64</p></td>
+<td><p>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</p></td>
+</tr>
+<tr class="row-even"><td><p>C_ulonglong_t</p></td>
+<td><p>unsigned long long</p></td>
+<td><p>u64</p></td>
+<td><p>0 to 18,446,744,073,709,551,615</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_float_t</p></td>
+<td><p>float</p></td>
+<td><p>f32</p></td>
+<td><p>3.4E +/- 38 (7 digits)</p></td>
+</tr>
+<tr class="row-even"><td><p>C_double_t</p></td>
+<td><p>double</p></td>
+<td><p>f64</p></td>
+<td><p>1.7E +/- 308 (15 digits)</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_ssize_t</p></td>
+<td><p>ssize_t</p></td>
+<td><p>int</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>C_size_t</p></td>
+<td><p>size_t</p></td>
+<td><p>uint</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_intptr_t</p></td>
+<td><p>intptr_t</p></td>
+<td><p>int</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>C_uintptr_t</p></td>
+<td><p>uintptr_t</p></td>
+<td><p>uint</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<p>Despite the fact that this table is final, it is highly recommended to continue using types such as <code class="docutils literal notranslate"><span class="pre">u16</span></code> when the type expected <em>must</em> be a 16-bit unsigned number. This helps better communicate the fact that the operation depends on there being 16-bits.</p>
+</section>
+<section id="smart-references">
+<h3>Smart References<a class="headerlink" href="#smart-references" title="Link to this heading"></a></h3>
+<p>Smart references are used to access data stored somewhere else without having to copy it. With the exception of nullable references, references will always have valid data.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
@@ -511,21 +508,148 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>%</p></td>
-<td><p>Move</p></td>
-<td><p>Data being transferred that can not be written to (R-value reference for those familiar with C++).</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>&#64;</p></td>
+<td><p>Nullable Reference</p></td>
+<td><p>Smart reference to a data that may be null.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>*</p></td>
-<td><p>Pointer</p></td>
-<td><p>A pointer that can only be used in unsafe contexts. For now, think of it as a shortcut to existing data without any safety mechanisms. This also allows you to do math operations with memory positions (it’s for more low-level uses so you most likely don’t need it).</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>^</p></td>
+<td><p>Owning Reference</p></td>
+<td><p>Smart reference that owns data. When it goes out of scope, the value it owns dies with it. Owning references may only moved to other owning references, never copied. It is not possible for this reference to be null.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>#</p></td>
+<td><p>Counted Reference</p></td>
+<td><p>Smart reference that counts references to data. Copying it to another <code class="docutils literal notranslate"><span class="pre">T#</span></code> will increase the reference count, where moving it leaves the reference count the same. References that are not <code class="docutils literal notranslate"><span class="pre">T#</span></code> do not effect the reference count. It is not possible for this reference to be null.</p></td>
+</tr>
+</tbody>
+</table>
+<p>All references must be initialized while declared as they have no default value with the exception of the nullable reference, which is <code class="docutils literal notranslate"><span class="pre">null</span></code> by default.</p>
+</section>
+<section id="vectors">
+<h3>Vectors<a class="headerlink" href="#vectors" title="Link to this heading"></a></h3>
+<p>Vectors are shortcuts to tuples of multiple of the same type. For example, a <code class="docutils literal notranslate"><span class="pre">Vector&lt;float,</span> <span class="pre">4&gt;</span></code> will produce a tuple of <code class="docutils literal notranslate"><span class="pre">4</span></code> <code class="docutils literal notranslate"><span class="pre">float</span></code> elements. EASL defines typedefs for commonly used vector types:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>True Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vec2</p></td>
+<td><p>Vector&lt;float, 2&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vec3</p></td>
+<td><p>Vector&lt;float, 3&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Vec4</p></td>
+<td><p>Vector&lt;float, 4&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>UVec2</p></td>
+<td><p>Vector&lt;uint, 2&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>UVec3</p></td>
+<td><p>Vector&lt;uint, 3&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>UVec4</p></td>
+<td><p>Vector&lt;uint, 4&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>SVec2</p></td>
+<td><p>Vector&lt;int, 2&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>SVec3</p></td>
+<td><p>Vector&lt;int, 3&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>SVec4</p></td>
+<td><p>Vector&lt;int, 4&gt;</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="matrices">
+<h3>Matrices<a class="headerlink" href="#matrices" title="Link to this heading"></a></h3>
+<p>EASL also allows you to declare a matrix with <code class="docutils literal notranslate"><span class="pre">Matrix&lt;T,</span> <span class="pre">U,</span> <span class="pre">V&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">T</span></code> is the element type, <code class="docutils literal notranslate"><span class="pre">U</span></code> is the number of rows, and <code class="docutils literal notranslate"><span class="pre">V</span></code> is the number of columns. This means a <code class="docutils literal notranslate"><span class="pre">Matrix&lt;float,</span> <span class="pre">3,</span> <span class="pre">4&gt;</span></code> is a matrix of <code class="docutils literal notranslate"><span class="pre">float</span></code> elements with <code class="docutils literal notranslate"><span class="pre">3</span></code> rows and <code class="docutils literal notranslate"><span class="pre">4</span></code> columns. Note that <code class="docutils literal notranslate"><span class="pre">T</span></code> must have addition, subtraction, multiplication, and division defined with itself. Like vectors, EASL defines some typedefs for commonly used matrix types:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>True Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Matrix2x2</p></td>
+<td><p>Matrix&lt;float, 2, 2&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Matrix2x3</p></td>
+<td><p>Matrix&lt;float, 2, 3&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Matrix3x3</p></td>
+<td><p>Matrix&lt;float, 3, 3&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Matrix3x4</p></td>
+<td><p>Matrix&lt;float, 3, 4&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Matrix4x4</p></td>
+<td><p>Matrix&lt;float, 4, 4&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>UMatrix2x2</p></td>
+<td><p>Matrix&lt;uint, 2, 2&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>UMatrix2x3</p></td>
+<td><p>Matrix&lt;uint, 2, 3&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>UMatrix3x3</p></td>
+<td><p>Matrix&lt;uint, 3, 3&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>UMatrix3x4</p></td>
+<td><p>Matrix&lt;uint, 3, 4&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>UMatrix4x4</p></td>
+<td><p>Matrix&lt;uint, 4, 4&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>SMatrix2x2</p></td>
+<td><p>Matrix&lt;int, 2, 2&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMatrix2x3</p></td>
+<td><p>Matrix&lt;int, 2, 3&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>SMatrix3x3</p></td>
+<td><p>Matrix&lt;int, 3, 3&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMatrix3x4</p></td>
+<td><p>Matrix&lt;int, 3, 4&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>SMatrix4x4</p></td>
+<td><p>Matrix&lt;int, 4, 4&gt;</p></td>
+</tr>
+</tbody>
+</table>
+<p>Unlike <code class="docutils literal notranslate"><span class="pre">Vector&lt;T,</span> <span class="pre">U&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">Matrix&lt;T,</span> <span class="pre">U,</span> <span class="pre">V&gt;</span></code> is a struct rather than a tuple. Its composure looks like:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Matrix</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span>: <span class="nc">Add</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Sub</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Mul</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Div</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="p">[</span><span class="n">V</span><span class="p">]</span><span class="w"> </span><span class="n">rows</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Other Types<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Some other types that EASL defines:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>?</p></td>
 <td><p>Optional</p></td>
 <td><p>An optional value. Either contains <code class="docutils literal notranslate"><span class="pre">T</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></td>
 </tr>
+<tr class="row-odd"><td><p>Error&lt;<code class="docutils literal notranslate"><span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code>&gt;</p></td>
+<td><p>When a success occurs, the value of type <code class="docutils literal notranslate"><span class="pre">T</span></code> will be returned. When an error occurs, the value of type <code class="docutils literal notranslate"><span class="pre">U</span></code> will be used. Note that both are allowed to be <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
-<p>Moved data does not have a default value and must be initialized immediately. However, pointers and optionals are both <code class="docutils literal notranslate"><span class="pre">null</span></code> by default.</p>
+<p>Optional is <code class="docutils literal notranslate"><span class="pre">null</span></code> by default. Errors by default are set to an error of the default type of <code class="docutils literal notranslate"><span class="pre">U</span></code> if possible.</p>
 </section>
 </section>
 <section id="storage-qualifiers">
