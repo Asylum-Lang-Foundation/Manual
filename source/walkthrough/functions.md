@@ -72,6 +72,9 @@ fn add(int a, int b) {}
 ```
 The compiler will know which function to call depending on the context on which it is used.
 
+## Default Parameters
+TODO!!!
+
 ## Challenges
 1. Adding is cool and all, but subtraction is where it is at! Make a function called `sub` that subtracts `int b` from `int a`, this returns an `int`.
 2. The more numbers the merrier! Make another function that computes `a - b - c` and another that computes `a - b - c - d`. Create them in such a way that both your functions return in a unique way.

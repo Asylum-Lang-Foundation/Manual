@@ -63,7 +63,7 @@ fn magicNumberGuess(int num) -> bool {
 }
 ```
 
-You are allowed to have multiple conditions for each result (`3` and `7` both lead to `I like this number!` being shown), as well as have multiple statements done as result as the condition. The `_` case will catch anything. Note that the first condition hit is matched, so `I really do not like this number.` will never be shown for `3` and the `_` case should always be done last. Note that this can work for anything, not just numbers:
+You may notice that unlike the traditional `switch` statements in `C`, there is no fall-through with labels, though you are allowed to have multiple conditions for each result (`3` and `7` both lead to `I like this number!` being shown), as well as have multiple statements done as result as the condition. The `_` case will catch anything. Note that the first condition hit is matched, so `I really do not like this number.` will never be shown for `3` and the `_` case should always be done last. Note that this can work for anything, not just numbers:
 
 ```rust
 fn matchStr(string s) -> int {

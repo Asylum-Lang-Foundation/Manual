@@ -132,7 +132,7 @@ fn main()
 Output:
 ```
 3
-3, Test
+num: 3, text: Test
 ```
 
 ## Batch Operations
@@ -160,7 +160,7 @@ Vectors are a special type of tuple that hold multiple of the same type. For exa
 typedef Vector<type T, 2> = T: x, T: y;
 typedef Vector<type T, 3> = T: x, T: y, T: z;
 typedef Vector<type T, 4> = T: x, T: y, T: z, T: w;
-typedef Vector<type T, uint U where U > 4> = T, T...(U - 1)
+typedef Vector<type T, uint U where U > 4> = T, T...(U - 1);
 ```
 
 This means that you can declare a vector of `4` floats by doing `Vector<float, 4>`. Note that vectors must have more than `1` element and that for the vectors with `2`, `3`, and `4` elements the items are named as well.

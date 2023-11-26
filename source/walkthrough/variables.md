@@ -74,7 +74,7 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b`. |
 | ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c`. |
 | ?? | False | a ?? b | If `a` is false, return `b`, else, return `a`. |
-| !? | Success Or Die | !? a | This is a shorthand for `if (a) toAssign = item; else return a;`. Basically, either the value of `a` is returned if its true or otherwise we exit out of the function and return whatever `a` is. This is useful for propogating errors. |
+| !? | Success Or Die | !? a | This is a shorthand for `if (a) toAssign = a; else return a;`. Basically, either the value of `a` is returned if its true or otherwise we exit out of the function and return whatever `a` is. This is useful for propogating errors. |
 | => | Lambda | a => b | The value of `a` is equal to the result of expression `b`. |
 | , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included. |
 | . | Dot | a.b | Access member `b` from struct `a`. |

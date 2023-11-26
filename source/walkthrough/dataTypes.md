@@ -210,7 +210,7 @@ Unlike `Vector<T, U>`, `Matrix<T, U, V>` is a struct rather than a tuple. Its co
 
 ```rust
 struct Matrix<type T: Add<T> & Sub<T> & Mul<T> & Div<T>, uint U where U > 1, uint V where V > 1> {
-    Vector<T, U>[V] rows;
+    Vector<T, U>[V] cols;
 }
 ```
 
@@ -219,10 +219,10 @@ Some other types that EASL defines:
 
 | Type | Name | Description |
 | ---- | ---- | ----------- |
-| `T`? | Optional | An optional value. Either contains `T` or `null`. |
-| Error<`T`, `U`> | When a success occurs, the value of type `T` will be returned. When an error occurs, the value of type `U` will be used. Note that both are allowed to be `void`. |
+| `T`? | Optional | An optional value. Either contains `T` or `None`. |
+| Res<`T`, `U`> | When a success occurs, the value of type `T` will be returned. When an error occurs, the value of type `U` will be used. Note that both are allowed to be `void`. |
 
-Optional is `null` by default. Errors by default are set to an error of the default type of `U` if possible.
+Optional is `null` by default. Results by default are set to an error of the default type of `U` if possible. It's also important to note that `T?` and `Res<T, void>` are identical types.
 
 ## Storage Qualifiers
 You're allowed to tag on storage qualifiers to add rules on how data is allowed to be accessed.
