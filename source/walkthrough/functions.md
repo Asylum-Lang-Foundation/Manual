@@ -73,7 +73,29 @@ fn add(int a, int b) {}
 The compiler will know which function to call depending on the context on which it is used.
 
 ## Default Parameters
-TODO!!!
+In Asylum, you are allowed to assign defaults to any parameter in the function:
+
+```rust
+fn myFunc(int a = 3, str b, float c = 3.0)
+{
+    println(a);
+    println(b);
+    println(c);
+}
+
+fn main()
+{
+    myFunc(c: 1.0, b: "Hello");
+}
+```
+Output:
+```
+3
+Hello
+1
+```
+
+Notice that you are allowed to give parameters values in any order regardless of their defaults or not! You just have to make sure you give values to parameters that do not have a default value or else the function call will produce a compilation error.
 
 ## Challenges
 1. Adding is cool and all, but subtraction is where it is at! Make a function called `sub` that subtracts `int b` from `int a`, this returns an `int`.

@@ -89,13 +89,14 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
@@ -623,7 +624,7 @@
 </table>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">Vector&lt;T,</span> <span class="pre">U&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">Matrix&lt;T,</span> <span class="pre">U,</span> <span class="pre">V&gt;</span></code> is a struct rather than a tuple. Its composure looks like:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Matrix</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span>: <span class="nc">Add</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Sub</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Mul</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Div</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="p">[</span><span class="n">V</span><span class="p">]</span><span class="w"> </span><span class="n">rows</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="p">[</span><span class="n">V</span><span class="p">]</span><span class="w"> </span><span class="n">cols</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -641,15 +642,15 @@
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>?</p></td>
 <td><p>Optional</p></td>
-<td><p>An optional value. Either contains <code class="docutils literal notranslate"><span class="pre">T</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></td>
+<td><p>An optional value. Either contains <code class="docutils literal notranslate"><span class="pre">T</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Error&lt;<code class="docutils literal notranslate"><span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code>&gt;</p></td>
+<tr class="row-odd"><td><p>Res&lt;<code class="docutils literal notranslate"><span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code>&gt;</p></td>
 <td><p>When a success occurs, the value of type <code class="docutils literal notranslate"><span class="pre">T</span></code> will be returned. When an error occurs, the value of type <code class="docutils literal notranslate"><span class="pre">U</span></code> will be used. Note that both are allowed to be <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
-<p>Optional is <code class="docutils literal notranslate"><span class="pre">null</span></code> by default. Errors by default are set to an error of the default type of <code class="docutils literal notranslate"><span class="pre">U</span></code> if possible.</p>
+<p>Optional is <code class="docutils literal notranslate"><span class="pre">null</span></code> by default. Results by default are set to an error of the default type of <code class="docutils literal notranslate"><span class="pre">U</span></code> if possible. It’s also important to note that <code class="docutils literal notranslate"><span class="pre">T?</span></code> and <code class="docutils literal notranslate"><span class="pre">Res&lt;T,</span> <span class="pre">void&gt;</span></code> are identical types.</p>
 </section>
 </section>
 <section id="storage-qualifiers">

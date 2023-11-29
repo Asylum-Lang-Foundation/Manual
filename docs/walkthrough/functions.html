@@ -54,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#function-parameters">Function Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#different-ways-to-return">Different Ways To Return</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multiple-function-definitions">Multiple Function Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-parameters">Default Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
@@ -61,13 +62,14 @@
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
@@ -190,6 +192,30 @@ The following is valid Asylum code:</p></li>
 </pre></div>
 </div>
 <p>The compiler will know which function to call depending on the context on which it is used.</p>
+</section>
+<section id="default-parameters">
+<h2>Default Parameters<a class="headerlink" href="#default-parameters" title="Link to this heading"></a></h2>
+<p>In Asylum, you are allowed to assign defaults to any parameter in the function:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">myFunc</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">myFunc</span><span class="p">(</span><span class="n">c</span>: <span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>: <span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="n">Hello</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+<p>Notice that you are allowed to give parameters values in any order regardless of their defaults or not! You just have to make sure you give values to parameters that do not have a default value or else the function call will produce a compilation error.</p>
 </section>
 <section id="challenges">
 <h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>

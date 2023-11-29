@@ -16,11 +16,10 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/implementations.md
    /walkthrough/inheritance.md
    /walkthrough/controlFlow.md
-   /walkthrough/enums.md
    /walkthrough/strings.md
    /walkthrough/parameterTypes.md
-   /walkthrough/optional.md
    /walkthrough/references.md
+   /walkthrough/enums.md
    /walkthrough/pointers.md
    /walkthrough/allocators.md
    /walkthrough/copyMoveSemantics.md

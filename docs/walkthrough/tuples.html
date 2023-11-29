@@ -21,7 +21,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="errors.html" />
+    <link rel="next" title="Errors" href="errors.html" />
     <link rel="prev" title="Variables" href="variables.html" /> 
 </head>
 
@@ -65,13 +65,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
@@ -238,7 +239,7 @@ This is because it is possible to convert the `int` into a `float`! In the previ
 </div>
 <p>Output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
-<span class="mi">3</span><span class="p">,</span> <span class="n">Test</span>
+<span class="n">num</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Test</span>
 </pre></div>
 </div>
 </section>
@@ -264,7 +265,7 @@ This is because it is possible to convert the `int` into a `float`! In the previ
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span>: <span class="nc">x</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>: <span class="nc">y</span><span class="p">;</span>
 <span class="n">typedef</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span>: <span class="nc">x</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>: <span class="nc">y</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>: <span class="nc">z</span><span class="p">;</span>
 <span class="n">typedef</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span>: <span class="nc">x</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>: <span class="nc">y</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>: <span class="nc">z</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>: <span class="nc">w</span><span class="p">;</span>
-<span class="n">typedef</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">..</span><span class="p">.(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="n">typedef</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="k">type</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">..</span><span class="p">.(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>This means that you can declare a vector of <code class="docutils literal notranslate"><span class="pre">4</span></code> floats by doing <code class="docutils literal notranslate"><span class="pre">Vector&lt;float,</span> <span class="pre">4&gt;</span></code>. Note that vectors must have more than <code class="docutils literal notranslate"><span class="pre">1</span></code> element and that for the vectors with <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">4</span></code> elements the items are named as well.</p>
@@ -285,7 +286,7 @@ This is because it is possible to convert the `int` into a `float`! In the previ
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="variables.html" class="btn btn-neutral float-left" title="Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="errors.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="errors.html" class="btn btn-neutral float-right" title="Errors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

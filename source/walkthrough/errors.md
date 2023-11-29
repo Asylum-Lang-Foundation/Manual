@@ -15,7 +15,7 @@ fn main()
     int? a = safeDiv(5, 3);
     int? b = safeDiv(2, 0);
     if (a) {
-        println(*a);
+        println(+a);
     } else {
         println(0):
     }
@@ -33,10 +33,44 @@ Output:
 0
 ```
 
-The above code will catch a division by zero before it happens. It is important to note that `T?` is actually a shortcut for `Res<T, void>`, so any optional type is actually a result enum! This is why we are allowed to return `Err` and `Ok` in `safeDiv` and can use the `match` statement in `main`. Note that the code for checking `a` and `b` do the same thing. This is because `Res` can be implicitly casted to a boolean, where it is `true` only if there is no error present. Dereferencing, or using `*` on a result will return its valid value. Dereferencing when an error is present will abort the program and dump a stack trace in debug mode but result in undefined behavior in release mode.
+The above code will catch a division by zero before it happens. It is important to note that `T?` is actually a shortcut for `Res<T, void>`, so any optional type is actually a result enum! This is why we are allowed to return `Err` and `Ok` in `safeDiv` and can use the `match` statement in `main`. Note that the code for checking `a` and `b` do the same thing. This is because `Res` can be implicitly casted to a boolean, where it is `true` only if there is no error present. Using `+` on a result will return its valid value. Using `+` when an error is present will abort the program and dump a stack trace in debug mode, but will result in undefined behavior in release mode.
 
 ## Error Types
-Results can specify types for errors as well other than the default `void` for optionals. This allows you to provide more detail about the error encountered. For example, TODO!!!
+Results can specify types for errors as well other than the default `void` for optionals. This allows you to provide more detail about the error encountered. For example, you can return an error message instead:
+
+```rust
+fn safeDiv(int a, int b) -> Res<int, str>
+{
+    if (b == 0)
+        return Err("Division by 0 attempt.");
+    else
+        return Ok(a / b);
+}
+
+fn main()
+{
+    int? a = safeDiv(5, 3);
+    int? b = safeDiv(2, 0);
+    if (a) {
+        println(+a);
+    } else {
+        println(-a):
+    }
+    match (b) {
+        Err(err):
+            println(err);
+        Ok(val):
+            println(val):
+    }
+}
+```
+Output:
+```
+1
+Division by 0 attempt.
+```
+
+Using `-` is similar to using `+` on a result with the exception that using `-` will give the error of a result, assuming it is valid. If it is not valid, the program will be aborted with a stack trace dumped in debug mode or result in undefined behavior in release mode.
 
 ## False Operator
 If you wish to have a default value even if a function returns an error, there is a special usage of the `??` (false operator) in which an error will be treated as "false".
@@ -58,7 +92,7 @@ Output:
 
 For results, you can think of `a ?? b` as doing the following where `a` is `Res<T, U>` and `b` is `T`:
 ```rust
-a ? (*a) : b;
+a ? (+a) : b;
 ```
 
 Essentially, the value is returned from the result if it exists or an alternative value is returned instead. Notice that the usage of this operator in `main` allows you to do the same thing as the `main` before but with less syntax!
@@ -125,3 +159,9 @@ Err(Division by 0)
 ```
 
 While here the `!?` operator is used to return errors immediately, it could also return valid results if you wanted to! Overall, these operators help you write cleaner and denser code.
+
+## Challenges
+TODO!!!
+
+## Challenge Solutions
+TODO!!!

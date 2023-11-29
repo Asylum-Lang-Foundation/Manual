@@ -16,8 +16,8 @@ The compiler sees that `val` is an `int` argument in the function. However, we h
 | Type | Example | Explanation |
 | ---- | ------- | ----------- |
 | In | `int val` | Parameter `val` is passed as in input and so it can not be modified (it is *immutable*). |
-| Ref | `ref int val`, `int& val` | Parameter `val` is passed by reference and can be modified (it is *mutable*). |
-| Move | `move int val`, `int% val` | Parameter `val` is being "moved" to the function being called. |
+| Ref | `int& val` | Parameter `val` is passed by reference and can be modified (it is *mutable*). |
+| Move | `int% val` | Parameter `val` is being "moved" to the function being called. |
 
 ```{note}
 The parameter types `in` and `ref` are around the same performance wise!
@@ -49,10 +49,10 @@ Output:
 3
 ```
 
-Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by using a parameter marked as `ref` or trailing it with `&`:
+Though do note that this is not what we wanted. While we can modify the value passed if we copy it into another variable, it does not impact the original value! This is solved by trailing the parameter type with `&`:
 
 ```rust
-fn setValue1(ref int val) {
+fn setValue1(int& val) {
     val = 7; // We are allowed to do this now!
 }
 
@@ -63,8 +63,8 @@ fn setValue2(int& val) {
 fn main() {
     int x = 3;
     println(x);
-    setValue1(ref x);
-    setValue2(x&); // This works the same as ref x!
+    setValue1(x&);
+    setValue2(x&);
     println(x);
 }
 ```
@@ -73,25 +73,22 @@ Output:
 5
 ```
 
-Note that we have to do `ref x` or `x&` to tell the compiler we want to pass a reference to the variable rather than pass it as an `in` parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:
+Note that we have to do `x&` to tell the compiler we want to pass a reference to the variable rather than pass it as an `in` parameter. This is because functions with different parameter types are different functions! This means the following code is perfectly valid:
 
 ```rust
 fn myFunc(int a) -> int => a;
-fn myFunc(ref int a) -> int => a;
-fn myFunc(move int a) -> int => a;
-fn myFunc2(int% a) -> int => a; // Can also make a parameter a "move" one with %.
+fn myFunc(int& a) -> int => a;
+fn myFunc(int% a) -> int => a;
 
 fn main() {
     int x = 3;
     println(myFunc(x));
-    println(myFunc(ref x));
-    println(myFunc(move x));
-    println(myFunc2(3%)); // Appending % after a variable or value moves it.
+    println(myFunc(x&));
+    println(myFunc(3%)); // Appending % after a variable or value moves it.
 }
 ```
 Output:
 ```
-3
 3
 3
 3
@@ -107,15 +104,15 @@ pub:
 }
 
 impl Image {
-    pub fn setPixels(move Pixels pixels) {
+    pub fn setPixels(Pixels% pixels) {
         this.pixels := pixels;
     }
 }
 ```
 
-In the above example, `Pixels` is a structure that contains large resources and thus should be copied or constructed as little as possible. Therefore, we want to move pixels to the image rather than copy them. This is done by using the move operator `:=`. However, we are only allowed to move an item we have ownership over. If `pixels` was passed as `in` or as `ref`, then we would only get to "borrow" the structure rather than own it! We're allowed to make copies of borrowed items, but we can not move them!
+In the above example, `Pixels` is a structure that contains large resources and thus should be copied or constructed as little as possible. Therefore, we want to move pixels to the image rather than copy them. This is done by using the move operator `:=`. However, we are only allowed to move an item we have ownership over. If `pixels` was passed as `in` or as `ref`, then we would only get to observe the structure rather than own it! We're allowed to make copies of these items, but we can not move them!
 
-Do not worry if this is confusing, Asylum's "move semantics" (or moving memory rather than borrowing or copying) will be discussed in its own section showing how to use it in practice and go into further detail.
+Do not worry if this is confusing, Asylum's "move semantics" (or moving memory rather than referencing or copying) will be discussed in its own section showing how to use it in practice and go into further detail.
 
 ### Use After Move
 TODO!!!

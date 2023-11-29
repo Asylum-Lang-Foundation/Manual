@@ -21,7 +21,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Enums" href="enums.html" />
+    <link rel="next" title="Strings" href="strings.html" />
     <link rel="prev" title="Inheritance" href="inheritance.html" /> 
 </head>
 
@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Control Flow</a><ul>
@@ -72,10 +73,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#recursion-recursion-recursion">Recursion Recursion Recursion</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
@@ -175,7 +176,7 @@ Hi!
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You are allowed to have multiple conditions for each result (<code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">7</span></code> both lead to <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">like</span> <span class="pre">this</span> <span class="pre">number!</span></code> being shown), as well as have multiple statements done as result as the condition. The <code class="docutils literal notranslate"><span class="pre">_</span></code> case will catch anything. Note that the first condition hit is matched, so <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">really</span> <span class="pre">do</span> <span class="pre">not</span> <span class="pre">like</span> <span class="pre">this</span> <span class="pre">number.</span></code> will never be shown for <code class="docutils literal notranslate"><span class="pre">3</span></code> and the <code class="docutils literal notranslate"><span class="pre">_</span></code> case should always be done last. Note that this can work for anything, not just numbers:</p>
+<p>You may notice that unlike the traditional <code class="docutils literal notranslate"><span class="pre">switch</span></code> statements in <code class="docutils literal notranslate"><span class="pre">C</span></code>, there is no fall-through with labels, though you are allowed to have multiple conditions for each result (<code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">7</span></code> both lead to <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">like</span> <span class="pre">this</span> <span class="pre">number!</span></code> being shown), as well as have multiple statements done as result as the condition. The <code class="docutils literal notranslate"><span class="pre">_</span></code> case will catch anything. Note that the first condition hit is matched, so <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">really</span> <span class="pre">do</span> <span class="pre">not</span> <span class="pre">like</span> <span class="pre">this</span> <span class="pre">number.</span></code> will never be shown for <code class="docutils literal notranslate"><span class="pre">3</span></code> and the <code class="docutils literal notranslate"><span class="pre">_</span></code> case should always be done last. Note that this can work for anything, not just numbers:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">matchStr</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="s">&quot;Red&quot;</span>:
@@ -506,7 +507,7 @@ Hello World!
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="inheritance.html" class="btn btn-neutral float-left" title="Inheritance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="enums.html" class="btn btn-neutral float-right" title="Enums" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="strings.html" class="btn btn-neutral float-right" title="Strings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

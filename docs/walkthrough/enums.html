@@ -21,8 +21,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Strings" href="strings.html" />
-    <link rel="prev" title="Control Flow" href="controlFlow.html" /> 
+    <link rel="next" title="Pointers" href="pointers.html" />
+    <link rel="prev" title="References" href="references.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,13 +53,20 @@
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Enums</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enum-matching">Enum Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-setting-enum-vals">Getting/Setting Enum Vals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
@@ -98,22 +105,88 @@
              
   <section id="enums">
 <h1>Enums<a class="headerlink" href="#enums" title="Link to this heading"></a></h1>
-<p>Sometimes you wish data would have a different form depending on the situation. For example, different types of foods:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="nc">Food</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Vegetable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="n">Candy</span><span class="o">..</span><span class="p">.</span>
+<p>Sometimes you wish data would have a different form depending on the situation. Enum items pair an enum entry name with an optional tuple:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">None</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Unknown</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Boat</span><span class="p">(</span><span class="n">int</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Car</span><span class="p">(</span><span class="kt">str</span>: <span class="nc">license</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span>: <span class="nc">color</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">none</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">.</span><span class="nb">None</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">boat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">.</span><span class="n">Boat</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;The Speedster&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">car1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">.</span><span class="n">Car</span><span class="p">(</span><span class="s">&quot;PNYZ123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grey&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">car2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">.</span><span class="n">Car</span><span class="p">(</span><span class="n">color</span>: <span class="s">&quot;Black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">license</span>: <span class="s">&quot;PNYZ456&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">none</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">boat</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">car1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">car2</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Ugh idk any ideas for this.</p>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
+<span class="n">Boat</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="n">The</span> <span class="n">Speedster</span><span class="p">)</span>
+<span class="n">Car</span><span class="p">(</span><span class="n">license</span><span class="p">:</span> <span class="n">PNYZ123</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Grey</span><span class="p">)</span>
+<span class="n">Car</span><span class="p">(</span><span class="n">license</span><span class="p">:</span> <span class="n">PNYZ456</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Black</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="enum-matching">
+<h2>Enum Matching<a class="headerlink" href="#enum-matching" title="Link to this heading"></a></h2>
+<p>You can handle the different values of an enum by using the <code class="docutils literal notranslate"><span class="pre">match</span></code> statement:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">handleVehicle</span><span class="p">(</span><span class="n">Vehicle</span><span class="w"> </span><span class="n">vehicle</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">None</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;There is no vehicle.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Boat</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;Boat named </span><span class="se">\&quot;</span><span class="s">{name}</span><span class="se">\&quot;</span><span class="s"> does not have a relevant speed so it is not named.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Car</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;Car has license plate </span><span class="se">\&quot;</span><span class="s">{vehicle.license}</span><span class="se">\&quot;</span><span class="s"> and color {vehicle[1]}.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="s">&quot;What kind of vehicle is this?&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above example, it is possible to bind the tuple’s elements with names as done with <code class="docutils literal notranslate"><span class="pre">Boat</span></code>. Note that an item not needed can be named <code class="docutils literal notranslate"><span class="pre">_</span></code> to be ignored. It is also possible to use the tuple itself as shown with <code class="docutils literal notranslate"><span class="pre">car</span></code>. You are also allowed to set properties of the enum in the <code class="docutils literal notranslate"><span class="pre">match</span></code> statement.</p>
+</section>
+<section id="getting-setting-enum-vals">
+<h2>Getting/Setting Enum Vals<a class="headerlink" href="#getting-setting-enum-vals" title="Link to this heading"></a></h2>
+<p>You may want to modify an enum outside of a <code class="docutils literal notranslate"><span class="pre">match</span></code> statement. This can be done by getting an enum “as” a value. This will return an optional reference:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">changeCarLicense</span><span class="p">(</span><span class="n">Vehicle</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vehicle</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="w"> </span><span class="n">newLicense</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="p">.</span><span class="n">Car</span><span class="o">&amp;?</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vehicle</span><span class="p">.</span><span class="k">as</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">car</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Changing car with license </span><span class="se">\&quot;</span><span class="s">{car.license}</span><span class="se">\&quot;</span><span class="s"> to </span><span class="se">\&quot;</span><span class="s">{newLicense}</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="o">+</span><span class="n">car</span><span class="p">.</span><span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newLicense</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Vehicle is not a car.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We pass the <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> by reference since we wish to be able to modify it. Then, we can call a function that all enums have to interpret it as an enum value. This returns an optional reference as we are referencing the original vehicle still, but do not know if the vehicle is actually a <code class="docutils literal notranslate"><span class="pre">Car</span></code> or not. Thus, we have to first check to make sure if the option is valid first before we work with it.</p>
+<p>You may wonder why we use an optional reference <code class="docutils literal notranslate"><span class="pre">&amp;?</span></code> rather than a nullable reference <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>. The reason is that nullable references should only really be used when a reference to data can become invalid. This means that when we initially create a nullable reference we <em>expect</em> it to reference valid data but know the data it references can exceed the lifetime of the nullable reference. On the otherhand, we expect the <code class="docutils literal notranslate"><span class="pre">Vehicle.Car</span></code> to possibly not exist to begin with so we use an optional. This is a demonstrates that while there are syntatically multiple ways of doing the same thing in Asylum, it is important to choose the option that makes the most semantic sense.</p>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="controlFlow.html" class="btn btn-neutral float-left" title="Control Flow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="strings.html" class="btn btn-neutral float-right" title="Strings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="references.html" class="btn btn-neutral float-left" title="References" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pointers.html" class="btn btn-neutral float-right" title="Pointers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

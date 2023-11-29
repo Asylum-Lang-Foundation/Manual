@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Asylum  documentation</title>
+  <title>Errors &mdash; Asylum  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -46,20 +46,28 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Errors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#error-types">Error Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#false-operator">False Operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-propagation">Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
 </ul>
@@ -86,7 +94,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">Errors</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/walkthrough/errors.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -96,7 +104,170 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="errors">
+<h1>Errors<a class="headerlink" href="#errors" title="Link to this heading"></a></h1>
+<p>In Asylum, you can return an error instead of a normal value in a function if things do not go according to plan. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">safeDiv</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">();</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">?</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">int</span><span class="o">?</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>:
+    <span class="p">}</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Err</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>:
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">0</span>
+</pre></div>
+</div>
+<p>The above code will catch a division by zero before it happens. It is important to note that <code class="docutils literal notranslate"><span class="pre">T?</span></code> is actually a shortcut for <code class="docutils literal notranslate"><span class="pre">Res&lt;T,</span> <span class="pre">void&gt;</span></code>, so any optional type is actually a result enum! This is why we are allowed to return <code class="docutils literal notranslate"><span class="pre">Err</span></code> and <code class="docutils literal notranslate"><span class="pre">Ok</span></code> in <code class="docutils literal notranslate"><span class="pre">safeDiv</span></code> and can use the <code class="docutils literal notranslate"><span class="pre">match</span></code> statement in <code class="docutils literal notranslate"><span class="pre">main</span></code>. Note that the code for checking <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> do the same thing. This is because <code class="docutils literal notranslate"><span class="pre">Res</span></code> can be implicitly casted to a boolean, where it is <code class="docutils literal notranslate"><span class="pre">true</span></code> only if there is no error present. Using <code class="docutils literal notranslate"><span class="pre">+</span></code> on a result will return its valid value. Using <code class="docutils literal notranslate"><span class="pre">+</span></code> when an error is present will abort the program and dump a stack trace in debug mode, but will result in undefined behavior in release mode.</p>
+<section id="error-types">
+<h2>Error Types<a class="headerlink" href="#error-types" title="Link to this heading"></a></h2>
+<p>Results can specify types for errors as well other than the default <code class="docutils literal notranslate"><span class="pre">void</span></code> for optionals. This allows you to provide more detail about the error encountered. For example, you can return an error message instead:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">safeDiv</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Res</span><span class="o">&lt;</span><span class="n">int</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Division by 0 attempt.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="o">?</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">int</span><span class="o">?</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>:
+    <span class="p">}</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="n">err</span><span class="p">);</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>:
+            <span class="nc">println</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>:
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="n">Division</span> <span class="n">by</span> <span class="mi">0</span> <span class="n">attempt</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">-</span></code> is similar to using <code class="docutils literal notranslate"><span class="pre">+</span></code> on a result with the exception that using <code class="docutils literal notranslate"><span class="pre">-</span></code> will give the error of a result, assuming it is valid. If it is not valid, the program will be aborted with a stack trace dumped in debug mode or result in undefined behavior in release mode.</p>
+</section>
+<section id="false-operator">
+<h2>False Operator<a class="headerlink" href="#false-operator" title="Link to this heading"></a></h2>
+<p>If you wish to have a default value even if a function returns an error, there is a special usage of the <code class="docutils literal notranslate"><span class="pre">??</span></code> (false operator) in which an error will be treated as “false”.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">0</span>
+</pre></div>
+</div>
+<p>For results, you can think of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">??</span> <span class="pre">b</span></code> as doing the following where <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">Res&lt;T,</span> <span class="pre">U&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> is <code class="docutils literal notranslate"><span class="pre">T</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="n">a</span><span class="p">)</span><span class="w"> </span>: <span class="nc">b</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Essentially, the value is returned from the result if it exists or an alternative value is returned instead. Notice that the usage of this operator in <code class="docutils literal notranslate"><span class="pre">main</span></code> allows you to do the same thing as the <code class="docutils literal notranslate"><span class="pre">main</span></code> before but with less syntax!</p>
+</section>
+<section id="error-propagation">
+<h2>Error Propagation<a class="headerlink" href="#error-propagation" title="Link to this heading"></a></h2>
+<p>Sometimes you would like to exit a function early when an error is encountered. The <code class="docutils literal notranslate"><span class="pre">!?</span></code> (success or die) operator is for this purpose: it will either dereference the value from the result or return the error’d result if the result is an error.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">safeDiv</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">();</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">safeAddDivs</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">div1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="o">!?</span><span class="p">;</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">div2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="o">!?</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">div1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">div2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">safeAddDivs</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">safeAddDivs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Err</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Though it’s important to note that the result type of <code class="docutils literal notranslate"><span class="pre">safeAddDivs</span></code> and <code class="docutils literal notranslate"><span class="pre">safeDiv</span></code> must match. If you wish to return a different result or error you can do so by putting it after the operator:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">safeDiv</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">int</span><span class="o">?</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">();</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">safeAddDivs</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Res</span><span class="o">&lt;</span><span class="n">int</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">div1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">!?</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Division by 0&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">int</span><span class="w"> </span><span class="n">div2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeDiv</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">!?</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Division by 0&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">div1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">div2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">safeAddDivs</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">));</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">safeAddDivs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Err</span><span class="p">(</span><span class="n">Division</span> <span class="n">by</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While here the <code class="docutils literal notranslate"><span class="pre">!?</span></code> operator is used to return errors immediately, it could also return valid results if you wanted to! Overall, these operators help you write cleaner and denser code.</p>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+</section>
+
 
            </div>
           </div>

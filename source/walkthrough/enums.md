@@ -59,7 +59,7 @@ fn changeCarLicense(Vehicle& vehicle, str newLicense)
     Vehicle.Car&? car = vehicle.as<Car>();
     if (car) {
         println("Changing car with license \"{car.license}\" to \"{newLicense}\".");
-        *car.license = newLicense;
+        +car.license = newLicense;
     } else {
         println("Vehicle is not a car.");
     }
