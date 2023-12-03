@@ -49,13 +49,12 @@ fn safeDiv(int a, int b) -> Res<int, str>
 
 fn main()
 {
-    int? a = safeDiv(5, 3);
-    int? b = safeDiv(2, 0);
-    if (a) {
+    Res<int, str> a = safeDiv(5, 3);
+    Res<int, str> b = safeDiv(2, 0);
+    if (a)
         println(+a);
-    } else {
+    else
         println(-a):
-    }
     match (b) {
         Err(err):
             println(err);

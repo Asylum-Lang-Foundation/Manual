@@ -6,26 +6,24 @@ You can inherit from another struct by using `:` followed by the name of the str
 
 ```rust
 struct Tires {
-pub:
     int count;
     int expectedPSI;
 }
 
 struct Vehicle {
-pub:
     Color color;
     int year;
-    string maker;
-    string model;
+    str maker;
+    str model;
 }
 
 struct Car : Vehicle {
-pub:
     int trunkSpace;
     int year;
 }
 
-fn main() {
+fn main()
+{
     Car car = Car {
         bases.Tires: Tires {
             count: 4,
@@ -59,22 +57,22 @@ You can inherit functions similarly to members:
 
 ```rust
 struct A {
-    pub int val;
+    int val;
 }
 
 struct B : A {}
 struct C : B {}
 
 impl A {
-    pub fn fun() -> int => val;
+    fn fun() -> int => val;
 }
 
 impl B {
-    pub fn fun() -> int => 7;
+    fn fun() -> int => 7;
 }
 
 impl C {
-    pub fn fun() -> int => val;
+    fn fun() -> int => val;
 }
 
 fn main() {
@@ -122,7 +120,7 @@ These are essentially virtual functions. When implementing functions, what funct
 
 ```rust
 trait Animal {
-    fn noise() -> string => "";
+    fn noise() -> str => "";
     fn isMammal() -> bool;
 }
 
@@ -130,16 +128,17 @@ struct Dog {};
 struct Cat {};
 
 impl Animal for Dog {
-    fn noise() -> string => "Bark";
+    fn noise() -> str => "Bark";
     fn isMammal() -> bool => true;
 }
 
 impl Animal for Cat {
-    fn noise() -> string => "Meow";
+    fn noise() -> str => "Meow";
     fn isMammal() -> bool => true;
 }
 
-fn main() {
+fn main()
+{
     Dog dog;
     Cat cat;
     Animal& dog2 -> dog;

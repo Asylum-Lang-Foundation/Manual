@@ -16,6 +16,7 @@ Welcome to the Asylum Programming Language Reference Manual! Here, you will lear
    /walkthrough/implementations.md
    /walkthrough/inheritance.md
    /walkthrough/controlFlow.md
+   /walkthrough/arrays.md
    /walkthrough/strings.md
    /walkthrough/parameterTypes.md
    /walkthrough/references.md
@@ -43,7 +44,8 @@ Asylum has many goals:
 * Be clear on how memory is being utilized (copied, referenced, moved, allocated, destroyed, etc).
 * Be beginner friendly (intuitive syntax and semantics, "pits of success", higher-level abstractions, etc).
 * Be applicable for general-purpose and low-level development.
+* Written densely. This is to make it faster to type, read, and refactor. Most keywords and common types are short. Operator overloading is also allowed and taken advantage of to make operations easier to do and recognize.
 
 ## Non-Goals
 There are some things Asylum does not aim to be:
-* Have everything C++ does. Asylum has a lot of features, but not all of them.
+* A clone of any language. While Asylum may look similar to a given language and have similar features, it is a different language and will not have the same features and guarantees.
