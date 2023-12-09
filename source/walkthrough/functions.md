@@ -95,7 +95,7 @@ Hello
 1
 ```
 
-Notice that you are allowed to give parameters values in any order regardless of their defaults or not! You just have to make sure you give values to parameters that do not have a default value or else the function call will produce a compilation error.
+Notice that you are allowed to give arguments in any order regardless of their defaults or not! You just have to make sure you give arguments that do not have a default value or else the function call will produce a compilation error.
 
 ## Challenges
 1. Adding is cool and all, but subtraction is where it is at! Make a function called `sub` that subtracts `int b` from `int a`, this returns an `int`.
