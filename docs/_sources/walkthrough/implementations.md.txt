@@ -3,14 +3,13 @@ On the previous page, you learned how structs can give you custom data types tha
 
 ```rust
 struct Color {
-pub:
     byte r;
     byte g;
     byte b;
 }
 
 impl Color {
-    pub fn toHex() -> string => "#" + r.toString("x2") + g.toString("x2") + b.toString("x2");
+    fn toHex() -> str => "#{r:x2}{g:x2}{b:x2}";
 }
 ```
 
@@ -21,7 +20,8 @@ A struct can have as many implementation blocks as it desires.
 ```
 
 ```rust
-fn main() {
+fn main()
+{
     Color color = Color {
         r: 0x21,
         g: 0x43,
@@ -48,7 +48,8 @@ As you probably have noticed, it is a bit tedius to construct instances of struc
 
 ```rust
 impl Color {
-    pub This(byte r, byte g, byte b) {
+    pub This(byte r, byte g, byte b)
+    {
         this.r = r;
         this.g = g;
         this.b = b;

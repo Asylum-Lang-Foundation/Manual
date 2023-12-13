@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Parameter Types" href="parameterTypes.html" />
-    <link rel="prev" title="Control Flow" href="controlFlow.html" /> 
+    <link rel="prev" title="Arrays" href="arrays.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,7 +57,27 @@
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Strings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#formatting">Formatting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#format-specifiers">Format Specifiers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#integers">Integers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#floats">Floats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#escape-characters">Escape Characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#splitting">Splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#repeating">Repeating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contains">Contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#replacing">Replacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#substrings">Substrings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
@@ -99,14 +119,255 @@
              
   <section id="strings">
 <h1>Strings<a class="headerlink" href="#strings" title="Link to this heading"></a></h1>
+<p>In any programming language, you typically need a way to pass text around. This is done with strings. As seen from the beginning of the guide, you use quotations to mark a string:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+<section id="formatting">
+<h2>Formatting<a class="headerlink" href="#formatting" title="Link to this heading"></a></h2>
+<p>The main way of combining strings together is through using formatting. This is done by inputting a value between <code class="docutils literal notranslate"><span class="pre">{}</span></code> (curly brackets) in the string:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">displayItem</span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;You&#39;re number is... {val}!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">displayItem</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span><span class="s1">&#39;re number is... 3!</span>
+</pre></div>
+</div>
+<section id="format-specifiers">
+<h3>Format Specifiers<a class="headerlink" href="#format-specifiers" title="Link to this heading"></a></h3>
+<p>Some items can be formatted using format specifiers. Note that they are case insensitive. Below is a table that shows available specifiers for different types:</p>
+<section id="integers">
+<h4>Integers<a class="headerlink" href="#integers" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Specifier</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is a positive whole number, which specifies how many digits. If there are not enough, padding 0s are added.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code> for <code class="docutils literal notranslate"><span class="pre">123</span></code> is <code class="docutils literal notranslate"><span class="pre">23</span></code>. <code class="docutils literal notranslate"><span class="pre">4</span></code> for <code class="docutils literal notranslate"><span class="pre">23</span></code> is <code class="docutils literal notranslate"><span class="pre">0023</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td><p>Binary number.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span></code> is <code class="docutils literal notranslate"><span class="pre">111</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>d</p></td>
+<td><p>Decimal number (unneccessary).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span></code> is <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>e</p></td>
+<td><p>Exponential notation.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">17000</span></code> would be <code class="docutils literal notranslate"><span class="pre">1.7e+004</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>h</p></td>
+<td><p>Hex number.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code> is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>Octal number.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code> would be <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>Hex number.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code> is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="floats">
+<h4>Floats<a class="headerlink" href="#floats" title="Link to this heading"></a></h4>
+<p>| <code class="docutils literal notranslate"><span class="pre">N</span></code>.<code class="docutils literal notranslate"><span class="pre">M</span></code> | <code class="docutils literal notranslate"><span class="pre">N</span></code> is a positive whole number, which specifies how many digits in the whole number’s place, and <code class="docutils literal notranslate"><span class="pre">M</span></code> is for the decimal’s place. If there are not enough, padding 0s are added. | <code class="docutils literal notranslate"><span class="pre">2.3</span></code> for <code class="docutils literal notranslate"><span class="pre">123.34</span></code> is <code class="docutils literal notranslate"><span class="pre">23.340</span></code>. |
+| b | Binary number. | <code class="docutils literal notranslate"><span class="pre">7.25</span></code> is <code class="docutils literal notranslate"><span class="pre">111.01</span></code>. |
+| d | Decimal number (unneccessary). | <code class="docutils literal notranslate"><span class="pre">7.3</span></code> is <code class="docutils literal notranslate"><span class="pre">7.3</span></code>. |
+| e | Exponential notation. | <code class="docutils literal notranslate"><span class="pre">17000.54</span></code> would be <code class="docutils literal notranslate"><span class="pre">1.700054e+004</span></code>. |
+| h | Hex number. | <code class="docutils literal notranslate"><span class="pre">32.25</span></code> is <code class="docutils literal notranslate"><span class="pre">20.4</span></code>. |
+| o | Octal number. | <code class="docutils literal notranslate"><span class="pre">8.25</span></code> would be <code class="docutils literal notranslate"><span class="pre">10.4</span></code>. |
+| x | Hex number. | <code class="docutils literal notranslate"><span class="pre">32.25</span></code> is <code class="docutils literal notranslate"><span class="pre">20.4</span></code>. |</p>
+</section>
+<section id="fixed">
+<h4>Fixed<a class="headerlink" href="#fixed" title="Link to this heading"></a></h4>
+<p>| <code class="docutils literal notranslate"><span class="pre">N</span></code>.<code class="docutils literal notranslate"><span class="pre">M</span></code> | <code class="docutils literal notranslate"><span class="pre">N</span></code> is a positive whole number, which specifies how many digits in the whole number’s place, and <code class="docutils literal notranslate"><span class="pre">M</span></code> is for the decimal’s place. If there are not enough, padding 0s are added. | <code class="docutils literal notranslate"><span class="pre">2.3</span></code> for <code class="docutils literal notranslate"><span class="pre">123.34</span></code> is <code class="docutils literal notranslate"><span class="pre">23.340</span></code>. |
+| b | Binary number. | <code class="docutils literal notranslate"><span class="pre">7.25</span></code> is <code class="docutils literal notranslate"><span class="pre">111.01</span></code>. |
+| d | Decimal number (unneccessary). | <code class="docutils literal notranslate"><span class="pre">7.3</span></code> is <code class="docutils literal notranslate"><span class="pre">7.3</span></code>. |
+| e | Exponential notation. | <code class="docutils literal notranslate"><span class="pre">17000.54</span></code> would be <code class="docutils literal notranslate"><span class="pre">1.700054e+004</span></code>. |
+| h | Hex number. | <code class="docutils literal notranslate"><span class="pre">32.25</span></code> is <code class="docutils literal notranslate"><span class="pre">20.4</span></code>. |
+| o | Octal number. | <code class="docutils literal notranslate"><span class="pre">8.25</span></code> would be <code class="docutils literal notranslate"><span class="pre">10.4</span></code>. |
+| x | Hex number. | <code class="docutils literal notranslate"><span class="pre">32.25</span></code> is <code class="docutils literal notranslate"><span class="pre">20.4</span></code>. |</p>
+</section>
+</section>
+</section>
+<section id="escape-characters">
+<h2>Escape Characters<a class="headerlink" href="#escape-characters" title="Link to this heading"></a></h2>
+<p>Escape characters are done using <code class="docutils literal notranslate"><span class="pre">\</span></code> (backlash). For example, to do a newline you would type <code class="docutils literal notranslate"><span class="pre">\n</span></code>. Below is a table of available escape characters:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>‘</p></td>
+<td><p>Single Quote</p></td>
+</tr>
+<tr class="row-odd"><td><p>“</p></td>
+<td><p>Double Quote</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{</span></code></p></td>
+<td><p>Left Curly Bracket</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">}</span></code></p></td>
+<td><p>Right Curly Bracket</p></td>
+</tr>
+<tr class="row-even"><td><p>\</p></td>
+<td><p>Backslash</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>Null Character</p></td>
+</tr>
+<tr class="row-even"><td><p>a</p></td>
+<td><p>Alert</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td><p>Backspace</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>Form Feed</p></td>
+</tr>
+<tr class="row-odd"><td><p>n</p></td>
+<td><p>New Line</p></td>
+</tr>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>Carriage Return</p></td>
+</tr>
+<tr class="row-odd"><td><p>t</p></td>
+<td><p>Horizontal Tab</p></td>
+</tr>
+<tr class="row-even"><td><p>uX</p></td>
+<td><p>Unicode, where <code class="docutils literal notranslate"><span class="pre">X</span></code> is the unicode byte sequence.</p></td>
+</tr>
+<tr class="row-odd"><td><p>v</p></td>
+<td><p>Vertical Tab</p></td>
+</tr>
+<tr class="row-even"><td><p>xFF</p></td>
+<td><p>Byte, where <code class="docutils literal notranslate"><span class="pre">FF</span></code> is the byte value.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="splitting">
+<h2>Splitting<a class="headerlink" href="#splitting" title="Link to this heading"></a></h2>
+<p>You may split a string by using a division operator. This will produce a dynamic array:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">str</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This.Is.A.Test&quot;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">item</span><span class="w"> </span>: <span class="nc">items</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span>
+<span class="n">Is</span>
+<span class="n">A</span>
+<span class="n">Test</span>
+</pre></div>
+</div>
+</section>
+<section id="repeating">
+<h2>Repeating<a class="headerlink" href="#repeating" title="Link to this heading"></a></h2>
+<p>Multiplying a string by an integer will repeat the string the given number of times.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;abacab_&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abacab_abacab_abacab_</span>
+</pre></div>
+</div>
+</section>
+<section id="contains">
+<h2>Contains<a class="headerlink" href="#contains" title="Link to this heading"></a></h2>
+<p>You may use the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator to see if the first string contains the second:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">str</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">&quot;ello&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">&quot;World.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">true</span>
+<span class="n">false</span>
+</pre></div>
+</div>
+</section>
+<section id="replacing">
+<h2>Replacing<a class="headerlink" href="#replacing" title="Link to this heading"></a></h2>
+<p>Replacing parts of strings with another string is done with a function rather than an operator. There are many string functions available to be utilized other than this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;o&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;i&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Helli Wirld!
+</pre></div>
+</div>
+</section>
+<section id="substrings">
+<h2>Substrings<a class="headerlink" href="#substrings" title="Link to this heading"></a></h2>
+<p>Strings are arrays of characters. Thus, you can get a substring by simply taking a slice of the character array:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">str</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="p">[]</span><span class="o">&amp;</span><span class="w"> </span><span class="n">byRef</span><span class="w"> </span>-&gt; <span class="nc">text</span><span class="p">[</span><span class="mi">2</span>:<span class="mi">4</span><span class="p">];</span>
+<span class="w">    </span><span class="n">byRef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;7&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">str</span><span class="w"> </span><span class="n">subStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">text</span><span class="p">[</span>:<span class="o">-</span><span class="mi">2</span><span class="p">];</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">byRef</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">subStr</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mi">7</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">o</span> <span class="p">]</span>
+<span class="n">Hello</span> <span class="n">World</span>
+</pre></div>
+</div>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
 <p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="controlFlow.html" class="btn btn-neutral float-left" title="Control Flow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arrays.html" class="btn btn-neutral float-left" title="Arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="parameterTypes.html" class="btn btn-neutral float-right" title="Parameter Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

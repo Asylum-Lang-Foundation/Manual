@@ -5,7 +5,8 @@ Being able to create and manipulate variables is useful, but without the ability
 If statements are the foundation of programming. If it is raining, you bring an umbrella. If you are hungry, you get something to eat. By using conditions in your code, you can have greater control on what your program can do:
 
 ```rust
-pub fn printItem(int a) {
+pub fn printItem(int a)
+{
     if (a == 0)
         println("0");
     else if (a == 1 || a == 2) {
@@ -43,7 +44,8 @@ As shown above, the output depends on the input value of `a`. Note that the brac
 The `match` statement is useful for situations in which you have a lot of various possible values for a variable and have different code actions for each. For example:
 
 ```rust
-fn magicNumberGuess(int num) -> bool {
+fn magicNumberGuess(int num) -> bool
+{
     match (num) {
         3:
         7:
@@ -66,7 +68,8 @@ fn magicNumberGuess(int num) -> bool {
 You may notice that unlike the traditional `switch` statements in `C`, there is no fall-through with labels, though you are allowed to have multiple conditions for each result (`3` and `7` both lead to `I like this number!` being shown), as well as have multiple statements done as result as the condition. The `_` case will catch anything. Note that the first condition hit is matched, so `I really do not like this number.` will never be shown for `3` and the `_` case should always be done last. Note that this can work for anything, not just numbers:
 
 ```rust
-fn matchStr(string s) -> int {
+fn matchStr(str s) -> int
+{
     match (s) {
         "Red":
             return 0;
@@ -84,7 +87,8 @@ fn matchStr(string s) -> int {
 Also note that it is not required to match every possible value in a `match` statement. We could decide to not match the "default" case with `_`:
 
 ```rust
-fn matchItem(int num) {
+fn matchItem(int num)
+{
     match (num) {
         3:
             println("You win!");
@@ -96,7 +100,8 @@ fn matchItem(int num) {
 Sometimes you want to run code multiple times. Sometimes that amount of times depends on an input given. For example, you should wash as many hands as you have. While it may be tempting to hardcode this value to `2`, some other unknown intelligent lifeform may have `4`. First, we must go over the loop statement:
 
 ```rust
-fn main() {
+fn main()
+{
     loop println("Hello World!");
 }
 ```
@@ -113,7 +118,8 @@ Hello World!
 To stop this program, press `Ctrl+C` on your terminal. While looping like this is a cool thing that we are able to do, it does not seem particularly useful if we can not exit the loop. Luckily, `break` exists for this purpose:
 
 ```rust
-fn main() {
+fn main()
+{
     loop {
         println("Hello World!");
         break;
@@ -128,7 +134,8 @@ Hello World!
 Remember that we need to put the statements inside a `{}`, otherwise only the first statement will be part of the `loop`. The `break` statement allows us to break out of a loop we are in. The above `break;` is actually shorthand for `break 1;` This does imply you can break out of multiple loops:
 
 ```rust
-fn main() {
+fn main()
+{
     loop {
         loop {
             loop {
@@ -152,7 +159,8 @@ Output:
 The `break 2;` breaks out of the first 2 `loop`s, which leaves us to the `println(2);` statement. Then we break out of the final loop. While this breaking structure is neat, it does not allow us to do much, or does it?
 
 ```rust
-fn count(int endNum) {
+fn count(int endNum)
+{
     int num = 1;
     loop {
         if (num > endNum) break;
@@ -160,7 +168,8 @@ fn count(int endNum) {
     }
 }
 
-fn main() {
+fn main()
+{
     count(5);
 }
 ```
@@ -179,13 +188,15 @@ Now we're getting somewhere! First, we set `num` to `1`. Inside the loop, if `nu
 Surely there must be an easier way than the above code? Luckily, `while` loops automatically check a condition at the top of the loop and `break` if it is not met. The below code accomplishes the same task as the code from earlier:
 
 ```rust
-fn count(int endNum) {
+fn count(int endNum)
+{
     int num = 1;
     while (num <= endNum)
         println(num++);
 }
 
-fn main() {
+fn main()
+{
     count(5);
 }
 ```
@@ -201,7 +212,8 @@ Output:
 It's important to note that the condition runs at *the top* of the loop, not for every statement in the loop:
 
 ```rust
-fn count(int endNum) {
+fn count(int endNum)
+{
     int num = 1;
     while (num <= endNum) {
         println(num++);
@@ -229,14 +241,16 @@ Since the value of `num` is only checked at the top of the loop, even though `nu
 What if you wanted to run a condition at the end of a loop rather than the beginning? For this purpose, you can use a do while loop:
 
 ```rust
-fn count(int endNum) {
+fn count(int endNum)
+{
     int num = 1;
     do {
         println(num++);
     } while (num <= 5);
 }
 
-fn main() {
+fn main()
+{
     count(5);
     count(0);
 }
@@ -258,12 +272,14 @@ Note that a do while loop guarantees the code in the loop will be executed at le
 It's annoying that we have to increment `num` ourselves and declare it outside the loop. With `for` loops, this problem is taken care for us:
 
 ```rust
-fn count(int endNum) {
+fn count(int endNum)
+{
     for (int i = 1; i <= endNum; i++)
         println(i);
 }
 
-fn main() {
+fn main()
+{
     count(5);
 }
 ```
@@ -282,7 +298,8 @@ The first part of the `for` loop has an expression that is done once before the 
 You may also use a `for` loop for iterating over an iterable list. You may iterate over anything that implements `Iterable`:
 
 ```rust
-fn printListItems(List<int> items) {
+fn printListItems(List<int> items)
+{
     for (int item : items)
         println(item);
 }
@@ -291,7 +308,8 @@ fn printListItems(List<int> items) {
 The above code will print all of the items in the given list. You can also iterate using the `..` (`Range`) or `..=` (`RangeEq`) operator:
 
 ```rust
-fn main() {
+fn main()
+{
     for (int i : 1..5)
         println(i);
     for (int i : 1..=5)
@@ -311,14 +329,27 @@ Output:
 5
 ```
 
+##### Iterating With Index
+You are also allowed to iterate with an index by combining the element type with an `int` type in the tuple:
+
+```rust
+fn printListItems(List<int> items)
+{
+    for ((int: item, int: index) : items)
+        println("Item at index {index} is {item}.");
+}
+```
+
+Remember that named tuples exist and is what we are using here. The tuple does not necessarily have to be named, but it makes code quicker to read and write. While not necessary, surrounding your tuple with parenthesis makes it easier to read. Any modifications to `index` will change the iteration to be at the new index. For example, setting `index` to always be `0` in the `for` loop will cause it to never end.
+
 ### Do For Loops
 Like the do while loops, do for loops run at least once:
 
 ```rust
 fn count(int endNum) {
-    do
+    do (int i = 0)
         println(i);
-    for (int i = 1; i <= endNum; i++)
+    for (i <= endNum; i++)
 }
 
 fn main() {
@@ -343,7 +374,8 @@ It's important to note that the condition is checked *before* the final expressi
 Continues allow you to jump to the end of a loop:
 
 ```rust
-fn main() {
+fn main()
+{
     for (int a = 0; a < 6; a++) {
         if (a == 4)
             continue;
@@ -363,7 +395,8 @@ Output:
 When `a` is `4`, we jump to the end of the `for` loop. At this point we increment `a`, then jump to the top of the loop where we check the condition `a < 6`. You are also allowed to continue out of multiple loops like with `break`:
 
 ```rust
-fn main() {
+fn main()
+{
     for (int a = 0; a < 2; a++) {
         for (int b = 0; b < 3; b++) {
             if (b == 2)
@@ -385,7 +418,8 @@ Output:
 One method of control flow that uses function calls rather than loops is called recursion, in which a function calls itself. For example:
 
 ```rust
-fn fib(int n) {
+fn fib(int n)
+{
     if (n <= 0)
         return 0;
     else if (n == 1)
@@ -398,7 +432,8 @@ fn fib(int n) {
 The above calculates the Fibonacci number for number `n`. Note that for large values of `n`, this will grow the call stack a large amount. In order to avoid this, tail recursion can be used. Tail recursion is when the last thing done by the function is calling itself. This means we can replace the call stack with the new one, therefore avoiding growing the stack:
 
 ```rust
-fn fib(int n, int prev = 0, int curr = 1) {
+fn fib(int n, int prev = 0, int curr = 1)
+{
     if (n == 0)
         return prev;
     else if (n == 1)

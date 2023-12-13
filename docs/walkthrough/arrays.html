@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arrays &mdash; Asylum  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Strings" href="strings.html" />
+    <link rel="prev" title="Control Flow" href="controlFlow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #de7cff" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Asylum
+              <img src="../_static/AsylumLogo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Asylum Language Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Asylum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloWorld.html">First Program (Hello World)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataTypes.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuples.html">Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Structs &amp; Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#iterating-over-an-array">Iterating Over An Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dimensional-arrays">Dimensional Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arrays-of-arrays">Arrays Of Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-arrays">Dynamic Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slicing">Slicing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointers.html">Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allocators.html">Allocators</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/about.html">Asylum Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/antlr.html">AST Creation With ANTLR4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/builder.html">Program Builder API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/visitor.html">Builder Code Calling For ASTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/codeRepresentation.html">Working With The Code Representation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #de7cff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Asylum</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Arrays</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/walkthrough/arrays.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arrays">
+<h1>Arrays<a class="headerlink" href="#arrays" title="Link to this heading"></a></h1>
+<p>Arrays are groups of the same type that have a fixed size and can not be changed. Below is a simple example of how arrays may be used:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">arr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">-</span><span class="n">arr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="p">(</span><span class="n">int</span>: <span class="nc">item</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">index</span><span class="p">)</span><span class="w"> </span>: <span class="nc">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="o">-</span><span class="mi">4</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="mi">3</span>
+<span class="mi">2</span>
+<span class="mi">0</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>There are some interesting things to note:</p>
+<ul class="simple">
+<li><p>Indexing starts from <code class="docutils literal notranslate"><span class="pre">0</span></code>, as in <code class="docutils literal notranslate"><span class="pre">0</span></code> is the first element of the array, <code class="docutils literal notranslate"><span class="pre">1</span></code> is the second, etc.</p></li>
+<li><p>Reverse indexing starts from <code class="docutils literal notranslate"><span class="pre">-1</span></code>, as in <code class="docutils literal notranslate"><span class="pre">-</span></code> is the last element of the array, <code class="docutils literal notranslate"><span class="pre">-2</span></code> is the second last, etc.</p></li>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">+</span></code> (Positive) operator will output the highest possible index of the array. If there are no elements, this will be <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">-</span></code> (Negative) operator will output the lowest possible negative index of the array. If there are no elements, this will be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>Any array that has an index higher or lower than the range of <code class="docutils literal notranslate"><span class="pre">int</span></code> is invalid. This means that the maximum size of an array is the highest value of <code class="docutils literal notranslate"><span class="pre">int</span></code> plus <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p>Accessing an invalid index will abort the program and dump a stack trace in debug mode but produce undefined behavior in release mode.</p></li>
+</ul>
+<section id="iterating-over-an-array">
+<h2>Iterating Over An Array<a class="headerlink" href="#iterating-over-an-array" title="Link to this heading"></a></h2>
+<p>Iterating over an array can be done either with an iterating for loop or a regular for loop:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;--Forward Iteration--&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span>: <span class="nc">item</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">index</span><span class="p">)</span><span class="w"> </span>: <span class="nc">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{index}: {item}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;--Backward Iteration--&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span>: <span class="nc">item</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">index</span><span class="p">)</span><span class="w"> </span>: <span class="o">~</span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{index}: {item}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;--Forward Index Iteration--&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">+</span><span class="n">arr</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{i}: {arr[i]}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;--Backward Index Iteration--&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">-</span><span class="n">arr</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{i}: {arr[i]}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">Forward</span> <span class="n">Iteration</span><span class="o">--</span>
+<span class="mi">0</span><span class="p">:</span> <span class="mi">7</span>
+<span class="mi">1</span><span class="p">:</span> <span class="mi">8</span>
+<span class="mi">2</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">--</span><span class="n">Backward</span> <span class="n">Iteration</span><span class="o">--</span>
+<span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">-</span><span class="mi">2</span><span class="p">:</span> <span class="mi">8</span>
+<span class="o">-</span><span class="mi">3</span><span class="p">:</span> <span class="mi">7</span>
+<span class="o">--</span><span class="n">Forward</span> <span class="n">Index</span> <span class="n">Iteration</span><span class="o">--</span>
+<span class="mi">0</span><span class="p">:</span> <span class="mi">7</span>
+<span class="mi">1</span><span class="p">:</span> <span class="mi">8</span>
+<span class="mi">2</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">--</span><span class="n">Backward</span> <span class="n">Index</span> <span class="n">Iteration</span><span class="o">--</span>
+<span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">-</span><span class="mi">2</span><span class="p">:</span> <span class="mi">8</span>
+<span class="o">-</span><span class="mi">3</span><span class="p">:</span> <span class="mi">7</span>
+</pre></div>
+</div>
+<p>Note that using <code class="docutils literal notranslate"><span class="pre">~</span></code> from an array provides a backwards iterator rather than a forwards iterator. You can also ration that in the case that <code class="docutils literal notranslate"><span class="pre">arr</span></code> is empty, the code runs without error as <code class="docutils literal notranslate"><span class="pre">+arr</span></code> would return <code class="docutils literal notranslate"><span class="pre">-1</span></code>, and <code class="docutils literal notranslate"><span class="pre">0</span></code> is not less than or equal to <code class="docutils literal notranslate"><span class="pre">-1</span></code> so the first forward iteration would not happen. Likewise, <code class="docutils literal notranslate"><span class="pre">-arr</span></code> would return <code class="docutils literal notranslate"><span class="pre">0</span></code>, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is not greater than or equal to <code class="docutils literal notranslate"><span class="pre">0</span></code> so the first backwards iteration would not happen either. Overall, it is recommended to use the iterators rather than indexing the array manually as the setup for iterating over an array can be tricky.</p>
+</section>
+<section id="dimensional-arrays">
+<h2>Dimensional Arrays<a class="headerlink" href="#dimensional-arrays" title="Link to this heading"></a></h2>
+<p>The above example is for 1-dimensional arrays. However, there is such thing as 2 dimensional arrays, 3 dimensional arrays, and so on. This is done by separating dimensions with a comma. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span><span class="w"> </span><span class="c1">// An MxN array where M is 2 and N is 3.</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span><span class="p">[]</span>: <span class="nc">row</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">y</span><span class="p">)</span><span class="w"> </span>: <span class="nc">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span>: <span class="nc">item</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">x</span><span class="p">)</span><span class="w"> </span>: <span class="nc">row</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{y}, {x}: {item}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">arr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">-</span><span class="n">arr</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">0</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">3</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">4</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that since the array is multidimensional, getting the index maxes of it returns a tuple of <code class="docutils literal notranslate"><span class="pre">(int,</span> <span class="pre">int)</span></code>. Below is an example of using 3 dimensions:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span><span class="p">[,]</span>: <span class="nc">xy</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">zIndex</span><span class="p">)</span><span class="w"> </span>: <span class="nc">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span><span class="p">[]</span>: <span class="nc">x</span><span class="p">,</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="n">yIndex</span><span class="p">)</span><span class="w"> </span>: <span class="nc">xy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span>: <span class="nc">item</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">xIndex</span><span class="p">)</span><span class="w"> </span>: <span class="nc">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{zIndex}, {yIndex}, {xIndex}: {item}&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">arr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">-</span><span class="n">arr</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">15</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">0</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">3</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">4</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">5</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">6</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">7</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">8</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">9</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">10</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">11</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">12</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">13</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">14</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">15</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">16</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">17</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">18</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">19</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">20</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">21</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">22</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">23</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="arrays-of-arrays">
+<h2>Arrays Of Arrays<a class="headerlink" href="#arrays-of-arrays" title="Link to this heading"></a></h2>
+<p>Of course, it is possible to use arrays of arrays rather than multidimentional arrays as well:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span><span class="w"> </span><span class="c1">// arr is an array of arrays that are size 2.</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span><span class="p">[]</span>: <span class="nc">row</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">y</span><span class="p">)</span><span class="w"> </span>: <span class="nc">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">int</span>: <span class="nc">item</span><span class="p">,</span><span class="w"> </span><span class="n">int</span>: <span class="nc">x</span><span class="p">)</span><span class="w"> </span>: <span class="nc">row</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;{y}, {x}: {item}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">arr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="o">+</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">0</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">2</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">3</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">4</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">5</span>
+<span class="mi">3</span>
+<span class="mi">2</span>
+</pre></div>
+</div>
+<p>Notice that since it is a singular dimension array, getting the highest index of it returns only a single value. It also may be confusing that despite <code class="docutils literal notranslate"><span class="pre">arr</span></code> being declared as <code class="docutils literal notranslate"><span class="pre">int[2][3]</span></code>, we have a max index of <code class="docutils literal notranslate"><span class="pre">arr[2][1]</span></code>! This is because types in Asylum are read from left to right (so we have an <code class="docutils literal notranslate"><span class="pre">int</span></code> array of size <code class="docutils literal notranslate"><span class="pre">2</span></code> that is in an array of size <code class="docutils literal notranslate"><span class="pre">3</span></code>). So when indexing, we are first indexing the array of size <code class="docutils literal notranslate"><span class="pre">3</span></code>. It is recommended to use multi-dimensional arrays to avoid this confusion.</p>
+</section>
+<section id="dynamic-arrays">
+<h2>Dynamic Arrays<a class="headerlink" href="#dynamic-arrays" title="Link to this heading"></a></h2>
+<p>The size of an array is not always known. Dynamic arrays allow you to handle this case. Despite being dynamic in size, the size must be determinable at compile time. Dynamic arrays are especially useful for passing an array to a function, as the size of the array may not be known:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">printItems</span><span class="p">(</span><span class="n">int</span><span class="p">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">int</span><span class="w"> </span><span class="n">item</span><span class="w"> </span>: <span class="nc">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="n">arr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[]</span><span class="w"> </span><span class="n">arr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// This is known at compile time and is stack-allocated.</span>
+<span class="w">    </span><span class="n">printItems</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printItems</span><span class="p">(</span><span class="n">arr2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+<span class="mi">3</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+<span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-warning notranslate"><div class="highlight"><pre><span></span>Returning a dynamic array is illegal since it does not have a determined size. The following code is invalid:
+```rust
+fn makeArr() -&gt; int[]
+{
+    return { 0, 1, 2 };
+}
+```
+
+Instead, you should use other structures such as smart references like the owning reference (discussed later):
+
+```rust
+fn makeArr() -&gt; int[]^
+{
+    return { 0, 1, 2 };
+}
+```
+</pre></div>
+</div>
+</section>
+<section id="slicing">
+<h2>Slicing<a class="headerlink" href="#slicing" title="Link to this heading"></a></h2>
+<p>You can get part of an array called a slice:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[]</span><span class="o">&amp;</span><span class="w"> </span><span class="n">slice1</span><span class="w"> </span>-&gt; <span class="nc">arr</span><span class="p">[</span><span class="mi">1</span>:<span class="mi">2</span><span class="p">];</span>
+<span class="w">    </span><span class="n">int</span><span class="p">[]</span><span class="o">^</span><span class="w"> </span><span class="n">slice2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span>:<span class="o">-</span><span class="mi">2</span><span class="p">];</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">slice1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">slice2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Slices are done by having the first index and the last index given inclusively. If the first index is missing, it will be implicitly <code class="docutils literal notranslate"><span class="pre">0</span></code> and if the last index is missing, it will be implicitly <code class="docutils literal notranslate"><span class="pre">-1</span></code>. It is invalid to have the lower index greater than the higher index. Note that the size of the slice may not known from compile time, so we must either reference the data, or wrap it in an allocated structure such as an owning reference. The <code class="docutils literal notranslate"><span class="pre">slice1</span></code> variable is actually a reference to the array data, while <code class="docutils literal notranslate"><span class="pre">slice2</span></code> is a copy stored in an owning reference.</p>
+<p>Under the hood, references to dynamic arrays are a special case that are their own “slice” structure containing a pointer to the data and size (as otherwise the size would not be known if not part of the slice info). On the contrary, regular dynamic arrays are simply just a size in front of a block of data for the array. This design allows the programmer to have slices and dynamic arrays behave as they would expect without performing any unnecessary heap allocations or copies.</p>
+</section>
+<section id="challenges">
+<h2>Challenges<a class="headerlink" href="#challenges" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+<section id="challenge-solutions">
+<h2>Challenge Solutions<a class="headerlink" href="#challenge-solutions" title="Link to this heading"></a></h2>
+<p>TODO!!!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="controlFlow.html" class="btn btn-neutral float-left" title="Control Flow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="strings.html" class="btn btn-neutral float-right" title="Strings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Asylum Lang Foundation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -56,7 +56,6 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | - | Neg | -a | Modifies a value to be negative. |
 | ++ | Inc | ++a; a++ | Increment the value of a. |
 | `--` | Dec | `--a`; `a--` | Decrement the value of a. |
-| ^ | FromLast | ^a | When indexing an element, will access the member that is the count minus `a`. |
 | * | Dereference | *a | Given that `a` is a pointer, this will return the value the pointer points to. |
 | & | AddressOf | &a | Returns a pointer that points to `a`. |
 | @ | AsAssignableReference | @a | If `a` is a reference, make it so the reference is accessed. |
@@ -74,7 +73,7 @@ These operators can be applied to any variable(s)/values to produce a new value.
 | <=> | Cmp | a <=> b | Returns a value based on comparing `a` and `b` (depends on type). A negative result means `a` is less than `b`, zero means the two are equal, and a positive result means `a` is greater than `b`. |
 | ?: | Cond | a ? b : c | If `a` is `true` return `b`, else, return `c`. |
 | ?? | False | a ?? b | If `a` is false, return `b`, else, return `a`. |
-| !? | Success Or Die | !? a | This is a shorthand for `if (a) toAssign = a; else return a;`. Basically, either the value of `a` is returned if its true or otherwise we exit out of the function and return whatever `a` is. This is useful for propogating errors. |
+| !? | Success Or Die | a !? b | This is a shorthand for `if (a) toAssign = a; else return a;`. Basically, either the value of `a` is returned if its true or otherwise we exit out of the function and return whatever `b` is. This is useful for propogating errors. If `b` is not present, we return exit the function with `a` instead. |
 | => | Lambda | a => b | The value of `a` is equal to the result of expression `b`. |
 | , | Comma | a, b, ... | Form a tuple with `a` in the first element, `b` in the second, etc. Expressions that result in `void` are NOT included. |
 | . | Dot | a.b | Access member `b` from struct `a`. |
@@ -111,7 +110,7 @@ You may have remembered in elementary school learning PEMDAS, or the order of op
 | --------- |
 | (x) |
 | x.y, x++, `x--` |
-| +x, -x, !x, ~x, ++x, --x, ^x, &x, *x, @x, x[y] |
+| +x, -x, !x, ~x, ++x, --x, &x, *x, @x, x[y] |
 | x..y, x..=y |
 | x ** y |
 | x * y, x / y, x % y |
@@ -165,35 +164,35 @@ fn quadraticFormula(float a, float b, float c) -> float, float
 
 ## Access Modifers
 Before we learn about custom data types using structs, we first must learn about access modifiers:
-| Modifier | Functions/Members Recognizable Outside Of Namespace | Member Accessible Outside Of Struct | Member Accessible By Derived Structs | 
-| -------- | --------------------------------------------------- | ----------------------------------- | ------------------------------------ |
-| public/pub | Yes | Yes | Yes |
-| protected/pro | No | No | Yes |
-| public protected/pub pro | Yes | No | Yes |
-| private/pri | No | No | No |
+| Modifier | Name | Functions/Members Recognizable Outside Of Namespace | Member Accessible Outside Of Struct | Member Accessible By Derived Structs | 
+| -------- | ---- | --------------------------------------------------- | ----------------------------------- | ------------------------------------ |
+| pub | Public | Yes | Yes | Yes |
+| pro | Protected | No | No | Yes |
+| pub pro | Public Protected | Yes | No | Yes |
+| pri | Private | No | No | No |
 
-Do not worry too much if these are confusing for now. They will be used in practice by this walkthrough later. For now, just know that `pub` is short for `public`, `pro` is short for `protected`, etc. and that the default accessibility of any function or member is `pro`.
+Do not worry too much if these are confusing for now. They will be used in practice by this walkthrough later. For now, just know that `pub` is short for `public`, `pro` is short for `protected`, etc. and that the default accessibility of any function or member is `pub`.
 
 ## Struct Variables
-Remember structs from earlier? What if we actually wanted to use them? We can define a variable that "is" our struct like we define any other variable. We could then access the members of our `struct` by using a `.`. We must declare these variables as `pub` too so we can access them outside of the struct:
+Remember structs from earlier? What if we actually wanted to use them? We can define a variable that "is" our struct like we define any other variable. We could then access the members of our `struct` by using a `.`:
 
 ```rust
 struct Color {
-pub:
     byte red;
     byte green;
     byte blue;
 }
 
 struct Car {
-    pub str licensePlate; // Specifying accessibility this way is also valid.
+    pub str licensePlate;   // Specifying accessibility for an item. Of course this is redundant here.
     pub Color rgbColor;
-pub:
+pub:                        // Specifying accessibility for members that follow.
     int year;
-    string model;
+    str model;
 }
 
-fn main() {
+fn main()
+{
     Car car;
     car.licensePlate = "TOY1234";
     car.rgbColor.red = car.rgbColor.green = 70; // You can set multiple variables to the same value too!
@@ -201,7 +200,7 @@ fn main() {
 }
 ```
 
-But what happens to the variables we did not set? In Asylum, the rule of thumb is that everything is inialized to either be `0` or empty:
+But what happens to the variables we did not set? In Asylum, the rule of thumb is that everything is inialized to either be `0`, empty, or whatever the default value is if it exists:
 
 ```rust
 println(car.model);
@@ -219,7 +218,8 @@ The first line is an empty line if that is not clear.
 Of course, setting the initial variables the above way is a little messy. Luckily, there is a shorthand using curly brackets for such:
 
 ```rust
-fn main() {
+fn main()
+{
     Car car = Car {
         licensePlate: "TOY1234",
         rgbColor: Color { red: 70, green: 70 },
@@ -243,8 +243,3 @@ This above code is equivalent, and much cleaner.
 * [Solution 3](solutions/variables3.md)
 * [Solution 4](solutions/variables4.md)
 * [Solution 5](solutions/variables5.md)
-
-## Disclaimers
-```{warning}
-StraitJacket currently does not support the majority of operators. It is very high on the priority list.
-```

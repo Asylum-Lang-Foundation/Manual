@@ -89,6 +89,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -133,14 +134,13 @@
 <h1>Structs &amp; Implementations<a class="headerlink" href="#structs-implementations" title="Link to this heading"></a></h1>
 <p>On the previous page, you learned how structs can give you custom data types that allow you to hold data. But we are also allowed to give them functions as well inside of implementation blocks:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
-<span class="k">pub</span>:
-    <span class="nc">byte</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
 <span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">g</span><span class="p">;</span>
 <span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">toHex</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">string</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;#&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">toString</span><span class="p">(</span><span class="s">&quot;x2&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">toString</span><span class="p">(</span><span class="s">&quot;x2&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">toString</span><span class="p">(</span><span class="s">&quot;x2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">toHex</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">str</span> <span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;#{r:x2}{g:x2}{b:x2}&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -149,7 +149,8 @@
 <p class="admonition-title">Note</p>
 <p>A struct can have as many implementation blocks as it desires.</p>
 </div>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">r</span>: <span class="mh">0x21</span><span class="p">,</span>
 <span class="w">        </span><span class="n">g</span>: <span class="mh">0x43</span><span class="p">,</span>
@@ -173,7 +174,8 @@
 <h2>Constructors<a class="headerlink" href="#constructors" title="Link to this heading"></a></h2>
 <p>As you probably have noticed, it is a bit tedius to construct instances of structs. Defining a constructor allows you to make this process easier:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">byte</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">This</span><span class="p">(</span><span class="n">byte</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
 <span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">;</span>
 <span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>

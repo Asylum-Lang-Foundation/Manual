@@ -56,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/implementations.html">Structs &amp; Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/inheritance.html">Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/controlFlow.html">Control Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/strings.html">Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/parameterTypes.html">Parameter Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/references.html">References</a></li>
@@ -147,7 +148,6 @@
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/variables.html#struct-variables">Struct Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/variables.html#challenges">Challenges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/variables.html#challenge-solutions">Challenge Solutions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="walkthrough/variables.html#disclaimers">Disclaimers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/tuples.html">Tuples</a><ul>
@@ -193,7 +193,28 @@
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/controlFlow.html#recursion-recursion-recursion">Recursion Recursion Recursion</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="walkthrough/strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/arrays.html">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#iterating-over-an-array">Iterating Over An Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#dimensional-arrays">Dimensional Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#arrays-of-arrays">Arrays Of Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#dynamic-arrays">Dynamic Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#slicing">Slicing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/arrays.html#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/strings.html">Strings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#formatting">Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#escape-characters">Escape Characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#splitting">Splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#repeating">Repeating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#contains">Contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#replacing">Replacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#substrings">Substrings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#challenges">Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/strings.html#challenge-solutions">Challenge Solutions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="walkthrough/parameterTypes.html">Parameter Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/parameterTypes.html#type-listing">Type Listing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough/parameterTypes.html#reference-parameters">Reference Parameters</a></li>
@@ -267,13 +288,14 @@
 <li><p>Be clear on how memory is being utilized (copied, referenced, moved, allocated, destroyed, etc).</p></li>
 <li><p>Be beginner friendly (intuitive syntax and semantics, “pits of success”, higher-level abstractions, etc).</p></li>
 <li><p>Be applicable for general-purpose and low-level development.</p></li>
+<li><p>Written densely. This is to make it faster to type, read, and refactor. Most keywords and common types are short. Operator overloading is also allowed and taken advantage of to make operations easier to do and recognize.</p></li>
 </ul>
 </section>
 <section id="non-goals">
 <h2>Non-Goals<a class="headerlink" href="#non-goals" title="Link to this heading"></a></h2>
 <p>There are some things Asylum does not aim to be:</p>
 <ul class="simple">
-<li><p>Have everything C++ does. Asylum has a lot of features, but not all of them.</p></li>
+<li><p>A clone of any language. While Asylum may look similar to a given language and have similar features, it is a different language and will not have the same features and guarantees.</p></li>
 </ul>
 </section>
 </section>

@@ -81,6 +81,8 @@ This can come at the cost of efficency of course.
 
 ### Passing Allocators
 
+### Pushing/Popping Allocators
+
 ## Custom Allocators
 
 ## Challenges
